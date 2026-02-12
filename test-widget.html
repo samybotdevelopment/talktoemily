@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emily Chatbot Test Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      background: white;
+      border-radius: 20px;
+      padding: 60px 40px;
+      margin-bottom: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #2d3748;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.25rem;
+      color: #4a5568;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      color: #667eea;
+      margin-bottom: 15px;
+    }
+
+    .feature-card p {
+      font-size: 1rem;
+      color: #718096;
+    }
+
+    .cta {
+      background: #667eea;
+      color: white;
+      padding: 15px 40px;
+      border-radius: 50px;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .cta:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+
+    .note {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 5px;
+    }
+
+    .note strong {
+      color: #856404;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <h1>🚀 Welcome to Emily Chatbot Test</h1>
+      <p>
+        This is a standalone test page to demonstrate how the Emily chatbot widget works when embedded on any website.
+        Look for the chat widget in the bottom-right corner!
+      </p>
+      <button class="cta" onclick="alert('This is a demo button. Try clicking the chat widget in the bottom-right!')">
+        Get Started
+      </button>
+
+      <div class="note">
+        <strong>💡 Testing the Widget:</strong> Click the chat icon in the bottom-right corner to open Emily and start chatting. 
+        This simulates exactly how it will appear on your actual website!
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feature-card">
+        <h3>🤖 AI-Powered</h3>
+        <p>Emily uses advanced AI to understand and respond to your visitors' questions in real-time.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>⚡ Lightning Fast</h3>
+        <p>Instant responses that stream in real-time, providing a smooth conversational experience.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>🎨 Customizable</h3>
+        <p>Match your brand with custom colors, styles, and welcome messages.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>📱 Mobile Friendly</h3>
+        <p>Works perfectly on desktop, tablet, and mobile devices with responsive design.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>🔒 Secure</h3>
+        <p>Your data is protected with enterprise-grade security and encryption.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>📊 Analytics</h3>
+        <p>Track conversations and gain insights into your visitors' needs and questions.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Emily Chatbot Widget -->
+  <script>
+    window.EmilyChat = { websiteId: "8f4ab846-2de5-44df-b4e9-3dc72a2686fb" };
+  </script>
+  <script src="http://localhost:3000/widget/emily-loader.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+import { QdrantClient } from '@qdrant/js-client-rest';
+import { QdrantPayload } from '@/types/models';
+
+const client = new QdrantClient({
+  url: process.env.QDRANT_URL!,
+  apiKey: process.env.QDRANT_API_KEY,
+  checkCompatibility: false,
+  timeout: 30000, // 30 seconds
+});
+
+export interface VectorPoint {
+  id: string;
+  vector: number[];
+  payload: QdrantPayload;
+}
+
+/**
+ * Get collection name for a website
+ */
+export function getCollectionName(websiteId: string): string {
+  return `website_${websiteId}`;
+}
+
+/**
+ * Check if a collection exists
+ */
+export async function collectionExists(websiteId: string): Promise<boolean> {
+  try {
+    const collectionName = getCollectionName(websiteId);
+    const response = await client.getCollection(collectionName);
+    return !!response;
+  } catch (error) {
+    return false;
+  }
+}
+
+/**
+ * Create a new collection for a website
+ */
+export async function createCollection(websiteId: string): Promise<void> {
+  const collectionName = getCollectionName(websiteId);
+  
+  // OpenAI embeddings are pre-normalized, so Dot product = Cosine
+  // Using Dot product can sometimes give better scores
+  await client.createCollection(collectionName, {
+    vectors: {
+      size: 1536, // OpenAI text-embedding-3-small dimension
+      distance: 'Dot',
+    },
+  });
+}
+
+/**
+ * Delete a collection
+ */
+export async function deleteCollection(websiteId: string): Promise<void> {
+  const collectionName = getCollectionName(websiteId);
+  
+  try {
+    await client.deleteCollection(collectionName);
+  } catch (error) {
+    console.error(`Failed to delete collection ${collectionName}:`, error);
+    // Don't throw - collection might not exist
+  }
+}
+
+/**
+ * Insert vectors into a collection
+ */
+export async function upsertVectors(
+  websiteId: string,
+  points: VectorPoint[]
+): Promise<void> {
+  const collectionName = getCollectionName(websiteId);
+  
+  await client.upsert(collectionName, {
+    wait: true,
+    points: points.map(point => ({
+      id: point.id,
+      vector: point.vector,
+      payload: point.payload,
+    })),
+  });
+}
+
+/**
+ * Search for similar vectors
+ */
+export async function searchSimilar(
+  websiteId: string,
+  queryVector: number[],
+  limit: number = 5
+): Promise<Array<{ score: number; payload: QdrantPayload }>> {
+  const collectionName = getCollectionName(websiteId);
+  
+  try {
+    const results = await client.search(collectionName, {
+      vector: queryVector,
+      limit,
+      with_payload: true,
+    });
+
+    return results.map(result => ({
+      score: result.score,
+      payload: result.payload as QdrantPayload,
+    }));
+  } catch (error) {
+    console.error(`Search failed for collection ${collectionName}:`, error);
+    throw new Error('Failed to search vectors');
+  }
+}
+
+/**
+ * Get collection info
+ */
+export async function getCollectionInfo(websiteId: string) {
+  const collectionName = getCollectionName(websiteId);
+  
+  try {
+    return await client.getCollection(collectionName);
+  } catch (error) {
+    return null;
+  }
+}
+
+/**
+ * Test Qdrant connection
+ */
+export async function testConnection(): Promise<boolean> {
+  try {
+    await client.getCollections();
+    return true;
+  } catch (error) {
+    console.error('Qdrant connection failed:', error);
+    return false;
+  }
+}

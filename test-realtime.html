@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emily Real-time Test</title>
+</head>
+<body>
+  <h1>Emily Real-time Connection Test</h1>
+  <div id="status"></div>
+  <div id="messages"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://gfppotrwghrawzpezsoc.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdmcHBvdHJ3Z2hyYXd6cGV6c29jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk0NDI3NDgsImV4cCI6MjA4NTAxODc0OH0.HFKh_-IpV9w5ErDP7m_WscR0hVTvs8Kby_pT6YiUhvQ';
+
+    const status = document.getElementById('status');
+    const messages = document.getElementById('messages');
+
+    function log(message) {
+      console.log(message);
+      const p = document.createElement('p');
+      p.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      messages.appendChild(p);
+    }
+
+    log('Testing Supabase Real-time connection...');
+    log('Creating Supabase client...');
+
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    
+    log('Supabase client created');
+    log('Setting up test channel...');
+
+    const channel = supabase
+      .channel('test-channel')
+      .on('postgres_changes', {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'messages'
+      }, (payload) => {
+        log('✅ Message INSERT detected: ' + JSON.stringify(payload));
+      })
+      .subscribe((status, err) => {
+        log('Subscription status: ' + status);
+        if (err) {
+          log('❌ Error: ' + JSON.stringify(err));
+        }
+        if (status === 'SUBSCRIBED') {
+          log('✅ Successfully subscribed to real-time updates!');
+          log('Real-time is working! Insert a message in your database to test.');
+        } else if (status === 'CHANNEL_ERROR') {
+          log('❌ Channel error - real-time might not be enabled');
+          log('Check Supabase Dashboard → Database → Replication');
+        } else if (status === 'TIMED_OUT') {
+          log('❌ Connection timed out');
+        } else if (status === 'CLOSED') {
+          log('⚠️ Channel closed');
+        }
+      });
+
+    log('Waiting for subscription status...');
+  </script>
+</body>
+</html>
