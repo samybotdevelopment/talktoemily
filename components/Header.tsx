@@ -5,25 +5,17 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { SignOutButton } from './SignOutButton';
 
-interface ChatbotNav {
-  websiteId: string;
-  websiteName: string;
-  websiteColor?: string;
-}
-
 interface HeaderProps {
   userName?: string;
   orgName?: string;
   showAuth?: boolean;
-  chatbotNav?: ChatbotNav;
 }
 
-export function Header({ userName, orgName, showAuth = false, chatbotNav }: HeaderProps) {
+export function Header({ userName, orgName, showAuth = false }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
   const isActive = (path: string) => pathname?.startsWith(path);
-  const isExactPath = (path: string) => pathname === path;
 
   return (
     <>
@@ -45,49 +37,30 @@ export function Header({ userName, orgName, showAuth = false, chatbotNav }: Head
             {showAuth ? (
               <>
                 <div className="hidden md:flex items-center gap-6">
-                  {chatbotNav ? (
-                    <>
-                      <Link 
-                        href={`/websites/${chatbotNav.websiteId}`}
-                        className={`font-bold hover:text-fuchsia-primary transition-colors ${isExactPath(`/websites/${chatbotNav.websiteId}`) ? 'text-fuchsia-primary' : ''}`}
-                      >
-                        Overview
-                      </Link>
-                      <Link 
-                        href={`/websites/${chatbotNav.websiteId}/training`}
-                        className={`font-bold hover:text-fuchsia-primary transition-colors ${isActive(`/websites/${chatbotNav.websiteId}/training`) ? 'text-fuchsia-primary' : ''}`}
-                      >
-                        Training
-                      </Link>
-                      <Link 
-                        href={`/websites/${chatbotNav.websiteId}/conversations`}
-                        className={`font-bold hover:text-fuchsia-primary transition-colors ${isActive(`/websites/${chatbotNav.websiteId}/conversations`) ? 'text-fuchsia-primary' : ''}`}
-                      >
-                        Conversations
-                      </Link>
-                      <Link 
-                        href={`/websites/${chatbotNav.websiteId}/settings`}
-                        className={`font-bold hover:text-fuchsia-primary transition-colors ${isActive(`/websites/${chatbotNav.websiteId}/settings`) ? 'text-fuchsia-primary' : ''}`}
-                      >
-                        Settings
-                      </Link>
-                    </>
-                  ) : (
-                    <>
-                      <Link 
-                        href="/dashboard" 
-                        className={`font-bold hover:text-fuchsia-primary transition-colors ${isActive('/dashboard') && !pathname?.includes('/websites') ? 'text-fuchsia-primary' : ''}`}
-                      >
-                        Dashboard
-                      </Link>
-                      <Link 
-                        href="/settings/subscription" 
-                        className={`font-bold hover:text-fuchsia-primary transition-colors ${isActive('/settings') ? 'text-fuchsia-primary' : ''}`}
-                      >
-                        Settings
-                      </Link>
-                    </>
-                  )}
+                  <Link 
+                    href="/dashboard" 
+                    className={`font-bold hover:text-fuchsia-primary transition-colors ${isActive('/dashboard') ? 'text-fuchsia-primary' : ''}`}
+                  >
+                    Dashboard
+                  </Link>
+                  <Link 
+                    href="/settings/subscription" 
+                    className={`font-bold hover:text-fuchsia-primary transition-colors ${isActive('/settings/subscription') ? 'text-fuchsia-primary' : ''}`}
+                  >
+                    Subscription
+                  </Link>
+                  <Link 
+                    href="/settings/credits" 
+                    className={`font-bold hover:text-fuchsia-primary transition-colors ${isActive('/settings/credits') ? 'text-fuchsia-primary' : ''}`}
+                  >
+                    Credits
+                  </Link>
+                  <Link 
+                    href="/settings" 
+                    className={`font-bold hover:text-fuchsia-primary transition-colors ${isActive('/settings') && !pathname?.includes('/subscription') && !pathname?.includes('/credits') ? 'text-fuchsia-primary' : ''}`}
+                  >
+                    Account
+                  </Link>
                 </div>
 
                 {/* User Menu on Desktop */}
@@ -150,73 +123,34 @@ export function Header({ userName, orgName, showAuth = false, chatbotNav }: Head
         <div className="fixed inset-0 z-40 bg-white md:hidden">
           <div className="flex flex-col h-full p-8 pt-24">
             <div className="flex flex-col gap-6">
-              {chatbotNav ? (
-                <>
-                  <Link
-                    href="/dashboard"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-2xl font-bold py-4 border-b-4 border-black hover:text-fuchsia-primary"
-                  >
-                    ← Back to Dashboard
-                  </Link>
-                  <div className="mb-4">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div
-                        className="w-12 h-12 rounded-lg border-4 border-black flex items-center justify-center font-bold text-xl"
-                        style={{ backgroundColor: chatbotNav.websiteColor || '#E91E63' }}
-                      >
-                        {chatbotNav.websiteName[0]}
-                      </div>
-                      <div className="font-bold text-lg">{chatbotNav.websiteName}</div>
-                    </div>
-                  </div>
-                  <Link
-                    href={`/websites/${chatbotNav.websiteId}`}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`text-2xl font-bold py-4 border-b-4 border-black ${isExactPath(`/websites/${chatbotNav.websiteId}`) ? 'text-fuchsia-primary' : ''}`}
-                  >
-                    Overview
-                  </Link>
-                  <Link
-                    href={`/websites/${chatbotNav.websiteId}/training`}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`text-2xl font-bold py-4 border-b-4 border-black ${isActive(`/websites/${chatbotNav.websiteId}/training`) ? 'text-fuchsia-primary' : ''}`}
-                  >
-                    Training
-                  </Link>
-                  <Link
-                    href={`/websites/${chatbotNav.websiteId}/conversations`}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`text-2xl font-bold py-4 border-b-4 border-black ${isActive(`/websites/${chatbotNav.websiteId}/conversations`) ? 'text-fuchsia-primary' : ''}`}
-                  >
-                    Conversations
-                  </Link>
-                  <Link
-                    href={`/websites/${chatbotNav.websiteId}/settings`}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`text-2xl font-bold py-4 border-b-4 border-black ${isActive(`/websites/${chatbotNav.websiteId}/settings`) ? 'text-fuchsia-primary' : ''}`}
-                  >
-                    Settings
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link
-                    href="/dashboard"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`text-3xl font-bold py-4 border-b-4 border-black ${isActive('/dashboard') && !pathname?.includes('/websites') ? 'text-fuchsia-primary' : ''}`}
-                  >
-                    Dashboard
-                  </Link>
-                  <Link
-                    href="/settings/subscription"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`text-3xl font-bold py-4 border-b-4 border-black ${isActive('/settings') ? 'text-fuchsia-primary' : ''}`}
-                  >
-                    Settings
-                  </Link>
-                </>
-              )}
+              <Link
+                href="/dashboard"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`text-3xl font-bold py-4 border-b-4 border-black ${isActive('/dashboard') ? 'text-fuchsia-primary' : ''}`}
+              >
+                Dashboard
+              </Link>
+              <Link
+                href="/settings/subscription"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`text-3xl font-bold py-4 border-b-4 border-black ${isActive('/settings/subscription') ? 'text-fuchsia-primary' : ''}`}
+              >
+                Subscription
+              </Link>
+              <Link
+                href="/settings/credits"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`text-3xl font-bold py-4 border-b-4 border-black ${isActive('/settings/credits') ? 'text-fuchsia-primary' : ''}`}
+              >
+                Credits
+              </Link>
+              <Link
+                href="/settings"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`text-3xl font-bold py-4 border-b-4 border-black ${isActive('/settings') && !pathname?.includes('/subscription') && !pathname?.includes('/credits') ? 'text-fuchsia-primary' : ''}`}
+              >
+                Account
+              </Link>
             </div>
 
             <div className="mt-auto">

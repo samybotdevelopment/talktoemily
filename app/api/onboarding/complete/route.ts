@@ -10,7 +10,7 @@ const completeSchema = z.object({
     display_name: z.string(),
     domain: z.string(),
     primary_color: z.string(),
-    wg_website_id: z.string(),
+    wg_website_id: z.string().optional(),
   }),
   training_chunks: z.array(
     z.object({
@@ -53,10 +53,6 @@ export async function POST(request: Request) {
 
     const org = memberships.organizations as any;
 
-    if (!org.is_wg_linked || !org.wg_user_id) {
-      return NextResponse.json({ error: 'Not a WG customer' }, { status: 403 });
-    }
-
     // Step 1: Create website
     const { data: website, error: websiteError } = await serviceSupabase
       .from('websites')
@@ -65,7 +61,7 @@ export async function POST(request: Request) {
         domain: validatedData.website_data.domain,
         display_name: validatedData.website_data.display_name,
         primary_color: validatedData.website_data.primary_color,
-        wg_website_id: validatedData.website_data.wg_website_id,
+        wg_website_id: validatedData.website_data.wg_website_id || null,
         widget_activated: false,
       })
       .select()
@@ -81,7 +77,7 @@ export async function POST(request: Request) {
       website_id: website.id,
       title: chunk.title,
       content: chunk.content,
-      source: 'wg' as const,
+      source: (org.is_wg_linked ? 'wg' : 'manual') as const,
     }));
 
     const { error: itemsError } = await serviceSupabase
@@ -107,29 +103,31 @@ export async function POST(request: Request) {
       );
     }
 
-    // Step 4: Activate widget on WG website
-    try {
-      const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://talktoemily.com';
-      const scriptCode = generateWidgetScript(website.id, appUrl);
+    // Step 4: Activate widget on WG website (WG customers only)
+    if (org.is_wg_linked && org.wg_user_id && validatedData.website_data.wg_website_id) {
+      try {
+        const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://talktoemily.com';
+        const scriptCode = generateWidgetScript(website.id, appUrl);
 
-      await activateWGWidget(
-        org.wg_user_id,
-        validatedData.website_data.wg_website_id,
-        scriptCode,
-        true
-      );
+        await activateWGWidget(
+          org.wg_user_id,
+          validatedData.website_data.wg_website_id,
+          scriptCode,
+          true
+        );
 
-      // Update widget activation status
-      await serviceSupabase
-        .from('websites')
-        .update({
-          widget_activated: true,
-          widget_activated_at: new Date().toISOString(),
-        })
-        .eq('id', website.id);
-    } catch (widgetError) {
-      console.error('Widget activation error:', widgetError);
-      // Don't fail the whole flow, widget can be activated later
+        // Update widget activation status
+        await serviceSupabase
+          .from('websites')
+          .update({
+            widget_activated: true,
+            widget_activated_at: new Date().toISOString(),
+          })
+          .eq('id', website.id);
+      } catch (widgetError) {
+        console.error('Widget activation error:', widgetError);
+        // Don't fail the whole flow, widget can be activated later
+      }
     }
 
     // Step 5: Mark onboarding as completed and clear state

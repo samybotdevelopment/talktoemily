@@ -28,6 +28,9 @@ export function SettingsClient({
   wgWebsiteId,
   widgetActivated: initialWidgetActivated,
 }: SettingsClientProps) {
+  const [displayName, setDisplayName] = useState(websiteName);
+  const [domain, setDomain] = useState(websiteDomain);
+  const [color, setColor] = useState(primaryColor);
   const [widgetStyle, setWidgetStyle] = useState<'modern' | 'neutral'>(initialStyle);
   const [widgetSubtitle, setWidgetSubtitle] = useState(initialSubtitle);
   const [widgetWelcomeTitle, setWidgetWelcomeTitle] = useState(initialWelcomeTitle);
@@ -38,6 +41,24 @@ export function SettingsClient({
   const [hasChanges, setHasChanges] = useState(false);
   const [widgetActivated, setWidgetActivated] = useState(initialWidgetActivated);
   const [activating, setActivating] = useState(false);
+
+  const handleDisplayNameChange = (value: string) => {
+    setDisplayName(value);
+    setHasChanges(true);
+    setSaved(false);
+  };
+
+  const handleDomainChange = (value: string) => {
+    setDomain(value);
+    setHasChanges(true);
+    setSaved(false);
+  };
+
+  const handleColorChange = (value: string) => {
+    setColor(value);
+    setHasChanges(true);
+    setSaved(false);
+  };
 
   const handleStyleChange = (newStyle: 'modern' | 'neutral') => {
     setWidgetStyle(newStyle);
@@ -72,6 +93,9 @@ export function SettingsClient({
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          display_name: displayName,
+          domain: domain,
+          primary_color: color,
           widget_style: widgetStyle,
           widget_subtitle: widgetSubtitle,
           widget_welcome_title: widgetWelcomeTitle,
@@ -283,49 +307,48 @@ export function SettingsClient({
           <div className="neo-card bg-white p-6 sm:p-8 mb-6">
             <h2 className="text-xl sm:text-2xl font-bold mb-6">Basic Information</h2>
               
-            <form>
-              <div className="mb-6">
+            <div className="space-y-4">
+              <div>
                 <label className="block text-sm font-bold mb-2">Display Name</label>
                 <input
                   type="text"
-                  defaultValue={websiteName}
+                  value={displayName}
+                  onChange={(e) => handleDisplayNameChange(e.target.value)}
                   className="neo-input w-full"
-                  disabled
+                  placeholder="My Bot"
                 />
               </div>
 
-              <div className="mb-6">
+              <div>
                 <label className="block text-sm font-bold mb-2">Domain</label>
                 <input
                   type="text"
-                  defaultValue={websiteDomain}
+                  value={domain}
+                  onChange={(e) => handleDomainChange(e.target.value)}
                   className="neo-input w-full"
-                  disabled
+                  placeholder="https://mywebsite.com"
                 />
               </div>
 
-              <div className="mb-6">
+              <div>
                 <label className="block text-sm font-bold mb-2">Primary Color</label>
                 <div className="flex gap-4">
                   <input
                     type="color"
-                    defaultValue={primaryColor}
-                    className="w-24 h-12 border-4 border-black rounded-lg"
-                    disabled
+                    value={color}
+                    onChange={(e) => handleColorChange(e.target.value)}
+                    className="w-24 h-12 border-4 border-black rounded-lg cursor-pointer"
                   />
                   <input
                     type="text"
-                    defaultValue={primaryColor}
+                    value={color}
+                    onChange={(e) => handleColorChange(e.target.value)}
                     className="neo-input flex-1"
-                    disabled
+                    placeholder="#E91E63"
                   />
                 </div>
               </div>
-
-              <p className="text-sm text-gray-600 mb-4">
-                Basic settings are view-only for now. Contact support to make changes.
-              </p>
-            </form>
+            </div>
           </div>
 
           {/* Danger Zone */}
@@ -345,8 +368,8 @@ export function SettingsClient({
       {showPreview && (
         <TestChatWidget
           websiteId={websiteId}
-          websiteName={websiteName}
-          primaryColor={primaryColor}
+          websiteName={displayName}
+          primaryColor={color}
           widgetStyle={widgetStyle}
           widgetSubtitle={widgetSubtitle}
           widgetWelcomeTitle={widgetWelcomeTitle}

@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect, notFound } from 'next/navigation';
 import { Header } from '@/components/Header';
+import { BotNavigation } from '@/components/BotNavigation';
 
 export default async function WebsiteLayout({
   children,
@@ -51,11 +52,11 @@ export default async function WebsiteLayout({
         userName={user.email} 
         orgName={org?.name} 
         showAuth 
-        chatbotNav={{
-          websiteId: id,
-          websiteName: website.display_name,
-          websiteColor: website.primary_color,
-        }}
+      />
+      <BotNavigation 
+        websiteId={id}
+        websiteName={website.display_name}
+        websiteColor={website.primary_color}
       />
       {children}
     </div>

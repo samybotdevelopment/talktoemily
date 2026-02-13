@@ -5,12 +5,12 @@ const openai = new OpenAI({
 });
 
 /**
- * Create an embedding for text using text-embedding-3-small
+ * Create an embedding for text using text-embedding-ada-002 (1536 dimensions)
  */
 export async function createEmbedding(text: string): Promise<number[]> {
   try {
     const response = await openai.embeddings.create({
-      model: 'text-embedding-3-small',
+      model: 'text-embedding-ada-002',
       input: text,
     });
 
@@ -27,7 +27,7 @@ export async function createEmbedding(text: string): Promise<number[]> {
 export async function createEmbeddings(texts: string[]): Promise<number[][]> {
   try {
     const response = await openai.embeddings.create({
-      model: 'text-embedding-3-small',
+      model: 'text-embedding-ada-002',
       input: texts,
     });
 

@@ -59,12 +59,65 @@
         const data = await response.json();
         widgetSettings = { ...widgetSettings, ...data };
         console.log('Emily Chat: Settings loaded', widgetSettings);
+        return true;
+      } else if (response.status === 403) {
+        const data = await response.json();
+        if (data.isInactive) {
+          console.warn('Emily Chat: Bot is inactive');
+          showInactiveMessage(data.message);
+          return false;
+        }
       } else {
         console.error('Emily Chat: Failed to fetch settings', response.status);
+        return false;
       }
     } catch (error) {
       console.error('Emily Chat: Failed to fetch settings', error);
+      return false;
     }
+  }
+
+  // Show inactive bot message
+  function showInactiveMessage(message) {
+    const widget = document.createElement('div');
+    widget.id = 'emily-chat-widget';
+    widget.innerHTML = `
+      <style>
+        #emily-chat-widget {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          z-index: 9999;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .emily-inactive-bubble {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background: #9CA3AF;
+          border: 4px solid #000;
+          box-shadow: 4px 4px 0 #000;
+          cursor: not-allowed;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0.5;
+        }
+
+        .emily-inactive-bubble svg {
+          width: 30px;
+          height: 30px;
+          fill: #fff;
+        }
+      </style>
+      <div class="emily-inactive-bubble" title="${message}">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+      </div>
+    `;
+    document.body.appendChild(widget);
   }
 
   // Create widget HTML
@@ -981,9 +1034,11 @@
 
   // Initialize
   console.log('Emily Chat: Initializing widget for', websiteId);
-  fetchWidgetSettings().then(() => {
-    console.log('Emily Chat: Creating widget with style', widgetSettings.widgetStyle);
-    createWidget();
+  fetchWidgetSettings().then((success) => {
+    if (success) {
+      console.log('Emily Chat: Creating widget with style', widgetSettings.widgetStyle);
+      createWidget();
+    }
   });
 
 })();

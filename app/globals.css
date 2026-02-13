@@ -42,6 +42,13 @@ body {
   transform: translate(-2px, -2px);
 }
 
+/* Modal card without hover effects to prevent flickering */
+.neo-card-modal {
+  border: 4px solid black;
+  border-radius: 0.75rem;
+  box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 1);
+}
+
 .neo-button {
   border: 4px solid black;
   border-radius: 0.5rem;

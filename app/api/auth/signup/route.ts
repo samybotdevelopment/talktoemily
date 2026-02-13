@@ -66,7 +66,7 @@ export async function POST(request: Request) {
         plan,
         max_websites: maxWebsites,
         is_wg_linked: isWGCustomer,
-        credits_balance: isWGCustomer ? 100 : 0, // WG customers get 100 credits/month
+        credits_balance: 50, // All new users get 50 credits on signup
         wg_user_id: isWGCustomer ? wgCustomer.user_id : null,
         wg_plan: isWGCustomer ? wgCustomer.plan : null,
         onboarding_completed_at: null, // Will be set when onboarding completes

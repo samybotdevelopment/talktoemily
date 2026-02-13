@@ -73,6 +73,10 @@ export async function upsertVectors(
 ): Promise<void> {
   const collectionName = getCollectionName(websiteId);
   
+  if (!points || points.length === 0) {
+    throw new Error('No points to upsert');
+  }
+  
   await client.upsert(collectionName, {
     wait: true,
     points: points.map(point => ({

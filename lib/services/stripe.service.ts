@@ -55,12 +55,92 @@ export async function createSubscriptionCheckout(
       automatic_tax: {
         enabled: true,
       },
+      tax_id_collection: {
+        enabled: true, // Show VAT number field for B2B
+      },
+      customer_update: {
+        address: 'auto',
+        name: 'auto',
+      },
+      billing_address_collection: 'required', // Always collect address for tax
     });
 
     return session;
   } catch (error) {
     console.error('Failed to create subscription checkout:', error);
     throw new Error('Failed to create checkout session');
+  }
+}
+
+/**
+ * Create a checkout session for credit purchase
+ */
+export async function createCreditsCheckout(
+  customerId: string,
+  credits: number,
+  amount: number,
+  successUrl: string,
+  cancelUrl: string
+): Promise<Stripe.Checkout.Session> {
+  try {
+    const session = await stripe.checkout.sessions.create({
+      customer: customerId,
+      mode: 'payment',
+      payment_method_types: ['card'],
+      line_items: [
+        {
+          price_data: {
+            currency: 'eur',
+            product_data: {
+              name: `${credits.toLocaleString()} AI Credits`,
+              description: `${credits.toLocaleString()} AI message exchanges for your chatbot`,
+            },
+            unit_amount: Math.round(amount * 100), // Convert euros to cents
+            tax_behavior: 'exclusive', // Price excludes tax, Stripe will add it
+          },
+          quantity: 1,
+        },
+      ],
+      success_url: successUrl,
+      cancel_url: cancelUrl,
+      allow_promotion_codes: true,
+      automatic_tax: {
+        enabled: true,
+      },
+      tax_id_collection: {
+        enabled: true, // Show VAT number field, auto-apply reverse charge for valid B2B
+      },
+      customer_update: {
+        address: 'auto', // Automatically save billing address to customer
+        name: 'auto', // Automatically save business name for tax ID collection
+      },
+      billing_address_collection: 'required', // Always collect address for tax
+      invoice_creation: {
+        enabled: true, // Create invoice for this payment (shows in customer portal)
+        invoice_data: {
+          description: `${credits.toLocaleString()} AI Credits`,
+          metadata: {
+            credits: credits.toString(),
+            type: 'credits_purchase',
+          },
+        },
+      },
+      metadata: {
+        credits: credits.toString(),
+        type: 'credits_purchase',
+      },
+    });
+
+    return session;
+  } catch (error: any) {
+    console.error('Failed to create credits checkout:', error);
+    console.error('Stripe error details:', {
+      type: error.type,
+      message: error.message,
+      code: error.code,
+      raw: error.raw,
+    });
+    throw error;
   }
 }
 
@@ -215,6 +295,7 @@ export async function handleWebhookEvent(event: Stripe.Event): Promise<void> {
     case 'customer.subscription.updated':
     case 'customer.subscription.deleted':
     case 'invoice.payment_succeeded':
+    case 'checkout.session.completed':
     case 'charge.succeeded':
       // These will be handled by API routes
       break;

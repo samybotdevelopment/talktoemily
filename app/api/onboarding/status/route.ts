@@ -34,7 +34,7 @@ export async function GET(request: Request) {
     const org = memberships.organizations as any;
 
     return NextResponse.json({
-      needs_onboarding: org.is_wg_linked && !org.onboarding_completed_at,
+      needs_onboarding: !org.onboarding_completed_at,
       wg_user_id: org.wg_user_id,
       is_wg_linked: org.is_wg_linked,
       onboarding_completed_at: org.onboarding_completed_at,

@@ -14,12 +14,28 @@ export async function GET(request: Request) {
 
     const { data: website, error } = await supabase
       .from('websites')
-      .select('display_name, primary_color, widget_style, widget_subtitle, widget_welcome_title, widget_welcome_message')
+      .select('display_name, primary_color, widget_style, widget_subtitle, widget_welcome_title, widget_welcome_message, is_active')
       .eq('id', websiteId)
       .single();
 
     if (error || !website) {
       return NextResponse.json({ error: 'Website not found' }, { status: 404 });
+    }
+
+    // Check if bot is active
+    if (!website.is_active) {
+      return NextResponse.json({
+        error: 'Bot is currently inactive',
+        message: 'This chatbot is temporarily unavailable. Please contact the website owner.',
+        isInactive: true
+      }, { 
+        status: 403,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        }
+      });
     }
 
     return NextResponse.json({

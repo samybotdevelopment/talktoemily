@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { TestChatWidget } from '@/components/TestChatWidget';
 
@@ -35,6 +36,7 @@ export function WebsiteOverviewClient({
   wgWebsiteId,
   widgetActivated,
 }: WebsiteOverviewClientProps) {
+  const router = useRouter();
   const [showTestWidget, setShowTestWidget] = useState(false);
   const [isActivating, setIsActivating] = useState(false);
   const [isWidgetActivated, setIsWidgetActivated] = useState(widgetActivated);
@@ -192,29 +194,6 @@ export function WebsiteOverviewClient({
                 : 'Train your bot first'}
             </p>
           </div>
-        </div>
-
-        {/* Quick Actions */}
-        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
-          <Link
-            href={`/websites/${websiteId}/training`}
-            className="neo-card bg-white p-6 sm:p-8 text-center hover:scale-[1.02] transition-transform"
-          >
-            <h3 className="text-xl sm:text-2xl font-bold mb-2">Train Your Bot</h3>
-            <p className="text-sm sm:text-base text-gray-600">
-              Add training content with text or voice to teach your AI assistant
-            </p>
-          </Link>
-
-          <Link
-            href={`/websites/${websiteId}/conversations`}
-            className="neo-card bg-white p-6 sm:p-8 text-center hover:scale-[1.02] transition-transform"
-          >
-            <h3 className="text-xl sm:text-2xl font-bold mb-2">View Conversations</h3>
-            <p className="text-sm sm:text-base text-gray-600">
-              See all conversations and chat with your AI assistant
-            </p>
-          </Link>
         </div>
       </main>
 

@@ -153,7 +153,7 @@ export async function checkMessageQuota(orgId: string): Promise<{
   // Get organization
   const { data: org, error: orgError } = await supabase
     .from('organizations')
-    .select('plan, is_wg_linked, credits_balance')
+    .select('plan, is_wg_linked, credits_balance, frozen_credits')
     .eq('id', orgId)
     .single();
 
@@ -163,14 +163,22 @@ export async function checkMessageQuota(orgId: string): Promise<{
 
   const limits = getUsageLimits(org.plan, org.is_wg_linked);
 
+  // For Free plan: Only usable credits are up to 50 (frozen credits are locked)
+  const FREE_PLAN_CREDIT_LIMIT = 50;
+  const usableCredits = org.plan === 'free' 
+    ? Math.min(org.credits_balance, FREE_PLAN_CREDIT_LIMIT)
+    : org.credits_balance;
+
   // Unlimited messages for pro/WG-linked (but need credits)
   if (limits.ai_messages === -1) {
-    if (org.credits_balance <= 0) {
+    if (usableCredits <= 0) {
       return {
         allowed: false,
-        reason: 'No credits remaining. Please purchase more credits.',
+        reason: org.plan === 'free' && org.frozen_credits > 0
+          ? `Free plan credit limit reached (${FREE_PLAN_CREDIT_LIMIT} max). Upgrade to unlock ${org.frozen_credits} frozen credits.`
+          : 'No credits remaining. Please purchase more credits.',
         current: 0,
-        limit: org.credits_balance,
+        limit: usableCredits,
       };
     }
     return { allowed: true, current: 0, limit: -1 };

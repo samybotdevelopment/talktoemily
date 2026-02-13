@@ -9,20 +9,6 @@ export function DeleteAccountButton() {
   const router = useRouter();
 
   const handleDeleteAccount = async () => {
-    // Confirm deletion
-    const confirmed = window.confirm(
-      'Are you sure you want to delete your account? This action cannot be undone.\n\nThis will permanently delete:\n• Your account\n• All websites\n• All conversations and messages\n• All training data\n• All subscriptions\n\nPlease type "DELETE" to confirm.'
-    );
-
-    if (!confirmed) return;
-
-    // Ask user to type DELETE
-    const userInput = window.prompt('Type "DELETE" to confirm account deletion:');
-    if (userInput !== 'DELETE') {
-      setError('Deletion cancelled. You must type "DELETE" to confirm.');
-      return;
-    }
-
     setIsDeleting(true);
     setError(null);
 
@@ -31,12 +17,12 @@ export function DeleteAccountButton() {
         method: 'POST',
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const data = await response.json();
         throw new Error(data.error || 'Failed to delete account');
       }
 
-      // Redirect to login page after successful deletion
       router.push('/auth/login');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -45,7 +31,7 @@ export function DeleteAccountButton() {
   };
 
   return (
-    <div className="mt-4">
+    <div>
       {error && (
         <div className="mb-4 p-4 bg-red-100 border-2 border-red-600 rounded-lg text-red-700 font-bold">
           {error}

@@ -13,3 +13,4 @@ CREATE INDEX IF NOT EXISTS idx_organizations_onboarding_state
 COMMENT ON COLUMN public.organizations.onboarding_state IS 'Stores current onboarding progress state as JSON - cleared on completion';
 
 
+

@@ -19,6 +19,20 @@ export async function PATCH(
   const body = await request.json();
   const updates: Record<string, string> = {};
 
+  // Add basic information fields
+  if (body.display_name !== undefined) {
+    updates.display_name = body.display_name.trim();
+  }
+  if (body.domain !== undefined) {
+    updates.domain = body.domain.trim();
+  }
+  if (body.primary_color !== undefined) {
+    // Validate hex color format
+    if (/^#[0-9A-F]{6}$/i.test(body.primary_color)) {
+      updates.primary_color = body.primary_color;
+    }
+  }
+
   // Validate and add widget_style
   if (body.widget_style) {
     if (!['modern', 'neutral'].includes(body.widget_style)) {

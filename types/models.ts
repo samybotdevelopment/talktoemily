@@ -78,6 +78,9 @@ export interface TrainingChunk {
 export interface OnboardingState {
   step: number;
   selectedWebsite: WGWebsite | null;
+  // For non-WG customers
+  websiteName: string;
+  websiteUrl: string;
   botName: string;
   primaryColor: string;
   trainingChunks: TrainingChunk[];

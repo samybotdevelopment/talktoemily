@@ -29,72 +29,50 @@ export async function POST(request: NextRequest) {
 
     const orgId = memberships.org_id;
 
-    // Delete all data related to the organization (using service client for admin operations)
-    
-    // 1. Get all website IDs for this org
-    const { data: websites } = await serviceClient
+    // Check if there are any bots (websites) still on the account
+    const { data: websites, error: websitesError } = await supabase
       .from('websites')
-      .select('id')
+      .select('id, display_name')
       .eq('org_id', orgId);
 
-    const websiteIds = websites?.map((w: any) => w.id) || [];
-
-    // 2. Delete all messages (from conversations in websites of this org)
-    if (websiteIds.length > 0) {
-      const { data: conversations } = await serviceClient
-        .from('conversations')
-        .select('id')
-        .in('website_id', websiteIds);
-
-      if (conversations && conversations.length > 0) {
-        const conversationIds = conversations.map((c: any) => c.id);
-        await serviceClient
-          .from('messages')
-          .delete()
-          .in('conversation_id', conversationIds);
-      }
-
-      // 3. Delete all conversations
-      await serviceClient
-        .from('conversations')
-        .delete()
-        .in('website_id', websiteIds);
-
-      // 4. Delete all training runs
-      await serviceClient
-        .from('training_runs')
-        .delete()
-        .in('website_id', websiteIds);
-
-      // 5. Delete all training items
-      await serviceClient
-        .from('training_items')
-        .delete()
-        .in('website_id', websiteIds);
-
-      // 6. Delete all websites
-      await serviceClient
-        .from('websites')
-        .delete()
-        .in('id', websiteIds);
+    if (websitesError) {
+      return NextResponse.json(
+        { error: 'Failed to check for existing bots' },
+        { status: 500 }
+      );
     }
 
-    // 7. Delete usage tracking
+    // If there are any bots, prevent deletion
+    if (websites && websites.length > 0) {
+      return NextResponse.json(
+        { 
+          error: 'Please delete all bots before deleting your account',
+          hasBots: true,
+          botCount: websites.length
+        },
+        { status: 400 }
+      );
+    }
+
+    // Delete all data related to the organization (using service client for admin operations)
+    // At this point, there are no websites to delete since we checked above
+
+    // 2. Delete usage tracking
     await serviceClient.from('usage_tracking').delete().eq('org_id', orgId);
 
-    // 8. Delete Stripe customer data
+    // 3. Delete Stripe customer data
     await serviceClient.from('stripe_customers').delete().eq('org_id', orgId);
 
-    // 9. Delete memberships
+    // 4. Delete memberships
     await serviceClient.from('memberships').delete().eq('org_id', orgId);
 
-    // 10. Delete organization
+    // 5. Delete organization
     await serviceClient.from('organizations').delete().eq('id', orgId);
 
-    // 11. Sign out the user first
+    // 6. Sign out the user first
     await supabase.auth.signOut();
 
-    // 12. Delete user from auth using service client admin API
+    // 7. Delete user from auth using service client admin API
     try {
       await serviceClient.auth.admin.deleteUser(user.id);
     } catch (error) {

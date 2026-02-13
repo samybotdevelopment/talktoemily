@@ -37,10 +37,18 @@ export default function OnboardingPage() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isWGLinked, setIsWGLinked] = useState<boolean | null>(null);
+  const [documentProcessed, setDocumentProcessed] = useState(false);
+  const [isCreatingAdditionalBot, setIsCreatingAdditionalBot] = useState(false);
+  const [showAllWebsitesUsedModal, setShowAllWebsitesUsedModal] = useState(false);
+  const [showCancelModal, setShowCancelModal] = useState(false);
 
   // State for each step
   const [websites, setWebsites] = useState<WGWebsite[]>([]);
+  const [existingBotWebsiteIds, setExistingBotWebsiteIds] = useState<string[]>([]); // WG website IDs with bots
   const [selectedWebsite, setSelectedWebsite] = useState<WGWebsite | null>(null);
+  const [websiteName, setWebsiteName] = useState('');
+  const [websiteUrl, setWebsiteUrl] = useState('');
   const [botName, setBotName] = useState('');
   const [primaryColor, setPrimaryColor] = useState('#E91E63');
   const [trainingChunks, setTrainingChunks] = useState<TrainingChunk[]>([]);
@@ -65,11 +73,18 @@ export default function OnboardingPage() {
       const response = await fetch('/api/onboarding/status');
       const data = await response.json();
 
+      setIsWGLinked(data.is_wg_linked);
+      
+      // Check if this is creating an additional bot (org already completed onboarding)
+      setIsCreatingAdditionalBot(!!data.onboarding_completed_at);
+
       if (data.onboarding_state) {
         const state: OnboardingState = data.onboarding_state;
         // Restore state
         setStep(state.step);
         setSelectedWebsite(state.selectedWebsite);
+        setWebsiteName(state.websiteName || '');
+        setWebsiteUrl(state.websiteUrl || '');
         setBotName(state.botName);
         setPrimaryColor(state.primaryColor);
         setTrainingChunks(state.trainingChunks);
@@ -86,6 +101,8 @@ export default function OnboardingPage() {
       const state: OnboardingState = {
         step,
         selectedWebsite,
+        websiteName,
+        websiteUrl,
         botName,
         primaryColor,
         trainingChunks,
@@ -103,12 +120,12 @@ export default function OnboardingPage() {
     }
   };
 
-  // Save state whenever it changes (debounced in practice)
+  // Save state only when step changes (not on every keystroke)
   useEffect(() => {
     if (step > 1) {
       saveOnboardingState();
     }
-  }, [step, selectedWebsite, botName, primaryColor, trainingChunks, currentQuestionSection, qaAnswers]);
+  }, [step, currentQuestionSection]); // Only save when navigating between steps
 
   // Initialize animated count when loading state
   useEffect(() => {
@@ -116,12 +133,12 @@ export default function OnboardingPage() {
     previousCountRef.current = trainingChunks.length;
   }, []);
 
-  // Step 2: Fetch websites
+  // Step 2: Fetch websites (WG only)
   useEffect(() => {
-    if (step === 2 && websites.length === 0) {
+    if (step === 2 && isWGLinked && websites.length === 0) {
       fetchWebsites();
     }
-  }, [step]);
+  }, [step, isWGLinked]);
 
   const fetchWebsites = async () => {
     setLoading(true);
@@ -139,6 +156,25 @@ export default function OnboardingPage() {
       }
 
       setWebsites(data.websites);
+      
+      // Fetch existing bots to grey out websites with bots
+      const existingBotsResponse = await fetch('/api/websites');
+      if (existingBotsResponse.ok) {
+        const existingBotsData = await existingBotsResponse.json();
+        // API returns { data: [...] }
+        const existingBots = existingBotsData.data || [];
+        const usedWgWebsiteIds = existingBots
+          .filter((bot: any) => bot.wg_website_id)
+          .map((bot: any) => bot.wg_website_id);
+        setExistingBotWebsiteIds(usedWgWebsiteIds);
+        console.log('🔍 Existing bots:', existingBots);
+        console.log('🔍 Used WG website IDs:', usedWgWebsiteIds);
+        
+        // Check if all WG websites already have bots
+        if (isCreatingAdditionalBot && data.websites.length > 0 && usedWgWebsiteIds.length === data.websites.length) {
+          setShowAllWebsitesUsedModal(true);
+        }
+      }
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -181,6 +217,7 @@ export default function OnboardingPage() {
   const handleDocumentUpload = async (file: File) => {
     setLoading(true);
     setError(null);
+    setDocumentProcessed(false);
 
     try {
       const formData = new FormData();
@@ -198,6 +235,14 @@ export default function OnboardingPage() {
       }
 
       setTrainingChunks([...trainingChunks, ...data.chunks]);
+      setDocumentProcessed(true);
+      
+      // Trigger confetti
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -205,24 +250,69 @@ export default function OnboardingPage() {
     }
   };
 
+  // Cancel bot creation (for additional bots only)
+  const handleCancelBotCreation = () => {
+    setShowCancelModal(true);
+  };
+
+  const confirmCancelBotCreation = async () => {
+    try {
+      setLoading(true);
+      
+      // Call API to clear state and delete incomplete bot
+      const response = await fetch('/api/onboarding/cancel', {
+        method: 'POST',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to cancel bot creation');
+      }
+
+      setShowCancelModal(false);
+      router.push('/dashboard');
+    } catch (error) {
+      console.error('Error canceling bot creation:', error);
+      setError('Failed to cancel bot creation');
+      setShowCancelModal(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handle all websites used modal
+  const handleAllWebsitesUsed = () => {
+    setShowAllWebsitesUsedModal(false);
+    router.push('/dashboard');
+  };
+
   // Complete onboarding
   const completeOnboarding = async () => {
-    if (!selectedWebsite) return;
+    // Validation: WG customers need selectedWebsite, non-WG need websiteName
+    if (isWGLinked && !selectedWebsite) return;
+    if (!isWGLinked && !websiteName) return;
 
     setLoading(true);
     setError(null);
 
     try {
+      const website_data = isWGLinked
+        ? {
+            display_name: botName,
+            domain: selectedWebsite!.website_url,
+            primary_color: primaryColor,
+            wg_website_id: selectedWebsite!.website_id,
+          }
+        : {
+            display_name: botName,
+            domain: websiteUrl || websiteName,
+            primary_color: primaryColor,
+          };
+
       const response = await fetch('/api/onboarding/complete', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          website_data: {
-            display_name: botName,
-            domain: selectedWebsite.website_url,
-            primary_color: primaryColor,
-            wg_website_id: selectedWebsite.website_id,
-          },
+          website_data,
           training_chunks: trainingChunks,
         }),
       });
@@ -311,6 +401,7 @@ export default function OnboardingPage() {
       } else {
         // Move to next step (document upload)
         setStep(6);
+        setDocumentProcessed(false); // Reset document processing state
       }
       
       // Reset transition after animation
@@ -396,21 +487,34 @@ export default function OnboardingPage() {
             <div className="neo-card bg-white p-8 text-center">
               <div className="text-6xl mb-6">👋</div>
               <h2 className="text-3xl font-bold mb-4">Welcome to Talk to Emily!</h2>
-              <p className="text-lg text-gray-700 mb-4">
-                You have a Wonder George subscription, so your Emily subscription is free of
-                charge.
-              </p>
-              <p className="text-gray-600 mb-8">
-                Congratulations! Let's create your first chatbot.
-              </p>
+              {isWGLinked ? (
+                <>
+                  <p className="text-lg text-gray-700 mb-4">
+                    You have a Wonder George subscription, so your Emily subscription is free of
+                    charge.
+                  </p>
+                  <p className="text-gray-600 mb-8">
+                    Congratulations! Let's create your first chatbot.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="text-lg text-gray-700 mb-4">
+                    Let's create your AI-powered chatbot in just a few steps.
+                  </p>
+                  <p className="text-gray-600 mb-8">
+                    Your chatbot will be ready to answer questions and engage with your visitors.
+                  </p>
+                </>
+              )}
               <button onClick={() => setStep(2)} className="neo-button-primary text-lg px-8 py-4">
                 Get Started →
               </button>
             </div>
           )}
 
-          {/* Step 2: Website Selection */}
-          {step === 2 && (
+          {/* Step 2: Website Selection (WG only) */}
+          {step === 2 && isWGLinked && (
             <div className="neo-card bg-white p-8">
               <h2 className="text-2xl font-bold mb-4">Choose Your Website</h2>
               <p className="text-gray-600 mb-6">
@@ -427,46 +531,110 @@ export default function OnboardingPage() {
                 </div>
               ) : (
                 <div className="grid gap-4">
-                  {websites.map((website) => (
-                    <button
-                      key={website.website_id}
-                      onClick={() => {
-                        setSelectedWebsite(website);
-                        setBotName(website.website_name);
-                        setStep(3);
-                      }}
-                      className={`neo-card p-6 text-left hover:scale-[1.02] transition-transform ${
-                        selectedWebsite?.website_id === website.website_id
-                          ? 'border-fuchsia-primary'
-                          : ''
-                      }`}
-                    >
-                      <div className="flex items-center gap-4">
-                        {website.website_image_url ? (
-                          <img
-                            src={website.website_image_url}
-                            alt={website.website_name}
-                            className="w-16 h-16 rounded-lg border-2 border-black object-cover"
-                          />
-                        ) : (
-                          <div className="w-16 h-16 rounded-lg border-2 border-black bg-fuchsia-primary flex items-center justify-center text-white font-bold text-2xl">
-                            {website.website_name[0]}
+                  {websites.map((website) => {
+                    const hasExistingBot = existingBotWebsiteIds.includes(website.website_id);
+                    
+                    return (
+                      <button
+                        key={website.website_id}
+                        onClick={() => {
+                          if (!hasExistingBot) {
+                            setSelectedWebsite(website);
+                            setBotName(website.website_name);
+                            setStep(3);
+                          }
+                        }}
+                        disabled={hasExistingBot}
+                        className={`neo-card p-6 text-left transition-transform ${
+                          hasExistingBot
+                            ? 'opacity-50 cursor-not-allowed bg-gray-100'
+                            : 'hover:scale-[1.02]'
+                        } ${
+                          selectedWebsite?.website_id === website.website_id
+                            ? 'border-fuchsia-primary'
+                            : ''
+                        }`}
+                      >
+                        <div className="flex items-center gap-4">
+                          {website.website_image_url ? (
+                            <img
+                              src={website.website_image_url}
+                              alt={website.website_name}
+                              className="w-16 h-16 rounded-lg border-2 border-black object-cover"
+                            />
+                          ) : (
+                            <div className="w-16 h-16 rounded-lg border-2 border-black bg-fuchsia-primary flex items-center justify-center text-white font-bold text-2xl">
+                              {website.website_name[0]}
+                            </div>
+                          )}
+                          <div className="flex-1">
+                            <h3 className="text-xl font-bold">{website.website_name}</h3>
+                            <p className="text-sm text-gray-600">{website.website_url}</p>
+                            {hasExistingBot && (
+                              <p className="text-sm font-bold text-fuchsia-primary mt-1">
+                                ✓ Chatbot already created
+                              </p>
+                            )}
                           </div>
-                        )}
-                        <div>
-                          <h3 className="text-xl font-bold">{website.website_name}</h3>
-                          <p className="text-sm text-gray-600">{website.website_url}</p>
                         </div>
-                      </div>
-                    </button>
-                  ))}
+                      </button>
+                    );
+                  })}
                 </div>
               )}
             </div>
           )}
 
+          {/* Step 2: Business Info (Non-WG customers) */}
+          {step === 2 && !isWGLinked && (
+            <div className="neo-card bg-white p-8">
+              <h2 className="text-2xl font-bold mb-4">Tell Us About Your Business</h2>
+              <p className="text-gray-600 mb-6">
+                We'll use this information to set up your chatbot
+              </p>
+
+              <div className="mb-6">
+                <label className="block text-sm font-bold mb-2">Business/Website Name</label>
+                <input
+                  type="text"
+                  value={websiteName}
+                  onChange={(e) => {
+                    setWebsiteName(e.target.value);
+                    if (!botName) setBotName(e.target.value);
+                  }}
+                  className="neo-input w-full"
+                  placeholder="e.g. My Coffee Shop"
+                />
+              </div>
+
+              <div className="mb-6">
+                <label className="block text-sm font-bold mb-2">Website URL (Optional)</label>
+                <input
+                  type="url"
+                  value={websiteUrl}
+                  onChange={(e) => setWebsiteUrl(e.target.value)}
+                  className="neo-input w-full"
+                  placeholder="e.g. https://mycoffeeshop.com"
+                />
+              </div>
+
+              <div className="flex gap-4">
+                <button onClick={() => setStep(1)} className="neo-button-secondary">
+                  ← Back
+                </button>
+                <button
+                  onClick={() => setStep(3)}
+                  disabled={!websiteName}
+                  className="neo-button-primary flex-1"
+                >
+                  Continue →
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Step 3: Bot Customization */}
-          {step === 3 && selectedWebsite && (
+          {step === 3 && ((isWGLinked && selectedWebsite) || (!isWGLinked && websiteName)) && (
             <div className="neo-card bg-white p-8">
               <h2 className="text-2xl font-bold mb-4">Customize Your Bot</h2>
               <p className="text-gray-600 mb-6">Name your bot and choose a color</p>
@@ -505,7 +673,7 @@ export default function OnboardingPage() {
                   ← Back
                 </button>
                 <button
-                  onClick={() => setStep(4)}
+                  onClick={() => setStep(isWGLinked ? 4 : 5)}
                   disabled={!botName}
                   className="neo-button-primary flex-1"
                 >
@@ -515,8 +683,8 @@ export default function OnboardingPage() {
             </div>
           )}
 
-          {/* Step 4: Auto-Training Setup */}
-          {step === 4 && (
+          {/* Step 4: Auto-Training Setup (WG Only) */}
+          {step === 4 && isWGLinked && (
             <div className="neo-card bg-white p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">Let's start training {botName}</h2>
               <p className="text-gray-600 mb-8">
@@ -647,6 +815,13 @@ export default function OnboardingPage() {
                 </div>
               )}
 
+              {documentProcessed && !loading && (
+                <div className="text-center py-4">
+                  <div className="text-5xl mb-2 text-green-600">✓</div>
+                  <p className="text-green-600 font-bold">Document processed successfully!</p>
+                </div>
+              )}
+
               <div className="flex gap-4">
                 <button onClick={() => setStep(5)} className="neo-button-secondary">
                   ← Back
@@ -770,7 +945,63 @@ export default function OnboardingPage() {
             </div>
           )}
         </div>
+
+        {/* Cancel Button (for additional bots only) */}
+        {isCreatingAdditionalBot && step > 1 && (
+          <div className="max-w-2xl mx-auto mt-6">
+            <button
+              onClick={handleCancelBotCreation}
+              className="neo-button-secondary w-full"
+            >
+              Cancel Bot Creation
+            </button>
+          </div>
+        )}
       </main>
+
+      {/* Cancel Confirmation Modal */}
+      {showCancelModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="neo-card bg-white p-8 max-w-md w-full">
+            <h2 className="text-2xl font-bold mb-4">Cancel Bot Creation?</h2>
+            <p className="text-gray-700 mb-6">
+              Are you sure you want to cancel? All progress will be lost.
+            </p>
+            <div className="flex gap-4">
+              <button
+                onClick={confirmCancelBotCreation}
+                className="neo-button-secondary flex-1"
+              >
+                Yes, Cancel
+              </button>
+              <button
+                onClick={() => setShowCancelModal(false)}
+                className="neo-button-primary flex-1"
+              >
+                Continue Creating
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* All Websites Used Modal */}
+      {showAllWebsitesUsedModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="neo-card bg-white p-8 max-w-md w-full">
+            <h2 className="text-2xl font-bold mb-4">All Websites Have Bots</h2>
+            <p className="text-gray-700 mb-6">
+              All your websites on Wonder George already have a chatbot. Create a new website on Wonder George to create a new bot.
+            </p>
+            <button
+              onClick={handleAllWebsitesUsed}
+              className="neo-button-primary w-full"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
