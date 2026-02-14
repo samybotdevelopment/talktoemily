@@ -7,10 +7,10 @@ export default async function Home() {
   const tCommon = await getTranslations('common');
   
   return (
-    <div className="min-h-screen bg-page">
+    <div className="flex-1 flex flex-col bg-page">
       <Header showAuth={false} />
       
-      <div className="flex items-center justify-center px-4 py-12 sm:py-20">
+      <div className="flex-1 flex items-center justify-center px-4 py-12 sm:py-20">
         <div className="neo-container text-center">
           <h1 className="text-4xl sm:text-6xl font-bold mb-6">
             {t('title', { name: t('titleName') }).split(t('titleName'))[0]}

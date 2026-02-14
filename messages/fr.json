@@ -999,5 +999,29 @@
         "signature": "Emily 💙"
       }
     }
+  },
+  "widget": {
+    "loading": "Chargement des conversations...",
+    "loadingMessages": "Chargement des messages...",
+    "failedToLoad": "Échec du chargement des conversations",
+    "failedToLoadMessages": "Échec du chargement des messages",
+    "noConversations": "Aucune conversation pour le moment.",
+    "clickToStart": "Cliquez ci-dessous pour commencer à discuter !",
+    "newConversation": "Nouvelle conversation",
+    "typeMessage": "Tapez votre message...",
+    "justNow": "À l'instant",
+    "minutesAgo": "il y a {count}m",
+    "hoursAgo": "il y a {count}h",
+    "daysAgo": "il y a {count}j",
+    "errorMessage": "Désolé, j'ai rencontré une erreur. Veuillez réessayer.",
+    "botInactive": "Ce chatbot est actuellement inactif"
+  },
+  "footer": {
+    "copyright": "© {year} TalkToEmily par",
+    "company": "Alsatech SAS",
+    "wonderGeorge": "Wonder George",
+    "legal": "Mentions légales",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions générales"
   }
 }

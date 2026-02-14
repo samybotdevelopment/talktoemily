@@ -999,6 +999,30 @@
         "signature": "Emily 💙"
       }
     }
+  },
+  "widget": {
+    "loading": "Loading conversations...",
+    "loadingMessages": "Loading messages...",
+    "failedToLoad": "Failed to load conversations",
+    "failedToLoadMessages": "Failed to load messages",
+    "noConversations": "No conversations yet.",
+    "clickToStart": "Click below to start chatting!",
+    "newConversation": "New Conversation",
+    "typeMessage": "Type your message...",
+    "justNow": "Just now",
+    "minutesAgo": "{count}m ago",
+    "hoursAgo": "{count}h ago",
+    "daysAgo": "{count}d ago",
+    "errorMessage": "Sorry, I encountered an error. Please try again.",
+    "botInactive": "This chatbot is currently inactive"
+  },
+  "footer": {
+    "copyright": "© {year} TalkToEmily by",
+    "company": "Alsatech SAS",
+    "wonderGeorge": "Wonder George",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions"
   }
 }
 
