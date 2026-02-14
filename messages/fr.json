@@ -1,0 +1,570 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "close": "Fermer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "backToDashboard": "← Retour au tableau de bord",
+    "getStarted": "Commencer",
+    "learnMore": "En savoir plus",
+    "viewAll": "Tout afficher",
+    "upgrade": "Passer à l’offre supérieure",
+    "comingSoon": "Bientôt disponible"
+  },
+  "auth": {
+    "login": {
+      "title": "Se connecter",
+      "subtitle": "Bon retour ! Connectez-vous à votre compte.",
+      "email": "E-mail",
+      "emailPlaceholder": "vous@exemple.com",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "Votre mot de passe",
+      "submit": "Se connecter",
+      "noAccount": "Vous n’avez pas de compte ?",
+      "signUp": "S’inscrire",
+      "forgotPassword": "Mot de passe oublié ?",
+      "magicLinkSent": "Vérifiez vos e-mails pour le lien magique !",
+      "error": "Échec de la connexion. Veuillez vérifier vos identifiants."
+    },
+    "signup": {
+      "title": "Créer votre compte",
+      "subtitle": "Commencez à créer des chatbots IA dès aujourd’hui.",
+      "email": "E-mail",
+      "emailPlaceholder": "vous@exemple.com",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "Choisissez un mot de passe fort",
+      "orgName": "Nom de l’organisation",
+      "orgNamePlaceholder": "Le nom de votre entreprise",
+      "submit": "Créer un compte",
+      "hasAccount": "Vous avez déjà un compte ?",
+      "login": "Se connecter",
+      "error": "Échec de l’inscription. Veuillez réessayer.",
+      "checkEmail": "Vérifiez vos e-mails pour confirmer votre compte !"
+    },
+    "signOut": "Se déconnecter",
+    "signOutConfirm": "Êtes-vous sûr(e) de vouloir vous déconnecter ?"
+  },
+  "navigation": {
+    "dashboard": "Tableau de bord",
+    "settings": "Paramètres",
+    "billing": "Facturation",
+    "credits": "Crédits",
+    "subscription": "Abonnement",
+    "overview": "Aperçu",
+    "conversations": "Conversations",
+    "training": "Entraînement",
+    "embed": "Intégration",
+    "botSettings": "Paramètres du bot"
+  },
+  "header": {
+    "welcome": "Bienvenue",
+    "settings": "Paramètres",
+    "signOut": "Se déconnecter"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "welcome": "Bienvenue sur Talk to Emily",
+    "yourChatbots": "Vos chatbots",
+    "noChatbots": "Aucun chatbot pour le moment",
+    "noChatbotsDescription": "Créez votre premier chatbot IA à intégrer sur votre site web",
+    "createFirstBot": "Créer votre premier chatbot",
+    "createNewBot": "Créer un nouveau chatbot",
+    "currentPlan": "Offre actuelle",
+    "planFree": "Gratuit",
+    "planStarter": "Starter",
+    "planPro": "Pro",
+    "botsActive": "{count} sur {max} bots actifs",
+    "viewPlans": "Voir les offres",
+    "cancelingAt": "Annulation à la fin de la période",
+    "canceledAt": "Abonnement annulé le {date}",
+    "yourPlanWillDowngrade": "Votre offre passera à Gratuit le {date}.",
+    "botsWillBeDeactivated": "Les bots au-delà de la limite de l’offre Gratuit seront désactivés.",
+    "reactivateSubscription": "Réactiver l’abonnement",
+    "continueWithFreePlan": "Continuer avec l’offre Gratuit",
+    "subscriptionCanceled": "Abonnement annulé",
+    "freePlanActive": "Vous êtes actuellement sur l’offre Gratuit.",
+    "upgradeToAccess": "Passez à une offre supérieure pour accéder à plus de fonctionnalités et de chatbots.",
+    "incompleteBot": "Vous avez une configuration de bot incomplète",
+    "resumeSetup": "Reprendre la configuration",
+    "deleteIncompleteBot": "Supprimer"
+  },
+  "onboarding": {
+    "welcome": {
+      "title": "Bienvenue sur Talk to Emily !",
+      "wgLinked": "Vous avez un abonnement Wonder George, donc votre abonnement Emily est gratuit.",
+      "congratulations": "Félicitations ! Créons votre premier chatbot.",
+      "subtitle": "Créons votre chatbot propulsé par l’IA en quelques étapes.",
+      "description": "Votre chatbot sera prêt à répondre aux questions et à échanger avec vos visiteurs.",
+      "getStarted": "Commencer →"
+    },
+    "websiteSelection": {
+      "title": "Sélectionner un site web",
+      "description": "Choisissez pour quel site Wonder George vous souhaitez créer un chatbot.",
+      "alreadyHasBot": "(A déjà un bot)",
+      "selectWebsite": "Sélectionner un site web"
+    },
+    "websiteDetails": {
+      "title": "Détails du site web",
+      "websiteName": "Nom du site web",
+      "websiteNamePlaceholder": "Mon super site",
+      "websiteUrl": "URL du site web",
+      "websiteUrlPlaceholder": "https://exemple.com",
+      "continue": "Continuer"
+    },
+    "botCustomization": {
+      "title": "Personnaliser votre chatbot",
+      "botName": "Nom du bot",
+      "botNamePlaceholder": "Emily",
+      "primaryColor": "Couleur principale",
+      "colorDescription": "Cette couleur sera utilisée pour le widget de chat",
+      "continue": "Continuer"
+    },
+    "trainingMethod": {
+      "title": "Comment souhaitez-vous entraîner votre chatbot ?",
+      "uploadDocument": "Importer un document",
+      "uploadDescription": "Importez un PDF, un document Word ou un fichier texte avec les informations de votre entreprise",
+      "answerQuestions": "Répondre à des questions",
+      "questionsDescription": "Nous vous poserons des questions sur votre entreprise pour entraîner le chatbot"
+    },
+    "uploadDocument": {
+      "title": "Importer un document d’entraînement",
+      "dragDrop": "Glissez-déposez votre fichier ici, ou cliquez pour parcourir",
+      "supportedFormats": "Formats pris en charge : PDF, DOC, DOCX, TXT (Max 10 Mo)",
+      "uploading": "Importation...",
+      "processing": "Traitement du document...",
+      "success": "Document traité avec succès !",
+      "itemsExtracted": "{count} éléments d’entraînement extraits",
+      "continue": "Continuer vers la révision"
+    },
+    "questionAnswering": {
+      "title": "Parlez-nous de votre entreprise",
+      "sectionTitle": "{title}",
+      "questionLabel": "Question",
+      "answerLabel": "Votre réponse",
+      "answerPlaceholder": "Saisissez votre réponse ici...",
+      "saveAndContinue": "Enregistrer et continuer",
+      "skip": "Passer cette question",
+      "sectionsSaved": "Section enregistrée !",
+      "sections": {
+        "products": {
+          "title": "Questions sur les produits et services",
+          "question": "Parlez-nous de vos produits ou services",
+          "placeholder": "Décrivez ce que vous proposez, les fonctionnalités clés, les tarifs, etc."
+        },
+        "customerQuestions": {
+          "title": "Questions que les clients posent généralement",
+          "question": "Quelles questions les clients vous posent-ils le plus souvent ?",
+          "placeholder": "Questions fréquentes de vos clients..."
+        },
+        "unique": {
+          "title": "Ce qui rend votre entreprise unique",
+          "question": "Qu’est-ce qui rend votre entreprise unique ?",
+          "placeholder": "Ce qui vous différencie de vos concurrents..."
+        },
+        "additional": {
+          "title": "Informations supplémentaires",
+          "question": "Y a-t-il quelque chose que vous aimeriez que le chatbot sache à propos de votre entreprise ?",
+          "placeholder": "Toute autre information importante..."
+        }
+      }
+    },
+    "reviewTraining": {
+      "title": "Réviser le contenu d’entraînement",
+      "description": "Voici ce que votre chatbot va apprendre. Vous pouvez modifier ou supprimer n’importe quelle section.",
+      "trainingItems": "{count} éléments d’entraînement",
+      "expand": "Développer",
+      "collapse": "Réduire",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "confirmDelete": "Êtes-vous sûr(e) de vouloir supprimer cet élément d’entraînement ?",
+      "finalize": "Finaliser et entraîner le bot"
+    },
+    "training": {
+      "title": "Entraînement de votre chatbot",
+      "processing": "Traitement de votre contenu...",
+      "thisWillTake": "Cela prendra quelques instants",
+      "complete": "Entraînement terminé !",
+      "yourBotIsReady": "Votre chatbot est prêt à être utilisé",
+      "goToDashboard": "Aller au tableau de bord"
+    },
+    "allWebsitesUsed": {
+      "title": "Tous les emplacements de sites web sont utilisés",
+      "description": "Vous avez déjà créé des chatbots pour tous vos sites Wonder George. Passez à une offre supérieure pour ajouter plus de bots !",
+      "upgrade": "Passer à l’offre supérieure",
+      "cancel": "Annuler"
+    },
+    "cancelModal": {
+      "title": "Annuler la création du bot ?",
+      "description": "Votre progression sera enregistrée et vous pourrez reprendre plus tard depuis le tableau de bord.",
+      "saveAndExit": "Enregistrer et quitter",
+      "continueSetup": "Continuer la configuration"
+    }
+  },
+  "bot": {
+    "overview": {
+      "title": "Aperçu du bot",
+      "status": "Statut",
+      "active": "Actif",
+      "inactive": "Inactif",
+      "conversations": "Conversations",
+      "messages": "Messages",
+      "lastTrained": "Dernier entraînement",
+      "never": "Jamais",
+      "trainBot": "Entraîner le bot",
+      "testBot": "Tester le bot",
+      "embedCode": "Obtenir le code d’intégration",
+      "quickStats": "Statistiques rapides",
+      "recentConversations": "Conversations récentes",
+      "noConversations": "Aucune conversation pour le moment",
+      "viewAll": "Voir toutes les conversations"
+    },
+    "conversations": {
+      "title": "Conversations",
+      "searchPlaceholder": "Rechercher des conversations...",
+      "visitor": "Visiteur",
+      "messages": "{count} messages",
+      "noConversations": "Aucune conversation pour le moment",
+      "noConversationsDescription": "Lorsque des visiteurs discutent avec votre bot, les conversations apparaîtront ici.",
+      "loadMore": "Charger plus",
+      "filterAll": "Toutes",
+      "filterActive": "Actives",
+      "filterResolved": "Résolues"
+    },
+    "training": {
+      "title": "Entraînement",
+      "addContent": "Ajouter du contenu d’entraînement",
+      "contentType": "Type de contenu",
+      "typeText": "Texte",
+      "typeUrl": "URL",
+      "typeFile": "Fichier",
+      "typeVoice": "Voix",
+      "titleLabel": "Titre",
+      "titlePlaceholder": "ex. À propos de nos services",
+      "contentLabel": "Contenu",
+      "contentPlaceholder": "Saisissez les informations que vous souhaitez que le bot apprenne...",
+      "urlLabel": "URL",
+      "urlPlaceholder": "https://exemple.com/page",
+      "fileLabel": "Importer un fichier",
+      "voiceLabel": "Enregistrer la voix",
+      "startRecording": "Démarrer l’enregistrement",
+      "stopRecording": "Arrêter l’enregistrement",
+      "addItem": "Ajouter un élément d’entraînement",
+      "trainBot": "Entraîner le chatbot",
+      "training": "Entraînement...",
+      "trainingItems": "Éléments d’entraînement ({count})",
+      "noItems": "Aucun élément d’entraînement pour le moment",
+      "noItemsDescription": "Ajoutez du contenu pour entraîner votre chatbot",
+      "itemAdded": "Élément d’entraînement ajouté avec succès",
+      "itemDeleted": "Élément d’entraînement supprimé",
+      "trainingComplete": "Entraînement terminé avec succès !",
+      "trainingFailed": "Échec de l’entraînement. Veuillez réessayer.",
+      "confirmDelete": "Êtes-vous sûr(e) de vouloir supprimer cet élément d’entraînement ?"
+    },
+    "embed": {
+      "title": "Intégrer votre chatbot",
+      "description": "Copiez-collez ce code dans le HTML de votre site web, juste avant la balise de fermeture </body>.",
+      "copyCode": "Copier le code",
+      "copied": "Copié !",
+      "testWidget": "Tester le widget",
+      "widgetAppearance": "Apparence du widget",
+      "widgetPosition": "Position",
+      "positionBottomRight": "En bas à droite",
+      "positionBottomLeft": "En bas à gauche",
+      "positionTopRight": "En haut à droite",
+      "positionTopLeft": "En haut à gauche"
+    },
+    "settings": {
+      "title": "Paramètres du bot",
+      "general": "Paramètres généraux",
+      "botName": "Nom du bot",
+      "botNamePlaceholder": "Emily",
+      "websiteDomain": "Domaine du site web",
+      "websiteDomainPlaceholder": "exemple.com",
+      "primaryColor": "Couleur principale",
+      "appearance": "Apparence",
+      "welcomeMessage": "Message de bienvenue",
+      "welcomeMessagePlaceholder": "Bonjour ! Comment puis-je vous aider aujourd’hui ?",
+      "placeholder": "Texte indicatif du champ de chat",
+      "placeholderText": "Saisissez votre message...",
+      "save": "Enregistrer les modifications",
+      "saved": "Paramètres enregistrés avec succès",
+      "danger": "Zone de danger",
+      "deactivateBot": "Désactiver le bot",
+      "deactivateDescription": "Désactiver temporairement ce bot sur votre site web",
+      "deactivate": "Désactiver",
+      "activate": "Activer",
+      "deleteBot": "Supprimer le bot",
+      "deleteDescription": "Supprimer définitivement ce bot et toutes ses données",
+      "delete": "Supprimer le bot",
+      "confirmDelete": "Êtes-vous sûr(e) de vouloir supprimer ce bot ? Cette action est irréversible.",
+      "confirmDeactivate": "Êtes-vous sûr(e) de vouloir désactiver ce bot ?"
+    }
+  },
+  "settings": {
+    "title": "Paramètres du compte",
+    "subscription": {
+      "title": "Abonnement",
+      "currentPlan": "Offre actuelle",
+      "managedByWG": "Géré par Wonder George",
+      "viewPlans": "Voir toutes les offres et les options de mise à niveau →",
+      "manageSubscription": "Gérer l’abonnement"
+    },
+    "billing": {
+      "title": "Facturation et factures",
+      "description": "Consultez votre historique de facturation et téléchargez les factures",
+      "manageBilling": "Gérer la facturation"
+    },
+    "credits": {
+      "title": "Crédits IA",
+      "balance": "Solde actuel",
+      "creditsRemaining": "{count} crédits",
+      "purchaseMore": "Acheter plus de crédits",
+      "whatAreCredits": "Que sont les crédits IA ?",
+      "creditsDescription": "Les crédits servent à entraîner votre chatbot et à traiter les conversations. Chaque élément d’entraînement coûte 1 crédit.",
+      "frozenCredits": "Crédits gelés",
+      "frozenDescription": "Ces crédits deviendront disponibles lorsque vous passerez à une offre payante.",
+      "usage": "Utilisation ce mois-ci",
+      "usedForTraining": "Utilisés pour l’entraînement"
+    },
+    "account": {
+      "title": "Compte",
+      "email": "E-mail",
+      "organization": "Organisation",
+      "deleteAccount": "Supprimer le compte",
+      "deleteDescription": "Supprimer définitivement votre compte et toutes les données associées",
+      "deleteButton": "Supprimer le compte",
+      "confirmDelete": "Êtes-vous sûr(e) de vouloir supprimer votre compte ? Cette action est irréversible."
+    }
+  },
+  "subscription": {
+    "title": "Offres d’abonnement",
+    "activatedSuccess": "Abonnement activé !",
+    "activatedDescription": "Bienvenue dans l’offre {plan} ! Vos crédits ont été ajoutés.",
+    "canceled": "Abonnement annulé",
+    "canceledDescription": "Votre abonnement a été annulé. Aucun frais n’a été facturé.",
+    "currentPlan": "Votre offre actuelle",
+    "free": {
+      "name": "Gratuit",
+      "price": "$0",
+      "period": "à vie",
+      "features": [
+        "1 chatbot",
+        "500 messages/mois",
+        "Personnalisation de base",
+        "Support par e-mail"
+      ],
+      "cta": "Offre actuelle"
+    },
+    "starter": {
+      "name": "Starter",
+      "price": "$9.99",
+      "period": "par mois",
+      "features": [
+        "3 chatbots",
+        "2 000 messages/mois",
+        "100 crédits/mois",
+        "Personnalisation avancée",
+        "Support prioritaire"
+      ],
+      "cta": "Passer à Starter"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "$19.99",
+      "period": "par mois",
+      "features": [
+        "10 chatbots",
+        "10 000 messages/mois",
+        "250 crédits/mois",
+        "Personnalisation complète",
+        "Option en marque blanche",
+        "Support prioritaire"
+      ],
+      "cta": "Passer à Pro"
+    },
+    "upgradeNow": "Passer à l’offre supérieure maintenant",
+    "managePlan": "Gérer l’offre",
+    "downgrade": "Passer à une offre inférieure",
+    "mostPopular": "La plus populaire"
+  },
+  "credits": {
+    "title": "Crédits IA",
+    "purchaseSuccess": "Achat réussi !",
+    "purchaseSuccessDescription": "{count} crédits ont été ajoutés à votre compte.",
+    "purchaseCanceled": "Achat annulé",
+    "purchaseCanceledDescription": "Votre achat a été annulé. Aucun frais n’a été facturé.",
+    "currentBalance": "Solde actuel",
+    "balanceAmount": "{count} crédits",
+    "whatAreCredits": "Que sont les crédits IA ?",
+    "creditsExplanation": "Les crédits IA servent à entraîner votre chatbot avec du nouveau contenu. Chaque élément d’entraînement (page, document ou Q&R) coûte 1 crédit. Votre premier entraînement est toujours gratuit !",
+    "whenYouNeed": "Quand vous avez besoin de plus de crédits",
+    "needMoreExplanation": "Vous aurez besoin de crédits lorsque vous ajouterez du nouveau contenu pour entraîner votre bot. Achetez des crédits en lot ci-dessous pour économiser !",
+    "purchasePacks": "Acheter des packs de crédits",
+    "requiresSubscription": "L’achat de crédits nécessite un abonnement actif",
+    "upgradeFirst": "Veuillez d’abord passer à une offre payante",
+    "packs": {
+      "small": {
+        "name": "Pack Starter",
+        "credits": "100 crédits",
+        "price": "$4.99",
+        "description": "Parfait pour les petites mises à jour"
+      },
+      "medium": {
+        "name": "Pack populaire",
+        "credits": "500 crédits",
+        "price": "$19.99",
+        "description": "Le meilleur rapport qualité-prix pour les entreprises en croissance",
+        "badge": "Meilleur rapport qualité-prix"
+      },
+      "large": {
+        "name": "Pack Pro",
+        "credits": "1000 crédits",
+        "price": "$34.99",
+        "description": "Pour les utilisateurs intensifs"
+      }
+    },
+    "purchase": "Acheter"
+  },
+  "trainingCostModal": {
+    "title": "Confirmer le coût de l’entraînement",
+    "firstTrainingFree": "🎉 Le premier entraînement est gratuit !",
+    "firstTrainingDescription": "C’est la première fois que vous entraînez ce bot, donc c’est pour nous ! Il traitera {count} éléments de contenu.",
+    "costDescription": "L’entraînement de votre chatbot traitera {count} éléments de contenu.",
+    "cost": "Coût :",
+    "credits": "{count} crédits",
+    "currentBalance": "Votre solde actuel : {count} crédits",
+    "insufficientCredits": "Il vous manque {count} crédits pour entraîner votre bot.",
+    "purchaseCredits": "Acheter des crédits",
+    "cancel": "Annuler",
+    "processing": "Traitement...",
+    "startTraining": "Démarrer l’entraînement",
+    "confirmTrain": "Confirmer et entraîner"
+  },
+  "widget": {
+    "welcome": "Bonjour ! Comment puis-je vous aider aujourd’hui ?",
+    "placeholder": "Saisissez votre message...",
+    "send": "Envoyer",
+    "poweredBy": "Propulsé par",
+    "online": "En ligne",
+    "offline": "Hors ligne",
+    "typing": "Écriture...",
+    "errorMessage": "Désolé, un problème est survenu. Veuillez réessayer.",
+    "minimize": "Réduire",
+    "close": "Fermer",
+    "newConversation": "Démarrer une nouvelle conversation"
+  },
+  "superadmin": {
+    "title": "Tableau de bord superadmin",
+    "subtitle": "Aperçu et gestion du système",
+    "stats": {
+      "totalOrganizations": "Nombre total d’organisations",
+      "totalUsers": "Nombre total d’utilisateurs",
+      "payingCustomers": "Clients payants",
+      "activeMRR": "MRR actif",
+      "totalConversations": "Nombre total de conversations",
+      "totalMessages": "Nombre total de messages",
+      "currentMonthRevenue": "Revenu du mois en cours"
+    },
+    "organizations": {
+      "title": "Gérer les organisations",
+      "description": "Consultez, recherchez et gérez toutes les organisations",
+      "search": "Rechercher des organisations...",
+      "noOrganizations": "Aucune organisation trouvée",
+      "viewDetails": "Voir les détails",
+      "plan": "Offre",
+      "credits": "Crédits",
+      "bots": "Bots",
+      "users": "Utilisateurs",
+      "created": "Créé"
+    },
+    "organizationDetail": {
+      "title": "Détails de l’organisation",
+      "grantPlan": "Attribuer une offre",
+      "grantCredits": "Attribuer des crédits",
+      "selectPlan": "Sélectionner une offre",
+      "starter": "Starter",
+      "pro": "Pro",
+      "grant": "Attribuer",
+      "creditsAmount": "Montant des crédits",
+      "creditsPlaceholder": "Saisir le montant",
+      "grantCreditsButton": "Attribuer des crédits",
+      "organizationInfo": "Informations sur l’organisation",
+      "name": "Nom",
+      "plan": "Offre",
+      "maxBots": "Nombre max de bots",
+      "creditsBalance": "Solde de crédits",
+      "frozenCredits": "Crédits gelés",
+      "users": "Utilisateurs",
+      "chatbots": "Chatbots",
+      "statistics": "Statistiques",
+      "conversations": "Conversations",
+      "messages": "Messages",
+      "planGranted": "Offre attribuée avec succès",
+      "creditsGranted": "Crédits attribués avec succès"
+    },
+    "systemLogs": {
+      "title": "Journaux système",
+      "comingSoon": "Bientôt disponible..."
+    },
+    "backToDashboard": "← Retour au tableau de bord"
+  },
+  "emails": {
+    "paymentFailed": {
+      "subject": {
+        "first": "Oups ! Nous n’avons pas pu traiter votre paiement",
+        "reminder": "Petit rappel : le paiement est toujours en attente (il reste {days} jours)",
+        "urgent": "⚠️ Urgent : veuillez mettre à jour vos informations de paiement"
+      },
+      "greeting": "Bonjour,",
+      "greetingReminder": "Bonjour,",
+      "firstAttempt": "Je voulais juste vous prévenir : nous avons essayé de traiter votre paiement, mais cela n’a pas abouti. Pas d’inquiétude, ça arrive !",
+      "retryInfo": "Pourriez-vous prendre un instant pour mettre à jour vos informations de paiement ? Nous réessaierons automatiquement au cours des {days} prochains jours (c’était la tentative {attempt} parmi plusieurs).",
+      "reminderMessage": "Ceci est un rappel amical : nous avons toujours des difficultés à traiter votre paiement. Votre abonnement sera bientôt renouvelé ; merci de mettre à jour votre moyen de paiement pour éviter toute interruption.",
+      "urgentMessage": "Ceci est un rappel urgent : le paiement de votre abonnement a échoué et il s’agit de la dernière tentative. Pour éviter une interruption de service, veuillez mettre à jour votre moyen de paiement immédiatement.",
+      "updatePayment": "👉 Mettez à jour votre moyen de paiement ici : {link}",
+      "helpMessage": "Si vous pensez qu’il s’agit d’une erreur ou si vous avez besoin d’aide, répondez simplement à cet e-mail — je suis là !",
+      "helpMessageReminder": "Si vous rencontrez des difficultés, dites-le-moi !",
+      "helpMessageUrgent": "Si vous avez besoin d’assistance, veuillez contacter le support.",
+      "signature": "Merci,\nEmily 💙",
+      "signatureReminder": "Bien à vous,\nEmily 💙",
+      "footer": "---\nTalk to Emily - Votre plateforme de chatbot IA"
+    }
+  },
+  "errors": {
+    "generic": "Un problème est survenu. Veuillez réessayer.",
+    "unauthorized": "Vous n’êtes pas autorisé(e) à effectuer cette action.",
+    "notFound": "La ressource demandée est introuvable.",
+    "networkError": "Erreur réseau. Veuillez vérifier votre connexion.",
+    "validationError": "Veuillez vérifier vos informations et réessayer.",
+    "insufficientCredits": "Crédits insuffisants. Veuillez acheter plus de crédits pour continuer.",
+    "botLimitReached": "Vous avez atteint votre limite de bots. Passez à une offre supérieure pour créer plus de bots.",
+    "trainingFailed": "Échec de l’entraînement. Veuillez réessayer plus tard."
+  },
+  "validation": {
+    "required": "Ce champ est obligatoire",
+    "email": "Veuillez saisir une adresse e-mail valide",
+    "url": "Veuillez saisir une URL valide",
+    "minLength": "Doit contenir au moins {min} caractères",
+    "maxLength": "Ne doit pas dépasser {max} caractères",
+    "passwordMismatch": "Les mots de passe ne correspondent pas"
+  },
+  "time": {
+    "now": "à l’instant",
+    "minutesAgo": "il y a {count} minutes",
+    "hoursAgo": "il y a {count} heures",
+    "daysAgo": "il y a {count} jours",
+    "weeksAgo": "il y a {count} semaines",
+    "monthsAgo": "il y a {count} mois",
+    "yearsAgo": "il y a {count} ans"
+  }
+}

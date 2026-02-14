@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { SignOutButton } from './SignOutButton';
+import { LanguageSwitcher } from './LanguageSwitcher';
+import { useTranslations } from 'next-intl';
 
 interface HeaderProps {
   userName?: string;
@@ -12,6 +14,9 @@ interface HeaderProps {
 }
 
 export function Header({ userName, orgName, showAuth = false }: HeaderProps) {
+  const t = useTranslations('navigation');
+  const tHeader = useTranslations('header');
+  const tAuth = useTranslations('auth');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -41,30 +46,31 @@ export function Header({ userName, orgName, showAuth = false }: HeaderProps) {
                     href="/dashboard" 
                     className={`font-bold hover:text-fuchsia-primary transition-colors ${isActive('/dashboard') ? 'text-fuchsia-primary' : ''}`}
                   >
-                    Dashboard
+                    {t('dashboard')}
                   </Link>
                   <Link 
                     href="/settings/subscription" 
                     className={`font-bold hover:text-fuchsia-primary transition-colors ${isActive('/settings/subscription') ? 'text-fuchsia-primary' : ''}`}
                   >
-                    Subscription
+                    {t('subscription')}
                   </Link>
                   <Link 
                     href="/settings/credits" 
                     className={`font-bold hover:text-fuchsia-primary transition-colors ${isActive('/settings/credits') ? 'text-fuchsia-primary' : ''}`}
                   >
-                    Credits
+                    {t('credits')}
                   </Link>
                   <Link 
                     href="/settings" 
                     className={`font-bold hover:text-fuchsia-primary transition-colors ${isActive('/settings') && !pathname?.includes('/subscription') && !pathname?.includes('/credits') ? 'text-fuchsia-primary' : ''}`}
                   >
-                    Account
+                    {tHeader('settings')}
                   </Link>
                 </div>
 
                 {/* User Menu on Desktop */}
                 <div className="hidden md:flex items-center gap-4">
+                  <LanguageSwitcher />
                   {userName && (
                     <div className="text-sm">
                       <div className="text-gray-600">Signed in as</div>
@@ -106,8 +112,9 @@ export function Header({ userName, orgName, showAuth = false }: HeaderProps) {
               </>
             ) : (
               <div className="flex items-center gap-2 sm:gap-4">
+                <LanguageSwitcher />
                 <Link href="/auth/login" className="neo-button-secondary text-sm sm:text-base px-3 py-2 sm:px-6 sm:py-3">
-                  Sign In
+                  {tAuth('login.title')}
                 </Link>
                 <Link href="/auth/signup" className="neo-button-primary text-sm sm:text-base px-3 py-2 sm:px-6 sm:py-3">
                   Get Started
@@ -128,32 +135,37 @@ export function Header({ userName, orgName, showAuth = false }: HeaderProps) {
                 onClick={() => setMobileMenuOpen(false)}
                 className={`text-3xl font-bold py-4 border-b-4 border-black ${isActive('/dashboard') ? 'text-fuchsia-primary' : ''}`}
               >
-                Dashboard
+                {t('dashboard')}
               </Link>
               <Link
                 href="/settings/subscription"
                 onClick={() => setMobileMenuOpen(false)}
                 className={`text-3xl font-bold py-4 border-b-4 border-black ${isActive('/settings/subscription') ? 'text-fuchsia-primary' : ''}`}
               >
-                Subscription
+                {t('subscription')}
               </Link>
               <Link
                 href="/settings/credits"
                 onClick={() => setMobileMenuOpen(false)}
                 className={`text-3xl font-bold py-4 border-b-4 border-black ${isActive('/settings/credits') ? 'text-fuchsia-primary' : ''}`}
               >
-                Credits
+                {t('credits')}
               </Link>
               <Link
                 href="/settings"
                 onClick={() => setMobileMenuOpen(false)}
                 className={`text-3xl font-bold py-4 border-b-4 border-black ${isActive('/settings') && !pathname?.includes('/subscription') && !pathname?.includes('/credits') ? 'text-fuchsia-primary' : ''}`}
               >
-                Account
+                {tHeader('settings')}
               </Link>
             </div>
 
             <div className="mt-auto">
+              {/* Language Switcher in Mobile Menu */}
+              <div className="mb-6">
+                <LanguageSwitcher />
+              </div>
+              
               {userName && (
                 <div className="mb-6 p-6 neo-card bg-gray-50">
                   <div className="text-sm text-gray-600">Signed in as</div>
@@ -167,7 +179,7 @@ export function Header({ userName, orgName, showAuth = false }: HeaderProps) {
                   className="neo-button-secondary w-full"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Sign Out
+                  {tAuth('signOut')}
                 </button>
               </form>
             </div>

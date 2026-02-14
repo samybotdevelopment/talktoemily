@@ -7,8 +7,12 @@ import { Header } from '@/components/Header';
 import { CreateBotButton } from '@/components/CreateBotButton';
 import { CancellationCountdownClient } from '@/components/CancellationCountdownClient';
 import { BotCard } from '@/components/BotCard';
+import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
 export default async function DashboardPage() {
+  const t = await getTranslations('dashboard');
+  const tCommon = await getTranslations('common');
   const supabase = await createClient();
 
   const {
@@ -80,10 +84,16 @@ export default async function DashboardPage() {
   let displayPlan = org.plan;
   if (org.is_wg_linked && org.wg_plan) {
     if (org.wg_plan === 'entrepreneur') {
-      displayPlan = 'Starter';
+      displayPlan = t('planStarter');
     } else if (org.wg_plan === 'agency') {
-      displayPlan = 'Pro';
+      displayPlan = t('planPro');
     }
+  } else if (org.plan === 'free') {
+    displayPlan = t('planFree');
+  } else if (org.plan === 'starter') {
+    displayPlan = t('planStarter');
+  } else if (org.plan === 'pro') {
+    displayPlan = t('planPro');
   }
 
   // Get subscription cancellation status
@@ -162,7 +172,7 @@ export default async function DashboardPage() {
         {/* Websites Section */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold">Your Chatbots</h2>
+            <h2 className="text-2xl font-bold">{t('yourChatbots')}</h2>
             <CreateBotButton
               canAddWebsite={canAddWebsite}
               currentWebsites={websites?.length || 0}
@@ -179,12 +189,12 @@ export default async function DashboardPage() {
             </div>
           ) : (
             <div className="neo-card bg-white p-8 sm:p-12 text-center">
-              <h3 className="text-xl sm:text-2xl font-bold mb-2">No chatbots yet</h3>
+              <h3 className="text-xl sm:text-2xl font-bold mb-2">{t('noChatbots')}</h3>
               <p className="text-gray-600 mb-6">
-                Create your first AI chatbot to embed on your website
+                {t('noChatbotsDescription')}
               </p>
               <Link href="/websites/new" className="neo-button-primary">
-                Create Your First Chatbot
+                {t('createFirstBot')}
               </Link>
             </div>
           )}

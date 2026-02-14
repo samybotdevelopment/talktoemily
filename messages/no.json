@@ -1,0 +1,571 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "backToDashboard": "← Back to Dashboard",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "upgrade": "Upgrade",
+    "comingSoon": "Coming Soon"
+  },
+  "auth": {
+    "login": {
+      "title": "Log In",
+      "subtitle": "Welcome back! Sign in to your account.",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "Your password",
+      "submit": "Log In",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "forgotPassword": "Forgot password?",
+      "magicLinkSent": "Check your email for the magic link!",
+      "error": "Login failed. Please check your credentials."
+    },
+    "signup": {
+      "title": "Create Your Account",
+      "subtitle": "Start building AI chatbots today.",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "Choose a strong password",
+      "orgName": "Organization Name",
+      "orgNamePlaceholder": "Your company name",
+      "submit": "Create Account",
+      "hasAccount": "Already have an account?",
+      "login": "Log in",
+      "error": "Signup failed. Please try again.",
+      "checkEmail": "Check your email to confirm your account!"
+    },
+    "signOut": "Sign Out",
+    "signOutConfirm": "Are you sure you want to sign out?"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "billing": "Billing",
+    "credits": "Credits",
+    "subscription": "Subscription",
+    "overview": "Overview",
+    "conversations": "Conversations",
+    "training": "Training",
+    "embed": "Embed",
+    "botSettings": "Bot Settings"
+  },
+  "header": {
+    "welcome": "Welcome",
+    "settings": "Settings",
+    "signOut": "Sign Out"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome to Talk to Emily",
+    "yourChatbots": "Your Chatbots",
+    "noChatbots": "No chatbots yet",
+    "noChatbotsDescription": "Create your first AI chatbot to embed on your website",
+    "createFirstBot": "Create Your First Chatbot",
+    "createNewBot": "Create New Chatbot",
+    "currentPlan": "Current Plan",
+    "planFree": "Free",
+    "planStarter": "Starter",
+    "planPro": "Pro",
+    "botsActive": "{count} of {max} bots active",
+    "viewPlans": "View Plans",
+    "cancelingAt": "Canceling at end of period",
+    "canceledAt": "Subscription canceled on {date}",
+    "yourPlanWillDowngrade": "Your plan will downgrade to Free on {date}.",
+    "botsWillBeDeactivated": "Bots beyond the Free plan limit will be deactivated.",
+    "reactivateSubscription": "Reactivate Subscription",
+    "continueWithFreePlan": "Continue with Free Plan",
+    "subscriptionCanceled": "Subscription Canceled",
+    "freePlanActive": "You are currently on the Free plan.",
+    "upgradeToAccess": "Upgrade to access more features and chatbots.",
+    "incompleteBot": "You have an incomplete bot setup",
+    "resumeSetup": "Resume Setup",
+    "deleteIncompleteBot": "Delete"
+  },
+  "onboarding": {
+    "welcome": {
+      "title": "Welcome to Talk to Emily!",
+      "wgLinked": "You have a Wonder George subscription, so your Emily subscription is free of charge.",
+      "congratulations": "Congratulations! Let's create your first chatbot.",
+      "subtitle": "Let's create your AI-powered chatbot in just a few steps.",
+      "description": "Your chatbot will be ready to answer questions and engage with your visitors.",
+      "getStarted": "Get Started →"
+    },
+    "websiteSelection": {
+      "title": "Select a Website",
+      "description": "Choose which Wonder George website you want to create a chatbot for.",
+      "alreadyHasBot": "(Already has a bot)",
+      "selectWebsite": "Select Website"
+    },
+    "websiteDetails": {
+      "title": "Website Details",
+      "websiteName": "Website Name",
+      "websiteNamePlaceholder": "My Awesome Website",
+      "websiteUrl": "Website URL",
+      "websiteUrlPlaceholder": "https://example.com",
+      "continue": "Continue"
+    },
+    "botCustomization": {
+      "title": "Customize Your Chatbot",
+      "botName": "Bot Name",
+      "botNamePlaceholder": "Emily",
+      "primaryColor": "Primary Color",
+      "colorDescription": "This color will be used for the chat widget",
+      "continue": "Continue"
+    },
+    "trainingMethod": {
+      "title": "How would you like to train your chatbot?",
+      "uploadDocument": "Upload a Document",
+      "uploadDescription": "Upload a PDF, Word doc, or text file with your business information",
+      "answerQuestions": "Answer Questions",
+      "questionsDescription": "We'll ask you questions about your business to train the chatbot"
+    },
+    "uploadDocument": {
+      "title": "Upload Training Document",
+      "dragDrop": "Drag & drop your file here, or click to browse",
+      "supportedFormats": "Supported formats: PDF, DOC, DOCX, TXT (Max 10MB)",
+      "uploading": "Uploading...",
+      "processing": "Processing document...",
+      "success": "Document processed successfully!",
+      "itemsExtracted": "{count} training items extracted",
+      "continue": "Continue to Review"
+    },
+    "questionAnswering": {
+      "title": "Tell Us About Your Business",
+      "sectionTitle": "{title}",
+      "questionLabel": "Question",
+      "answerLabel": "Your Answer",
+      "answerPlaceholder": "Type your answer here...",
+      "saveAndContinue": "Save & Continue",
+      "skip": "Skip this question",
+      "sectionsSaved": "Section Saved!",
+      "sections": {
+        "products": {
+          "title": "Product and Services Questions",
+          "question": "Tell us about your products or services",
+          "placeholder": "Describe what you offer, key features, pricing, etc."
+        },
+        "customerQuestions": {
+          "title": "Questions Customers Typically Ask",
+          "question": "What questions do customers typically ask you?",
+          "placeholder": "Common questions your customers have..."
+        },
+        "unique": {
+          "title": "What Makes Your Business Unique",
+          "question": "What makes your business unique?",
+          "placeholder": "What sets you apart from competitors..."
+        },
+        "additional": {
+          "title": "Additional Information",
+          "question": "Is there anything you'd like the chatbot to know about your business?",
+          "placeholder": "Any other important information..."
+        }
+      }
+    },
+    "reviewTraining": {
+      "title": "Review Training Content",
+      "description": "Here's what your chatbot will learn. You can edit or remove any section.",
+      "trainingItems": "{count} Training Items",
+      "expand": "Expand",
+      "collapse": "Collapse",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirmDelete": "Are you sure you want to delete this training item?",
+      "finalize": "Finalize & Train Bot"
+    },
+    "training": {
+      "title": "Training Your Chatbot",
+      "processing": "Processing your content...",
+      "thisWillTake": "This will take a few moments",
+      "complete": "Training Complete!",
+      "yourBotIsReady": "Your chatbot is ready to use",
+      "goToDashboard": "Go to Dashboard"
+    },
+    "allWebsitesUsed": {
+      "title": "All Website Slots Used",
+      "description": "You've already created chatbots for all your Wonder George websites. Upgrade to add more bots!",
+      "upgrade": "Upgrade Plan",
+      "cancel": "Cancel"
+    },
+    "cancelModal": {
+      "title": "Cancel Bot Creation?",
+      "description": "Your progress will be saved and you can resume later from the dashboard.",
+      "saveAndExit": "Save & Exit",
+      "continueSetup": "Continue Setup"
+    }
+  },
+  "bot": {
+    "overview": {
+      "title": "Bot Overview",
+      "status": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "conversations": "Conversations",
+      "messages": "Messages",
+      "lastTrained": "Last Trained",
+      "never": "Never",
+      "trainBot": "Train Bot",
+      "testBot": "Test Bot",
+      "embedCode": "Get Embed Code",
+      "quickStats": "Quick Stats",
+      "recentConversations": "Recent Conversations",
+      "noConversations": "No conversations yet",
+      "viewAll": "View All Conversations"
+    },
+    "conversations": {
+      "title": "Conversations",
+      "searchPlaceholder": "Search conversations...",
+      "visitor": "Visitor",
+      "messages": "{count} messages",
+      "noConversations": "No conversations yet",
+      "noConversationsDescription": "When visitors chat with your bot, conversations will appear here.",
+      "loadMore": "Load More",
+      "filterAll": "All",
+      "filterActive": "Active",
+      "filterResolved": "Resolved"
+    },
+    "training": {
+      "title": "Training",
+      "addContent": "Add Training Content",
+      "contentType": "Content Type",
+      "typeText": "Text",
+      "typeUrl": "URL",
+      "typeFile": "File",
+      "typeVoice": "Voice",
+      "titleLabel": "Title",
+      "titlePlaceholder": "e.g., About Our Services",
+      "contentLabel": "Content",
+      "contentPlaceholder": "Enter the information you want the bot to learn...",
+      "urlLabel": "URL",
+      "urlPlaceholder": "https://example.com/page",
+      "fileLabel": "Upload File",
+      "voiceLabel": "Record Voice",
+      "startRecording": "Start Recording",
+      "stopRecording": "Stop Recording",
+      "addItem": "Add Training Item",
+      "trainBot": "Train Chatbot",
+      "training": "Training...",
+      "trainingItems": "Training Items ({count})",
+      "noItems": "No training items yet",
+      "noItemsDescription": "Add content to train your chatbot",
+      "itemAdded": "Training item added successfully",
+      "itemDeleted": "Training item deleted",
+      "trainingComplete": "Training completed successfully!",
+      "trainingFailed": "Training failed. Please try again.",
+      "confirmDelete": "Are you sure you want to delete this training item?"
+    },
+    "embed": {
+      "title": "Embed Your Chatbot",
+      "description": "Copy and paste this code into your website's HTML, just before the closing </body> tag.",
+      "copyCode": "Copy Code",
+      "copied": "Copied!",
+      "testWidget": "Test Widget",
+      "widgetAppearance": "Widget Appearance",
+      "widgetPosition": "Position",
+      "positionBottomRight": "Bottom Right",
+      "positionBottomLeft": "Bottom Left",
+      "positionTopRight": "Top Right",
+      "positionTopLeft": "Top Left"
+    },
+    "settings": {
+      "title": "Bot Settings",
+      "general": "General Settings",
+      "botName": "Bot Name",
+      "botNamePlaceholder": "Emily",
+      "websiteDomain": "Website Domain",
+      "websiteDomainPlaceholder": "example.com",
+      "primaryColor": "Primary Color",
+      "appearance": "Appearance",
+      "welcomeMessage": "Welcome Message",
+      "welcomeMessagePlaceholder": "Hi! How can I help you today?",
+      "placeholder": "Chat Input Placeholder",
+      "placeholderText": "Type your message...",
+      "save": "Save Changes",
+      "saved": "Settings saved successfully",
+      "danger": "Danger Zone",
+      "deactivateBot": "Deactivate Bot",
+      "deactivateDescription": "Temporarily disable this bot on your website",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "deleteBot": "Delete Bot",
+      "deleteDescription": "Permanently delete this bot and all its data",
+      "delete": "Delete Bot",
+      "confirmDelete": "Are you sure you want to delete this bot? This action cannot be undone.",
+      "confirmDeactivate": "Are you sure you want to deactivate this bot?"
+    }
+  },
+  "settings": {
+    "title": "Account Settings",
+    "subscription": {
+      "title": "Subscription",
+      "currentPlan": "Current Plan",
+      "managedByWG": "Managed by Wonder George",
+      "viewPlans": "View all plans and upgrade options →",
+      "manageSubscription": "Manage Subscription"
+    },
+    "billing": {
+      "title": "Billing & Invoices",
+      "description": "View your billing history and download invoices",
+      "manageBilling": "Manage Billing"
+    },
+    "credits": {
+      "title": "AI Credits",
+      "balance": "Current Balance",
+      "creditsRemaining": "{count} credits",
+      "purchaseMore": "Purchase More Credits",
+      "whatAreCredits": "What are AI Credits?",
+      "creditsDescription": "Credits are used to train your chatbot and process conversations. Each training item costs 1 credit.",
+      "frozenCredits": "Frozen Credits",
+      "frozenDescription": "These credits will become available when you upgrade to a paid plan.",
+      "usage": "Usage This Month",
+      "usedForTraining": "Used for training"
+    },
+    "account": {
+      "title": "Account",
+      "email": "Email",
+      "organization": "Organization",
+      "deleteAccount": "Delete Account",
+      "deleteDescription": "Permanently delete your account and all associated data",
+      "deleteButton": "Delete Account",
+      "confirmDelete": "Are you sure you want to delete your account? This action cannot be undone."
+    }
+  },
+  "subscription": {
+    "title": "Subscription Plans",
+    "activatedSuccess": "Subscription Activated!",
+    "activatedDescription": "Welcome to the {plan} plan! Your credits have been added.",
+    "canceled": "Subscription Canceled",
+    "canceledDescription": "Your subscription was canceled. No charges were made.",
+    "currentPlan": "Your Current Plan",
+    "free": {
+      "name": "Free",
+      "price": "$0",
+      "period": "forever",
+      "features": [
+        "1 chatbot",
+        "500 messages/month",
+        "Basic customization",
+        "Email support"
+      ],
+      "cta": "Current Plan"
+    },
+    "starter": {
+      "name": "Starter",
+      "price": "$9.99",
+      "period": "per month",
+      "features": [
+        "3 chatbots",
+        "2,000 messages/month",
+        "100 credits/month",
+        "Advanced customization",
+        "Priority support"
+      ],
+      "cta": "Upgrade to Starter"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "$19.99",
+      "period": "per month",
+      "features": [
+        "10 chatbots",
+        "10,000 messages/month",
+        "250 credits/month",
+        "Full customization",
+        "White-label option",
+        "Priority support"
+      ],
+      "cta": "Upgrade to Pro"
+    },
+    "upgradeNow": "Upgrade Now",
+    "managePlan": "Manage Plan",
+    "downgrade": "Downgrade",
+    "mostPopular": "Most Popular"
+  },
+  "credits": {
+    "title": "AI Credits",
+    "purchaseSuccess": "Purchase Successful!",
+    "purchaseSuccessDescription": "{count} credits have been added to your account.",
+    "purchaseCanceled": "Purchase Canceled",
+    "purchaseCanceledDescription": "Your purchase was canceled. No charges were made.",
+    "currentBalance": "Current Balance",
+    "balanceAmount": "{count} Credits",
+    "whatAreCredits": "What Are AI Credits?",
+    "creditsExplanation": "AI Credits are used to train your chatbot with new content. Each training item (page, document, or Q&A) costs 1 credit. Your first training is always free!",
+    "whenYouNeed": "When You Need More Credits",
+    "needMoreExplanation": "You'll need credits when adding new content to train your bot. Purchase credits in bulk below to save!",
+    "purchasePacks": "Purchase Credit Packs",
+    "requiresSubscription": "Credit purchases require an active subscription",
+    "upgradeFirst": "Please upgrade to a paid plan first",
+    "packs": {
+      "small": {
+        "name": "Starter Pack",
+        "credits": "100 Credits",
+        "price": "$4.99",
+        "description": "Perfect for small updates"
+      },
+      "medium": {
+        "name": "Popular Pack",
+        "credits": "500 Credits",
+        "price": "$19.99",
+        "description": "Best value for growing businesses",
+        "badge": "Best Value"
+      },
+      "large": {
+        "name": "Pro Pack",
+        "credits": "1000 Credits",
+        "price": "$34.99",
+        "description": "For power users"
+      }
+    },
+    "purchase": "Purchase"
+  },
+  "trainingCostModal": {
+    "title": "Confirm Training Cost",
+    "firstTrainingFree": "🎉 First Training is Free!",
+    "firstTrainingDescription": "This is your first time training this bot, so it's on us! It will process {count} content items.",
+    "costDescription": "Training your chatbot will process {count} content items.",
+    "cost": "Cost:",
+    "credits": "{count} credits",
+    "currentBalance": "Your current balance: {count} credits",
+    "insufficientCredits": "You need {count} more credits to train your bot.",
+    "purchaseCredits": "Purchase Credits",
+    "cancel": "Cancel",
+    "processing": "Processing...",
+    "startTraining": "Start Training",
+    "confirmTrain": "Confirm & Train"
+  },
+  "widget": {
+    "welcome": "Hi! How can I help you today?",
+    "placeholder": "Type your message...",
+    "send": "Send",
+    "poweredBy": "Powered by",
+    "online": "Online",
+    "offline": "Offline",
+    "typing": "Typing...",
+    "errorMessage": "Sorry, something went wrong. Please try again.",
+    "minimize": "Minimize",
+    "close": "Close",
+    "newConversation": "Start New Conversation"
+  },
+  "superadmin": {
+    "title": "Superadmin Dashboard",
+    "subtitle": "System overview and management",
+    "stats": {
+      "totalOrganizations": "Total Organizations",
+      "totalUsers": "Total Users",
+      "payingCustomers": "Paying Customers",
+      "activeMRR": "Active MRR",
+      "totalConversations": "Total Conversations",
+      "totalMessages": "Total Messages",
+      "currentMonthRevenue": "Current Month Revenue"
+    },
+    "organizations": {
+      "title": "Manage Organizations",
+      "description": "View, search, and manage all organizations",
+      "search": "Search organizations...",
+      "noOrganizations": "No organizations found",
+      "viewDetails": "View Details",
+      "plan": "Plan",
+      "credits": "Credits",
+      "bots": "Bots",
+      "users": "Users",
+      "created": "Created"
+    },
+    "organizationDetail": {
+      "title": "Organization Details",
+      "grantPlan": "Grant Plan",
+      "grantCredits": "Grant Credits",
+      "selectPlan": "Select Plan",
+      "starter": "Starter",
+      "pro": "Pro",
+      "grant": "Grant",
+      "creditsAmount": "Credits Amount",
+      "creditsPlaceholder": "Enter amount",
+      "grantCreditsButton": "Grant Credits",
+      "organizationInfo": "Organization Information",
+      "name": "Name",
+      "plan": "Plan",
+      "maxBots": "Max Bots",
+      "creditsBalance": "Credits Balance",
+      "frozenCredits": "Frozen Credits",
+      "users": "Users",
+      "chatbots": "Chatbots",
+      "statistics": "Statistics",
+      "conversations": "Conversations",
+      "messages": "Messages",
+      "planGranted": "Plan granted successfully",
+      "creditsGranted": "Credits granted successfully"
+    },
+    "systemLogs": {
+      "title": "System Logs",
+      "comingSoon": "Coming soon..."
+    },
+    "backToDashboard": "← Back to Dashboard"
+  },
+  "emails": {
+    "paymentFailed": {
+      "subject": {
+        "first": "Oops! We couldn't process your payment",
+        "reminder": "Quick reminder: Payment still pending ({days} days left)",
+        "urgent": "⚠️ Urgent: Please update your payment details"
+      },
+      "greeting": "Hey there,",
+      "greetingReminder": "Hi,",
+      "firstAttempt": "Just wanted to give you a heads up – we tried to process your payment but it didn't go through. No worries though, these things happen!",
+      "retryInfo": "Could you take a quick moment to update your payment details? We'll automatically retry over the next {days} days (this was attempt {attempt} of several).",
+      "reminderMessage": "This is a friendly reminder that we're still having trouble processing your payment. Your subscription will be renewed soon, so please update your payment method to avoid any interruptions.",
+      "urgentMessage": "This is an urgent reminder that your payment for your subscription has failed and this is the final retry attempt. To avoid service interruption, please update your payment method immediately.",
+      "updatePayment": "👉 Update your payment method here: {link}",
+      "helpMessage": "If you think this is a mistake or need any help, just reply to this email – I'm here!",
+      "helpMessageReminder": "If you're having trouble, just let me know!",
+      "helpMessageUrgent": "If you need any assistance, please contact support.",
+      "signature": "Thanks,\nEmily 💙",
+      "signatureReminder": "Best,\nEmily 💙",
+      "footer": "---\nTalk to Emily - Your AI Chatbot Platform"
+    }
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "unauthorized": "You are not authorized to perform this action.",
+    "notFound": "The requested resource was not found.",
+    "networkError": "Network error. Please check your connection.",
+    "validationError": "Please check your input and try again.",
+    "insufficientCredits": "Insufficient credits. Please purchase more credits to continue.",
+    "botLimitReached": "You've reached your bot limit. Upgrade to create more bots.",
+    "trainingFailed": "Training failed. Please try again later."
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "url": "Please enter a valid URL",
+    "minLength": "Must be at least {min} characters",
+    "maxLength": "Must be no more than {max} characters",
+    "passwordMismatch": "Passwords do not match"
+  },
+  "time": {
+    "now": "just now",
+    "minutesAgo": "{count} minutes ago",
+    "hoursAgo": "{count} hours ago",
+    "daysAgo": "{count} days ago",
+    "weeksAgo": "{count} weeks ago",
+    "monthsAgo": "{count} months ago",
+    "yearsAgo": "{count} years ago"
+  }
+}
+
