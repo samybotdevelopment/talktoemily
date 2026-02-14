@@ -2,8 +2,10 @@
 
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export function SignOutButton() {
+  const t = useTranslations('auth');
   const router = useRouter();
   const supabase = createClient();
 
@@ -15,7 +17,7 @@ export function SignOutButton() {
 
   return (
     <button onClick={handleSignOut} className="neo-button-secondary">
-      Sign Out
+      {t('signOut')}
     </button>
   );
 }

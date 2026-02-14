@@ -14,40 +14,75 @@
     "previous": "Précédent",
     "backToDashboard": "← Retour au tableau de bord",
     "getStarted": "Commencer",
+    "getStartedFree": "Commencer gratuitement",
+    "signIn": "Se connecter",
     "learnMore": "En savoir plus",
     "viewAll": "Tout afficher",
-    "upgrade": "Passer à l’offre supérieure",
-    "comingSoon": "Bientôt disponible"
+    "upgrade": "Passer à l'offre supérieure",
+    "comingSoon": "Bientôt disponible",
+    "purchase": "Acheter"
+  },
+  "landing": {
+    "title": "Parlez à {name}",
+    "titleName": "Emily",
+    "subtitle": "Assistant de chat IA pour votre site web. Entraînez-le avec votre contenu, déployez-le en quelques minutes.",
+    "features": {
+      "easyTraining": {
+        "title": "Entraînement facile",
+        "description": "Entraînez votre chatbot avec du texte ou la voix. Aucune connaissance technique requise."
+      },
+      "instantAnswers": {
+        "title": "Réponses instantanées",
+        "description": "Réponses alimentées par l'IA utilisant votre base de connaissances. Rapide et précis."
+      },
+      "customizable": {
+        "title": "Personnalisable",
+        "description": "Adaptez votre marque avec des couleurs personnalisées et des options de style."
+      }
+    }
   },
   "auth": {
     "login": {
       "title": "Se connecter",
-      "subtitle": "Bon retour ! Connectez-vous à votre compte.",
+      "welcomeTitle": "Bienvenue sur Emily",
+      "subtitle": "Connectez-vous à votre compte",
       "email": "E-mail",
       "emailPlaceholder": "vous@exemple.com",
       "password": "Mot de passe",
       "passwordPlaceholder": "Votre mot de passe",
       "submit": "Se connecter",
-      "noAccount": "Vous n’avez pas de compte ?",
-      "signUp": "S’inscrire",
+      "sendMagicLink": "Envoyer le lien magique",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "signUp": "S'inscrire",
       "forgotPassword": "Mot de passe oublié ?",
-      "magicLinkSent": "Vérifiez vos e-mails pour le lien magique !",
+      "magicLinkSent": "Nous avons envoyé un lien magique à",
+      "checkEmail": "Vérifiez vos e-mails",
+      "clickLinkToSignIn": "Cliquez sur le lien dans l'e-mail pour vous connecter. Vous pouvez fermer cette page.",
+      "backToLogin": "Retour à la connexion",
+      "useMagicLink": "Se connecter avec un lien magique",
+      "usePassword": "Se connecter avec un mot de passe",
       "error": "Échec de la connexion. Veuillez vérifier vos identifiants."
     },
     "signup": {
-      "title": "Créer votre compte",
-      "subtitle": "Commencez à créer des chatbots IA dès aujourd’hui.",
+      "title": "Rejoindre Emily",
+      "subtitle": "Créez votre compte et commencez à construire",
       "email": "E-mail",
       "emailPlaceholder": "vous@exemple.com",
       "password": "Mot de passe",
       "passwordPlaceholder": "Choisissez un mot de passe fort",
-      "orgName": "Nom de l’organisation",
-      "orgNamePlaceholder": "Le nom de votre entreprise",
+      "passwordHint": "Au moins 6 caractères",
+      "orgName": "Nom de l'organisation",
+      "orgNamePlaceholder": "Mon entreprise",
       "submit": "Créer un compte",
+      "creating": "Création du compte...",
       "hasAccount": "Vous avez déjà un compte ?",
       "login": "Se connecter",
-      "error": "Échec de l’inscription. Veuillez réessayer.",
-      "checkEmail": "Vérifiez vos e-mails pour confirmer votre compte !"
+      "error": "Échec de l'inscription. Veuillez réessayer.",
+      "createdButSignInFailed": "Compte créé mais échec de la connexion. Veuillez essayer de vous connecter.",
+      "freeTrialTitle": "L'essai gratuit inclut :",
+      "freeTrialFeature1": "1 entraînement (à vie)",
+      "freeTrialFeature2": "50 messages IA (à vie)",
+      "freeTrialFeature3": "1 site web"
     },
     "signOut": "Se déconnecter",
     "signOutConfirm": "Êtes-vous sûr(e) de vouloir vous déconnecter ?"
@@ -67,7 +102,8 @@
   "header": {
     "welcome": "Bienvenue",
     "settings": "Paramètres",
-    "signOut": "Se déconnecter"
+    "signOut": "Se déconnecter",
+    "signedInAs": "Connecté en tant que"
   },
   "dashboard": {
     "title": "Tableau de bord",
@@ -81,20 +117,42 @@
     "planFree": "Gratuit",
     "planStarter": "Starter",
     "planPro": "Pro",
+    "planLabel": "OFFRE",
+    "creditsLabel": "CRÉDITS",
     "botsActive": "{count} sur {max} bots actifs",
     "viewPlans": "Voir les offres",
     "cancelingAt": "Annulation à la fin de la période",
     "canceledAt": "Abonnement annulé le {date}",
     "yourPlanWillDowngrade": "Votre offre passera à Gratuit le {date}.",
-    "botsWillBeDeactivated": "Les bots au-delà de la limite de l’offre Gratuit seront désactivés.",
-    "reactivateSubscription": "Réactiver l’abonnement",
-    "continueWithFreePlan": "Continuer avec l’offre Gratuit",
+    "botsWillBeDeactivated": "Les bots au-delà de la limite de l'offre Gratuit seront désactivés.",
+    "reactivateSubscription": "Réactiver l'abonnement",
+    "continueWithFreePlan": "Continuer avec l'offre Gratuit",
     "subscriptionCanceled": "Abonnement annulé",
-    "freePlanActive": "Vous êtes actuellement sur l’offre Gratuit.",
+    "freePlanActive": "Vous êtes actuellement sur l'offre Gratuit.",
     "upgradeToAccess": "Passez à une offre supérieure pour accéder à plus de fonctionnalités et de chatbots.",
     "incompleteBot": "Vous avez une configuration de bot incomplète",
     "resumeSetup": "Reprendre la configuration",
-    "deleteIncompleteBot": "Supprimer"
+    "deleteIncompleteBot": "Supprimer",
+    "wgCustomerTitle": "Client Wonder George",
+    "wgCustomerMessage": "Vous êtes un client Wonder George ! Votre abonnement Emily est gratuit et inclut un entraînement et des messages illimités.",
+    "wgLinked": "WG LIÉ",
+    "frozen": "gelés",
+    "starterCredits": "+100 crédits/mois avec l'abonnement",
+    "proCredits": "+250 crédits/mois avec l'abonnement",
+    "unlimitedWG": "Illimité avec Wonder George",
+    "freeCredits": "1 crédit = 1 échange de message",
+    "upgradeToUnlock": "Passez à une offre supérieure pour débloquer les crédits gelés",
+    "completeBotCreation": "Terminer la création de {name}",
+    "limitReachedTitle": "Limite de chatbots atteinte",
+    "limitReachedMessage": "Vous avez atteint la limite de votre offre de {max} chatbots.",
+    "upgradeToProMessage": "Passez à l'offre Pro pour créer jusqu'à 5 chatbots.",
+    "upgradePlan": "Passer à l'offre supérieure",
+    "created": "Créé",
+    "inactive": "INACTIF",
+    "clickToReactivate": "Cliquez pour réactiver",
+    "botDeactivatedTitle": "Bot désactivé",
+    "botDeactivatedMessage": "{name} a été désactivé lorsque votre abonnement s'est terminé. L'offre Gratuit n'inclut qu'1 bot actif.",
+    "upgradeToReactivate": "Passez à une offre payante pour réactiver ce bot et créer jusqu'à 5 bots."
   },
   "onboarding": {
     "welcome": {
@@ -402,16 +460,26 @@
     "purchaseSuccess": "Achat réussi !",
     "purchaseSuccessDescription": "{count} crédits ont été ajoutés à votre compte.",
     "purchaseCanceled": "Achat annulé",
-    "purchaseCanceledDescription": "Votre achat a été annulé. Aucun frais n’a été facturé.",
+    "purchaseCanceledDescription": "Votre achat a été annulé. Aucun frais n'a été facturé.",
     "currentBalance": "Solde actuel",
+    "creditsLabel": "crédits",
     "balanceAmount": "{count} crédits",
     "whatAreCredits": "Que sont les crédits IA ?",
-    "creditsExplanation": "Les crédits IA servent à entraîner votre chatbot avec du nouveau contenu. Chaque élément d’entraînement (page, document ou Q&R) coûte 1 crédit. Votre premier entraînement est toujours gratuit !",
+    "creditsExplanation": "Les crédits IA servent à entraîner votre chatbot avec du nouveau contenu. Chaque élément d'entraînement (page, document ou Q&R) coûte 1 crédit. Votre premier entraînement est toujours gratuit !",
     "whenYouNeed": "Quand vous avez besoin de plus de crédits",
     "needMoreExplanation": "Vous aurez besoin de crédits lorsque vous ajouterez du nouveau contenu pour entraîner votre bot. Achetez des crédits en lot ci-dessous pour économiser !",
     "purchasePacks": "Acheter des packs de crédits",
-    "requiresSubscription": "L’achat de crédits nécessite un abonnement actif",
-    "upgradeFirst": "Veuillez d’abord passer à une offre payante",
+    "purchaseDescription": "Alimentez votre chatbot IA avec des crédits supplémentaires. Tous les prix en EUR. Les crédits n'expirent jamais et se reportent chaque mois.",
+    "requiresSubscription": "Abonnement actif requis",
+    "requiresSubscriptionMessage": "Vous avez besoin d'un abonnement Pro actif ou d'un plan Wonder George pour acheter des packs de crédits.",
+    "viewPlans": "Voir les plans d'abonnement",
+    "upgradeFirst": "Veuillez d'abord passer à une offre payante",
+    "creditEquation": "1 crédit = 1 échange de message IA • Les crédits se reportent de mois en mois",
+    "howCreditsWork": "Comment fonctionnent les crédits",
+    "creditInfo1": "Chaque message de visiteur et réponse IA compte pour 1 crédit",
+    "creditInfo2": "Les crédits se reportent de mois en mois et n'expirent jamais",
+    "creditInfo3": "Les abonnés Pro reçoivent 100 crédits gratuits chaque mois",
+    "creditInfo4": "Achetez des packs plus grands pour une meilleure valeur par message",
     "packs": {
       "small": {
         "name": "Pack Starter",
@@ -434,6 +502,25 @@
       }
     },
     "purchase": "Acheter"
+  },
+  "creditPacks": {
+    "popular": "POPULAIRE",
+    "credits": "crédits",
+    "save": "Économisez {percent}%",
+    "messageExchanges": "{count} échanges de messages IA",
+    "neverExpires": "N'expire jamais",
+    "perMessage": "{price} par message",
+    "loading": "Chargement...",
+    "purchaseError": "Échec du lancement du paiement. Veuillez réessayer.",
+    "starter": {
+      "name": "Pack Starter"
+    },
+    "growth": {
+      "name": "Pack Croissance"
+    },
+    "business": {
+      "name": "Pack Business"
+    }
   },
   "trainingCostModal": {
     "title": "Confirmer le coût de l’entraînement",
@@ -559,12 +646,12 @@
     "passwordMismatch": "Les mots de passe ne correspondent pas"
   },
   "time": {
-    "now": "à l’instant",
-    "minutesAgo": "il y a {count} minutes",
-    "hoursAgo": "il y a {count} heures",
-    "daysAgo": "il y a {count} jours",
-    "weeksAgo": "il y a {count} semaines",
-    "monthsAgo": "il y a {count} mois",
-    "yearsAgo": "il y a {count} ans"
+    "now": "à l'instant",
+    "minutesAgo": "il y a {count}m",
+    "hoursAgo": "il y a {count}h",
+    "daysAgo": "il y a {count}j",
+    "weeksAgo": "il y a {count}s",
+    "monthsAgo": "il y a {count}mo",
+    "yearsAgo": "il y a {count}a"
   }
 }

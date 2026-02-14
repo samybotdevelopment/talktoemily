@@ -123,10 +123,9 @@ export default async function DashboardPage() {
             <div className="flex items-start gap-4">
               <div className="text-3xl">🎉</div>
               <div>
-                <h3 className="font-bold text-lg mb-1">Wonder George Customer</h3>
+                <h3 className="font-bold text-lg mb-1">{t('wgCustomerTitle')}</h3>
                 <p className="text-sm text-gray-700">
-                  You're a Wonder George customer! Your Emily subscription is free and includes
-                  unlimited training and messages.
+                  {t('wgCustomerMessage')}
                 </p>
               </div>
             </div>
@@ -136,34 +135,34 @@ export default async function DashboardPage() {
         {/* Usage Stats */}
         <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
           <div className="neo-card bg-white p-6">
-            <h3 className="text-sm font-bold text-gray-600 mb-2">PLAN</h3>
+            <h3 className="text-sm font-bold text-gray-600 mb-2">{t('planLabel')}</h3>
             <p className="text-3xl font-bold capitalize">{displayPlan}</p>
             {org.is_wg_linked && (
               <span className="inline-block mt-2 px-3 py-1 bg-fuchsia-primary text-white text-xs font-bold rounded">
-                WG LINKED
+                {t('wgLinked')}
               </span>
             )}
           </div>
 
           <div className="neo-card bg-white p-6">
-            <h3 className="text-sm font-bold text-gray-600 mb-2">CREDITS</h3>
+            <h3 className="text-sm font-bold text-gray-600 mb-2">{t('creditsLabel')}</h3>
             <p className="text-3xl font-bold">
               {org.credits_balance}
             </p>
             {org.frozen_credits > 0 && (
               <p className="text-sm text-orange-600 font-semibold mt-1">
-                +{org.frozen_credits} frozen
+                +{org.frozen_credits} {t('frozen')}
               </p>
             )}
             <p className="text-sm text-gray-600 mt-2">
-              {org.plan === 'starter' && '+100 credits/month with subscription'}
-              {org.plan === 'pro' && '+250 credits/month with subscription'}
-              {org.is_wg_linked && 'Unlimited with Wonder George'}
-              {org.plan === 'free' && !org.is_wg_linked && '1 credit = 1 message exchange'}
+              {org.plan === 'starter' && t('starterCredits')}
+              {org.plan === 'pro' && t('proCredits')}
+              {org.is_wg_linked && t('unlimitedWG')}
+              {org.plan === 'free' && !org.is_wg_linked && t('freeCredits')}
             </p>
             {org.frozen_credits > 0 && (
               <p className="text-xs text-orange-600 mt-2">
-                💡 Upgrade to unlock frozen credits
+                💡 {t('upgradeToUnlock')}
               </p>
             )}
           </div>

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 interface CreateBotButtonProps {
   canAddWebsite: boolean;
@@ -20,6 +21,8 @@ export function CreateBotButton({
   maxWebsites,
   incompleteBot,
 }: CreateBotButtonProps) {
+  const t = useTranslations('dashboard');
+  const tCommon = useTranslations('common');
   const router = useRouter();
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
 
@@ -37,7 +40,7 @@ export function CreateBotButton({
           href={`/onboarding?websiteId=${incompleteBot.id}`}
           className="neo-button-secondary"
         >
-          Complete {incompleteBot.name} creation →
+          {t('completeBotCreation', { name: incompleteBot.name })} →
         </Link>
       ) : (
         <Link
@@ -45,7 +48,7 @@ export function CreateBotButton({
           onClick={handleClick}
           className="neo-button-primary"
         >
-          + Create Chatbot
+          + {t('createNewBot')}
         </Link>
       )}
 
@@ -53,25 +56,25 @@ export function CreateBotButton({
       {showUpgradeModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="neo-card bg-white p-8 max-w-md w-full">
-            <h2 className="text-2xl font-bold mb-4">Chatbot Limit Reached</h2>
+            <h2 className="text-2xl font-bold mb-4">{t('limitReachedTitle')}</h2>
             <p className="text-gray-700 mb-2">
-              You've reached your plan limit of <strong>{maxWebsites} chatbot{maxWebsites !== 1 ? 's' : ''}</strong>.
+              {t('limitReachedMessage', { max: maxWebsites })}
             </p>
             <p className="text-gray-700 mb-6">
-              Upgrade to the <strong>Pro plan</strong> to create up to 5 chatbots.
+              {t('upgradeToProMessage')}
             </p>
             <div className="flex gap-4">
               <Link
                 href="/settings/subscription"
                 className="neo-button-primary flex-1 text-center"
               >
-                Upgrade Plan
+                {t('upgradePlan')}
               </Link>
               <button
                 onClick={() => setShowUpgradeModal(false)}
                 className="neo-button-secondary flex-1"
               >
-                Cancel
+                {tCommon('cancel')}
               </button>
             </div>
           </div>

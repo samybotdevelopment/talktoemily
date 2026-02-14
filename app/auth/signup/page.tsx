@@ -4,8 +4,11 @@ import { useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export default function SignupPage() {
+  const t = useTranslations('auth.signup');
+  const tCommon = useTranslations('common');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [orgName, setOrgName] = useState('');
@@ -34,7 +37,7 @@ export default function SignupPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Signup failed');
+        throw new Error(data.error || t('error'));
       }
 
       // Account created! Now sign in to establish session
@@ -44,7 +47,7 @@ export default function SignupPage() {
       });
 
       if (signInError) {
-        setError('Account created but failed to sign in. Please try logging in.');
+        setError(t('createdButSignInFailed'));
         setLoading(false);
         return;
       }
@@ -65,8 +68,8 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-page px-4">
       <div className="neo-card bg-white p-8 w-full max-w-md">
-        <h1 className="text-4xl font-bold mb-2">Join Emily</h1>
-        <p className="text-gray-600 mb-8">Create your account and start building</p>
+        <h1 className="text-4xl font-bold mb-2">{t('title')}</h1>
+        <p className="text-gray-600 mb-8">{t('subtitle')}</p>
 
         {error && (
           <div className="bg-red-50 border-4 border-red-500 rounded-lg p-4 mb-6">
@@ -77,7 +80,7 @@ export default function SignupPage() {
         <form onSubmit={handleSignup}>
           <div className="mb-6">
             <label htmlFor="orgName" className="block text-sm font-bold mb-2">
-              Organization Name
+              {t('orgName')}
             </label>
             <input
               id="orgName"
@@ -85,14 +88,14 @@ export default function SignupPage() {
               value={orgName}
               onChange={(e) => setOrgName(e.target.value)}
               className="neo-input w-full"
-              placeholder="My Company"
+              placeholder={t('orgNamePlaceholder')}
               required
             />
           </div>
 
           <div className="mb-6">
             <label htmlFor="email" className="block text-sm font-bold mb-2">
-              Email
+              {t('email')}
             </label>
             <input
               id="email"
@@ -100,14 +103,14 @@ export default function SignupPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="neo-input w-full"
-              placeholder="you@example.com"
+              placeholder={t('emailPlaceholder')}
               required
             />
           </div>
 
           <div className="mb-6">
             <label htmlFor="password" className="block text-sm font-bold mb-2">
-              Password
+              {t('password')}
             </label>
             <input
               id="password"
@@ -115,12 +118,12 @@ export default function SignupPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="neo-input w-full"
-              placeholder="••••••••"
+              placeholder={t('passwordPlaceholder')}
               required
               minLength={6}
             />
             <p className="text-xs text-gray-500 mt-1">
-              At least 6 characters
+              {t('passwordHint')}
             </p>
           </div>
 
@@ -129,25 +132,25 @@ export default function SignupPage() {
             disabled={loading}
             className="neo-button-primary w-full mb-4"
           >
-            {loading ? 'Creating account...' : 'Create account'}
+            {loading ? t('creating') : t('submit')}
           </button>
         </form>
 
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-600">
-            Already have an account?{' '}
+            {t('hasAccount')}{' '}
             <Link href="/auth/login" className="font-bold text-fuchsia-primary hover:underline">
-              Sign in
+              {t('login')}
             </Link>
           </p>
         </div>
 
         <div className="mt-6 p-4 bg-page rounded-lg border-4 border-black">
-          <h3 className="font-bold mb-2">Free Trial Includes:</h3>
+          <h3 className="font-bold mb-2">{t('freeTrialTitle')}</h3>
           <ul className="text-sm space-y-1">
-            <li>✓ 1 training run (lifetime)</li>
-            <li>✓ 50 AI messages (lifetime)</li>
-            <li>✓ 1 website</li>
+            <li>✓ {t('freeTrialFeature1')}</li>
+            <li>✓ {t('freeTrialFeature2')}</li>
+            <li>✓ {t('freeTrialFeature3')}</li>
           </ul>
         </div>
       </div>

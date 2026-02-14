@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 interface CreditPack {
   credits: number;
@@ -16,23 +17,23 @@ const creditPacks: CreditPack[] = [
   {
     credits: 500,
     amount: 9,
-    name: 'Starter Pack',
+    name: 'starter',
     perMessage: '€0.018',
   },
   {
     credits: 5000,
     amount: 49,
-    name: 'Growth Pack',
+    name: 'growth',
     perMessage: '€0.0098',
-    savings: 'Save 46%',
+    savings: '46',
     popular: true,
   },
   {
     credits: 50000,
     amount: 299,
-    name: 'Business Pack',
+    name: 'business',
     perMessage: '€0.00598',
-    savings: 'Save 67%',
+    savings: '67',
   },
 ];
 
@@ -41,6 +42,8 @@ interface CreditPacksClientProps {
 }
 
 export function CreditPacksClient({ hasActiveSubscription }: CreditPacksClientProps) {
+  const t = useTranslations('creditPacks');
+  const tCommon = useTranslations('common');
   const router = useRouter();
   const [loadingPack, setLoadingPack] = useState<number | null>(null);
 
@@ -66,7 +69,7 @@ export function CreditPacksClient({ hasActiveSubscription }: CreditPacksClientPr
       }
     } catch (error) {
       console.error('Error creating checkout:', error);
-      alert('Failed to start checkout. Please try again.');
+      alert(t('purchaseError'));
       setLoadingPack(null);
     }
   };
@@ -82,29 +85,29 @@ export function CreditPacksClient({ hasActiveSubscription }: CreditPacksClientPr
         >
           {pack.popular && (
             <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-fuchsia-primary text-white px-4 py-1 rounded-full text-sm font-bold">
-              POPULAR
+              {t('popular')}
             </div>
           )}
           <div className="text-center mb-4">
-            <h3 className="text-2xl font-bold mb-2">{pack.name}</h3>
+            <h3 className="text-2xl font-bold mb-2">{t(`${pack.name}.name`)}</h3>
             <div className="text-4xl font-bold text-fuchsia-primary mb-2">€{pack.amount}</div>
-            <div className="text-gray-600">{pack.credits.toLocaleString()} credits</div>
+            <div className="text-gray-600">{pack.credits.toLocaleString()} {t('credits')}</div>
             {pack.savings && (
-              <div className="text-green-600 font-bold text-sm">{pack.savings}</div>
+              <div className="text-green-600 font-bold text-sm">{t('save', { percent: pack.savings })}</div>
             )}
           </div>
           <ul className="space-y-2 mb-6 text-sm flex-grow">
             <li className="flex items-center gap-2">
               <span className="text-green-600 font-bold">✓</span>
-              <span>{pack.credits.toLocaleString()} AI message exchanges</span>
+              <span>{t('messageExchanges', { count: pack.credits.toLocaleString() })}</span>
             </li>
             <li className="flex items-center gap-2">
               <span className="text-green-600 font-bold">✓</span>
-              <span>Never expires</span>
+              <span>{t('neverExpires')}</span>
             </li>
             <li className="flex items-center gap-2">
               <span className="text-green-600 font-bold">✓</span>
-              <span>{pack.perMessage} per message</span>
+              <span>{t('perMessage', { price: pack.perMessage })}</span>
             </li>
           </ul>
           <button
@@ -112,7 +115,7 @@ export function CreditPacksClient({ hasActiveSubscription }: CreditPacksClientPr
             disabled={!hasActiveSubscription || loadingPack === pack.credits}
             className="neo-button-primary w-full disabled:bg-gray-300 disabled:cursor-not-allowed mt-auto"
           >
-            {loadingPack === pack.credits ? 'Loading...' : 'Purchase'}
+            {loadingPack === pack.credits ? t('loading') : tCommon('purchase')}
           </button>
         </div>
       ))}

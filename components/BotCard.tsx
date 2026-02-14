@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { formatRelativeTime } from '@/lib/utils/helpers';
+import { useTranslations } from 'next-intl';
 
 interface BotCardProps {
   website: {
@@ -17,6 +18,9 @@ interface BotCardProps {
 }
 
 export function BotCard({ website }: BotCardProps) {
+  const t = useTranslations('dashboard');
+  const tTime = useTranslations('time');
+  const tCommon = useTranslations('common');
   const [showModal, setShowModal] = useState(false);
 
   if (!website.is_active) {
@@ -27,7 +31,7 @@ export function BotCard({ website }: BotCardProps) {
           className="neo-card bg-gray-100 p-6 opacity-60 cursor-pointer hover:opacity-75 transition-opacity relative"
         >
           <div className="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded text-xs font-bold">
-            INACTIVE
+            {t('inactive')}
           </div>
           <div className="flex items-start justify-between mb-4">
             <div className="flex items-center gap-3">
@@ -52,36 +56,35 @@ export function BotCard({ website }: BotCardProps) {
             </div>
           </div>
           <p className="text-sm text-gray-500">
-            Created {formatRelativeTime(website.created_at)}
+            {t('created')} {formatRelativeTime(website.created_at, tTime)}
           </p>
           <p className="text-sm text-red-600 font-semibold mt-2">
-            Click to reactivate
+            {t('clickToReactivate')}
           </p>
         </div>
 
         {showModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="neo-card bg-white p-8 max-w-md w-full">
-              <h2 className="text-2xl font-bold mb-4">Bot Deactivated</h2>
+              <h2 className="text-2xl font-bold mb-4">{t('botDeactivatedTitle')}</h2>
               <p className="text-gray-700 mb-6">
-                <strong>{website.display_name}</strong> was deactivated when your subscription ended. 
-                The Free plan only includes 1 active bot.
+                {t('botDeactivatedMessage', { name: website.display_name })}
               </p>
               <p className="text-gray-700 mb-6">
-                Upgrade to a paid plan to reactivate this bot and create up to 5 bots.
+                {t('upgradeToReactivate')}
               </p>
               <div className="flex gap-3">
                 <Link
                   href="/settings/subscription"
                   className="neo-button-primary flex-1 text-center"
                 >
-                  Upgrade Plan
+                  {t('upgradePlan')}
                 </Link>
                 <button
                   onClick={() => setShowModal(false)}
                   className="neo-button-secondary flex-1"
                 >
-                  Cancel
+                  {tCommon('cancel')}
                 </button>
               </div>
             </div>
@@ -119,7 +122,7 @@ export function BotCard({ website }: BotCardProps) {
         </div>
       </div>
       <p className="text-sm text-gray-500">
-        Created {formatRelativeTime(website.created_at)}
+        {t('created')} {formatRelativeTime(website.created_at, tTime)}
       </p>
     </Link>
   );

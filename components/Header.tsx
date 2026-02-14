@@ -17,6 +17,7 @@ export function Header({ userName, orgName, showAuth = false }: HeaderProps) {
   const t = useTranslations('navigation');
   const tHeader = useTranslations('header');
   const tAuth = useTranslations('auth');
+  const tCommon = useTranslations('common');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -73,7 +74,7 @@ export function Header({ userName, orgName, showAuth = false }: HeaderProps) {
                   <LanguageSwitcher />
                   {userName && (
                     <div className="text-sm">
-                      <div className="text-gray-600">Signed in as</div>
+                      <div className="text-gray-600">{tHeader('signedInAs')}</div>
                       <div className="font-bold">{userName}</div>
                     </div>
                   )}
@@ -117,7 +118,7 @@ export function Header({ userName, orgName, showAuth = false }: HeaderProps) {
                   {tAuth('login.title')}
                 </Link>
                 <Link href="/auth/signup" className="neo-button-primary text-sm sm:text-base px-3 py-2 sm:px-6 sm:py-3">
-                  Get Started
+                  {tCommon('getStarted')}
                 </Link>
               </div>
             )}
@@ -168,7 +169,7 @@ export function Header({ userName, orgName, showAuth = false }: HeaderProps) {
               
               {userName && (
                 <div className="mb-6 p-6 neo-card bg-gray-50">
-                  <div className="text-sm text-gray-600">Signed in as</div>
+                  <div className="text-sm text-gray-600">{tHeader('signedInAs')}</div>
                   <div className="font-bold">{userName}</div>
                   {orgName && <div className="text-sm text-gray-600">{orgName}</div>}
                 </div>

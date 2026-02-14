@@ -14,40 +14,75 @@
     "previous": "Previous",
     "backToDashboard": "← Back to Dashboard",
     "getStarted": "Get Started",
+    "getStartedFree": "Get Started Free",
+    "signIn": "Sign In",
     "learnMore": "Learn More",
     "viewAll": "View All",
     "upgrade": "Upgrade",
-    "comingSoon": "Coming Soon"
+    "comingSoon": "Coming Soon",
+    "purchase": "Purchase"
+  },
+  "landing": {
+    "title": "Talk to {name}",
+    "titleName": "Emily",
+    "subtitle": "AI-powered chat assistant for your website. Train it with your content, deploy it in minutes.",
+    "features": {
+      "easyTraining": {
+        "title": "Easy Training",
+        "description": "Train your chatbot with text or voice. No technical knowledge required."
+      },
+      "instantAnswers": {
+        "title": "Instant Answers",
+        "description": "AI-powered responses using your knowledge base. Fast and accurate."
+      },
+      "customizable": {
+        "title": "Customizable",
+        "description": "Match your brand with custom colors and styling options."
+      }
+    }
   },
   "auth": {
     "login": {
       "title": "Log In",
-      "subtitle": "Welcome back! Sign in to your account.",
+      "welcomeTitle": "Welcome to Emily",
+      "subtitle": "Sign in to your account",
       "email": "Email",
       "emailPlaceholder": "you@example.com",
       "password": "Password",
       "passwordPlaceholder": "Your password",
-      "submit": "Log In",
+      "submit": "Sign in",
+      "sendMagicLink": "Send magic link",
       "noAccount": "Don't have an account?",
       "signUp": "Sign up",
       "forgotPassword": "Forgot password?",
-      "magicLinkSent": "Check your email for the magic link!",
+      "magicLinkSent": "We've sent a magic link to",
+      "checkEmail": "Check your email",
+      "clickLinkToSignIn": "Click the link in the email to sign in. You can close this page.",
+      "backToLogin": "Back to login",
+      "useMagicLink": "Sign in with magic link instead",
+      "usePassword": "Sign in with password instead",
       "error": "Login failed. Please check your credentials."
     },
     "signup": {
-      "title": "Create Your Account",
-      "subtitle": "Start building AI chatbots today.",
+      "title": "Join Emily",
+      "subtitle": "Create your account and start building",
       "email": "Email",
       "emailPlaceholder": "you@example.com",
       "password": "Password",
       "passwordPlaceholder": "Choose a strong password",
+      "passwordHint": "At least 6 characters",
       "orgName": "Organization Name",
-      "orgNamePlaceholder": "Your company name",
-      "submit": "Create Account",
+      "orgNamePlaceholder": "My Company",
+      "submit": "Create account",
+      "creating": "Creating account...",
       "hasAccount": "Already have an account?",
-      "login": "Log in",
+      "login": "Sign in",
       "error": "Signup failed. Please try again.",
-      "checkEmail": "Check your email to confirm your account!"
+      "createdButSignInFailed": "Account created but failed to sign in. Please try logging in.",
+      "freeTrialTitle": "Free Trial Includes:",
+      "freeTrialFeature1": "1 training run (lifetime)",
+      "freeTrialFeature2": "50 AI messages (lifetime)",
+      "freeTrialFeature3": "1 website"
     },
     "signOut": "Sign Out",
     "signOutConfirm": "Are you sure you want to sign out?"
@@ -67,7 +102,8 @@
   "header": {
     "welcome": "Welcome",
     "settings": "Settings",
-    "signOut": "Sign Out"
+    "signOut": "Sign Out",
+    "signedInAs": "Signed in as"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -81,6 +117,8 @@
     "planFree": "Free",
     "planStarter": "Starter",
     "planPro": "Pro",
+    "planLabel": "PLAN",
+    "creditsLabel": "CREDITS",
     "botsActive": "{count} of {max} bots active",
     "viewPlans": "View Plans",
     "cancelingAt": "Canceling at end of period",
@@ -94,7 +132,27 @@
     "upgradeToAccess": "Upgrade to access more features and chatbots.",
     "incompleteBot": "You have an incomplete bot setup",
     "resumeSetup": "Resume Setup",
-    "deleteIncompleteBot": "Delete"
+    "deleteIncompleteBot": "Delete",
+    "wgCustomerTitle": "Wonder George Customer",
+    "wgCustomerMessage": "You're a Wonder George customer! Your Emily subscription is free and includes unlimited training and messages.",
+    "wgLinked": "WG LINKED",
+    "frozen": "frozen",
+    "starterCredits": "+100 credits/month with subscription",
+    "proCredits": "+250 credits/month with subscription",
+    "unlimitedWG": "Unlimited with Wonder George",
+    "freeCredits": "1 credit = 1 message exchange",
+    "upgradeToUnlock": "Upgrade to unlock frozen credits",
+    "completeBotCreation": "Complete {name} creation",
+    "limitReachedTitle": "Chatbot Limit Reached",
+    "limitReachedMessage": "You've reached your plan limit of {max} chatbots.",
+    "upgradeToProMessage": "Upgrade to the Pro plan to create up to 5 chatbots.",
+    "upgradePlan": "Upgrade Plan",
+    "created": "Created",
+    "inactive": "INACTIVE",
+    "clickToReactivate": "Click to reactivate",
+    "botDeactivatedTitle": "Bot Deactivated",
+    "botDeactivatedMessage": "{name} was deactivated when your subscription ended. The Free plan only includes 1 active bot.",
+    "upgradeToReactivate": "Upgrade to a paid plan to reactivate this bot and create up to 5 bots."
   },
   "onboarding": {
     "welcome": {
@@ -404,14 +462,24 @@
     "purchaseCanceled": "Purchase Canceled",
     "purchaseCanceledDescription": "Your purchase was canceled. No charges were made.",
     "currentBalance": "Current Balance",
+    "creditsLabel": "credits",
     "balanceAmount": "{count} Credits",
     "whatAreCredits": "What Are AI Credits?",
     "creditsExplanation": "AI Credits are used to train your chatbot with new content. Each training item (page, document, or Q&A) costs 1 credit. Your first training is always free!",
     "whenYouNeed": "When You Need More Credits",
     "needMoreExplanation": "You'll need credits when adding new content to train your bot. Purchase credits in bulk below to save!",
     "purchasePacks": "Purchase Credit Packs",
-    "requiresSubscription": "Credit purchases require an active subscription",
+    "purchaseDescription": "Power your AI chatbot with additional credits. All prices in EUR. Credits never expire and roll over each month.",
+    "requiresSubscription": "Active Subscription Required",
+    "requiresSubscriptionMessage": "You need an active Pro subscription or Wonder George plan to purchase credit packs.",
+    "viewPlans": "View Subscription Plans",
     "upgradeFirst": "Please upgrade to a paid plan first",
+    "creditEquation": "1 credit = 1 AI message exchange • Credits roll over month after month",
+    "howCreditsWork": "How Credits Work",
+    "creditInfo1": "Each visitor message and AI response counts as 1 credit",
+    "creditInfo2": "Credits roll over month after month and never expire",
+    "creditInfo3": "Pro subscribers get 100 free credits every month",
+    "creditInfo4": "Purchase larger packs for better value per message",
     "packs": {
       "small": {
         "name": "Starter Pack",
@@ -434,6 +502,25 @@
       }
     },
     "purchase": "Purchase"
+  },
+  "creditPacks": {
+    "popular": "POPULAR",
+    "credits": "credits",
+    "save": "Save {percent}%",
+    "messageExchanges": "{count} AI message exchanges",
+    "neverExpires": "Never expires",
+    "perMessage": "{price} per message",
+    "loading": "Loading...",
+    "purchaseError": "Failed to start checkout. Please try again.",
+    "starter": {
+      "name": "Starter Pack"
+    },
+    "growth": {
+      "name": "Growth Pack"
+    },
+    "business": {
+      "name": "Business Pack"
+    }
   },
   "trainingCostModal": {
     "title": "Confirm Training Cost",
@@ -560,12 +647,12 @@
   },
   "time": {
     "now": "just now",
-    "minutesAgo": "{count} minutes ago",
-    "hoursAgo": "{count} hours ago",
-    "daysAgo": "{count} days ago",
-    "weeksAgo": "{count} weeks ago",
-    "monthsAgo": "{count} months ago",
-    "yearsAgo": "{count} years ago"
+    "minutesAgo": "{count}m ago",
+    "hoursAgo": "{count}h ago",
+    "daysAgo": "{count}d ago",
+    "weeksAgo": "{count}w ago",
+    "monthsAgo": "{count}mo ago",
+    "yearsAgo": "{count}y ago"
   }
 }
 
