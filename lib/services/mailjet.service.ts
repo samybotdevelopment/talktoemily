@@ -44,6 +44,85 @@ export async function sendEmail(options: EmailOptions): Promise<void> {
   }
 }
 
+/**
+ * Add a contact to the Mailjet mailing list
+ * Maps user locale to one of the 4 supported languages: FR, ES, DE, EN
+ */
+export async function addContactToMailingList(
+  email: string,
+  name: string,
+  userLocale: string = 'en'
+): Promise<void> {
+  const listId = process.env.MAILJET_FREE_LIST_UID;
+
+  if (!listId) {
+    console.warn('MAILJET_FREE_LIST_UID not configured, skipping mailing list subscription');
+    return;
+  }
+
+  // Map locale to one of the 4 supported languages
+  const localeToLanguage: Record<string, string> = {
+    fr: 'FR',
+    es: 'ES',
+    de: 'DE',
+    // All other languages default to EN
+  };
+
+  const language = localeToLanguage[userLocale.toLowerCase()] || 'EN';
+
+  try {
+    // Add contact to Mailjet
+    const contactRequest = mailjet
+      .post('contact', { version: 'v3' })
+      .request({
+        Email: email,
+        Name: name,
+      });
+
+    await contactRequest;
+    console.log(`✅ Contact created/updated in Mailjet: ${email}`);
+
+    // Add contact to the mailing list with language property
+    const manageContactRequest = mailjet
+      .post('contact', { version: 'v3' })
+      .id(email)
+      .action('managecontactslists')
+      .request({
+        ContactsLists: [
+          {
+            ListID: listId,
+            Action: 'addnoforce', // addnoforce = add only if not already in list
+          },
+        ],
+      });
+
+    await manageContactRequest;
+    console.log(`✅ Contact added to mailing list: ${email}`);
+
+    // Update contact properties with language
+    const updatePropertiesRequest = mailjet
+      .put('contactdata', { version: 'v3' })
+      .id(email)
+      .request({
+        Data: [
+          {
+            Name: 'language',
+            Value: language,
+          },
+        ],
+      });
+
+    await updatePropertiesRequest;
+    console.log(`✅ Contact language set to ${language} for ${email}`);
+  } catch (error: any) {
+    // Log but don't fail the signup if mailing list fails
+    console.error('Failed to add contact to mailing list:', error);
+    if (error.response) {
+      console.error('Mailjet API error:', error.response.data);
+    }
+  }
+}
+
 export async function getPaymentFailureEmail(
   attemptCount: number,
   customerName: string,

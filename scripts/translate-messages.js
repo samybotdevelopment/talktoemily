@@ -18,21 +18,18 @@ const openai = new OpenAI({
 });
 
 // Target languages (excluding English which is the source)
-// For testing, only translate to French first
 const TARGET_LANGUAGES = [
-  { code: 'fr', name: 'French' },
-  // Uncomment below to translate all languages:
-  // { code: 'de', name: 'German' },
-  // { code: 'es', name: 'Spanish' },
-  // { code: 'it', name: 'Italian' },
-  // { code: 'pt', name: 'Portuguese' },
-  // { code: 'nl', name: 'Dutch' },
-  // { code: 'da', name: 'Danish' },
-  // { code: 'no', name: 'Norwegian' },
-  // { code: 'sv', name: 'Swedish' },
-  // { code: 'pl', name: 'Polish' },
-  // { code: 'el', name: 'Greek' },
-  // { code: 'tr', name: 'Turkish' },
+  { code: 'de', name: 'German' },
+  { code: 'es', name: 'Spanish' },
+  { code: 'it', name: 'Italian' },
+  { code: 'pt', name: 'Portuguese' },
+  { code: 'nl', name: 'Dutch' },
+  { code: 'da', name: 'Danish' },
+  { code: 'no', name: 'Norwegian' },
+  { code: 'sv', name: 'Swedish' },
+  { code: 'pl', name: 'Polish' },
+  { code: 'el', name: 'Greek' },
+  { code: 'tr', name: 'Turkish' },
 ];
 
 const MESSAGES_DIR = path.join(__dirname, '..', 'messages');

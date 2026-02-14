@@ -52,6 +52,16 @@ export default function SignupPage() {
         return;
       }
 
+      // Subscribe to newsletter (don't block on failure)
+      try {
+        await fetch('/api/auth/subscribe-newsletter', {
+          method: 'POST',
+        });
+      } catch (newsletterError) {
+        console.error('Failed to subscribe to newsletter:', newsletterError);
+        // Continue anyway - this is non-critical
+      }
+
       // Check if user needs onboarding (WG customer)
       if (data.needs_onboarding) {
         router.push('/onboarding');
