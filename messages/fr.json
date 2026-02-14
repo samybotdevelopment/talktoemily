@@ -963,5 +963,41 @@
       "description": "Tous vos sites web sur Wonder George ont déjà un chatbot. Créez un nouveau site web sur Wonder George pour créer un nouveau bot.",
       "ok": "OK"
     }
+  },
+  "email": {
+    "fromName": "Emily",
+    "footer": "Talk to Emily - Votre plateforme de chatbot IA",
+    "paymentFailure": {
+      "attempt1": {
+        "subject": "Oups ! Nous n'avons pas pu traiter votre paiement",
+        "greeting": "Bonjour {customerName},",
+        "intro": "Je voulais juste vous informer – nous avons essayé de traiter votre paiement mais cela n'a pas fonctionné. Pas de souci, ces choses arrivent !",
+        "action": "Pourriez-vous prendre un moment pour mettre à jour vos informations de paiement ? Nous réessayerons automatiquement au cours des {daysRemaining} prochains jours (c'était la tentative 1 sur plusieurs).",
+        "cta": "👉 Mettez à jour votre moyen de paiement ici : {portalUrl}",
+        "help": "Si vous pensez qu'il s'agit d'une erreur ou si vous avez besoin d'aide, répondez simplement à cet e-mail – je suis là !",
+        "closing": "Merci,",
+        "signature": "Emily 💙"
+      },
+      "attempt2to3": {
+        "subject": "Rappel rapide : Paiement toujours en attente",
+        "greeting": "Bonjour {customerName},",
+        "intro": "Je reviens vers vous – nous avons toujours du mal à traiter votre paiement (tentative {attemptCount}).",
+        "action": "Nous continuerons à essayer pendant {daysRemaining} jours supplémentaires, mais je voulais m'assurer que vous êtes au courant. Plus tôt vous mettrez à jour vos informations de paiement, plus vite nous pourrons tout remettre sur les rails !",
+        "cta": "👉 Mettez à jour votre moyen de paiement ici : {portalUrl}",
+        "closing": "Merci d'être génial !",
+        "signature": "Emily 💙"
+      },
+      "attempt4plus": {
+        "subject": "⚠️ Urgent : Veuillez mettre à jour vos informations de paiement",
+        "greeting": "Bonjour {customerName},",
+        "intro": "J'ai vraiment besoin de votre aide – nous avons essayé {attemptCount} fois de traiter votre paiement et cela ne fonctionne toujours pas.",
+        "urgentWithDays": "Il nous reste environ {daysRemaining} jour{plural} avant que votre abonnement ne soit annulé et que vos bots soient désactivés.",
+        "urgentFinal": "C'est notre dernière tentative avant que votre abonnement ne soit annulé.",
+        "action": "Veuillez mettre à jour votre moyen de paiement immédiatement pour maintenir vos chatbots en service :",
+        "cta": "👉 Mettez à jour votre moyen de paiement ici : {portalUrl}",
+        "help": "Si vous rencontrez des problèmes ou si vous souhaitez discuter de votre abonnement, répondez simplement à cet e-mail. Je suis là pour vous aider !",
+        "signature": "Emily 💙"
+      }
+    }
   }
 }

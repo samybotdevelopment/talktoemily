@@ -383,7 +383,7 @@ export async function POST(request: Request) {
             // Get customer name (use email prefix if no name)
             const customerName = userEmail.split('@')[0];
 
-            const { subject, body } = getPaymentFailureEmail(
+            const { subject, body } = await getPaymentFailureEmail(
               attemptCount,
               customerName,
               daysRemaining

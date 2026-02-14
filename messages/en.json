@@ -963,6 +963,42 @@
       "description": "All your websites on Wonder George already have a chatbot. Create a new website on Wonder George to create a new bot.",
       "ok": "OK"
     }
+  },
+  "email": {
+    "fromName": "Emily",
+    "footer": "Talk to Emily - Your AI Chatbot Platform",
+    "paymentFailure": {
+      "attempt1": {
+        "subject": "Oops! We couldn't process your payment",
+        "greeting": "Hey {customerName},",
+        "intro": "Just wanted to give you a heads up – we tried to process your payment but it didn't go through. No worries though, these things happen!",
+        "action": "Could you take a quick moment to update your payment details? We'll automatically retry over the next {daysRemaining} days (this was attempt 1 of several).",
+        "cta": "👉 Update your payment method here: {portalUrl}",
+        "help": "If you think this is a mistake or need any help, just reply to this email – I'm here!",
+        "closing": "Thanks,",
+        "signature": "Emily 💙"
+      },
+      "attempt2to3": {
+        "subject": "Quick reminder: Payment still pending",
+        "greeting": "Hey {customerName},",
+        "intro": "Just checking in again – we're still having trouble processing your payment (attempt {attemptCount}).",
+        "action": "We'll keep trying for {daysRemaining} more days, but I wanted to make sure you're aware. The sooner you update your payment info, the sooner we can get everything back on track!",
+        "cta": "👉 Update your payment method here: {portalUrl}",
+        "closing": "Thanks for being awesome!",
+        "signature": "Emily 💙"
+      },
+      "attempt4plus": {
+        "subject": "⚠️ Urgent: Please update your payment details",
+        "greeting": "Hey {customerName},",
+        "intro": "I really need your help here – we've tried {attemptCount} times to process your payment and it's still not going through.",
+        "urgentWithDays": "We have about {daysRemaining} day{plural} left before your subscription gets cancelled and your bots are deactivated.",
+        "urgentFinal": "This is our final attempt before your subscription gets cancelled.",
+        "action": "Please update your payment method right away to keep your chatbots running:",
+        "cta": "👉 Update your payment method here: {portalUrl}",
+        "help": "If you're having any issues or want to chat about your subscription, just reply to this email. I'm here to help!",
+        "signature": "Emily 💙"
+      }
+    }
   }
 }
 

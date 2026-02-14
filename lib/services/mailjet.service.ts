@@ -1,4 +1,5 @@
 import Mailjet from 'node-mailjet';
+import { getTranslations } from 'next-intl/server';
 
 const mailjet = new Mailjet({
   apiKey: process.env.MAILJET_API_KEY || '',
@@ -14,12 +15,14 @@ interface EmailOptions {
 
 export async function sendEmail(options: EmailOptions): Promise<void> {
   try {
+    const t = await getTranslations('email');
+    
     const request = mailjet.post('send', { version: 'v3.1' }).request({
       Messages: [
         {
           From: {
             Email: 'emily@talktoemily.com',
-            Name: 'Emily',
+            Name: t('fromName'),
           },
           To: [
             {
@@ -41,80 +44,89 @@ export async function sendEmail(options: EmailOptions): Promise<void> {
   }
 }
 
-export function getPaymentFailureEmail(
+export async function getPaymentFailureEmail(
   attemptCount: number,
   customerName: string,
   daysRemaining: number
-): { subject: string; body: string } {
+): Promise<{ subject: string; body: string }> {
+  const t = await getTranslations('email.paymentFailure');
   const portalUrl = `${process.env.NEXT_PUBLIC_APP_URL}/settings`;
 
   // First attempt
   if (attemptCount === 1) {
-    return {
-      subject: "Oops! We couldn't process your payment",
-      body: `Hey ${customerName},
+    const subject = t('attempt1.subject');
+    const body = [
+      t('attempt1.greeting', { customerName }),
+      '',
+      t('attempt1.intro'),
+      '',
+      t('attempt1.action', { daysRemaining }),
+      '',
+      t('attempt1.cta', { portalUrl }),
+      '',
+      t('attempt1.help'),
+      '',
+      t('attempt1.closing'),
+      t('attempt1.signature'),
+      '',
+      '---',
+      (await getTranslations('email'))('footer'),
+    ].join('\n');
 
-Just wanted to give you a heads up – we tried to process your payment but it didn't go through. No worries though, these things happen!
-
-Could you take a quick moment to update your payment details? We'll automatically retry over the next ${daysRemaining} days (this was attempt 1 of several).
-
-👉 Update your payment method here: ${portalUrl}
-
-If you think this is a mistake or need any help, just reply to this email – I'm here!
-
-Thanks,
-Emily 💙
-
----
-Talk to Emily - Your AI Chatbot Platform
-`,
-    };
+    return { subject, body };
   }
 
   // Middle attempts (2-3)
   if (attemptCount <= 3) {
-    return {
-      subject: 'Quick reminder: Payment still pending',
-      body: `Hey ${customerName},
+    const subject = t('attempt2to3.subject');
+    const body = [
+      t('attempt2to3.greeting', { customerName }),
+      '',
+      t('attempt2to3.intro', { attemptCount }),
+      '',
+      t('attempt2to3.action', { daysRemaining }),
+      '',
+      t('attempt2to3.cta', { portalUrl }),
+      '',
+      t('attempt2to3.closing'),
+      t('attempt2to3.signature'),
+      '',
+      '---',
+      (await getTranslations('email'))('footer'),
+    ].join('\n');
 
-Just checking in again – we're still having trouble processing your payment (attempt ${attemptCount}).
-
-We'll keep trying for ${daysRemaining} more days, but I wanted to make sure you're aware. The sooner you update your payment info, the sooner we can get everything back on track!
-
-👉 Update your payment method here: ${portalUrl}
-
-Thanks for being awesome!
-
-Emily 💙
-
----
-Talk to Emily - Your AI Chatbot Platform
-`,
-    };
+    return { subject, body };
   }
 
   // Final attempts (4+)
-  return {
-    subject: '⚠️ Urgent: Please update your payment details',
-    body: `Hey ${customerName},
+  const subject = t('attempt4plus.subject');
+  const urgentMessage = daysRemaining > 0
+    ? t('attempt4plus.urgentWithDays', {
+        daysRemaining,
+        plural: daysRemaining > 1 ? 's' : '',
+      })
+    : t('attempt4plus.urgentFinal');
 
-I really need your help here – we've tried ${attemptCount} times to process your payment and it's still not going through.
+  const body = [
+    t('attempt4plus.greeting', { customerName }),
+    '',
+    t('attempt4plus.intro', { attemptCount }),
+    '',
+    urgentMessage,
+    '',
+    t('attempt4plus.action'),
+    '',
+    t('attempt4plus.cta', { portalUrl }),
+    '',
+    t('attempt4plus.help'),
+    '',
+    t('attempt4plus.signature'),
+    '',
+    '---',
+    (await getTranslations('email'))('footer'),
+  ].join('\n');
 
-${daysRemaining > 0 
-  ? `We have about ${daysRemaining} day${daysRemaining > 1 ? 's' : ''} left before your subscription gets cancelled and your bots are deactivated.` 
-  : 'This is our final attempt before your subscription gets cancelled.'}
-
-Please update your payment method right away to keep your chatbots running:
-
-👉 Update your payment method here: ${portalUrl}
-
-If you're having any issues or want to chat about your subscription, just reply to this email. I'm here to help!
-
-Emily 💙
-
----
-Talk to Emily - Your AI Chatbot Platform
-`,
-  };
+  return { subject, body };
 }
+
 
