@@ -4,35 +4,38 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { WGWebsite, TrainingChunk, OnboardingState } from '@/types/models';
 import confetti from 'canvas-confetti';
+import { useTranslations } from 'next-intl';
 
 const QUESTION_SECTIONS = [
   {
     id: 'products',
-    title: 'Product and Services Questions',
-    question: 'Tell us about your products or services',
-    placeholder: 'Describe what you offer, key features, pricing, etc.',
+    titleKey: 'productsTitle',
+    questionKey: 'productsQuestion',
+    placeholderKey: 'productsPlaceholder',
   },
   {
     id: 'customer-questions',
-    title: 'Questions Customers Typically Ask',
-    question: 'What questions do customers typically ask you?',
-    placeholder: 'Common questions your customers have...',
+    titleKey: 'customerQuestionsTitle',
+    questionKey: 'customerQuestionsQuestion',
+    placeholderKey: 'customerQuestionsPlaceholder',
   },
   {
     id: 'unique',
-    title: 'What Makes Your Business Unique',
-    question: 'What makes your business unique?',
-    placeholder: 'What sets you apart from competitors...',
+    titleKey: 'uniqueTitle',
+    questionKey: 'uniqueQuestion',
+    placeholderKey: 'uniquePlaceholder',
   },
   {
     id: 'additional',
-    title: 'Additional Information',
-    question: "Is there anything you'd like the chatbot to know about your business?",
-    placeholder: 'Any other important information...',
+    titleKey: 'additionalTitle',
+    questionKey: 'additionalQuestion',
+    placeholderKey: 'additionalPlaceholder',
   },
 ];
 
 export default function OnboardingPage() {
+  const t = useTranslations('onboarding');
+  const tCommon = useTranslations('common');
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);

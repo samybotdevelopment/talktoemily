@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface SubscribeButtonProps {
   plan: 'starter' | 'pro';
@@ -10,6 +11,8 @@ interface SubscribeButtonProps {
 }
 
 export function SubscribeButton({ plan, currentPlan, isWGLinked, disabled }: SubscribeButtonProps) {
+  const t = useTranslations('subscription');
+  const tCommon = useTranslations('common');
   const [loading, setLoading] = useState(false);
 
   const handleSubscribe = async () => {
@@ -34,7 +37,7 @@ export function SubscribeButton({ plan, currentPlan, isWGLinked, disabled }: Sub
       }
     } catch (error) {
       console.error('Error creating subscription:', error);
-      alert('Failed to start checkout. Please try again.');
+      alert(t('checkoutError'));
       setLoading(false);
     }
   };
@@ -58,7 +61,7 @@ export function SubscribeButton({ plan, currentPlan, isWGLinked, disabled }: Sub
       }
     } catch (error) {
       console.error('Error accessing portal:', error);
-      alert('Failed to access billing portal. Please try again.');
+      alert(t('portalError'));
       setLoading(false);
     }
   };
@@ -67,7 +70,7 @@ export function SubscribeButton({ plan, currentPlan, isWGLinked, disabled }: Sub
   if (isWGLinked) {
     return (
       <div className="text-center text-sm text-gray-600 mt-4">
-        Managed by Wonder George
+        {t('managedByWonderGeorge')}
       </div>
     );
   }
@@ -82,14 +85,14 @@ export function SubscribeButton({ plan, currentPlan, isWGLinked, disabled }: Sub
           disabled={loading}
           className="neo-button-primary w-full mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {loading ? 'Loading...' : 'Manage'}
+          {loading ? tCommon('loading') : t('manage')}
         </button>
       );
     }
     // For free plan, show disabled "Current Plan" button
     return (
       <button disabled className="neo-button-secondary w-full mt-4 opacity-50 cursor-not-allowed">
-        Current Plan
+        {t('currentPlanButton')}
       </button>
     );
   }
@@ -109,7 +112,7 @@ export function SubscribeButton({ plan, currentPlan, isWGLinked, disabled }: Sub
       disabled={loading || disabled}
       className="neo-button-primary w-full mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      {loading ? 'Loading...' : 'Upgrade'}
+      {loading ? tCommon('loading') : tCommon('upgrade')}
     </button>
   );
 }

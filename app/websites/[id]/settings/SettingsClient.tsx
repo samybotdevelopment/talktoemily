@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { TestChatWidget } from '@/components/TestChatWidget';
+import { useTranslations } from 'next-intl';
 
 interface SettingsClientProps {
   websiteId: string;
@@ -28,6 +29,8 @@ export function SettingsClient({
   wgWebsiteId,
   widgetActivated: initialWidgetActivated,
 }: SettingsClientProps) {
+  const t = useTranslations('botSettings');
+  const tCommon = useTranslations('common');
   const [displayName, setDisplayName] = useState(websiteName);
   const [domain, setDomain] = useState(websiteDomain);
   const [color, setColor] = useState(primaryColor);
@@ -136,7 +139,7 @@ export function SettingsClient({
       setWidgetActivated(!widgetActivated);
     } catch (error) {
       console.error('Error toggling widget:', error);
-      alert('Failed to toggle widget. Please try again.');
+      alert(t('toggleWidgetError'));
     } finally {
       setActivating(false);
     }
@@ -147,45 +150,45 @@ export function SettingsClient({
       <main className="neo-container py-4 sm:py-8">
         <div className="max-w-2xl mx-auto">
           <div className="flex justify-between items-center mb-6">
-            <h1 className="text-2xl sm:text-3xl font-bold">Chatbot Settings</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold">{t('title')}</h1>
             <div className="flex gap-2">
               <button
                 onClick={() => setShowPreview(true)}
                 className="neo-button-secondary text-sm sm:text-base px-4 py-2"
               >
-                Preview
+                {t('preview')}
               </button>
               <button
                 onClick={handleSaveAll}
                 disabled={!hasChanges || saving}
                 className={`neo-button-primary text-sm sm:text-base px-4 py-2 ${!hasChanges ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                {saving ? 'Saving...' : saved ? 'Saved!' : 'Save Changes'}
+                {saving ? t('saving') : saved ? t('saved') : t('saveChanges')}
               </button>
             </div>
           </div>
 
           {saved && (
             <div className="mb-6 p-4 bg-green-50 border-4 border-green-500 rounded-lg">
-              <p className="text-green-800 font-bold">Settings saved successfully!</p>
+              <p className="text-green-800 font-bold">{t('settingsSaved')}</p>
             </div>
           )}
 
           {/* Widget Activation (WG customers only) */}
           {wgWebsiteId && (
             <div className="neo-card bg-white p-6 sm:p-8 mb-6">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4">Widget Status</h2>
+              <h2 className="text-xl sm:text-2xl font-bold mb-4">{t('widgetStatusTitle')}</h2>
               <p className="text-sm text-gray-600 mb-6">
-                Control whether your chatbot widget is active on your Wonder George website
+                {t('widgetStatusDescription')}
               </p>
 
               <div className="flex items-center justify-between p-4 bg-page rounded-lg border-2 border-black">
                 <div>
-                  <p className="font-bold">Widget is {widgetActivated ? 'Active ✓' : 'Inactive'}</p>
+                  <p className="font-bold">{t('widgetIs', { status: widgetActivated ? t('activeCheck') : t('inactive') })}</p>
                   <p className="text-sm text-gray-600">
                     {widgetActivated 
-                      ? 'Your chatbot is visible on your website'
-                      : 'Your chatbot is hidden from your website'}
+                      ? t('widgetVisibleOnSite')
+                      : t('widgetHiddenFromSite')}
                   </p>
                 </div>
                 <button
@@ -194,10 +197,10 @@ export function SettingsClient({
                   className={`neo-button-${widgetActivated ? 'secondary' : 'primary'} px-6`}
                 >
                   {activating 
-                    ? 'Processing...' 
+                    ? t('processing') 
                     : widgetActivated 
-                    ? 'Deactivate' 
-                    : 'Activate'}
+                    ? t('deactivate') 
+                    : t('activate')}
                 </button>
               </div>
             </div>
@@ -205,9 +208,9 @@ export function SettingsClient({
           
           {/* Widget Style */}
           <div className="neo-card bg-white p-6 sm:p-8 mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4">Widget Style</h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-4">{t('widgetStyleTitle')}</h2>
             <p className="text-sm text-gray-600 mb-6">
-              Choose how your chat widget looks to visitors on your website
+              {t('widgetStyleDescription')}
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4">
@@ -223,12 +226,12 @@ export function SettingsClient({
                 <div className="aspect-video bg-gray-100 rounded-lg mb-3 flex items-center justify-center border-4 border-black">
                   <div className="text-center">
                     <div className="w-12 h-12 bg-fuchsia-primary border-2 border-black rounded-lg mx-auto mb-2"></div>
-                    <div className="text-xs font-bold">Bold & Neo-Brutalist</div>
+                    <div className="text-xs font-bold">{t('modernLabel')}</div>
                   </div>
                 </div>
-                <h3 className="font-bold mb-1">Modern</h3>
+                <h3 className="font-bold mb-1">{t('modern')}</h3>
                 <p className="text-xs text-gray-600">
-                  Bold borders, strong shadows, standout design
+                  {t('modernDescription')}
                 </p>
               </button>
 
@@ -244,12 +247,12 @@ export function SettingsClient({
                 <div className="aspect-video bg-gray-100 rounded-lg mb-3 flex items-center justify-center border border-gray-200">
                   <div className="text-center">
                     <div className="w-12 h-12 bg-fuchsia-primary rounded-lg mx-auto mb-2 shadow-md"></div>
-                    <div className="text-xs font-bold">Clean & Minimal</div>
+                    <div className="text-xs font-bold">{t('neutralLabel')}</div>
                   </div>
                 </div>
-                <h3 className="font-bold mb-1">Neutral</h3>
+                <h3 className="font-bold mb-1">{t('neutral')}</h3>
                 <p className="text-xs text-gray-600">
-                  Clean, subtle design like Intercom
+                  {t('neutralDescription')}
                 </p>
               </button>
             </div>
@@ -257,81 +260,81 @@ export function SettingsClient({
 
           {/* Widget Messages */}
           <div className="neo-card bg-white p-6 sm:p-8 mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4">Widget Messages</h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-4">{t('widgetMessagesTitle')}</h2>
             <p className="text-sm text-gray-600 mb-6">
-              Customize the messages visitors see when they open the chat widget
+              {t('widgetMessagesDescription')}
             </p>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-bold mb-2">Header Subtitle</label>
+                <label className="block text-sm font-bold mb-2">{t('headerSubtitle')}</label>
                 <input
                   type="text"
                   value={widgetSubtitle}
                   onChange={(e) => handleSubtitleChange(e.target.value)}
-                  placeholder="We reply instantly"
+                  placeholder={t('headerSubtitlePlaceholder')}
                   className="neo-input w-full"
                   maxLength={50}
                 />
-                <p className="text-xs text-gray-500 mt-1">Shown under your bot name in the header</p>
+                <p className="text-xs text-gray-500 mt-1">{t('headerSubtitleHint')}</p>
               </div>
 
               <div>
-                <label className="block text-sm font-bold mb-2">Welcome Title</label>
+                <label className="block text-sm font-bold mb-2">{t('welcomeTitle')}</label>
                 <input
                   type="text"
                   value={widgetWelcomeTitle}
                   onChange={(e) => handleWelcomeTitleChange(e.target.value)}
-                  placeholder="Hi there! 👋"
+                  placeholder={t('welcomeTitlePlaceholder')}
                   className="neo-input w-full"
                   maxLength={50}
                 />
-                <p className="text-xs text-gray-500 mt-1">First message when chat opens</p>
+                <p className="text-xs text-gray-500 mt-1">{t('welcomeTitleHint')}</p>
               </div>
 
               <div>
-                <label className="block text-sm font-bold mb-2">Welcome Message</label>
+                <label className="block text-sm font-bold mb-2">{t('welcomeMessage')}</label>
                 <textarea
                   value={widgetWelcomeMessage}
                   onChange={(e) => handleWelcomeMessageChange(e.target.value)}
-                  placeholder="How can we help you today?"
+                  placeholder={t('welcomeMessagePlaceholder')}
                   className="neo-input w-full min-h-[80px]"
                   maxLength={200}
                 />
-                <p className="text-xs text-gray-500 mt-1">Subtitle shown below the welcome title</p>
+                <p className="text-xs text-gray-500 mt-1">{t('welcomeMessageHint')}</p>
               </div>
             </div>
           </div>
 
           {/* Basic Information */}
           <div className="neo-card bg-white p-6 sm:p-8 mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold mb-6">Basic Information</h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-6">{t('basicInfoTitle')}</h2>
               
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-bold mb-2">Display Name</label>
+                <label className="block text-sm font-bold mb-2">{t('displayName')}</label>
                 <input
                   type="text"
                   value={displayName}
                   onChange={(e) => handleDisplayNameChange(e.target.value)}
                   className="neo-input w-full"
-                  placeholder="My Bot"
+                  placeholder={t('displayNamePlaceholder')}
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-bold mb-2">Domain</label>
+                <label className="block text-sm font-bold mb-2">{t('domain')}</label>
                 <input
                   type="text"
                   value={domain}
                   onChange={(e) => handleDomainChange(e.target.value)}
                   className="neo-input w-full"
-                  placeholder="https://mywebsite.com"
+                  placeholder={t('domainPlaceholder')}
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-bold mb-2">Primary Color</label>
+                <label className="block text-sm font-bold mb-2">{t('primaryColor')}</label>
                 <div className="flex gap-4">
                   <input
                     type="color"
@@ -353,12 +356,12 @@ export function SettingsClient({
 
           {/* Danger Zone */}
           <div className="neo-card bg-white p-6 sm:p-8 mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-red-600">Danger Zone</h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-red-600">{t('dangerZone')}</h2>
             <p className="text-sm sm:text-base text-gray-600 mb-4">
-              Deleting this chatbot will remove all training data, conversations, and settings. This action cannot be undone.
+              {t('dangerZoneDescription')}
             </p>
             <button className="border-4 border-red-500 bg-red-50 text-red-700 font-bold px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-red-100 transition-colors text-sm sm:text-base">
-              Delete Chatbot
+              {t('deleteChatbot')}
             </button>
           </div>
         </div>

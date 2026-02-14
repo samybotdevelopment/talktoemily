@@ -1,8 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 export function BillingPortalButton() {
+  const t = useTranslations('settings');
+  const tCommon = useTranslations('common');
   const [loading, setLoading] = useState(false);
 
   const handleClick = async () => {
@@ -24,7 +27,7 @@ export function BillingPortalButton() {
       }
     } catch (error) {
       console.error('Error opening billing portal:', error);
-      alert('Failed to open billing portal. Please try again.');
+      alert(t('billingPortalError'));
       setLoading(false);
     }
   };
@@ -35,7 +38,7 @@ export function BillingPortalButton() {
       disabled={loading}
       className="neo-button-primary disabled:bg-gray-300 disabled:cursor-not-allowed"
     >
-      {loading ? 'Loading...' : 'View Billing History & Invoices →'}
+      {loading ? tCommon('loading') : t('viewBillingHistory')}
     </button>
   );
 }

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { TestChatWidget } from '@/components/TestChatWidget';
+import { useTranslations } from 'next-intl';
 
 interface WebsiteOverviewClientProps {
   websiteId: string;
@@ -36,6 +37,7 @@ export function WebsiteOverviewClient({
   wgWebsiteId,
   widgetActivated,
 }: WebsiteOverviewClientProps) {
+  const t = useTranslations('botOverview');
   const router = useRouter();
   const [showTestWidget, setShowTestWidget] = useState(false);
   const [isActivating, setIsActivating] = useState(false);
@@ -60,7 +62,7 @@ export function WebsiteOverviewClient({
       setIsWidgetActivated(!isWidgetActivated);
     } catch (error) {
       console.error('Error toggling widget:', error);
-      alert('Failed to toggle widget. Please try again.');
+      alert(t('toggleWidgetError'));
     } finally {
       setIsActivating(false);
     }
@@ -73,28 +75,28 @@ export function WebsiteOverviewClient({
         {wgWebsiteId ? (
           <div className="neo-card bg-white p-4 sm:p-8 mb-6 sm:mb-8">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
-              <h3 className="text-xl sm:text-2xl font-bold">Wonder George Website</h3>
+              <h3 className="text-xl sm:text-2xl font-bold">{t('wonderGeorgeWebsite')}</h3>
               <button
                 onClick={() => setShowTestWidget(true)}
                 className="neo-button-primary text-sm sm:text-base w-full sm:w-auto"
               >
-                Test My Chatbot
+                {t('testChatbot')}
               </button>
             </div>
             
             <p className="text-sm sm:text-base text-gray-600 mb-6">
-              Your chatbot widget is automatically managed on your Wonder George website
+              {t('wonderGeorgeAutoManaged')}
             </p>
             
             <div className="flex items-center justify-between p-4 sm:p-6 bg-gradient-to-r from-fuchsia-50 to-pink-50 rounded-lg border-4 border-fuchsia-primary">
               <div>
                 <p className="font-bold text-lg mb-1">
-                  Widget is {isWidgetActivated ? 'Active' : 'Inactive'}
+                  {t('widgetStatus', { status: isWidgetActivated ? t('active') : t('inactive') })}
                 </p>
                 <p className="text-sm text-gray-600">
                   {isWidgetActivated 
-                    ? 'Your chatbot is visible on your Wonder George website'
-                    : 'Your chatbot is hidden from your Wonder George website'}
+                    ? t('widgetVisibleWG')
+                    : t('widgetHiddenWG')}
                 </p>
               </div>
               <button
@@ -103,22 +105,22 @@ export function WebsiteOverviewClient({
                 className={`neo-button-${isWidgetActivated ? 'secondary' : 'primary'} px-6`}
               >
                 {isActivating 
-                  ? 'Processing...' 
+                  ? t('processing') 
                   : isWidgetActivated 
-                  ? 'Deactivate' 
-                  : 'Activate'}
+                  ? t('deactivate') 
+                  : t('activate')}
               </button>
             </div>
             
             {latestRunStatus === 'completed' ? (
               <div className="mt-4 p-3 sm:p-4 bg-green-50 border-4 border-green-500 rounded-lg">
-                <p className="text-green-800 font-bold text-sm sm:text-base">Your chatbot is trained and ready!</p>
+                <p className="text-green-800 font-bold text-sm sm:text-base">{t('trainedAndReady')}</p>
               </div>
             ) : (
               <div className="mt-4 p-3 sm:p-4 bg-blue-50 border-4 border-blue-500 rounded-lg">
-                <p className="text-blue-800 font-bold text-sm sm:text-base">Not trained yet</p>
+                <p className="text-blue-800 font-bold text-sm sm:text-base">{t('notTrainedYet')}</p>
                 <p className="text-blue-700 text-xs sm:text-sm mt-2">
-                  Train your chatbot to enable AI responses. <Link href={`/websites/${websiteId}/training`} className="underline font-bold">Add training content</Link>
+                  {t('trainToEnable')} <Link href={`/websites/${websiteId}/training`} className="underline font-bold">{t('addTrainingContent')}</Link>
                 </p>
               </div>
             )}
@@ -127,17 +129,17 @@ export function WebsiteOverviewClient({
           /* Embed Code - Show only for non-WG customers */
         <div className="neo-card bg-white p-4 sm:p-8 mb-6 sm:mb-8">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
-            <h3 className="text-xl sm:text-2xl font-bold">Embed Code</h3>
+            <h3 className="text-xl sm:text-2xl font-bold">{t('embedCode')}</h3>
             <button
               onClick={() => setShowTestWidget(true)}
               className="neo-button-primary text-sm sm:text-base w-full sm:w-auto"
             >
-              Test My Chatbot
+              {t('testChatbot')}
             </button>
           </div>
           
           <p className="text-sm sm:text-base text-gray-600 mb-4">
-            Add this code to your website's HTML, just before the closing &lt;/body&gt; tag:
+            {t('embedInstructions')}
           </p>
           <div className="bg-gray-900 text-green-400 p-3 sm:p-4 rounded-lg font-mono text-xs sm:text-sm overflow-x-auto">
             <pre>{`<script>
@@ -148,13 +150,13 @@ export function WebsiteOverviewClient({
           
           {latestRunStatus === 'completed' ? (
             <div className="mt-4 p-3 sm:p-4 bg-green-50 border-4 border-green-500 rounded-lg">
-              <p className="text-green-800 font-bold text-sm sm:text-base">Your chatbot is trained and ready!</p>
+              <p className="text-green-800 font-bold text-sm sm:text-base">{t('trainedAndReady')}</p>
             </div>
           ) : (
             <div className="mt-4 p-3 sm:p-4 bg-blue-50 border-4 border-blue-500 rounded-lg">
-              <p className="text-blue-800 font-bold text-sm sm:text-base">Not trained yet</p>
+              <p className="text-blue-800 font-bold text-sm sm:text-base">{t('notTrainedYet')}</p>
               <p className="text-blue-700 text-xs sm:text-sm mt-2">
-                The widget will appear on your site, but train your chatbot to enable AI responses. <Link href={`/websites/${websiteId}/training`} className="underline font-bold">Add training content</Link>
+                {t('widgetWillAppear')} <Link href={`/websites/${websiteId}/training`} className="underline font-bold">{t('addTrainingContent')}</Link>
               </p>
             </div>
           )}
@@ -164,34 +166,34 @@ export function WebsiteOverviewClient({
         {/* Overview Cards */}
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
           <div className="neo-card bg-white p-6">
-            <h3 className="text-sm font-bold text-gray-600 mb-2">TRAINING STATUS</h3>
+            <h3 className="text-sm font-bold text-gray-600 mb-2">{t('trainingStatusTitle')}</h3>
             {latestRunStatus ? (
               <>
-                <p className="text-2xl font-bold capitalize mb-2">{latestRunStatus}</p>
+                <p className="text-2xl font-bold capitalize mb-2">{t(`status.${latestRunStatus}`)}</p>
                 <p className="text-sm text-gray-600">
-                  {trainingCount || 0} training items
+                  {t('trainingItems', { count: trainingCount || 0 })}
                 </p>
               </>
             ) : (
-              <p className="text-2xl font-bold">Not Trained</p>
+              <p className="text-2xl font-bold">{t('notTrained')}</p>
             )}
           </div>
 
           <div className="neo-card bg-white p-6">
-            <h3 className="text-sm font-bold text-gray-600 mb-2">CONVERSATIONS</h3>
+            <h3 className="text-sm font-bold text-gray-600 mb-2">{t('conversationsTitle')}</h3>
             <p className="text-2xl font-bold">{conversationsCount || 0}</p>
-            <p className="text-sm text-gray-600">Total conversations</p>
+            <p className="text-sm text-gray-600">{t('totalConversations')}</p>
           </div>
 
           <div className="neo-card bg-white p-6">
-            <h3 className="text-sm font-bold text-gray-600 mb-2">WIDGET STATUS</h3>
+            <h3 className="text-sm font-bold text-gray-600 mb-2">{t('widgetStatusTitle')}</h3>
             <p className="text-2xl font-bold">
-              {latestRunStatus === 'completed' ? 'Ready' : 'Not Ready'}
+              {latestRunStatus === 'completed' ? t('ready') : t('notReady')}
             </p>
             <p className="text-sm text-gray-600">
               {latestRunStatus === 'completed' 
-                ? 'Widget is live' 
-                : 'Train your bot first'}
+                ? t('widgetIsLive') 
+                : t('trainBotFirst')}
             </p>
           </div>
         </div>

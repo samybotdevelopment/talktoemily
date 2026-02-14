@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import TrainingCostModal from '@/components/TrainingCostModal';
+import { useTranslations } from 'next-intl';
 
 interface TrainingItem {
   id: string;
@@ -14,6 +15,8 @@ interface TrainingItem {
 }
 
 export default function TrainingPage() {
+  const t = useTranslations('training');
+  const tCommon = useTranslations('common');
   const params = useParams();
   const router = useRouter();
   const websiteId = params.id as string;
@@ -79,7 +82,7 @@ export default function TrainingPage() {
 
       setTitle('');
       setContent('');
-      setSuccess('Training item added!');
+      setSuccess(t('itemAdded'));
       fetchTrainingItems();
     } catch (err: any) {
       setError(err.message);
@@ -87,7 +90,7 @@ export default function TrainingPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Delete this training item?')) return;
+    if (!confirm(t('deleteConfirm'))) return;
 
     try {
       const response = await fetch(`/api/websites/${websiteId}/training-items/${id}`, {
@@ -98,7 +101,7 @@ export default function TrainingPage() {
         throw new Error('Failed to delete item');
       }
 
-      setSuccess('Item deleted');
+      setSuccess(t('itemDeleted'));
       fetchTrainingItems();
     } catch (err: any) {
       setError(err.message);
@@ -127,7 +130,7 @@ export default function TrainingPage() {
       setIsRecording(true);
       setError(null);
     } catch (err: any) {
-      setError('Failed to access microphone. Please allow microphone access.');
+      setError(t('microphoneError'));
     }
   };
 
@@ -158,7 +161,7 @@ export default function TrainingPage() {
       }
 
       setContent((prev) => (prev ? `${prev}\n\n${data.text}` : data.text));
-      setSuccess('Audio transcribed! Edit and add a title.');
+      setSuccess(t('audioTranscribed'));
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -200,7 +203,7 @@ export default function TrainingPage() {
       if (!response.ok) {
         if (response.status === 402) {
           // Payment required
-          setError(`Insufficient credits. You need ${data.required} credits but only have ${data.available}.`);
+          setError(t('insufficientCredits', { required: data.required, available: data.available }));
         } else {
           throw new Error(data.error || 'Training failed');
         }
@@ -208,9 +211,9 @@ export default function TrainingPage() {
       }
 
       if (data.isFreeTraining) {
-        setSuccess('🎉 Training completed successfully! (First training was free)');
+        setSuccess(t('trainingSuccessFree'));
       } else {
-        setSuccess(`Training completed successfully! Used ${data.creditsUsed} credits.`);
+        setSuccess(t('trainingSuccess', { credits: data.creditsUsed }));
       }
       
       router.refresh();
@@ -250,35 +253,35 @@ export default function TrainingPage() {
           {/* Add Training Item Form */}
           <div>
             <div className="neo-card bg-white p-6 mb-6">
-              <h2 className="text-2xl font-bold mb-4">Add Training Content</h2>
+              <h2 className="text-2xl font-bold mb-4">{t('addTrainingContent')}</h2>
 
               <form onSubmit={handleAddItem}>
                 <div className="mb-4">
-                  <label className="block text-sm font-bold mb-2">Title</label>
+                  <label className="block text-sm font-bold mb-2">{t('title')}</label>
                   <input
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     className="neo-input w-full"
-                    placeholder="What is this about?"
+                    placeholder={t('titlePlaceholder')}
                     required
                   />
                 </div>
 
                 <div className="mb-4">
-                  <label className="block text-sm font-bold mb-2">Content</label>
+                  <label className="block text-sm font-bold mb-2">{t('content')}</label>
                   <textarea
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     className="neo-input w-full min-h-[200px]"
-                    placeholder="Enter your training content here..."
+                    placeholder={t('contentPlaceholder')}
                     required
                   />
                 </div>
 
                 <div className="flex gap-4">
                   <button type="submit" className="neo-button-primary flex-1">
-                    Add Item
+                    {t('addItem')}
                   </button>
                   
                   {isRecording ? (
@@ -287,7 +290,7 @@ export default function TrainingPage() {
                       onClick={stopRecording}
                       className="neo-button-secondary bg-red-500 text-white border-red-700"
                     >
-                      ⏹ Stop
+                      ⏹ {t('stop')}
                     </button>
                   ) : (
                     <button
@@ -296,7 +299,7 @@ export default function TrainingPage() {
                       className="neo-button-secondary"
                       disabled={isTranscribing}
                     >
-                      🎤 {isTranscribing ? 'Transcribing...' : 'Record'}
+                      🎤 {isTranscribing ? t('transcribing') : t('record')}
                     </button>
                   )}
                 </div>
@@ -304,12 +307,12 @@ export default function TrainingPage() {
             </div>
 
             <div className="neo-card bg-white p-6">
-              <h3 className="font-bold mb-2">How to train your bot</h3>
+              <h3 className="font-bold mb-2">{t('howToTrain')}</h3>
               <ol className="text-sm space-y-2 text-gray-600 list-decimal list-inside">
-                <li>Add training items with text or voice</li>
-                <li>Each item should cover one topic clearly</li>
-                <li>Click "Train Chatbot" when ready</li>
-                <li>Training rebuilds your bot's knowledge</li>
+                <li>{t('step1')}</li>
+                <li>{t('step2')}</li>
+                <li>{t('step3')}</li>
+                <li>{t('step4')}</li>
               </ol>
             </div>
           </div>
@@ -318,26 +321,26 @@ export default function TrainingPage() {
           <div>
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold">
-                Training Items ({trainingItems.length})
+                {t('trainingItems', { count: trainingItems.length })}
               </h2>
               <button
                 onClick={handleTrain}
                 disabled={isTraining || trainingItems.length === 0}
                 className="neo-button-primary"
               >
-                {isTraining ? 'Training...' : 'Train Chatbot'}
+                {isTraining ? t('training') : t('trainChatbot')}
               </button>
             </div>
 
             {loading ? (
               <div className="neo-card bg-white p-12 text-center">
-                <p>Loading...</p>
+                <p>{tCommon('loading')}</p>
               </div>
             ) : trainingItems.length === 0 ? (
               <div className="neo-card bg-white p-12 text-center">
                 <div className="text-5xl mb-4">📝</div>
-                <h3 className="text-xl font-bold mb-2">No training items yet</h3>
-                <p className="text-gray-600">Add your first training item to get started</p>
+                <h3 className="text-xl font-bold mb-2">{t('noItems')}</h3>
+                <p className="text-gray-600">{t('noItemsDescription')}</p>
               </div>
             ) : (
               <div className="space-y-4">
@@ -349,7 +352,7 @@ export default function TrainingPage() {
                         onClick={() => handleDelete(item.id)}
                         className="text-red-600 hover:text-red-800 font-bold"
                       >
-                        Delete
+                        {tCommon('delete')}
                       </button>
                     </div>
                     <p className="text-gray-700 text-sm mb-2 whitespace-pre-wrap">

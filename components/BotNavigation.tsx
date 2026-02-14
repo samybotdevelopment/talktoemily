@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 interface BotNavigationProps {
   websiteId: string;
@@ -11,6 +12,8 @@ interface BotNavigationProps {
 }
 
 export function BotNavigation({ websiteId, websiteName, websiteColor }: BotNavigationProps) {
+  const t = useTranslations('botNav');
+  const tCommon = useTranslations('common');
   const pathname = usePathname();
   const router = useRouter();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -34,7 +37,7 @@ export function BotNavigation({ websiteId, websiteName, websiteColor }: BotNavig
       router.push('/dashboard');
     } catch (error) {
       console.error('Error deleting bot:', error);
-      alert('Failed to delete bot. Please try again.');
+      alert(t('deleteError'));
       setIsDeleting(false);
       setShowDeleteModal(false);
     }
@@ -50,7 +53,7 @@ export function BotNavigation({ websiteId, websiteName, websiteColor }: BotNavig
               href="/dashboard" 
               className="text-gray-600 hover:text-black transition-colors text-sm font-medium"
             >
-              ← Back to Dashboard
+              {tCommon('backToDashboard')}
             </Link>
             <div className="text-gray-400">|</div>
             <div className="flex items-center gap-2">
@@ -70,31 +73,31 @@ export function BotNavigation({ websiteId, websiteName, websiteColor }: BotNavig
               href={`/websites/${websiteId}`}
               className={`font-bold hover:text-fuchsia-primary transition-colors whitespace-nowrap pb-1 ${isExactPath(`/websites/${websiteId}`) ? 'text-fuchsia-primary border-b-2 border-fuchsia-primary' : ''}`}
             >
-              Overview
+              {t('overview')}
             </Link>
             <Link 
               href={`/websites/${websiteId}/training`}
               className={`font-bold hover:text-fuchsia-primary transition-colors whitespace-nowrap pb-1 ${isActive(`/websites/${websiteId}/training`) ? 'text-fuchsia-primary border-b-2 border-fuchsia-primary' : ''}`}
             >
-              Training
+              {t('training')}
             </Link>
             <Link 
               href={`/websites/${websiteId}/conversations`}
               className={`font-bold hover:text-fuchsia-primary transition-colors whitespace-nowrap pb-1 ${isActive(`/websites/${websiteId}/conversations`) ? 'text-fuchsia-primary border-b-2 border-fuchsia-primary' : ''}`}
             >
-              Conversations
+              {t('conversations')}
             </Link>
             <Link 
               href={`/websites/${websiteId}/settings`}
               className={`font-bold hover:text-fuchsia-primary transition-colors whitespace-nowrap pb-1 ${isActive(`/websites/${websiteId}/settings`) ? 'text-fuchsia-primary border-b-2 border-fuchsia-primary' : ''}`}
             >
-              Settings
+              {t('settings')}
             </Link>
             <button
               onClick={() => setShowDeleteModal(true)}
               className="font-bold text-red-600 hover:text-red-700 transition-colors whitespace-nowrap pb-1"
             >
-              Delete
+              {t('delete')}
             </button>
           </div>
         </div>
@@ -104,18 +107,18 @@ export function BotNavigation({ websiteId, websiteName, websiteColor }: BotNavig
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[9999]">
           <div className="neo-card bg-white p-6 sm:p-8 max-w-md w-full">
-            <h2 className="text-2xl font-bold mb-4 text-red-600">⚠️ Delete Bot?</h2>
+            <h2 className="text-2xl font-bold mb-4 text-red-600">{t('deleteModalTitle')}</h2>
             <p className="text-gray-700 mb-6">
-              This will permanently delete <strong>{websiteName}</strong> and all associated data including:
+              {t('deleteModalDescription', { name: websiteName })}
             </p>
             <ul className="list-disc list-inside mb-6 text-gray-700 space-y-2">
-              <li>All training data</li>
-              <li>All conversations and messages</li>
-              <li>Vector embeddings</li>
-              <li>Widget configuration</li>
+              <li>{t('deleteItem1')}</li>
+              <li>{t('deleteItem2')}</li>
+              <li>{t('deleteItem3')}</li>
+              <li>{t('deleteItem4')}</li>
             </ul>
             <p className="text-red-600 font-bold mb-6">
-              This action cannot be undone!
+              {t('deleteWarning')}
             </p>
             <div className="flex gap-4">
               <button
@@ -123,14 +126,14 @@ export function BotNavigation({ websiteId, websiteName, websiteColor }: BotNavig
                 disabled={isDeleting}
                 className="neo-button-secondary flex-1"
               >
-                Cancel
+                {tCommon('cancel')}
               </button>
               <button
                 onClick={handleDelete}
                 disabled={isDeleting}
                 className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg border-2 border-red-900 transition-colors disabled:bg-gray-400"
               >
-                {isDeleting ? 'Deleting...' : 'Delete Forever'}
+                {isDeleting ? t('deleting') : t('deleteForever')}
               </button>
             </div>
           </div>

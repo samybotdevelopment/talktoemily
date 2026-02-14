@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { formatRelativeTime } from '@/lib/utils/helpers';
 import { createClient } from '@/lib/supabase/client';
+import { useTranslations } from 'next-intl';
 
 interface Message {
   id: string;
@@ -26,6 +27,8 @@ interface ConversationsClientProps {
 }
 
 export function ConversationsClient({ websiteId, initialConversations }: ConversationsClientProps) {
+  const t = useTranslations('conversations');
+  const tTime = useTranslations('time');
   const [conversations, setConversations] = useState<Conversation[]>(initialConversations);
   const [selectedConvId, setSelectedConvId] = useState<string | null>(
     initialConversations.length > 0 ? initialConversations[0].id : null
@@ -250,9 +253,9 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
     return (
       <main className="neo-container py-4 sm:py-8">
         <div className="neo-card bg-white p-8 sm:p-12 text-center">
-          <h3 className="text-xl sm:text-2xl font-bold mb-2">No conversations yet</h3>
+          <h3 className="text-xl sm:text-2xl font-bold mb-2">{t('noConversations')}</h3>
           <p className="text-sm sm:text-base text-gray-600">
-            Visitors will start conversations through the chat widget on your website.
+            {t('noConversationsDescription')}
           </p>
         </div>
       </main>
@@ -264,7 +267,7 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
       {/* Sidebar */}
       <div className="w-80 border-r-4 border-black bg-white flex flex-col">
         <div className="p-4 border-b-4 border-black">
-          <h2 className="text-xl font-bold">Conversations</h2>
+          <h2 className="text-xl font-bold">{t('conversations')}</h2>
         </div>
         <div className="flex-1 overflow-y-auto">
           {conversations.map(conv => (
@@ -279,7 +282,7 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
             >
               <div className="flex justify-between items-start mb-2">
                 <span className="text-xs font-bold">
-                  {conv.agent_type === 'owner' ? '👤 Owner' : '💬 Visitor'}
+                  {conv.agent_type === 'owner' ? `👤 ${t('owner')}` : `💬 ${t('visitor')}`}
                 </span>
                 <span className={`text-xs px-2 py-1 rounded font-bold ${
                   selectedConvId === conv.id
@@ -292,10 +295,10 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
                 </span>
               </div>
               <p className={`text-sm mb-1 truncate ${selectedConvId === conv.id ? 'text-white' : 'text-gray-800'}`}>
-                {conv.lastMessage || 'No messages yet'}
+                {conv.lastMessage || t('noMessages')}
               </p>
               <p className={`text-xs ${selectedConvId === conv.id ? 'text-white opacity-80' : 'text-gray-500'}`}>
-                {formatRelativeTime(conv.updated_at || conv.created_at)}
+                {formatRelativeTime(conv.updated_at || conv.created_at, tTime)}
               </p>
             </div>
           ))}
@@ -310,16 +313,16 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
             <div className="flex justify-between items-center">
               <div>
                 <h1 className="text-xl font-bold">
-                  {selectedConversation.agent_type === 'owner' ? 'Owner Assistant' : 'Visitor Chat'}
+                  {selectedConversation.agent_type === 'owner' ? t('ownerAssistant') : t('visitorChat')}
                 </h1>
                 <p className="text-sm text-gray-600">
-                  {formatRelativeTime(selectedConversation.created_at)}
+                  {formatRelativeTime(selectedConversation.created_at, tTime)}
                 </p>
               </div>
               <button
                 onClick={toggleAiMode}
                 className={`neo-button-${aiMode === 'auto' ? 'primary' : 'secondary'} !p-3 flex items-center justify-center`}
-                title={aiMode === 'auto' ? 'Pause AI' : 'Resume AI'}
+                title={aiMode === 'auto' ? t('pauseAI') : t('resumeAI')}
               >
                 {aiMode === 'auto' ? (
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -338,12 +341,12 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
           <main className="flex-1 neo-container py-8 overflow-y-auto">
             {loading ? (
               <div className="text-center py-12">
-                <p className="text-gray-600">Loading messages...</p>
+                <p className="text-gray-600">{t('loadingMessages')}</p>
               </div>
             ) : messages.length === 0 ? (
               <div className="text-center py-8 sm:py-12">
-                <h3 className="text-xl sm:text-2xl font-bold mb-2">Start the conversation</h3>
-                <p className="text-sm sm:text-base text-gray-600">Send a message to begin</p>
+                <h3 className="text-xl sm:text-2xl font-bold mb-2">{t('startConversation')}</h3>
+                <p className="text-sm sm:text-base text-gray-600">{t('startConversationDescription')}</p>
               </div>
             ) : (
               <div className="space-y-6">
@@ -378,7 +381,7 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
                     >
                       <p className="text-sm sm:text-base whitespace-pre-wrap">{message.content}</p>
                       <p className={`text-xs mt-1 text-right ${message.sender === 'assistant' ? 'text-gray-500' : 'text-white opacity-80'}`}>
-                        {formatRelativeTime(message.created_at)}
+                        {formatRelativeTime(message.created_at, tTime)}
                       </p>
                     </div>
                   </div>
@@ -392,12 +395,12 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
           <div className="py-4 px-6 border-t-4 border-black bg-white flex-shrink-0">
             {isAiActive && (
               <div className="mb-2 p-2 bg-blue-50 border-2 border-blue-500 rounded text-sm text-blue-800">
-                💡 Pause the AI to send manual messages
+                {t('pauseAiToSend')}
               </div>
             )}
             {aiMode === 'paused' && (
               <div className="mb-2 p-2 bg-yellow-50 border-2 border-yellow-500 rounded text-sm text-yellow-800">
-                AI is paused. Your messages will go directly to the visitor.
+                {t('aiPaused')}
               </div>
             )}
             <form onSubmit={handleSend} className="flex gap-4">
@@ -406,7 +409,7 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 className={`neo-input flex-1 ${isAiActive ? 'opacity-50 cursor-not-allowed' : ''}`}
-                placeholder={isAiActive ? "Pause AI to send messages" : "Type your message..."}
+                placeholder={isAiActive ? t('pauseAiPlaceholder') : t('typePlaceholder')}
                 disabled={sending || isAiActive}
               />
               <button 
@@ -414,7 +417,7 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
                 className={`neo-button-primary flex-shrink-0 ${isAiActive ? 'opacity-50 cursor-not-allowed' : ''}`}
                 disabled={sending || isAiActive}
               >
-                {sending ? 'Sending...' : 'Send'}
+                {sending ? t('sending') : t('send')}
               </button>
             </form>
             {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
@@ -422,7 +425,7 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
         </div>
       ) : (
         <div className="flex-1 flex items-center justify-center bg-page">
-          <p className="text-gray-600">Select a conversation to view</p>
+          <p className="text-gray-600">{t('selectConversation')}</p>
         </div>
       )}
       
@@ -430,15 +433,15 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
       {showAiModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowAiModal(false)}>
           <div className="bg-white border-4 border-black rounded-lg p-6 max-w-md mx-4" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-xl font-bold mb-3">AI is Active</h3>
+            <h3 className="text-xl font-bold mb-3">{t('aiActiveTitle')}</h3>
             <p className="text-gray-700 mb-4">
-              You need to pause the AI before you can send manual messages. Click the pause button (⏸) in the header to take over the conversation.
+              {t('aiActiveDescription')}
             </p>
             <button
               onClick={() => setShowAiModal(false)}
               className="neo-button-primary w-full"
             >
-              Got it
+              {t('gotIt')}
             </button>
           </div>
         </div>
