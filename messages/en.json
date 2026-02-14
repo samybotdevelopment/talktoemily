@@ -12,6 +12,7 @@
     "back": "Back",
     "next": "Next",
     "previous": "Previous",
+    "continue": "Continue",
     "backToDashboard": "← Back to Dashboard",
     "getStarted": "Get Started",
     "getStartedFree": "Get Started Free",
@@ -873,6 +874,95 @@
     "weeksAgo": "{count}w ago",
     "monthsAgo": "{count}mo ago",
     "yearsAgo": "{count}y ago"
+  },
+  "onboarding": {
+    "welcomeTitle": "Welcome to Emily",
+    "welcomeSubtitle": "Let's set up your chatbot",
+    "step1": {
+      "title": "Welcome to Talk to Emily!",
+      "wgSubscription": "You have a Wonder George subscription, so your Emily subscription is free of charge.",
+      "wgCongrats": "Congratulations! Let's create your first chatbot.",
+      "regularIntro": "Let's create your AI-powered chatbot in just a few steps.",
+      "regularDescription": "Your chatbot will be ready to answer questions and engage with your visitors.",
+      "getStarted": "Get Started"
+    },
+    "step2": {
+      "chooseWebsite": "Choose Your Website",
+      "chooseWebsiteDescription": "Select the website you want to add your chatbot to",
+      "loadingWebsites": "Loading your websites...",
+      "noWebsites": "No websites found",
+      "chatbotAlreadyCreated": "Chatbot already created",
+      "businessInfo": "Tell Us About Your Business",
+      "businessInfoDescription": "We'll use this information to set up your chatbot",
+      "businessName": "Business/Website Name",
+      "businessNamePlaceholder": "e.g. My Coffee Shop",
+      "websiteUrl": "Website URL (Optional)",
+      "websiteUrlPlaceholder": "e.g. https://mycoffeeshop.com"
+    },
+    "step3": {
+      "title": "Customize Your Bot",
+      "description": "Name your bot and choose a color",
+      "botName": "Bot Name",
+      "botNamePlaceholder": "My Website Assistant",
+      "widgetColor": "Widget Color"
+    },
+    "step4": {
+      "title": "Let's start training {botName}",
+      "description": "We'll pull data from your website to train your chatbot",
+      "loading": "Pulling data from your website...",
+      "button": "Pull Website Content"
+    },
+    "step5": {
+      "sectionProgress": "Section {current} of {total}",
+      "description": "Add training content for this section. You can add multiple entries.",
+      "title": "Title",
+      "titlePlaceholder": "Enter a title for this content...",
+      "content": "Content",
+      "totalItems": "Total Training Items Added",
+      "savedSuccess": "Saved successfully",
+      "nextSection": "Next Section"
+    },
+    "step6": {
+      "title": "Upload a Document (Optional)",
+      "description": "Upload a .txt file with more information to train your bot. The AI will automatically extract title and content chunks.",
+      "uploadPrompt": "Click to upload .txt file",
+      "uploadHint": "The LLM will extract title and content chunks automatically",
+      "processing": "Processing document...",
+      "processedSuccess": "Document processed successfully!",
+      "continueToReview": "Continue to Review"
+    },
+    "productsTitle": "Product and Services Questions",
+    "productsQuestion": "Tell us about your products or services",
+    "productsPlaceholder": "Describe what you offer, key features, pricing, etc.",
+    "customerQuestionsTitle": "Questions Customers Typically Ask",
+    "customerQuestionsQuestion": "What questions do customers typically ask you?",
+    "customerQuestionsPlaceholder": "Common questions your customers have...",
+    "uniqueTitle": "What Makes Your Business Unique",
+    "uniqueQuestion": "What makes your business unique?",
+    "uniquePlaceholder": "What sets you apart from competitors...",
+    "additionalTitle": "Additional Information",
+    "additionalQuestion": "Is there anything you'd like the chatbot to know about your business?",
+    "additionalPlaceholder": "Any other important information...",
+    "step7": {
+      "title": "Review & Train",
+      "description": "You have {count} training items. Review and start training.",
+      "content": "Content",
+      "saveChanges": "Save Changes",
+      "training": "Training your bot... This may take 1-2 minutes",
+      "launch": "Launch AI Training"
+    },
+    "cancelBotCreation": "Cancel Bot Creation",
+    "cancelModal": {
+      "title": "Cancel Bot Creation?",
+      "description": "Are you sure you want to cancel? All progress will be lost.",
+      "confirm": "Yes, Cancel",
+      "continue": "Continue Creating"
+    },
+    "allWebsitesModal": {
+      "title": "All Websites Have Bots",
+      "description": "All your websites on Wonder George already have a chatbot. Create a new website on Wonder George to create a new bot.",
+      "ok": "OK"
+    }
   }
 }
 

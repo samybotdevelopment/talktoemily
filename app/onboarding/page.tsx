@@ -448,8 +448,8 @@ export default function OnboardingPage() {
     <div className="min-h-screen bg-page">
       <header className="bg-white border-b-4 border-black">
         <div className="neo-container py-6">
-          <h1 className="text-3xl font-bold">Welcome to Emily</h1>
-          <p className="text-gray-600 mt-2">Let's set up your chatbot</p>
+          <h1 className="text-3xl font-bold">{t('welcomeTitle')}</h1>
+          <p className="text-gray-600 mt-2">{t('welcomeSubtitle')}</p>
         </div>
       </header>
 
@@ -489,29 +489,28 @@ export default function OnboardingPage() {
           {step === 1 && (
             <div className="neo-card bg-white p-8 text-center">
               <div className="text-6xl mb-6">👋</div>
-              <h2 className="text-3xl font-bold mb-4">Welcome to Talk to Emily!</h2>
+              <h2 className="text-3xl font-bold mb-4">{t('step1.title')}</h2>
               {isWGLinked ? (
                 <>
               <p className="text-lg text-gray-700 mb-4">
-                You have a Wonder George subscription, so your Emily subscription is free of
-                charge.
+                {t('step1.wgSubscription')}
               </p>
               <p className="text-gray-600 mb-8">
-                Congratulations! Let's create your first chatbot.
+                {t('step1.wgCongrats')}
               </p>
                 </>
               ) : (
                 <>
                   <p className="text-lg text-gray-700 mb-4">
-                    Let's create your AI-powered chatbot in just a few steps.
+                    {t('step1.regularIntro')}
                   </p>
                   <p className="text-gray-600 mb-8">
-                    Your chatbot will be ready to answer questions and engage with your visitors.
+                    {t('step1.regularDescription')}
                   </p>
                 </>
               )}
               <button onClick={() => setStep(2)} className="neo-button-primary text-lg px-8 py-4">
-                Get Started →
+                {t('step1.getStarted')} →
               </button>
             </div>
           )}
@@ -519,18 +518,18 @@ export default function OnboardingPage() {
           {/* Step 2: Website Selection (WG only) */}
           {step === 2 && isWGLinked && (
             <div className="neo-card bg-white p-8">
-              <h2 className="text-2xl font-bold mb-4">Choose Your Website</h2>
+              <h2 className="text-2xl font-bold mb-4">{t('step2.chooseWebsite')}</h2>
               <p className="text-gray-600 mb-6">
-                Select the website you want to add your chatbot to
+                {t('step2.chooseWebsiteDescription')}
               </p>
 
               {loading ? (
                 <div className="text-center py-12">
-                  <p className="text-gray-600">Loading your websites...</p>
+                  <p className="text-gray-600">{t('step2.loadingWebsites')}</p>
                 </div>
               ) : websites.length === 0 ? (
                 <div className="text-center py-12">
-                  <p className="text-gray-600">No websites found</p>
+                  <p className="text-gray-600">{t('step2.noWebsites')}</p>
                 </div>
               ) : (
                 <div className="grid gap-4">
@@ -575,7 +574,7 @@ export default function OnboardingPage() {
                           <p className="text-sm text-gray-600">{website.website_url}</p>
                             {hasExistingBot && (
                               <p className="text-sm font-bold text-fuchsia-primary mt-1">
-                                ✓ Chatbot already created
+                                ✓ {t('step2.chatbotAlreadyCreated')}
                               </p>
                             )}
                         </div>
@@ -591,13 +590,13 @@ export default function OnboardingPage() {
           {/* Step 2: Business Info (Non-WG customers) */}
           {step === 2 && !isWGLinked && (
             <div className="neo-card bg-white p-8">
-              <h2 className="text-2xl font-bold mb-4">Tell Us About Your Business</h2>
+              <h2 className="text-2xl font-bold mb-4">{t('step2.businessInfo')}</h2>
               <p className="text-gray-600 mb-6">
-                We'll use this information to set up your chatbot
+                {t('step2.businessInfoDescription')}
               </p>
 
               <div className="mb-6">
-                <label className="block text-sm font-bold mb-2">Business/Website Name</label>
+                <label className="block text-sm font-bold mb-2">{t('step2.businessName')}</label>
                 <input
                   type="text"
                   value={websiteName}
@@ -606,31 +605,31 @@ export default function OnboardingPage() {
                     if (!botName) setBotName(e.target.value);
                   }}
                   className="neo-input w-full"
-                  placeholder="e.g. My Coffee Shop"
+                  placeholder={t('step2.businessNamePlaceholder')}
                 />
               </div>
 
               <div className="mb-6">
-                <label className="block text-sm font-bold mb-2">Website URL (Optional)</label>
+                <label className="block text-sm font-bold mb-2">{t('step2.websiteUrl')}</label>
                 <input
                   type="url"
                   value={websiteUrl}
                   onChange={(e) => setWebsiteUrl(e.target.value)}
                   className="neo-input w-full"
-                  placeholder="e.g. https://mycoffeeshop.com"
+                  placeholder={t('step2.websiteUrlPlaceholder')}
                 />
               </div>
 
               <div className="flex gap-4">
                 <button onClick={() => setStep(1)} className="neo-button-secondary">
-                  ← Back
+                  ← {tCommon('back')}
                 </button>
                 <button
                   onClick={() => setStep(3)}
                   disabled={!websiteName}
                   className="neo-button-primary flex-1"
                 >
-                  Continue →
+                  {tCommon('continue')} →
                 </button>
               </div>
             </div>
@@ -639,22 +638,22 @@ export default function OnboardingPage() {
           {/* Step 3: Bot Customization */}
           {step === 3 && ((isWGLinked && selectedWebsite) || (!isWGLinked && websiteName)) && (
             <div className="neo-card bg-white p-8">
-              <h2 className="text-2xl font-bold mb-4">Customize Your Bot</h2>
-              <p className="text-gray-600 mb-6">Name your bot and choose a color</p>
+              <h2 className="text-2xl font-bold mb-4">{t('step3.title')}</h2>
+              <p className="text-gray-600 mb-6">{t('step3.description')}</p>
 
               <div className="mb-6">
-                <label className="block text-sm font-bold mb-2">Bot Name</label>
+                <label className="block text-sm font-bold mb-2">{t('step3.botName')}</label>
                 <input
                   type="text"
                   value={botName}
                   onChange={(e) => setBotName(e.target.value)}
                   className="neo-input w-full"
-                  placeholder="My Website Assistant"
+                  placeholder={t('step3.botNamePlaceholder')}
                 />
               </div>
 
               <div className="mb-6">
-                <label className="block text-sm font-bold mb-2">Widget Color</label>
+                <label className="block text-sm font-bold mb-2">{t('step3.widgetColor')}</label>
                 <div className="flex gap-4 items-center">
                   <input
                     type="color"
@@ -673,14 +672,14 @@ export default function OnboardingPage() {
 
               <div className="flex gap-4">
                 <button onClick={() => setStep(2)} className="neo-button-secondary">
-                  ← Back
+                  ← {tCommon('back')}
                 </button>
                 <button
                   onClick={() => setStep(isWGLinked ? 4 : 5)}
                   disabled={!botName}
                   className="neo-button-primary flex-1"
                 >
-                  Continue →
+                  {tCommon('continue')} →
                 </button>
               </div>
             </div>
@@ -689,19 +688,19 @@ export default function OnboardingPage() {
           {/* Step 4: Auto-Training Setup (WG Only) */}
           {step === 4 && isWGLinked && (
             <div className="neo-card bg-white p-8 text-center">
-              <h2 className="text-2xl font-bold mb-4">Let's start training {botName}</h2>
+              <h2 className="text-2xl font-bold mb-4">{t('step4.title', { botName })}</h2>
               <p className="text-gray-600 mb-8">
-                We'll pull data from your website to train your chatbot
+                {t('step4.description')}
               </p>
 
               {loading ? (
                 <div className="py-12">
                   <div className="animate-spin text-6xl mb-4">⚙️</div>
-                  <p className="text-gray-600">Pulling data from your website...</p>
+                  <p className="text-gray-600">{t('step4.loading')}</p>
                 </div>
               ) : (
                 <button onClick={fetchWebsiteContent} className="neo-button-primary text-lg px-8">
-                  Pull Website Content →
+                  {t('step4.button')} →
                 </button>
               )}
             </div>
@@ -713,31 +712,31 @@ export default function OnboardingPage() {
               sectionTransition ? 'opacity-0 translate-x-10' : 'opacity-100 translate-x-0'
             }`}>
               <h2 className="text-2xl font-bold mb-2">
-                {QUESTION_SECTIONS[currentQuestionSection].title}
+                {t(`${QUESTION_SECTIONS[currentQuestionSection].titleKey}`)}
               </h2>
               <p className="text-sm text-gray-500 mb-6">
-                Section {currentQuestionSection + 1} of {QUESTION_SECTIONS.length}
+                {t('step5.sectionProgress', { current: currentQuestionSection + 1, total: QUESTION_SECTIONS.length })}
               </p>
               <p className="text-gray-600 mb-6">
-                Add training content for this section. You can add multiple entries.
+                {t('step5.description')}
               </p>
 
               <div className="mb-6">
-                <label className="block text-sm font-bold mb-2">Title</label>
+                <label className="block text-sm font-bold mb-2">{t('step5.title')}</label>
                 <input
                   type="text"
                   value={currentSectionTitle}
                   onChange={(e) => setCurrentSectionTitle(e.target.value)}
                   className="neo-input w-full mb-4"
-                  placeholder="Enter a title for this content..."
+                  placeholder={t('step5.titlePlaceholder')}
                 />
 
-                <label className="block text-sm font-bold mb-2">Content</label>
+                <label className="block text-sm font-bold mb-2">{t('step5.content')}</label>
                 <textarea
                   value={currentSectionContent}
                   onChange={(e) => setCurrentSectionContent(e.target.value)}
                   className="neo-input w-full min-h-[200px]"
-                  placeholder={QUESTION_SECTIONS[currentQuestionSection].placeholder}
+                  placeholder={t(`${QUESTION_SECTIONS[currentQuestionSection].placeholderKey}`)}
                 />
               </div>
 
@@ -751,7 +750,7 @@ export default function OnboardingPage() {
                   )}
                   <div className="relative z-10 text-center">
                     <p className="text-sm font-bold text-gray-600 mb-2">
-                      Total Training Items Added
+                      {t('step5.totalItems')}
                     </p>
                     <p className={`text-3xl font-bold text-fuchsia-primary transition-all duration-300 ${
                       showSaveSuccess ? 'scale-110' : ''
@@ -760,7 +759,7 @@ export default function OnboardingPage() {
                     </p>
                     {showSaveSuccess && (
                       <p className="text-sm font-bold text-green-600 mt-2 animate-pulse">
-                        Saved successfully
+                        {t('step5.savedSuccess')}
                       </p>
                     )}
                   </div>
@@ -773,13 +772,13 @@ export default function OnboardingPage() {
                   disabled={!currentSectionTitle.trim() || !currentSectionContent.trim()}
                   className="neo-button-secondary flex-1 transition-transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Save
+                  {tCommon('save')}
                 </button>
                 <button
                   onClick={handleNextSection}
                   className="neo-button-primary flex-1 transition-transform hover:scale-105"
                 >
-                  Next Section →
+                  {t('step5.nextSection')} →
                 </button>
               </div>
             </div>
@@ -788,9 +787,9 @@ export default function OnboardingPage() {
           {/* Step 6: Document Upload */}
           {step === 6 && (
             <div className="neo-card bg-white p-8">
-              <h2 className="text-2xl font-bold mb-4">Upload a Document (Optional)</h2>
+              <h2 className="text-2xl font-bold mb-4">{t('step6.title')}</h2>
               <p className="text-gray-600 mb-6">
-                Upload a .txt file with more information to train your bot. The AI will automatically extract title and content chunks.
+                {t('step6.description')}
               </p>
 
               <div className="mb-6 border-4 border-dashed border-gray-300 rounded-lg p-8 text-center">
@@ -806,31 +805,31 @@ export default function OnboardingPage() {
                 />
                 <label htmlFor="document-upload" className="cursor-pointer">
                   <div className="text-5xl mb-4">📄</div>
-                  <p className="font-bold mb-2">Click to upload .txt file</p>
-                  <p className="text-sm text-gray-600">The LLM will extract title and content chunks automatically</p>
+                  <p className="font-bold mb-2">{t('step6.uploadPrompt')}</p>
+                  <p className="text-sm text-gray-600">{t('step6.uploadHint')}</p>
                 </label>
               </div>
 
               {loading && (
                 <div className="text-center py-4">
                   <div className="animate-spin text-4xl mb-2">⚙️</div>
-                  <p className="text-gray-600">Processing document...</p>
+                  <p className="text-gray-600">{t('step6.processing')}</p>
                 </div>
               )}
 
               {documentProcessed && !loading && (
                 <div className="text-center py-4">
                   <div className="text-5xl mb-2 text-green-600">✓</div>
-                  <p className="text-green-600 font-bold">Document processed successfully!</p>
+                  <p className="text-green-600 font-bold">{t('step6.processedSuccess')}</p>
                 </div>
               )}
 
               <div className="flex gap-4">
                 <button onClick={() => setStep(5)} className="neo-button-secondary">
-                  ← Back
+                  ← {tCommon('back')}
                 </button>
                 <button onClick={() => setStep(7)} className="neo-button-primary flex-1">
-                  Continue to Review →
+                  {t('step6.continueToReview')} →
                 </button>
               </div>
             </div>
@@ -839,9 +838,9 @@ export default function OnboardingPage() {
           {/* Step 7: Review & Train */}
           {step === 7 && (
             <div className="neo-card bg-white p-8">
-              <h2 className="text-2xl font-bold mb-4">Review & Train</h2>
+              <h2 className="text-2xl font-bold mb-4">{t('step7.title')}</h2>
               <p className="text-gray-600 mb-6">
-                You have {trainingChunks.length} training items. Review and start training.
+                {t('step7.description', { count: trainingChunks.length })}
               </p>
 
               <div className="mb-6 space-y-3">
@@ -865,7 +864,7 @@ export default function OnboardingPage() {
                           // Edit Mode
                           <div className="space-y-4">
                             <div>
-                              <label className="block text-sm font-bold mb-2">Title</label>
+                              <label className="block text-sm font-bold mb-2">{t('step7.title')}</label>
                               <input
                                 type="text"
                                 value={editingChunk.title}
@@ -874,7 +873,7 @@ export default function OnboardingPage() {
                               />
                             </div>
                             <div>
-                              <label className="block text-sm font-bold mb-2">Content</label>
+                              <label className="block text-sm font-bold mb-2">{t('step7.content')}</label>
                               <textarea
                                 value={editingChunk.content}
                                 onChange={(e) => setEditingChunk({ ...editingChunk, content: e.target.value })}
@@ -886,13 +885,13 @@ export default function OnboardingPage() {
                                 onClick={saveChunkEdit}
                                 className="neo-button-primary flex-1"
                               >
-                                Save Changes
+                                {t('step7.saveChanges')}
                               </button>
                               <button
                                 onClick={cancelChunkEdit}
                                 className="neo-button-secondary flex-1"
                               >
-                                Cancel
+                                {tCommon('cancel')}
                               </button>
                             </div>
                           </div>
@@ -907,13 +906,13 @@ export default function OnboardingPage() {
                                 onClick={() => startEditingChunk(index)}
                                 className="neo-button-secondary text-sm px-4 py-2"
                               >
-                                Edit
+                                {tCommon('edit')}
                               </button>
                       <button
                         onClick={() => removeChunk(index)}
                                 className="text-red-600 hover:text-red-800 font-bold text-sm px-4 py-2 border-2 border-red-600 rounded-lg hover:bg-red-50 transition-colors"
                       >
-                        Delete
+                        {tCommon('delete')}
                       </button>
                     </div>
                           </div>
@@ -928,20 +927,20 @@ export default function OnboardingPage() {
                 <div className="text-center py-8">
                   <div className="animate-spin text-6xl mb-4">⚙️</div>
                   <p className="text-gray-600 font-bold">
-                    Training your bot... This may take 1-2 minutes
+                    {t('step7.training')}
                   </p>
                 </div>
               ) : (
                 <div className="flex gap-4">
                   <button onClick={() => setStep(6)} className="neo-button-secondary">
-                    ← Back
+                    ← {tCommon('back')}
                   </button>
                   <button
                     onClick={completeOnboarding}
                     disabled={trainingChunks.length === 0}
                     className="neo-button-primary flex-1 text-lg"
                   >
-                    Launch AI Training
+                    {t('step7.launch')}
                   </button>
                 </div>
               )}
@@ -956,7 +955,7 @@ export default function OnboardingPage() {
               onClick={handleCancelBotCreation}
               className="neo-button-secondary w-full"
             >
-              Cancel Bot Creation
+              {t('cancelBotCreation')}
             </button>
           </div>
         )}
@@ -966,22 +965,22 @@ export default function OnboardingPage() {
       {showCancelModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="neo-card bg-white p-8 max-w-md w-full">
-            <h2 className="text-2xl font-bold mb-4">Cancel Bot Creation?</h2>
+            <h2 className="text-2xl font-bold mb-4">{t('cancelModal.title')}</h2>
             <p className="text-gray-700 mb-6">
-              Are you sure you want to cancel? All progress will be lost.
+              {t('cancelModal.description')}
             </p>
             <div className="flex gap-4">
               <button
                 onClick={confirmCancelBotCreation}
                 className="neo-button-secondary flex-1"
               >
-                Yes, Cancel
+                {t('cancelModal.confirm')}
               </button>
               <button
                 onClick={() => setShowCancelModal(false)}
                 className="neo-button-primary flex-1"
               >
-                Continue Creating
+                {t('cancelModal.continue')}
               </button>
             </div>
           </div>
@@ -992,15 +991,15 @@ export default function OnboardingPage() {
       {showAllWebsitesUsedModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="neo-card bg-white p-8 max-w-md w-full">
-            <h2 className="text-2xl font-bold mb-4">All Websites Have Bots</h2>
+            <h2 className="text-2xl font-bold mb-4">{t('allWebsitesModal.title')}</h2>
             <p className="text-gray-700 mb-6">
-              All your websites on Wonder George already have a chatbot. Create a new website on Wonder George to create a new bot.
+              {t('allWebsitesModal.description')}
             </p>
             <button
               onClick={handleAllWebsitesUsed}
               className="neo-button-primary w-full"
             >
-              OK
+              {t('allWebsitesModal.ok')}
             </button>
           </div>
         </div>

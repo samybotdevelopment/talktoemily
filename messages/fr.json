@@ -12,6 +12,7 @@
     "back": "Retour",
     "next": "Suivant",
     "previous": "Précédent",
+    "continue": "Continuer",
     "backToDashboard": "← Retour au tableau de bord",
     "getStarted": "Commencer",
     "getStartedFree": "Commencer gratuitement",
@@ -873,5 +874,94 @@
     "weeksAgo": "il y a {count}s",
     "monthsAgo": "il y a {count}mo",
     "yearsAgo": "il y a {count}a"
+  },
+  "onboarding": {
+    "welcomeTitle": "Bienvenue sur Emily",
+    "welcomeSubtitle": "Configurons votre chatbot",
+    "step1": {
+      "title": "Bienvenue sur Talk to Emily !",
+      "wgSubscription": "Vous avez un abonnement Wonder George, votre abonnement Emily est donc gratuit.",
+      "wgCongrats": "Félicitations ! Créons votre premier chatbot.",
+      "regularIntro": "Créons votre chatbot alimenté par l'IA en quelques étapes simples.",
+      "regularDescription": "Votre chatbot sera prêt à répondre aux questions et à interagir avec vos visiteurs.",
+      "getStarted": "Commencer"
+    },
+    "step2": {
+      "chooseWebsite": "Choisissez votre site web",
+      "chooseWebsiteDescription": "Sélectionnez le site web sur lequel vous souhaitez ajouter votre chatbot",
+      "loadingWebsites": "Chargement de vos sites web...",
+      "noWebsites": "Aucun site web trouvé",
+      "chatbotAlreadyCreated": "Chatbot déjà créé",
+      "businessInfo": "Parlez-nous de votre entreprise",
+      "businessInfoDescription": "Nous utiliserons ces informations pour configurer votre chatbot",
+      "businessName": "Nom de l'entreprise/du site web",
+      "businessNamePlaceholder": "ex. Mon Coffee Shop",
+      "websiteUrl": "URL du site web (optionnel)",
+      "websiteUrlPlaceholder": "ex. https://moncoffeeshop.com"
+    },
+    "step3": {
+      "title": "Personnalisez votre bot",
+      "description": "Nommez votre bot et choisissez une couleur",
+      "botName": "Nom du bot",
+      "botNamePlaceholder": "Mon assistant de site web",
+      "widgetColor": "Couleur du widget"
+    },
+    "step4": {
+      "title": "Commençons l'entraînement de {botName}",
+      "description": "Nous allons extraire les données de votre site web pour entraîner votre chatbot",
+      "loading": "Extraction des données de votre site web...",
+      "button": "Extraire le contenu du site web"
+    },
+    "step5": {
+      "sectionProgress": "Section {current} sur {total}",
+      "description": "Ajoutez du contenu d'entraînement pour cette section. Vous pouvez ajouter plusieurs entrées.",
+      "title": "Titre",
+      "titlePlaceholder": "Entrez un titre pour ce contenu...",
+      "content": "Contenu",
+      "totalItems": "Total des éléments d'entraînement ajoutés",
+      "savedSuccess": "Enregistré avec succès",
+      "nextSection": "Section suivante"
+    },
+    "step6": {
+      "title": "Télécharger un document (optionnel)",
+      "description": "Téléchargez un fichier .txt avec plus d'informations pour entraîner votre bot. L'IA extraira automatiquement les titres et les morceaux de contenu.",
+      "uploadPrompt": "Cliquez pour télécharger un fichier .txt",
+      "uploadHint": "Le LLM extraira automatiquement les titres et les morceaux de contenu",
+      "processing": "Traitement du document...",
+      "processedSuccess": "Document traité avec succès !",
+      "continueToReview": "Continuer vers la révision"
+    },
+    "productsTitle": "Questions sur les produits et services",
+    "productsQuestion": "Parlez-nous de vos produits ou services",
+    "productsPlaceholder": "Décrivez ce que vous proposez, les fonctionnalités clés, les tarifs, etc.",
+    "customerQuestionsTitle": "Questions fréquemment posées par les clients",
+    "customerQuestionsQuestion": "Quelles questions les clients vous posent-ils généralement ?",
+    "customerQuestionsPlaceholder": "Questions courantes de vos clients...",
+    "uniqueTitle": "Ce qui rend votre entreprise unique",
+    "uniqueQuestion": "Qu'est-ce qui rend votre entreprise unique ?",
+    "uniquePlaceholder": "Ce qui vous distingue de vos concurrents...",
+    "additionalTitle": "Informations supplémentaires",
+    "additionalQuestion": "Y a-t-il quelque chose que vous aimeriez que le chatbot sache sur votre entreprise ?",
+    "additionalPlaceholder": "Toute autre information importante...",
+    "step7": {
+      "title": "Réviser et entraîner",
+      "description": "Vous avez {count} éléments d'entraînement. Révisez et lancez l'entraînement.",
+      "content": "Contenu",
+      "saveChanges": "Enregistrer les modifications",
+      "training": "Entraînement de votre bot... Cela peut prendre 1 à 2 minutes",
+      "launch": "Lancer l'entraînement IA"
+    },
+    "cancelBotCreation": "Annuler la création du bot",
+    "cancelModal": {
+      "title": "Annuler la création du bot ?",
+      "description": "Êtes-vous sûr de vouloir annuler ? Toute la progression sera perdue.",
+      "confirm": "Oui, annuler",
+      "continue": "Continuer la création"
+    },
+    "allWebsitesModal": {
+      "title": "Tous les sites web ont des bots",
+      "description": "Tous vos sites web sur Wonder George ont déjà un chatbot. Créez un nouveau site web sur Wonder George pour créer un nouveau bot.",
+      "ok": "OK"
+    }
   }
 }
