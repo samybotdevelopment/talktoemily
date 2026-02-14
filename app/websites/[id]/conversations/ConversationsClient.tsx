@@ -40,12 +40,21 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
   const [error, setError] = useState<string | null>(null);
   const [aiMode, setAiMode] = useState<string>('auto');
   const [showAiModal, setShowAiModal] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const processedMessageIds = useRef<Set<string>>(new Set());
   const supabase = createClient();
 
   const selectedConversation = conversations.find(c => c.id === selectedConvId);
   const isAiActive = aiMode === 'auto';
+
+  // Prevent body scroll
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
 
   // Subscribe to new conversations for this website
   useEffect(() => {
@@ -88,13 +97,11 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
 
   useEffect(() => {
     if (selectedConvId) {
-      // Clear processed messages when switching conversations
       processedMessageIds.current.clear();
       
       fetchConversation(selectedConvId);
       fetchMessages(selectedConvId);
       
-      // Subscribe to new messages in real-time
       const channelName = `conversation-${selectedConvId}-${Date.now()}`;
       const channel = supabase
         .channel(channelName)
@@ -108,25 +115,17 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
           },
           (payload) => {
             const newMessage = payload.new as Message;
-            console.log('🔔 REALTIME: Message received:', newMessage.id.substring(0, 8), '| Sender:', newMessage.sender);
             
-            // Use ref to prevent duplicate processing across render cycles
             if (processedMessageIds.current.has(newMessage.id)) {
-              console.log('   ⏭️  SKIP: Already in processedMessageIds');
               return;
             }
             
             processedMessageIds.current.add(newMessage.id);
-            console.log('   ✅ ADDED to processedMessageIds');
             
             setMessages(prev => {
-              console.log('   📝 setState called. Current state has', prev.length, 'messages');
-              // Double-check in state as well
               if (prev.some(m => m.id === newMessage.id)) {
-                console.log('   ⏭️  SKIP: Already in state array');
                 return prev;
               }
-              console.log('   ✅ ADDING to state array');
               return [...prev, newMessage];
             });
           }
@@ -164,88 +163,94 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
     try {
       const response = await fetch(`/api/conversations/${convId}/messages`);
       const data = await response.json();
+      
       if (response.ok) {
-        const fetchedMessages = data.data || [];
-        console.log('📥 FETCH: Received', fetchedMessages.length, 'messages from API');
-        fetchedMessages.forEach((msg: Message) => {
-          console.log(`  - ${msg.id.substring(0, 8)} | ${msg.sender} | ${msg.content.substring(0, 30)}`);
-        });
-        
-        setMessages(fetchedMessages);
-        
-        // Mark all fetched messages as processed to prevent realtime from re-adding them
-        fetchedMessages.forEach((msg: Message) => {
+        setMessages(data.messages || []);
+        data.messages?.forEach((msg: Message) => {
           processedMessageIds.current.add(msg.id);
         });
-        
-        console.log('✅ FETCH: State updated and', fetchedMessages.length, 'IDs marked as processed');
+        setTimeout(scrollToBottom, 100);
+      } else {
+        setError(data.error || t('failedToLoad'));
       }
     } catch (err) {
-      console.error('Failed to fetch messages:', err);
+      setError(t('failedToLoad'));
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSend = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim() || sending || isAiActive) return;
+
+    setSending(true);
+    setError(null);
+
+    const userMessage = input.trim();
+    setInput('');
+    
+    const tempMessage: Message = {
+      id: `temp-${Date.now()}`,
+      sender: 'user',
+      content: userMessage,
+      created_at: new Date().toISOString()
+    };
+    setMessages(prev => [...prev, tempMessage]);
+    processedMessageIds.current.add(tempMessage.id);
+
+    try {
+      const response = await fetch('/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          conversation_id: selectedConvId,
+          content: userMessage,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || t('failedToSend'));
+      }
+
+      const data = await response.json();
+      
+      setMessages(prev => prev.filter(m => m.id !== tempMessage.id));
+      processedMessageIds.current.delete(tempMessage.id);
+      
+      if (!processedMessageIds.current.has(data.message.id)) {
+        setMessages(prev => [...prev, data.message]);
+        processedMessageIds.current.add(data.message.id);
+      }
+    } catch (err: any) {
+      setError(err.message);
+      setMessages(prev => prev.filter(m => m.id !== tempMessage.id));
+      processedMessageIds.current.delete(tempMessage.id);
+      setInput(userMessage);
+    } finally {
+      setSending(false);
     }
   };
 
   const toggleAiMode = async () => {
     if (!selectedConvId) return;
 
-    const newMode = aiMode === 'auto' ? 'paused' : 'auto';
-    try {
-      const response = await fetch(`/api/conversations/${selectedConvId}/ai-mode`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ aiMode: newMode }),
-      });
-
-      if (response.ok) {
-        setAiMode(newMode);
-        // Update conversation in list
-        setConversations(prev =>
-          prev.map(c => (c.id === selectedConvId ? { ...c, ai_mode: newMode } : c))
-        );
-      }
-    } catch (err) {
-      console.error('Failed to toggle AI mode:', err);
-    }
-  };
-
-  const handleSend = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Check if AI is active - user must pause it first
-    if (isAiActive) {
+    if (aiMode === 'auto') {
       setShowAiModal(true);
-      return;
     }
-    
-    if (!input.trim() || sending || !selectedConvId) return;
 
-    const userMessage = input.trim();
-    setInput('');
-    setSending(true);
-    setError(null);
+    const newMode = aiMode === 'auto' ? 'paused' : 'auto';
+    setAiMode(newMode);
 
     try {
-      const response = await fetch(`/api/conversations/${selectedConvId}/messages`, {
-        method: 'POST',
+      await fetch(`/api/conversations/${selectedConvId}/ai-mode`, {
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          content: userMessage,
-          sender: 'assistant' // Owner manual response
-        }),
+        body: JSON.stringify({ ai_mode: newMode }),
       });
-
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || 'Failed to send message');
-      }
-
-      // Message will appear via realtime subscription - no optimistic update needed
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setSending(false);
+    } catch (err) {
+      console.error('Failed to update AI mode:', err);
     }
   };
 
@@ -263,17 +268,41 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
   }
 
   return (
-    <div className="flex h-[calc(100vh-5rem)] overflow-hidden">
+    <div className="fixed inset-0 top-16 flex overflow-hidden overscroll-none">
+      {/* Mobile Overlay */}
+      {showSidebar && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          onClick={() => setShowSidebar(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <div className="w-80 border-r-4 border-black bg-white flex flex-col">
-        <div className="p-4 border-b-4 border-black">
+      <div className={`
+        fixed lg:static inset-y-0 left-0 z-50
+        w-80 border-r-4 border-black bg-white flex flex-col
+        transform transition-transform duration-300 ease-in-out
+        ${showSidebar ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+      `}>
+        <div className="p-4 border-b-4 border-black flex justify-between items-center flex-shrink-0">
           <h2 className="text-xl font-bold">{t('conversations')}</h2>
+          <button
+            onClick={() => setShowSidebar(false)}
+            className="lg:hidden p-2 hover:bg-gray-100 rounded"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
         <div className="flex-1 overflow-y-auto">
           {conversations.map(conv => (
             <div
               key={conv.id}
-              onClick={() => setSelectedConvId(conv.id)}
+              onClick={() => {
+                setSelectedConvId(conv.id);
+                setShowSidebar(false);
+              }}
               className={`p-4 border-b-2 border-gray-200 cursor-pointer transition-colors ${
                 selectedConvId === conv.id
                   ? 'bg-fuchsia-primary text-white'
@@ -307,29 +336,49 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
 
       {/* Main Chat Area */}
       {selectedConversation ? (
-        <div className="flex-1 flex flex-col bg-page">
+        <div className="flex-1 flex flex-col bg-page min-w-0">
           {/* Chat Header */}
-          <div className="py-4 px-6 border-b-4 border-black bg-white">
-            <div className="flex justify-between items-center">
-              <div>
-                <h1 className="text-xl font-bold">
-                  {selectedConversation.agent_type === 'owner' ? t('ownerAssistant') : t('visitorChat')}
-                </h1>
-                <p className="text-sm text-gray-600">
-                  {formatRelativeTime(selectedConversation.created_at, tTime)}
-                </p>
+          <div className="py-3 px-4 border-b-4 border-black bg-white flex-shrink-0">
+            <div className="flex justify-between items-center gap-2">
+              <div className="flex items-center gap-2 min-w-0 flex-1">
+                <button
+                  onClick={() => setShowSidebar(true)}
+                  className="lg:hidden p-2 -ml-2 hover:bg-gray-100 rounded flex-shrink-0"
+                  title="Open conversations list"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                </button>
+                <a
+                  href={`/websites/${websiteId}`}
+                  className="p-2 -ml-2 hover:bg-gray-100 rounded flex-shrink-0"
+                  title="Back to bot"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                </a>
+                <div className="min-w-0">
+                  <h1 className="text-base lg:text-xl font-bold truncate">
+                    {selectedConversation.agent_type === 'owner' ? t('ownerAssistant') : t('visitorChat')}
+                  </h1>
+                  <p className="text-xs lg:text-sm text-gray-600">
+                    {formatRelativeTime(selectedConversation.created_at, tTime)}
+                  </p>
+                </div>
               </div>
               <button
                 onClick={toggleAiMode}
-                className={`neo-button-${aiMode === 'auto' ? 'primary' : 'secondary'} !p-3 flex items-center justify-center`}
+                className={`neo-button-${aiMode === 'auto' ? 'primary' : 'secondary'} !p-2 lg:!p-3 flex items-center justify-center flex-shrink-0`}
                 title={aiMode === 'auto' ? t('pauseAI') : t('resumeAI')}
               >
                 {aiMode === 'auto' ? (
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 lg:w-5 lg:h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
                   </svg>
                 ) : (
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 lg:w-5 lg:h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 )}
@@ -337,8 +386,8 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
             </div>
           </div>
 
-          {/* Messages */}
-          <main className="flex-1 neo-container py-8 overflow-y-auto">
+          {/* Messages - Scrollable area */}
+          <div className="flex-1 overflow-y-auto px-4 py-4 lg:px-8 lg:py-6 min-h-0">
             {loading ? (
               <div className="text-center py-12">
                 <p className="text-gray-600">{t('loadingMessages')}</p>
@@ -349,78 +398,59 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
                 <p className="text-sm sm:text-base text-gray-600">{t('startConversationDescription')}</p>
               </div>
             ) : (
-              <div className="space-y-6">
-                {(() => {
-                  console.log('🎨 RENDER: Displaying', messages.length, 'messages');
-                  // Check for duplicates
-                  const ids = messages.map(m => m.id);
-                  const uniqueIds = new Set(ids);
-                  if (ids.length !== uniqueIds.size) {
-                    console.error('⚠️ DUPLICATE IDs IN STATE!');
-                    console.log('Total messages:', ids.length);
-                    console.log('Unique IDs:', uniqueIds.size);
-                    ids.forEach((id, idx) => {
-                      if (ids.indexOf(id) !== idx) {
-                        console.error(`  DUPLICATE: ${id.substring(0, 8)} at index ${idx} (first at ${ids.indexOf(id)})`);
-                      }
-                    });
-                  }
-                  return null;
-                })()}
+              <div className="space-y-6 max-w-3xl mx-auto">
                 {messages.map(message => (
                   <div
                     key={message.id}
-                    className={`flex ${message.sender === 'assistant' ? 'justify-end' : 'justify-start'}`}
+                    className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
-                    <div
-                      className={`max-w-[70%] p-4 rounded-lg shadow-md ${
-                        message.sender === 'assistant'
-                          ? 'bg-gray-100 text-gray-800 rounded-br-none border-2 border-gray-200'
-                          : 'bg-fuchsia-primary text-white rounded-bl-none'
-                      }`}
-                    >
-                      <p className="text-sm sm:text-base whitespace-pre-wrap">{message.content}</p>
-                      <p className={`text-xs mt-1 text-right ${message.sender === 'assistant' ? 'text-gray-500' : 'text-white opacity-80'}`}>
-                        {formatRelativeTime(message.created_at, tTime)}
-                      </p>
+                    <div className={`max-w-[85%] sm:max-w-[70%] rounded-lg p-3 sm:p-4 ${
+                      message.sender === 'user'
+                        ? 'bg-fuchsia-primary text-white'
+                        : 'bg-white border-2 border-gray-200'
+                    }`}>
+                      <p className="text-sm sm:text-base whitespace-pre-wrap break-words">{message.content}</p>
                     </div>
                   </div>
                 ))}
                 <div ref={messagesEndRef} />
               </div>
             )}
-          </main>
+          </div>
 
-          {/* Input Area */}
-          <div className="py-4 px-6 border-t-4 border-black bg-white flex-shrink-0">
+          {/* Input Area - Sticky at bottom */}
+          <div className="py-3 px-4 lg:py-4 lg:px-6 border-t-4 border-black bg-white flex-shrink-0">
             {isAiActive && (
-              <div className="mb-2 p-2 bg-blue-50 border-2 border-blue-500 rounded text-sm text-blue-800">
+              <div className="mb-2 p-2 bg-blue-50 border-2 border-blue-500 rounded text-xs sm:text-sm text-blue-800">
                 {t('pauseAiToSend')}
               </div>
             )}
             {aiMode === 'paused' && (
-              <div className="mb-2 p-2 bg-yellow-50 border-2 border-yellow-500 rounded text-sm text-yellow-800">
+              <div className="mb-2 p-2 bg-yellow-50 border-2 border-yellow-500 rounded text-xs sm:text-sm text-yellow-800">
                 {t('aiPaused')}
               </div>
             )}
-            <form onSubmit={handleSend} className="flex gap-4">
+            <form onSubmit={handleSend} className="flex gap-2 sm:gap-4">
               <input
                 type="text"
                 value={input}
                 onChange={e => setInput(e.target.value)}
-                className={`neo-input flex-1 ${isAiActive ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`neo-input flex-1 text-sm sm:text-base ${isAiActive ? 'opacity-50 cursor-not-allowed' : ''}`}
                 placeholder={isAiActive ? t('pauseAiPlaceholder') : t('typePlaceholder')}
                 disabled={sending || isAiActive}
               />
               <button 
                 type="submit" 
-                className={`neo-button-primary flex-shrink-0 ${isAiActive ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`neo-button-primary flex-shrink-0 !p-3 sm:!p-4 ${isAiActive ? 'opacity-50 cursor-not-allowed' : ''}`}
                 disabled={sending || isAiActive}
+                title={sending ? t('sending') : t('send')}
               >
-                {sending ? t('sending') : t('send')}
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
               </button>
             </form>
-            {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+            {error && <p className="text-red-500 text-xs sm:text-sm mt-2">{error}</p>}
           </div>
         </div>
       ) : (
@@ -431,8 +461,8 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
       
       {/* AI Active Modal */}
       {showAiModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowAiModal(false)}>
-          <div className="bg-white border-4 border-black rounded-lg p-6 max-w-md mx-4" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={() => setShowAiModal(false)}>
+          <div className="bg-white border-4 border-black rounded-lg p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
             <h3 className="text-xl font-bold mb-3">{t('aiActiveTitle')}</h3>
             <p className="text-gray-700 mb-4">
               {t('aiActiveDescription')}

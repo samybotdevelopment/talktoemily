@@ -81,7 +81,7 @@ export function LanguageSwitcher() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border-4 border-black z-50 max-h-96 overflow-y-auto">
+        <div className="absolute right-0 mt-2 w-64 sm:w-64 bg-white rounded-lg shadow-lg border-4 border-black z-50 max-h-[70vh] overflow-y-auto">
           <div className="py-2">
             {locales.map((locale) => {
               const Flag = flagComponents[locale];

@@ -149,19 +149,19 @@ export function SettingsClient({
     <>
       <main className="neo-container py-4 sm:py-8">
         <div className="max-w-2xl mx-auto">
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
             <h1 className="text-2xl sm:text-3xl font-bold">{t('title')}</h1>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
               <button
                 onClick={() => setShowPreview(true)}
-                className="neo-button-secondary text-sm sm:text-base px-4 py-2"
+                className="neo-button-secondary text-sm sm:text-base px-4 py-2 w-full sm:w-auto"
               >
                 {t('preview')}
               </button>
               <button
                 onClick={handleSaveAll}
                 disabled={!hasChanges || saving}
-                className={`neo-button-primary text-sm sm:text-base px-4 py-2 ${!hasChanges ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`neo-button-primary text-sm sm:text-base px-4 py-2 w-full sm:w-auto ${!hasChanges ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 {saving ? t('saving') : saved ? t('saved') : t('saveChanges')}
               </button>
@@ -335,18 +335,18 @@ export function SettingsClient({
 
               <div>
                 <label className="block text-sm font-bold mb-2">{t('primaryColor')}</label>
-                <div className="flex gap-4">
+                <div className="flex gap-2 sm:gap-4 items-center">
                   <input
                     type="color"
                     value={color}
                     onChange={(e) => handleColorChange(e.target.value)}
-                    className="w-24 h-12 border-4 border-black rounded-lg cursor-pointer"
+                    className="w-16 sm:w-24 h-12 border-4 border-black rounded-lg cursor-pointer flex-shrink-0"
                   />
                   <input
                     type="text"
                     value={color}
                     onChange={(e) => handleColorChange(e.target.value)}
-                    className="neo-input flex-1"
+                    className="neo-input flex-1 min-w-0"
                     placeholder="#E91E63"
                   />
                 </div>
