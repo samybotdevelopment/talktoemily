@@ -398,9 +398,9 @@ export default function OnboardingPage() {
     setTimeout(() => {
       if (currentQuestionSection < QUESTION_SECTIONS.length - 1) {
         setCurrentQuestionSection(currentQuestionSection + 1);
-      } else {
+    } else {
         // Move to next step (document upload)
-        setStep(6);
+      setStep(6);
         setDocumentProcessed(false); // Reset document processing state
       }
       
@@ -489,13 +489,13 @@ export default function OnboardingPage() {
               <h2 className="text-3xl font-bold mb-4">Welcome to Talk to Emily!</h2>
               {isWGLinked ? (
                 <>
-                  <p className="text-lg text-gray-700 mb-4">
-                    You have a Wonder George subscription, so your Emily subscription is free of
-                    charge.
-                  </p>
-                  <p className="text-gray-600 mb-8">
-                    Congratulations! Let's create your first chatbot.
-                  </p>
+              <p className="text-lg text-gray-700 mb-4">
+                You have a Wonder George subscription, so your Emily subscription is free of
+                charge.
+              </p>
+              <p className="text-gray-600 mb-8">
+                Congratulations! Let's create your first chatbot.
+              </p>
                 </>
               ) : (
                 <>
@@ -535,13 +535,13 @@ export default function OnboardingPage() {
                     const hasExistingBot = existingBotWebsiteIds.includes(website.website_id);
                     
                     return (
-                      <button
-                        key={website.website_id}
-                        onClick={() => {
+                    <button
+                      key={website.website_id}
+                      onClick={() => {
                           if (!hasExistingBot) {
-                            setSelectedWebsite(website);
-                            setBotName(website.website_name);
-                            setStep(3);
+                        setSelectedWebsite(website);
+                        setBotName(website.website_name);
+                        setStep(3);
                           }
                         }}
                         disabled={hasExistingBot}
@@ -550,34 +550,34 @@ export default function OnboardingPage() {
                             ? 'opacity-50 cursor-not-allowed bg-gray-100'
                             : 'hover:scale-[1.02]'
                         } ${
-                          selectedWebsite?.website_id === website.website_id
-                            ? 'border-fuchsia-primary'
-                            : ''
-                        }`}
-                      >
-                        <div className="flex items-center gap-4">
-                          {website.website_image_url ? (
-                            <img
-                              src={website.website_image_url}
-                              alt={website.website_name}
-                              className="w-16 h-16 rounded-lg border-2 border-black object-cover"
-                            />
-                          ) : (
-                            <div className="w-16 h-16 rounded-lg border-2 border-black bg-fuchsia-primary flex items-center justify-center text-white font-bold text-2xl">
-                              {website.website_name[0]}
-                            </div>
-                          )}
+                        selectedWebsite?.website_id === website.website_id
+                          ? 'border-fuchsia-primary'
+                          : ''
+                      }`}
+                    >
+                      <div className="flex items-center gap-4">
+                        {website.website_image_url ? (
+                          <img
+                            src={website.website_image_url}
+                            alt={website.website_name}
+                            className="w-16 h-16 rounded-lg border-2 border-black object-cover"
+                          />
+                        ) : (
+                          <div className="w-16 h-16 rounded-lg border-2 border-black bg-fuchsia-primary flex items-center justify-center text-white font-bold text-2xl">
+                            {website.website_name[0]}
+                          </div>
+                        )}
                           <div className="flex-1">
-                            <h3 className="text-xl font-bold">{website.website_name}</h3>
-                            <p className="text-sm text-gray-600">{website.website_url}</p>
+                          <h3 className="text-xl font-bold">{website.website_name}</h3>
+                          <p className="text-sm text-gray-600">{website.website_url}</p>
                             {hasExistingBot && (
                               <p className="text-sm font-bold text-fuchsia-primary mt-1">
                                 ✓ Chatbot already created
                               </p>
                             )}
-                          </div>
                         </div>
-                      </button>
+                      </div>
+                    </button>
                     );
                   })}
                 </div>
@@ -906,13 +906,13 @@ export default function OnboardingPage() {
                               >
                                 Edit
                               </button>
-                              <button
-                                onClick={() => removeChunk(index)}
+                      <button
+                        onClick={() => removeChunk(index)}
                                 className="text-red-600 hover:text-red-800 font-bold text-sm px-4 py-2 border-2 border-red-600 rounded-lg hover:bg-red-50 transition-colors"
-                              >
-                                Delete
-                              </button>
-                            </div>
+                      >
+                        Delete
+                      </button>
+                    </div>
                           </div>
                         )}
                       </div>

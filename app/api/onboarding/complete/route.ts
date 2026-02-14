@@ -105,28 +105,28 @@ export async function POST(request: Request) {
 
     // Step 4: Activate widget on WG website (WG customers only)
     if (org.is_wg_linked && org.wg_user_id && validatedData.website_data.wg_website_id) {
-      try {
-        const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://talktoemily.com';
-        const scriptCode = generateWidgetScript(website.id, appUrl);
+    try {
+      const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://talktoemily.com';
+      const scriptCode = generateWidgetScript(website.id, appUrl);
 
-        await activateWGWidget(
-          org.wg_user_id,
-          validatedData.website_data.wg_website_id,
-          scriptCode,
-          true
-        );
+      await activateWGWidget(
+        org.wg_user_id,
+        validatedData.website_data.wg_website_id,
+        scriptCode,
+        true
+      );
 
-        // Update widget activation status
-        await serviceSupabase
-          .from('websites')
-          .update({
-            widget_activated: true,
-            widget_activated_at: new Date().toISOString(),
-          })
-          .eq('id', website.id);
-      } catch (widgetError) {
-        console.error('Widget activation error:', widgetError);
-        // Don't fail the whole flow, widget can be activated later
+      // Update widget activation status
+      await serviceSupabase
+        .from('websites')
+        .update({
+          widget_activated: true,
+          widget_activated_at: new Date().toISOString(),
+        })
+        .eq('id', website.id);
+    } catch (widgetError) {
+      console.error('Widget activation error:', widgetError);
+      // Don't fail the whole flow, widget can be activated later
       }
     }
 

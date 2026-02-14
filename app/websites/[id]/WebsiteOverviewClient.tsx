@@ -125,40 +125,40 @@ export function WebsiteOverviewClient({
           </div>
         ) : (
           /* Embed Code - Show only for non-WG customers */
-          <div className="neo-card bg-white p-4 sm:p-8 mb-6 sm:mb-8">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
-              <h3 className="text-xl sm:text-2xl font-bold">Embed Code</h3>
-              <button
-                onClick={() => setShowTestWidget(true)}
-                className="neo-button-primary text-sm sm:text-base w-full sm:w-auto"
-              >
-                Test My Chatbot
-              </button>
-            </div>
-            
-            <p className="text-sm sm:text-base text-gray-600 mb-4">
-              Add this code to your website's HTML, just before the closing &lt;/body&gt; tag:
-            </p>
-            <div className="bg-gray-900 text-green-400 p-3 sm:p-4 rounded-lg font-mono text-xs sm:text-sm overflow-x-auto">
-              <pre>{`<script>
+        <div className="neo-card bg-white p-4 sm:p-8 mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+            <h3 className="text-xl sm:text-2xl font-bold">Embed Code</h3>
+            <button
+              onClick={() => setShowTestWidget(true)}
+              className="neo-button-primary text-sm sm:text-base w-full sm:w-auto"
+            >
+              Test My Chatbot
+            </button>
+          </div>
+          
+          <p className="text-sm sm:text-base text-gray-600 mb-4">
+            Add this code to your website's HTML, just before the closing &lt;/body&gt; tag:
+          </p>
+          <div className="bg-gray-900 text-green-400 p-3 sm:p-4 rounded-lg font-mono text-xs sm:text-sm overflow-x-auto">
+            <pre>{`<script>
   window.EmilyChat = { websiteId: "${websiteId}" };
 </script>
 <script src="${process.env.NEXT_PUBLIC_APP_URL || 'https://talktoemily.com'}/widget/emily-loader.js"></script>`}</pre>
-            </div>
-            
-            {latestRunStatus === 'completed' ? (
-              <div className="mt-4 p-3 sm:p-4 bg-green-50 border-4 border-green-500 rounded-lg">
-                <p className="text-green-800 font-bold text-sm sm:text-base">Your chatbot is trained and ready!</p>
-              </div>
-            ) : (
-              <div className="mt-4 p-3 sm:p-4 bg-blue-50 border-4 border-blue-500 rounded-lg">
-                <p className="text-blue-800 font-bold text-sm sm:text-base">Not trained yet</p>
-                <p className="text-blue-700 text-xs sm:text-sm mt-2">
-                  The widget will appear on your site, but train your chatbot to enable AI responses. <Link href={`/websites/${websiteId}/training`} className="underline font-bold">Add training content</Link>
-                </p>
-              </div>
-            )}
           </div>
+          
+          {latestRunStatus === 'completed' ? (
+            <div className="mt-4 p-3 sm:p-4 bg-green-50 border-4 border-green-500 rounded-lg">
+              <p className="text-green-800 font-bold text-sm sm:text-base">Your chatbot is trained and ready!</p>
+            </div>
+          ) : (
+            <div className="mt-4 p-3 sm:p-4 bg-blue-50 border-4 border-blue-500 rounded-lg">
+              <p className="text-blue-800 font-bold text-sm sm:text-base">Not trained yet</p>
+              <p className="text-blue-700 text-xs sm:text-sm mt-2">
+                The widget will appear on your site, but train your chatbot to enable AI responses. <Link href={`/websites/${websiteId}/training`} className="underline font-bold">Add training content</Link>
+              </p>
+            </div>
+          )}
+        </div>
         )}
 
         {/* Overview Cards */}

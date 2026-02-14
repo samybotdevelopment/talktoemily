@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import TrainingCostModal from '@/components/TrainingCostModal';
 
 interface TrainingItem {
   id: string;
@@ -26,6 +27,16 @@ export default function TrainingPage() {
   const [isTraining, setIsTraining] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  
+  // Training cost modal state
+  const [showCostModal, setShowCostModal] = useState(false);
+  const [trainingCost, setTrainingCost] = useState<{
+    itemCount: number;
+    creditCost: number;
+    creditsBalance: number;
+    isFreeTraining: boolean;
+    hasEnoughCredits: boolean;
+  } | null>(null);
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
@@ -156,10 +167,26 @@ export default function TrainingPage() {
   };
 
   const handleTrain = async () => {
-    if (!confirm('Start training? This will rebuild your chatbot with all current training items.')) {
-      return;
-    }
+    // Fetch training cost info first
+    setError(null);
+    
+    try {
+      const response = await fetch(`/api/websites/${websiteId}/training-cost`);
+      const data = await response.json();
 
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to get training cost');
+      }
+
+      setTrainingCost(data);
+      setShowCostModal(true);
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
+
+  const confirmTraining = async () => {
+    setShowCostModal(false);
     setIsTraining(true);
     setError(null);
 
@@ -171,10 +198,21 @@ export default function TrainingPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Training failed');
+        if (response.status === 402) {
+          // Payment required
+          setError(`Insufficient credits. You need ${data.required} credits but only have ${data.available}.`);
+        } else {
+          throw new Error(data.error || 'Training failed');
+        }
+        return;
       }
 
-      setSuccess('Training completed successfully!');
+      if (data.isFreeTraining) {
+        setSuccess('🎉 Training completed successfully! (First training was free)');
+      } else {
+        setSuccess(`Training completed successfully! Used ${data.creditsUsed} credits.`);
+      }
+      
       router.refresh();
     } catch (err: any) {
       setError(err.message);
@@ -191,11 +229,22 @@ export default function TrainingPage() {
         </div>
       )}
 
-        {success && (
-          <div className="bg-green-50 border-4 border-green-500 rounded-lg p-4 mb-6">
-            <p className="text-green-800 font-semibold">{success}</p>
-          </div>
-        )}
+      {success && (
+        <div className="bg-green-50 border-4 border-green-500 rounded-lg p-4 mb-6">
+          <p className="text-green-800 font-semibold">{success}</p>
+        </div>
+      )}
+
+      {/* Training Cost Modal */}
+      {showCostModal && trainingCost && (
+        <TrainingCostModal
+          itemCount={trainingCost.itemCount}
+          creditsBalance={trainingCost.creditsBalance}
+          isFreeTraining={trainingCost.isFreeTraining}
+          onClose={() => setShowCostModal(false)}
+          onConfirm={confirmTraining}
+        />
+      )}
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Add Training Item Form */}

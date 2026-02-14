@@ -9,3 +9,4 @@ ON public.websites(is_active);
 -- Add comment
 COMMENT ON COLUMN public.websites.is_active IS 'Whether the bot is active. Inactive bots do not respond to widget requests.';
 
+

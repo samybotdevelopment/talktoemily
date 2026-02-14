@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { constructWebhookEvent } from '@/lib/services/stripe.service';
 import { createServiceClient } from '@/lib/supabase/server';
+import { sendEmail, getPaymentFailureEmail } from '@/lib/services/mailjet.service';
 
 export async function POST(request: Request) {
   try {
@@ -340,6 +341,71 @@ export async function POST(request: Request) {
               console.log(`Added ${credits} credits to org ${charge.metadata.org_id}`);
             }
           }
+        }
+        break;
+      }
+
+      case 'invoice.payment_failed': {
+        const invoice = event.data.object as any;
+        const customerId = invoice.customer as string;
+        const attemptCount = invoice.attempt_count || 1;
+        
+        console.log(`💳 Payment failed for customer ${customerId}, attempt ${attemptCount}`);
+
+        // Get org and user info from stripe_customers table
+        const { data: stripeCustomer } = await supabase
+          .from('stripe_customers')
+          .select('org_id')
+          .eq('stripe_customer_id', customerId)
+          .single();
+
+        if (stripeCustomer) {
+          // Get user email from organizations table
+          const { data: org } = await supabase
+            .from('organizations')
+            .select(`
+              id,
+              users!inner(email)
+            `)
+            .eq('id', stripeCustomer.org_id)
+            .single();
+
+          if (org && org.users && Array.isArray(org.users) && org.users.length > 0) {
+            const userEmail = org.users[0].email;
+            
+            // Calculate days remaining (Stripe retries over ~7 days, typically 4 attempts)
+            // Attempt 1: Day 0 (7 days left)
+            // Attempt 2: Day 3 (4 days left)
+            // Attempt 3: Day 5 (2 days left)
+            // Attempt 4: Day 7 (0 days left)
+            const daysRemaining = Math.max(0, 7 - Math.floor((attemptCount - 1) * 2.5));
+
+            // Get customer name (use email prefix if no name)
+            const customerName = userEmail.split('@')[0];
+
+            const { subject, body } = getPaymentFailureEmail(
+              attemptCount,
+              customerName,
+              daysRemaining
+            );
+
+            try {
+              await sendEmail({
+                to: userEmail,
+                toName: customerName,
+                subject,
+                textBody: body,
+              });
+
+              console.log(`✅ Payment failure email sent to ${userEmail} (attempt ${attemptCount})`);
+            } catch (emailError) {
+              console.error(`❌ Failed to send payment failure email:`, emailError);
+            }
+          } else {
+            console.error('❌ Could not find user email for org:', stripeCustomer.org_id);
+          }
+        } else {
+          console.error('❌ Could not find org for customer:', customerId);
         }
         break;
       }
