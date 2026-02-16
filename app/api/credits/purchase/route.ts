@@ -21,22 +21,22 @@ export async function POST(request: Request) {
     }
 
     // Get user's organization
-    const { data: memberships } = await supabase
+    const { data: memberships } = (await supabase
       .from('memberships')
       .select('org_id')
       .eq('user_id', user.id)
-      .single();
+      .single()) as any;
 
     if (!memberships) {
       return NextResponse.json({ error: 'No organization found' }, { status: 404 });
     }
 
     // Get stripe customer
-    const { data: stripeCustomer } = await supabase
+    const { data: stripeCustomer } = (await supabase
       .from('stripe_customers')
       .select('stripe_customer_id')
       .eq('org_id', memberships.org_id)
-      .single();
+      .single()) as any;
 
     if (!stripeCustomer) {
       return NextResponse.json({ error: 'No Stripe customer found' }, { status: 404 });

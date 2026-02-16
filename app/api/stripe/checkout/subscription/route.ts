@@ -30,11 +30,11 @@ export async function POST(request: NextRequest) {
 
     // Get user's organization
     const serviceSupabase = await createServiceClient();
-    const { data: membership } = await serviceSupabase
+    const { data: membership } = (await serviceSupabase
       .from('memberships')
       .select('org_id, organizations(*)')
       .eq('user_id', user.id)
-      .single();
+      .single()) as any;
 
     if (!membership) {
       return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
@@ -63,11 +63,11 @@ export async function POST(request: NextRequest) {
     }
 
     // Get or create Stripe customer
-    const { data: stripeCustomer } = await serviceSupabase
+    const { data: stripeCustomer } = (await serviceSupabase
       .from('stripe_customers')
       .select('stripe_customer_id')
       .eq('org_id', org.id)
-      .single();
+      .single()) as any;
 
     let stripeCustomerId = stripeCustomer?.stripe_customer_id;
 
@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
         .insert({
           org_id: org.id,
           stripe_customer_id: stripeCustomerId,
-        });
+        } as any);
     }
 
     // Get price ID

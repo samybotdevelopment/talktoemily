@@ -19,11 +19,11 @@ export async function POST(request: Request) {
     const supabase = await createServiceClient();
 
     // Get website and org
-    const { data: website, error: websiteError } = await supabase
+    const { data: website, error: websiteError } = (await supabase
       .from('websites')
       .select('org_id')
       .eq('id', websiteId)
-      .single();
+      .single()) as any;
 
     if (websiteError || !website) {
       return NextResponse.json({ error: 'Website not found' }, { status: 404 });
@@ -34,8 +34,8 @@ export async function POST(request: Request) {
 
     // Create conversation if it doesn't exist
     if (!currentConversationId) {
-      const { data: conversation, error: convError} = await supabase
-        .from('conversations')
+      const { data: conversation, error: convError } = (await supabase
+      .from('conversations')
         .insert({
           website_id: websiteId,
           agent_type: 'visitor',
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
           visitor_id: visitorId,
         })
         .select()
-        .single();
+      .single()) as any;
 
       if (convError || !conversation) {
         console.error('Conversation creation error:', convError);
@@ -54,11 +54,11 @@ export async function POST(request: Request) {
       aiMode = conversation.ai_mode;
     } else {
       // Get existing conversation to check AI mode
-      const { data: existingConv } = await supabase
-        .from('conversations')
+      const { data: existingConv } = (await supabase
+      .from('conversations')
         .select('ai_mode')
         .eq('id', currentConversationId)
-        .single();
+      .single()) as any;
       
       if (existingConv) {
         aiMode = existingConv.ai_mode;
@@ -73,7 +73,7 @@ export async function POST(request: Request) {
         conversation_id: currentConversationId,
         sender: 'user',
         content: content,
-      });
+      } as any);
 
     if (msgError) {
       console.error('Error saving message:', msgError);

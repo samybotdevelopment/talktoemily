@@ -14,11 +14,11 @@ export async function GET(request: Request) {
     }
 
     // Check if user is admin
-    const { data: userData } = await supabase
+    const { data: userData } = (await supabase
       .from('users')
       .select('role')
       .eq('id', user.id)
-      .single();
+      .single()) as any;
 
     if (!userData || userData.role !== 'admin') {
       return NextResponse.json({ error: 'Forbidden: Admin access required' }, { status: 403 });

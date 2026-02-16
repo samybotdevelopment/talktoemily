@@ -21,11 +21,11 @@ export async function POST(request: Request) {
     const serviceSupabase = await createServiceClient();
 
     // Get user's organization
-    const { data: memberships } = await serviceSupabase
+    const { data: memberships } = (await serviceSupabase
       .from('memberships')
       .select('org_id, organizations(*)')
       .eq('user_id', user.id)
-      .single();
+      .single()) as any;
 
     if (!memberships) {
       return NextResponse.json({ error: 'Organization not found' }, { status: 404 });

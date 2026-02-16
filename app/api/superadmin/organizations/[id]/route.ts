@@ -18,11 +18,11 @@ export async function GET(
     }
 
     // Check if user is admin
-    const { data: userData } = await supabase
+    const { data: userData } = (await supabase
       .from('users')
       .select('role')
       .eq('id', user.id)
-      .single();
+      .single()) as any;
 
     if (!userData || userData.role !== 'admin') {
       return NextResponse.json({ error: 'Forbidden: Admin access required' }, { status: 403 });
@@ -32,11 +32,11 @@ export async function GET(
     const serviceSupabase = await createServiceClient();
 
     // Get organization details
-    const { data: org, error: orgError } = await serviceSupabase
+    const { data: org, error: orgError } = (await serviceSupabase
       .from('organizations')
       .select('*')
       .eq('id', orgId)
-      .single();
+      .single()) as any;
 
     if (orgError || !org) {
       return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
@@ -57,11 +57,11 @@ export async function GET(
       .order('created_at', { ascending: false });
 
     // Get Stripe customer info
-    const { data: stripeCustomer } = await serviceSupabase
+    const { data: stripeCustomer } = (await serviceSupabase
       .from('stripe_customers')
       .select('*')
       .eq('org_id', orgId)
-      .single();
+      .single()) as any;
 
     // Get conversation and message counts
     const { count: conversationCount } = await serviceSupabase

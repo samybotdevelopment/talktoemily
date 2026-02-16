@@ -73,7 +73,7 @@ export async function POST(
 
     if (error) {
       console.error('Failed to create training item:', error);
-      return NextResponse.json({ error: 'Failed to create training item' }, { status: 500 });
+      return NextResponse.json({ error: 'Failed to create training item' }, { status: 500 } as any);
     }
 
     return NextResponse.json({ data: trainingItem }, { status: 201 });

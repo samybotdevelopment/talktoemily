@@ -23,9 +23,9 @@ export async function PUT(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { data, error } = await supabase
-      .from('conversations')
-      .update({ ai_mode: aiMode })
+    const { data, error } = await (supabase
+      .from('conversations') as any)
+      .update({ ai_mode: aiMode } as any)
       .eq('id', convId)
       .select()
       .single();

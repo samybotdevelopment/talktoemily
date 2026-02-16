@@ -58,11 +58,11 @@ export async function POST(
     const serviceSupabase = await createServiceClient();
 
     // Get conversation details
-    const { data: conversation } = await serviceSupabase
+    const { data: conversation } = (await serviceSupabase
       .from('conversations')
       .select('website_id, ai_mode')
       .eq('id', convId)
-      .single();
+      .single()) as any;
 
     if (!conversation) {
       return NextResponse.json({ error: 'Conversation not found' }, { status: 404 });
@@ -78,7 +78,7 @@ export async function POST(
           conversation_id: convId,
           sender: sender,
           content: content,
-        });
+        } as any);
 
       if (msgError) {
         console.error(`❌ [Conversations API ${callId}] Error saving message:`, msgError);
@@ -92,11 +92,11 @@ export async function POST(
     // AI is active - processChatMessage will save the user message
 
     // Get website and org for AI response
-    const { data: website } = await serviceSupabase
+    const { data: website } = (await serviceSupabase
       .from('websites')
       .select('org_id')
       .eq('id', conversation.website_id)
-      .single();
+      .single()) as any;
 
     if (!website) {
       return NextResponse.json({ error: 'Website not found' }, { status: 404 });

@@ -41,11 +41,11 @@ export async function POST(request: Request) {
     const serviceSupabase = await createServiceClient();
 
     // Get user's organization
-    const { data: memberships } = await serviceSupabase
+    const { data: memberships } = (await serviceSupabase
       .from('memberships')
       .select('org_id, organizations(*)')
       .eq('user_id', user.id)
-      .single();
+      .single()) as any;
 
     if (!memberships) {
       return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
@@ -54,7 +54,7 @@ export async function POST(request: Request) {
     const org = memberships.organizations as any;
 
     // Step 1: Create website
-    const { data: website, error: websiteError } = await serviceSupabase
+    const { data: website, error: websiteError } = (await serviceSupabase
       .from('websites')
       .insert({
         org_id: org.id,
@@ -63,9 +63,9 @@ export async function POST(request: Request) {
         primary_color: validatedData.website_data.primary_color,
         wg_website_id: validatedData.website_data.wg_website_id || null,
         widget_activated: false,
-      })
+      } as any)
       .select()
-      .single();
+      .single()) as any;
 
     if (websiteError || !website) {
       console.error('Website creation error:', websiteError);
@@ -77,12 +77,12 @@ export async function POST(request: Request) {
       website_id: website.id,
       title: chunk.title,
       content: chunk.content,
-      source: (org.is_wg_linked ? 'wg' : 'manual') as const,
+      source: org.is_wg_linked ? 'wg' : 'manual',
     }));
 
     const { error: itemsError } = await serviceSupabase
       .from('training_items')
-      .insert(trainingItems);
+      .insert(trainingItems as any);
 
     if (itemsError) {
       console.error('Training items error:', itemsError);
@@ -117,8 +117,8 @@ export async function POST(request: Request) {
       );
 
       // Update widget activation status
-      await serviceSupabase
-        .from('websites')
+      await (serviceSupabase
+        .from('websites') as any)
         .update({
           widget_activated: true,
           widget_activated_at: new Date().toISOString(),
@@ -131,8 +131,8 @@ export async function POST(request: Request) {
     }
 
     // Step 5: Mark onboarding as completed and clear state
-    await serviceSupabase
-      .from('organizations')
+    await (serviceSupabase
+      .from('organizations') as any)
       .update({
         onboarding_completed_at: new Date().toISOString(),
         onboarding_state: null,
@@ -146,7 +146,7 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid data', details: error.errors }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid data', details: (error as any).errors }, { status: 400 });
     }
 
     console.error('Error completing onboarding:', error);

@@ -17,11 +17,11 @@ export async function POST(request: Request) {
     const supabase = await createServiceClient();
 
     // Check if user already exists
-    const { data: existingUser } = await supabase
+    const { data: existingUser } = (await supabase
       .from('users')
       .select('id')
       .eq('email', validatedData.email)
-      .single();
+      .single()) as any;
 
     if (existingUser) {
       return NextResponse.json(
@@ -70,7 +70,7 @@ export async function POST(request: Request) {
         wg_user_id: isWGCustomer ? wgCustomer.user_id : null,
         wg_plan: isWGCustomer ? wgCustomer.plan : null,
         onboarding_completed_at: null, // Will be set when onboarding completes
-      })
+      } as any)
       .select()
       .single();
 
@@ -89,15 +89,15 @@ export async function POST(request: Request) {
       .from('memberships')
       .insert({
         user_id: authData.user.id,
-        org_id: org.id,
+        org_id: (org as any).id,
         role: 'owner',
-      });
+      } as any);
 
     if (membershipError) {
       console.error('Membership creation error:', membershipError);
       // Cleanup
       await supabase.auth.admin.deleteUser(authData.user.id);
-      await supabase.from('organizations').delete().eq('id', org.id);
+      await supabase.from('organizations').delete().eq('id', (org as any).id);
       return NextResponse.json(
         { error: 'Failed to create membership' },
         { status: 500 }
@@ -112,7 +112,7 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid input', details: (error as any).errors }, { status: 400 });
     }
 
     console.error('Signup error:', error);

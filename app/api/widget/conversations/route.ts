@@ -30,14 +30,14 @@ export async function GET(request: Request) {
     // Get first message for each conversation
     const conversationsWithMessages = await Promise.all(
       (conversations || []).map(async (conv) => {
-        const { data: firstMessage } = await supabase
-          .from('messages')
+        const { data: firstMessage } = (await supabase
+      .from('messages')
           .select('content, sender')
           .eq('conversation_id', conv.id)
           .eq('sender', 'user')
           .order('created_at', { ascending: true })
           .limit(1)
-          .single();
+      .single()) as any;
 
         return {
           ...conv,

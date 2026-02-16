@@ -21,11 +21,11 @@ export async function POST(
     }
 
     // Get website, org, and training count
-    const { data: website } = await supabase
+    const { data: website } = (await supabase
       .from('websites')
       .select('org_id, training_count')
       .eq('id', websiteId)
-      .single();
+      .single()) as any;
 
     if (!website) {
       return NextResponse.json({ error: 'Website not found' }, { status: 404 });
@@ -61,11 +61,11 @@ export async function POST(
       const serviceSupabase = await createServiceClient();
       
       // Get current credits
-      const { data: org } = await serviceSupabase
-        .from('organizations')
+      const { data: org } = (await serviceSupabase
+      .from('organizations')
         .select('credits_balance, plan')
         .eq('id', website.org_id)
-        .single();
+      .single()) as any;
 
       if (!org) {
         return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
@@ -92,7 +92,7 @@ export async function POST(
         .from('organizations')
         .update({
           credits_balance: org.credits_balance - creditCost,
-        })
+        } as any)
         .eq('id', website.org_id);
 
       if (deductError) {
@@ -113,7 +113,7 @@ export async function POST(
       .from('websites')
       .update({
         training_count: website.training_count + 1,
-      })
+      } as any)
       .eq('id', websiteId);
 
     if (countError) {

@@ -72,7 +72,7 @@ export async function POST(
       .update({
         widget_activated: validatedData.activate,
         widget_activated_at: validatedData.activate ? new Date().toISOString() : null,
-      })
+      } as any)
       .eq('id', websiteId);
 
     return NextResponse.json({

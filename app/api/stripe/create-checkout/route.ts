@@ -21,11 +21,11 @@ export async function POST(request: Request) {
     }
 
     // Get user's organization
-    const { data: memberships } = await supabase
+    const { data: memberships } = (await supabase
       .from('memberships')
       .select('org_id, organizations(*)')
       .eq('user_id', user.id)
-      .single();
+      .single()) as any;
 
     if (!memberships) {
       return NextResponse.json({ error: 'No organization found' }, { status: 404 });
@@ -34,24 +34,24 @@ export async function POST(request: Request) {
     const org = memberships.organizations as any;
 
     // Check if customer exists
-    let { data: stripeCustomer } = await supabase
+    let { data: stripeCustomer } = (await supabase
       .from('stripe_customers')
       .select('*')
       .eq('org_id', org.id)
-      .single();
+      .single()) as any;
 
     // Create Stripe customer if doesn't exist
     if (!stripeCustomer) {
       const customer = await createCustomer(user.email!, org.name, org.id);
 
-      const { data: newCustomer } = await supabase
-        .from('stripe_customers')
+      const { data: newCustomer } = (await supabase
+      .from('stripe_customers')
         .insert({
           org_id: org.id,
           stripe_customer_id: customer.id,
-        })
+        } as any)
         .select()
-        .single();
+      .single()) as any;
 
       stripeCustomer = newCustomer;
     }

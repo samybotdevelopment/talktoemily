@@ -16,11 +16,11 @@ export async function POST() {
     const serviceSupabase = await createServiceClient();
 
     // Get user's organization
-    const { data: membership } = await serviceSupabase
+    const { data: membership } = (await serviceSupabase
       .from('memberships')
       .select('org_id, organizations(*)')
       .eq('user_id', user.id)
-      .single();
+      .single()) as any;
 
     if (!membership) {
       return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
@@ -29,24 +29,24 @@ export async function POST() {
     const org = membership.organizations as any;
 
     // Clear onboarding state
-    await serviceSupabase
-      .from('organizations')
-      .update({ onboarding_state: null })
+    await (serviceSupabase
+      .from('organizations') as any)
+      .update({ onboarding_state: null } as any)
       .eq('id', org.id);
 
     // Find and delete any incomplete websites (no onboarding_completed_at)
-    const { data: incompleteWebsites } = await serviceSupabase
+    const { data: incompleteWebsites } = (await serviceSupabase
       .from('websites')
       .select('id')
       .eq('org_id', org.id)
-      .is('onboarding_completed_at', null);
+      .is('onboarding_completed_at', null)) as any;
 
     if (incompleteWebsites && incompleteWebsites.length > 0) {
       // Delete incomplete websites (cascade will delete related training_items, etc.)
       await serviceSupabase
         .from('websites')
         .delete()
-        .in('id', incompleteWebsites.map(w => w.id));
+        .in('id', incompleteWebsites.map((w: any) => w.id));
     }
 
     return NextResponse.json({ success: true });

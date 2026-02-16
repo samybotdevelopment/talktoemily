@@ -28,11 +28,11 @@ export async function POST(
     }
 
     // Check if user is admin
-    const { data: userData } = await supabase
+    const { data: userData } = (await supabase
       .from('users')
       .select('role')
       .eq('id', user.id)
-      .single();
+      .single()) as any;
 
     if (!userData || userData.role !== 'admin') {
       return NextResponse.json({ error: 'Forbidden: Admin access required' }, { status: 403 });
@@ -46,11 +46,11 @@ export async function POST(
     const monthlyCredits = plan === 'starter' ? 100 : 250;
 
     // Get current org data
-    const { data: org } = await serviceSupabase
+    const { data: org } = (await serviceSupabase
       .from('organizations')
       .select('credits_balance, frozen_credits, plan')
       .eq('id', orgId)
-      .single();
+      .single()) as any;
 
     if (!org) {
       return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
@@ -71,7 +71,7 @@ export async function POST(
         max_websites: maxWebsites,
         credits_balance: org.credits_balance + unfrozenCredits + monthlyCredits,
         frozen_credits: 0,
-      })
+      } as any)
       .eq('id', orgId);
 
     if (updateError) {
@@ -103,7 +103,7 @@ export async function POST(
           
           await serviceSupabase
             .from('websites')
-            .update({ is_active: true })
+            .update({ is_active: true } as any)
             .in('id', idsToReactivate);
         }
       }

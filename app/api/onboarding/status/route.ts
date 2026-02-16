@@ -21,11 +21,11 @@ export async function GET(request: Request) {
     const serviceSupabase = await createServiceClient();
 
     // Get user's organization
-    const { data: memberships } = await serviceSupabase
+    const { data: memberships } = (await serviceSupabase
       .from('memberships')
       .select('org_id, organizations(*)')
       .eq('user_id', user.id)
-      .single();
+      .single()) as any;
 
     if (!memberships) {
       return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
@@ -64,11 +64,11 @@ export async function POST(request: Request) {
     const serviceSupabase = await createServiceClient();
 
     // Get user's organization
-    const { data: memberships } = await serviceSupabase
+    const { data: memberships } = (await serviceSupabase
       .from('memberships')
       .select('org_id, organizations(*)')
       .eq('user_id', user.id)
-      .single();
+      .single()) as any;
 
     if (!memberships) {
       return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
@@ -81,8 +81,8 @@ export async function POST(request: Request) {
     const state: OnboardingState = body.state;
 
     // Save state to database
-    const { error } = await serviceSupabase
-      .from('organizations')
+    const { error } = await (serviceSupabase
+      .from('organizations') as any)
       .update({ onboarding_state: state })
       .eq('id', org.id);
 

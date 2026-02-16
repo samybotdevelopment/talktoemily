@@ -65,7 +65,7 @@ export async function POST(request: Request) {
 
     if (error) {
       console.error('Failed to create website:', error);
-      return NextResponse.json({ error: 'Failed to create website' }, { status: 500 });
+      return NextResponse.json({ error: 'Failed to create website' }, { status: 500 } as any);
     }
 
     return NextResponse.json({ data: website }, { status: 201 });

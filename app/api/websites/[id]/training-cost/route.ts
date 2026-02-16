@@ -18,11 +18,11 @@ export async function GET(
     }
 
     // Get website and training count
-    const { data: website } = await supabase
+    const { data: website } = (await supabase
       .from('websites')
       .select('org_id, training_count')
       .eq('id', websiteId)
-      .single();
+      .single()) as any;
 
     if (!website) {
       return NextResponse.json({ error: 'Website not found' }, { status: 404 });
@@ -37,11 +37,11 @@ export async function GET(
     const itemCount = trainingItems?.length || 0;
 
     // Get organization credits
-    const { data: org } = await supabase
+    const { data: org } = (await supabase
       .from('organizations')
       .select('credits_balance, plan')
       .eq('id', website.org_id)
-      .single();
+      .single()) as any;
 
     if (!org) {
       return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
