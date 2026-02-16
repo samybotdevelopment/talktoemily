@@ -29,14 +29,13 @@ export function Header({ userName, orgName, showAuth = false }: HeaderProps) {
         <nav className="neo-container">
           <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Logo */}
-            <Link href={showAuth ? "/dashboard" : "/"} className="flex items-center gap-2">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-fuchsia-primary border-4 border-black rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl sm:text-2xl">E</span>
-              </div>
-              <div className="hidden sm:block">
-                <div className="font-bold text-xl">Emily</div>
-                {orgName && <div className="text-xs text-gray-600">{orgName}</div>}
-              </div>
+            <Link href={showAuth ? "/dashboard" : "/"} className="flex items-center">
+              <img 
+                src="/Emily_wide_logo.png" 
+                alt="Emily" 
+                className="h-8 sm:h-10 w-auto"
+              />
+              {orgName && <div className="ml-3 text-xs text-gray-600 hidden sm:block">{orgName}</div>}
             </Link>
 
             {/* Desktop Navigation */}

@@ -18,6 +18,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Emily - AI-Powered Chat for Your Website",
   description: "Create intelligent chatbots trained on your content. Emily helps website owners provide instant support to their visitors.",
+  icons: {
+    icon: '/emily_logo.png',
+  },
 };
 
 export default async function RootLayout({

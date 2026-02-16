@@ -11,3 +11,4 @@ SET frozen_credits = 0
 WHERE frozen_credits IS NULL;
 
 
+

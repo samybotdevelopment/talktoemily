@@ -16,3 +16,4 @@ WHERE email = 'shotbymikebeck@gmail.com';
 -- Add comment
 COMMENT ON COLUMN public.users.role IS 'User role: user (default) or admin (superadmin access)';
 
+

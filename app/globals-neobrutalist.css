@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FFF1E6;
+  --foreground: #000000;
+  --fuchsia-primary: #E91E63;
+  --fuchsia-dark: #D81B60;
+  --border-width: 4px;
+  --shadow-offset: 6px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-fuchsia-primary: var(--fuchsia-primary);
+  --color-fuchsia-dark: var(--fuchsia-dark);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Custom background class to use CSS variable */
+.bg-page {
+  background-color: var(--background);
+}
+
+/* Neo-brutalist styles - Using standard CSS instead of @apply for Tailwind v4 */
+.neo-card {
+  border: 4px solid black;
+  border-radius: 0.75rem;
+  box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 1);
+  transition: all 0.2s;
+}
+
+.neo-card:hover {
+  box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+  transform: translate(-2px, -2px);
+}
+
+/* Modal card without hover effects to prevent flickering */
+.neo-card-modal {
+  border: 4px solid black;
+  border-radius: 0.75rem;
+  box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.neo-button {
+  border: 4px solid black;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  font-size: 1.125rem;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  transition: all 0.2s;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+}
+
+.neo-button:active {
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
+  transform: translate(2px, 2px);
+}
+
+.neo-button-primary {
+  background: var(--fuchsia-primary);
+  color: white;
+  border: 4px solid black;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  font-size: 1.125rem;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  transition: all 0.2s;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+}
+
+.neo-button-primary:hover {
+  background: var(--fuchsia-dark);
+}
+
+.neo-button-primary:active {
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
+  transform: translate(2px, 2px);
+}
+
+.neo-button-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.neo-button-secondary {
+  background: white;
+  color: black;
+  border: 4px solid black;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  font-size: 1.125rem;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  transition: all 0.2s;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+}
+
+.neo-button-secondary:hover {
+  background: #f3f4f6;
+}
+
+.neo-button-secondary:active {
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
+  transform: translate(2px, 2px);
+}
+
+.neo-button-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.neo-input {
+  border: 4px solid black;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 1.125rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.neo-input:focus {
+  border-color: var(--fuchsia-primary);
+}
+
+.neo-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .neo-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .neo-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

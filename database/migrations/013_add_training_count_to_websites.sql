@@ -14,3 +14,4 @@ SET training_count = (
     AND tr.status = 'completed'
 );
 
+

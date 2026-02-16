@@ -12,6 +12,13 @@ export default async function Home() {
       
       <div className="flex-1 flex items-center justify-center px-4 py-12 sm:py-20">
         <div className="neo-container text-center">
+          <div className="flex justify-center mb-8">
+            <img 
+              src="/Emily_wide_logo.png" 
+              alt="Emily" 
+              className="h-16 sm:h-24 w-auto"
+            />
+          </div>
           <h1 className="text-4xl sm:text-6xl font-bold mb-6">
             {t('title', { name: t('titleName') }).split(t('titleName'))[0]}
             <span className="text-fuchsia-primary">{t('titleName')}</span>

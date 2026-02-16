@@ -97,3 +97,4 @@ Check logs for:
 - `✅ Payment failure email sent to user@example.com (attempt Y)`
 - `❌ Failed to send payment failure email` (if email service fails)
 
+
