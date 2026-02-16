@@ -17,13 +17,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Get user's organization
-    const { data: memberships } = await supabase
+    const { data: memberships, error: membershipError } = await supabase
       .from('memberships')
       .select('org_id')
       .eq('user_id', user.id)
       .single();
 
-    if (!memberships) {
+    if (!memberships || membershipError) {
       return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
     }
 
