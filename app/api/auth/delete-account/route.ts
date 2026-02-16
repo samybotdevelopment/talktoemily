@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
     }
 
-    const orgId = memberships.org_id;
+    const orgId = (memberships as { org_id: string }).org_id;
 
     // Check if there are any bots (websites) still on the account
     const { data: websites, error: websitesError } = await supabase

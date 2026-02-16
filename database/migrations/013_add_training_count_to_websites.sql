@@ -15,3 +15,4 @@ SET training_count = (
 );
 
 
+
