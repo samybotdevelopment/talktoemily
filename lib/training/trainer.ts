@@ -20,7 +20,7 @@ import { v4 as uuidv4 } from 'uuid';
  * 6. Mark complete
  */
 export async function trainChatbot(websiteId: string, orgId: string): Promise<void> {
-  const supabase = await createServiceClient();
+  const supabase = (await createServiceClient()) as any;
 
   // Create training run record
   const { data: trainingRun, error: runError } = await supabase
@@ -58,7 +58,7 @@ export async function trainChatbot(websiteId: string, orgId: string): Promise<vo
     // IMPORTANT: Embed ONLY the content, not the title
     // The title is generic (e.g., "Contact: Hero Section") and dilutes semantic relevance
     // We store the title in the payload for display purposes only
-    const embeddingPromises = trainingItems.map(async (item) => {
+    const embeddingPromises = trainingItems.map(async (item: any) => {
       const embedding = await createEmbedding(item.content);
       return {
         id: item.id,
@@ -127,7 +127,7 @@ export async function trainChatbot(websiteId: string, orgId: string): Promise<vo
  * Get training status for a website
  */
 export async function getTrainingStatus(websiteId: string) {
-  const supabase = await createServiceClient();
+  const supabase = (await createServiceClient()) as any;
 
   const { data: latestRun } = await supabase
     .from('training_runs')

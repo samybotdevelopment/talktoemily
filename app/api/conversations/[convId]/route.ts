@@ -7,7 +7,7 @@ export async function GET(
 ) {
   try {
     const { convId } = await context.params;
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },

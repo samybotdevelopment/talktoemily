@@ -8,7 +8,7 @@ export async function GET(
 ) {
   try {
     const { convId } = await context.params;
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -35,7 +35,7 @@ export async function POST(
   console.log(`🟢 [Conversations API ${callId}] POST called`);
   
   const { convId } = await context.params;
-  const supabase = await createClient();
+  const supabase = (await createClient()) as any;
 
   const {
     data: { user },
@@ -55,7 +55,7 @@ export async function POST(
     }
 
     // Use service client for database operations
-    const serviceSupabase = await createServiceClient();
+    const serviceSupabase = (await createServiceClient()) as any;
 
     // Get conversation details
     const { data: conversation } = (await serviceSupabase

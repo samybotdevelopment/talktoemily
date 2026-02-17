@@ -11,7 +11,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    const supabase = await createServiceClient();
+    const supabase = (await createServiceClient()) as any;
 
     // Get conversations for this visitor
     const { data: conversations, error } = await supabase
@@ -29,7 +29,7 @@ export async function GET(request: Request) {
 
     // Get first message for each conversation
     const conversationsWithMessages = await Promise.all(
-      (conversations || []).map(async (conv) => {
+      (conversations || []).map(async (conv: any) => {
         const { data: firstMessage } = (await supabase
       .from('messages')
           .select('content, sender')

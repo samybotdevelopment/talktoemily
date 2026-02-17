@@ -349,7 +349,7 @@ export default function OnboardingPage() {
       
       setQAAnswers([
         ...qaAnswers,
-        { question: currentSection.question, answer: `${currentSectionTitle}: ${currentSectionContent}` },
+        { question: t(`${currentSection.questionKey}`), answer: `${currentSectionTitle}: ${currentSectionContent}` },
       ]);
       
       // Trigger confetti animation
@@ -457,7 +457,7 @@ export default function OnboardingPage() {
         {/* Progress Indicator */}
         <div className="mb-8">
           <div className="flex items-center justify-between max-w-2xl mx-auto">
-            {[1, 2, 3, 4, 5, 6, 7].map((s) => (
+            {[1, 2, 3, 4, 5, 6, 7].map((s: any) => (
               <div key={s} className="flex items-center flex-1 last:flex-initial">
                 <div
                   className={`w-10 h-10 rounded-full border-4 border-black flex items-center justify-center font-bold ${
@@ -533,7 +533,7 @@ export default function OnboardingPage() {
                 </div>
               ) : (
                 <div className="grid gap-4">
-                  {websites.map((website) => {
+                  {websites.map((website: any) => {
                     const hasExistingBot = existingBotWebsiteIds.includes(website.website_id);
                     
                     return (

@@ -17,7 +17,7 @@ export async function POST(
       );
     }
 
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -39,7 +39,7 @@ export async function POST(
     }
 
     // Grant credits using service client
-    const serviceSupabase = await createServiceClient();
+    const serviceSupabase = (await createServiceClient()) as any;
 
     // Get current credits
     const { data: org } = (await serviceSupabase
@@ -55,11 +55,11 @@ export async function POST(
     const newBalance = org.credits_balance + credits;
 
     // Update credits
-    const { error: updateError } = await serviceSupabase
-      .from('organizations')
+    const { error: updateError } = await (serviceSupabase
+      .from('organizations') as any)
       .update({
         credits_balance: newBalance,
-      } as any)
+      })
       .eq('id', orgId);
 
     if (updateError) {

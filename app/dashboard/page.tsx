@@ -13,7 +13,7 @@ import { getTranslations } from 'next-intl/server';
 export default async function DashboardPage() {
   const t = await getTranslations('dashboard');
   const tCommon = await getTranslations('common');
-  const supabase = await createClient();
+  const supabase = (await createClient()) as any;
 
   const {
     data: { user },
@@ -24,7 +24,7 @@ export default async function DashboardPage() {
   }
 
   // Use service client to bypass RLS for data fetching
-  const serviceSupabase = await createServiceClient();
+  const serviceSupabase = (await createServiceClient()) as any;
 
   // Get user's organizations
   const { data: memberships } = await serviceSupabase
@@ -182,7 +182,7 @@ export default async function DashboardPage() {
 
           {websites && websites.length > 0 ? (
             <div className="grid md:grid-cols-2 gap-6">
-              {websites.map((website) => (
+              {websites.map((website: any) => (
                 <BotCard key={website.id} website={website} />
               ))}
             </div>

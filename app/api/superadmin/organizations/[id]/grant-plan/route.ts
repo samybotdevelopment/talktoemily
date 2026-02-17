@@ -17,7 +17,7 @@ export async function POST(
       );
     }
 
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -39,7 +39,7 @@ export async function POST(
     }
 
     // Grant plan using service client
-    const serviceSupabase = await createServiceClient();
+    const serviceSupabase = (await createServiceClient()) as any;
 
     // Determine max_websites and monthly credits
     const maxWebsites = plan === 'starter' ? 1 : 5;
@@ -64,14 +64,14 @@ export async function POST(
     }
 
     // Update organization
-    const { error: updateError } = await serviceSupabase
-      .from('organizations')
+    const { error: updateError } = await (serviceSupabase
+      .from('organizations') as any)
       .update({
         plan,
         max_websites: maxWebsites,
         credits_balance: org.credits_balance + unfrozenCredits + monthlyCredits,
         frozen_credits: 0,
-      } as any)
+      })
       .eq('id', orgId);
 
     if (updateError) {
@@ -80,30 +80,30 @@ export async function POST(
 
     // Reactivate inactive bots if upgrading
     if (isUpgradingFromFree) {
-      const { data: inactiveBots } = await serviceSupabase
+      const { data: inactiveBots } = (await serviceSupabase
         .from('websites')
         .select('id')
         .eq('org_id', orgId)
         .eq('is_active', false)
-        .order('created_at', { ascending: true });
+        .order('created_at', { ascending: true })) as any;
 
       if (inactiveBots && inactiveBots.length > 0) {
-        const { data: activeBots } = await serviceSupabase
+        const { data: activeBots } = (await serviceSupabase
           .from('websites')
           .select('id')
           .eq('org_id', orgId)
-          .eq('is_active', true);
+          .eq('is_active', true)) as any;
 
         const currentActiveCount = activeBots?.length || 0;
         const availableSlots = maxWebsites - currentActiveCount;
         const botsToReactivate = Math.min(availableSlots, inactiveBots.length);
 
         if (botsToReactivate > 0) {
-          const idsToReactivate = inactiveBots.slice(0, botsToReactivate).map(b => b.id);
+          const idsToReactivate = inactiveBots.slice(0, botsToReactivate).map((b: any) => b.id);
           
-          await serviceSupabase
-            .from('websites')
-            .update({ is_active: true } as any)
+          await (serviceSupabase
+            .from('websites') as any)
+            .update({ is_active: true })
             .in('id', idsToReactivate);
         }
       }

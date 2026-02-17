@@ -13,7 +13,7 @@ export async function PUT(
       return NextResponse.json({ error: 'Invalid AI mode' }, { status: 400 });
     }
 
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -25,7 +25,7 @@ export async function PUT(
 
     const { data, error } = await (supabase
       .from('conversations') as any)
-      .update({ ai_mode: aiMode } as any)
+      .update({ ai_mode: aiMode })
       .eq('id', convId)
       .select()
       .single();

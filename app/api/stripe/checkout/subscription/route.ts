@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+﻿import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createServiceClient } from '@/lib/supabase/server';
 import { createSubscriptionCheckout, createCustomer } from '@/lib/services/stripe.service';
@@ -16,7 +16,7 @@ const PRICE_IDS = {
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     const { plan } = subscribeSchema.parse(body);
 
     // Get user's organization
-    const serviceSupabase = await createServiceClient();
+    const serviceSupabase = (await createServiceClient()) as any;
     const { data: membership } = (await serviceSupabase
       .from('memberships')
       .select('org_id, organizations(*)')
@@ -113,4 +113,5 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
 

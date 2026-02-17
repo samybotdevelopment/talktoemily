@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+﻿import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createServiceClient } from '@/lib/supabase/server';
 import { createCreditsCheckout, createCustomer } from '@/lib/services/stripe.service';
@@ -11,7 +11,7 @@ const purchaseSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get user's organization
-    const serviceSupabase = await createServiceClient();
+    const serviceSupabase = (await createServiceClient()) as any;
     const { data: membership } = (await serviceSupabase
       .from('memberships')
       .select('org_id, organizations(*)')
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
 
     const org = membership.organizations as any;
     
-    console.log('🏢 Organization:', { id: org.id, name: org.name, stripe_customer_id: org.stripe_customer_id });
+    console.log('ðŸ¢ Organization:', { id: org.id, name: org.name, stripe_customer_id: org.stripe_customer_id });
 
     // Check if user has active subscription
     const hasActiveSubscription = 
@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
       const customer = await createCustomer(user.email!, org.name, org.id);
       stripeCustomerId = customer.id;
 
-      console.log('🆕 Created new Stripe customer:', stripeCustomerId);
+      console.log('ðŸ†• Created new Stripe customer:', stripeCustomerId);
 
       // Save in stripe_customers table
       await serviceSupabase
@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
           stripe_customer_id: stripeCustomerId,
         } as any);
 
-      console.log('✅ Saved stripe_customer to stripe_customers table');
+      console.log('âœ… Saved stripe_customer to stripe_customers table');
     }
 
     // Create checkout session
@@ -117,4 +117,5 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
 

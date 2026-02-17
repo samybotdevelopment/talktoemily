@@ -1,11 +1,11 @@
-import { createServiceClient } from '@/lib/supabase/server';
+﻿import { createServiceClient } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
 import { processChatMessage } from '@/lib/chat/pipeline';
 
 export async function POST(request: Request) {
   const { websiteId, content, conversationId, visitorId } = await request.json();
   
-  console.log(`🔵 WIDGET API CALLED: "${content}" | convId: ${conversationId || 'NEW'} | visitorId: ${visitorId}`);
+  console.log(`ðŸ”µ WIDGET API CALLED: "${content}" | convId: ${conversationId || 'NEW'} | visitorId: ${visitorId}`);
 
   if (!websiteId || !content) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -16,7 +16,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const supabase = await createServiceClient();
+    const supabase = (await createServiceClient()) as any;
 
     // Get website and org
     const { data: website, error: websiteError } = (await supabase
@@ -66,7 +66,7 @@ export async function POST(request: Request) {
     }
 
     // Save the user message
-    console.log(`💾 INSERTING MESSAGE: "${content}" into conversation ${currentConversationId}`);
+    console.log(`ðŸ’¾ INSERTING MESSAGE: "${content}" into conversation ${currentConversationId}`);
     const { error: msgError } = await supabase
       .from('messages')
       .insert({
@@ -80,7 +80,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Failed to save message' }, { status: 500 });
     }
     
-    console.log(`✅ MESSAGE INSERTED SUCCESSFULLY`);
+    console.log(`âœ… MESSAGE INSERTED SUCCESSFULLY`);
 
     // If AI is paused, just return conversation ID without AI response
     if (aiMode === 'paused') {
@@ -149,3 +149,4 @@ export async function OPTIONS() {
     },
   });
 }
+

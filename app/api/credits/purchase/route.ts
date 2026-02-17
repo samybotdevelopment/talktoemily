@@ -1,10 +1,10 @@
-import { createClient } from '@/lib/supabase/server';
+﻿import { createClient } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
 import { createPaymentIntent } from '@/lib/services/stripe.service';
 
 export async function POST(request: Request) {
   try {
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -62,3 +62,4 @@ export async function POST(request: Request) {
     );
   }
 }
+

@@ -12,7 +12,7 @@ export default async function SettingsPage() {
   const t = await getTranslations('settings');
   const tCommon = await getTranslations('common');
   const tSub = await getTranslations('subscription');
-  const supabase = await createClient();
+  const supabase = (await createClient()) as any;
 
   const {
     data: { user },
@@ -23,7 +23,7 @@ export default async function SettingsPage() {
   }
 
   // Get user's organization
-  const serviceSupabase = await createServiceClient();
+  const serviceSupabase = (await createServiceClient()) as any;
   const { data: memberships } = await serviceSupabase
     .from('memberships')
     .select('org_id, role, organizations(*)')

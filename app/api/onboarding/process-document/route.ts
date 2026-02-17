@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server';
+﻿import { createClient } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
 import { chunkDocument } from '@/lib/training/content-processor';
 
@@ -8,7 +8,7 @@ import { chunkDocument } from '@/lib/training/content-processor';
  */
 export async function POST(request: Request) {
   try {
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -49,3 +49,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Failed to process document' }, { status: 500 });
   }
 }
+

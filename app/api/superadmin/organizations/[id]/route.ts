@@ -7,7 +7,7 @@ export async function GET(
 ) {
   try {
     const { id: orgId } = await context.params;
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -29,7 +29,7 @@ export async function GET(
     }
 
     // Use service client to bypass RLS and see ALL data
-    const serviceSupabase = await createServiceClient();
+    const serviceSupabase = (await createServiceClient()) as any;
 
     // Get organization details
     const { data: org, error: orgError } = (await serviceSupabase
@@ -50,11 +50,11 @@ export async function GET(
       .order('created_at', { ascending: false });
 
     // Get all websites
-    const { data: websites } = await serviceSupabase
+    const { data: websites } = (await serviceSupabase
       .from('websites')
       .select('id, display_name, domain, is_active, training_count, created_at')
       .eq('org_id', orgId)
-      .order('created_at', { ascending: false });
+      .order('created_at', { ascending: false })) as any;
 
     // Get Stripe customer info
     const { data: stripeCustomer } = (await serviceSupabase
@@ -67,7 +67,7 @@ export async function GET(
     const { count: conversationCount } = await serviceSupabase
       .from('conversations')
       .select('id', { count: 'exact', head: true })
-      .in('website_id', websites?.map(w => w.id) || []);
+      .in('website_id', websites?.map((w: any) => w.id) || []);
 
     const { count: messageCount } = await serviceSupabase
       .from('messages')
@@ -76,15 +76,15 @@ export async function GET(
         (await serviceSupabase
           .from('conversations')
           .select('id')
-          .in('website_id', websites?.map(w => w.id) || [])
-        ).data?.map(c => c.id) || []
+          .in('website_id', websites?.map((w: any) => w.id) || [])
+        ).data?.map((c: any) => c.id) || []
       );
 
     // Get recent training runs
     const { data: recentTrainings } = await serviceSupabase
       .from('training_runs')
       .select('id, website_id, status, created_at, completed_at')
-      .in('website_id', websites?.map(w => w.id) || [])
+      .in('website_id', websites?.map((w: any) => w.id) || [])
       .order('created_at', { ascending: false })
       .limit(10);
 

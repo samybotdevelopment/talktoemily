@@ -10,7 +10,7 @@ export async function POST(
 ) {
   try {
     const { id: websiteId } = await context.params;
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -58,7 +58,7 @@ export async function POST(
 
     // If not free training, check and deduct credits
     if (!isFreeTraining) {
-      const serviceSupabase = await createServiceClient();
+      const serviceSupabase = (await createServiceClient()) as any;
       
       // Get current credits
       const { data: org } = (await serviceSupabase

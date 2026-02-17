@@ -20,7 +20,7 @@ export async function* processChatMessage(
   websiteId: string,
   orgId: string
 ): AsyncGenerator<string, void, unknown> {
-  const supabase = await createServiceClient();
+  const supabase = (await createServiceClient()) as any;
 
   // Check message quota
   const quotaCheck = await checkMessageQuota(orgId);
@@ -80,7 +80,7 @@ export async function* processChatMessage(
         const lastSubstantiveMessage = conversationHistory
           .slice()
           .reverse()
-          .find(msg => 
+          .find((msg: any) => 
             msg.sender === 'user' && 
             msg.content.trim().split(/\s+/).length >= 5
           );
@@ -94,7 +94,7 @@ export async function* processChatMessage(
 
           // Merge and deduplicate by title
           const mergedMap = new Map();
-          [...previousResults, ...currentResults].forEach(result => {
+          [...previousResults, ...currentResults].forEach((result: any) => {
             const key = result.payload.title;
             if (!mergedMap.has(key) || result.score > mergedMap.get(key).score) {
               mergedMap.set(key, result);
@@ -102,7 +102,7 @@ export async function* processChatMessage(
           });
 
           searchResults = Array.from(mergedMap.values())
-            .sort((a, b) => b.score - a.score)
+            .sort((a: any, b: any) => b.score - a.score)
             .slice(0, 7);
         } else {
           // Use LLM to rewrite the query for better vector search
@@ -117,7 +117,7 @@ export async function* processChatMessage(
           
           // Merge and deduplicate, keeping highest scores
           const mergedMap = new Map();
-          [...originalResults, ...rewrittenResults].forEach(result => {
+          [...originalResults, ...rewrittenResults].forEach((result: any) => {
             const key = result.payload.title;
             if (!mergedMap.has(key) || result.score > mergedMap.get(key).score) {
               mergedMap.set(key, result);
@@ -125,7 +125,7 @@ export async function* processChatMessage(
           });
           
           searchResults = Array.from(mergedMap.values())
-            .sort((a, b) => b.score - a.score)
+            .sort((a: any, b: any) => b.score - a.score)
             .slice(0, 7);
         }
       } else {
@@ -136,7 +136,7 @@ export async function* processChatMessage(
         searchResults = await searchSimilar(websiteId, await createEmbedding(rewritten), 7);
       }
       
-      context = searchResults.map(result => ({
+      context = searchResults.map((result: any) => ({
         title: result.payload.title,
         content: result.payload.content,
       }));
@@ -215,7 +215,7 @@ export async function* processChatMessage(
  * Get conversation history
  */
 export async function getConversationHistory(conversationId: string) {
-  const supabase = await createServiceClient();
+  const supabase = (await createServiceClient()) as any;
 
   const { data: messages, error } = await supabase
     .from('messages')
@@ -228,7 +228,7 @@ export async function getConversationHistory(conversationId: string) {
   }
 
   console.log(`📚 getConversationHistory for ${conversationId}: ${messages?.length || 0} messages`);
-  messages?.forEach(msg => {
+  messages?.forEach((msg: any) => {
     console.log(`   - ${msg.id.substring(0, 8)} | ${msg.sender} | ${msg.content.substring(0, 30)}`);
   });
 
@@ -242,7 +242,7 @@ export async function createConversation(
   websiteId: string,
   agentType: 'owner' | 'visitor' = 'owner'
 ) {
-  const supabase = await createServiceClient();
+  const supabase = (await createServiceClient()) as any;
 
   const { data: conversation, error } = await supabase
     .from('conversations')
@@ -268,7 +268,7 @@ export async function toggleAiMode(
   conversationId: string,
   mode: 'auto' | 'paused'
 ) {
-  const supabase = await createServiceClient();
+  const supabase = (await createServiceClient()) as any;
 
   const { error } = await supabase
     .from('conversations')

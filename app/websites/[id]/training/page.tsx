@@ -344,7 +344,7 @@ export default function TrainingPage() {
               </div>
             ) : (
               <div className="space-y-4">
-                {trainingItems.map((item) => (
+                {trainingItems.map((item: any) => (
                   <div key={item.id} className="neo-card bg-white p-6">
                     <div className="flex justify-between items-start mb-2">
                       <h3 className="text-lg font-bold">{item.title}</h3>

@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server';
+﻿import { createClient } from '@/lib/supabase/server';
 import { createServiceClient } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
 import { getWGWebsites } from '@/lib/integrations/wg-api';
@@ -9,7 +9,7 @@ import { getWGWebsites } from '@/lib/integrations/wg-api';
  */
 export async function POST(request: Request) {
   try {
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const serviceSupabase = await createServiceClient();
+    const serviceSupabase = (await createServiceClient()) as any;
 
     // Get user's organization
     const { data: memberships } = (await serviceSupabase
@@ -49,3 +49,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Failed to fetch websites' }, { status: 500 });
   }
 }
+

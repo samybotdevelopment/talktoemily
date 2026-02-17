@@ -6,7 +6,7 @@ export async function PATCH(
   context: { params: Promise<{ id: string }> }
 ) {
   const { id: websiteId } = await context.params;
-  const supabase = await createClient();
+  const supabase = (await createClient()) as any;
 
   const {
     data: { user },
@@ -57,7 +57,7 @@ export async function PATCH(
   }
 
   // Use service client to update
-  const serviceSupabase = await createServiceClient();
+  const serviceSupabase = (await createServiceClient()) as any;
 
   const { data, error } = await serviceSupabase
     .from('websites')

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+﻿import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { addContactToMailingList } from '@/lib/services/mailjet.service';
 import { cookies } from 'next/headers';
@@ -9,7 +9,7 @@ import { cookies } from 'next/headers';
  */
 export async function POST(request: Request) {
   try {
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     // Get the current user
     const {
@@ -41,6 +41,8 @@ export async function POST(request: Request) {
     );
   }
 }
+
+
 
 
 

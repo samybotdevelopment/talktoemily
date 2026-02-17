@@ -1,4 +1,4 @@
-import { createServiceClient } from '@/lib/supabase/server';
+﻿import { createServiceClient } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
@@ -10,7 +10,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    const supabase = await createServiceClient();
+    const supabase = (await createServiceClient()) as any;
 
     // Get messages for this conversation
     const { data: messages, error } = await supabase
@@ -46,3 +46,4 @@ export async function OPTIONS() {
     },
   });
 }
+

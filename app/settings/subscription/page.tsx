@@ -14,7 +14,7 @@ export default async function SubscriptionPage({
   const t = await getTranslations('subscription');
   const tCommon = await getTranslations('common');
   const params = await searchParams;
-  const supabase = await createClient();
+  const supabase = (await createClient()) as any;
 
   const {
     data: { user },
@@ -25,7 +25,7 @@ export default async function SubscriptionPage({
   }
 
   // Get user's organization with service client
-  const serviceSupabase = await createServiceClient();
+  const serviceSupabase = (await createServiceClient()) as any;
   const { data: memberships }: { data: any } = await serviceSupabase
     .from('memberships')
     .select('org_id, role, organizations(*)')

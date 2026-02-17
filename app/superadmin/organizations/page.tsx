@@ -136,7 +136,7 @@ export default function OrganizationsPage() {
         </div>
       ) : (
         <div className="space-y-4">
-          {organizations.map((org) => (
+          {organizations.map((org: any) => (
             <Link
               key={org.id}
               href={`/superadmin/organizations/${org.id}`}
@@ -177,6 +177,7 @@ export default function OrganizationsPage() {
     </main>
   );
 }
+
 
 
 

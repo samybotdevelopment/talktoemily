@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
   try {
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -25,7 +25,7 @@ export async function GET(request: Request) {
     }
 
     // Use service client to bypass RLS and see ALL data
-    const serviceSupabase = await createServiceClient();
+    const serviceSupabase = (await createServiceClient()) as any;
 
     // Get all metrics
     const [
@@ -64,8 +64,11 @@ export async function GET(request: Request) {
     let payingCount = 0;
 
     if (allCustomers) {
+      type StripeCustomerRow = { org_id: string };
+      const customerRows = allCustomers as StripeCustomerRow[];
+
       // Get org plans to calculate MRR
-      const orgIds = allCustomers.map(c => c.org_id);
+      const orgIds = customerRows.map((c) => c.org_id);
       const { data: orgs } = await serviceSupabase
         .from('organizations')
         .select('id, plan, wg_plan')
@@ -76,7 +79,10 @@ export async function GET(request: Request) {
         'pro': 19.99,
       };
 
-      orgs?.forEach(org => {
+      type OrganizationPlanRow = { plan: string | null; wg_plan: string | null };
+      const orgRows = (orgs ?? []) as OrganizationPlanRow[];
+
+      orgRows.forEach((org) => {
         const plan = org.wg_plan || org.plan;
         if (plan === 'starter' || plan === 'pro') {
           activeMRR += planPrices[plan] || 0;

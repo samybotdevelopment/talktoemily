@@ -22,7 +22,7 @@ export function getUsageLimits(
  * Get current usage for an organization
  */
 export async function getCurrentUsage(orgId: string) {
-  const supabase = await createServiceClient();
+  const supabase = (await createServiceClient()) as any;
 
   // Get current period (month)
   const periodStart = new Date();
@@ -75,7 +75,7 @@ export async function checkTrainingQuota(orgId: string): Promise<{
   current: number;
   limit: number;
 }> {
-  const supabase = await createServiceClient();
+  const supabase = (await createServiceClient()) as any;
 
   // Get organization
   const { data: org, error: orgError } = await supabase
@@ -106,7 +106,7 @@ export async function checkTrainingQuota(orgId: string): Promise<{
       throw new Error('Failed to get usage');
     }
 
-    const totalUsed = allUsage?.reduce((sum, u) => sum + u.training_runs_used, 0) || 0;
+    const totalUsed = allUsage?.reduce((sum: number, u: any) => sum + u.training_runs_used, 0) || 0;
 
     if (totalUsed >= limits.training_runs) {
       return {
@@ -148,7 +148,7 @@ export async function checkMessageQuota(orgId: string): Promise<{
   current: number;
   limit: number;
 }> {
-  const supabase = await createServiceClient();
+  const supabase = (await createServiceClient()) as any;
 
   // Get organization
   const { data: org, error: orgError } = await supabase
@@ -194,7 +194,7 @@ export async function checkMessageQuota(orgId: string): Promise<{
     throw new Error('Failed to get usage');
   }
 
-  const totalUsed = allUsage?.reduce((sum, u) => sum + u.ai_messages_used, 0) || 0;
+  const totalUsed = allUsage?.reduce((sum: number, u: any) => sum + u.ai_messages_used, 0) || 0;
 
   if (totalUsed >= limits.ai_messages) {
     return {
@@ -212,7 +212,7 @@ export async function checkMessageQuota(orgId: string): Promise<{
  * Increment training run usage
  */
 export async function incrementTrainingUsage(orgId: string): Promise<void> {
-  const supabase = await createServiceClient();
+  const supabase = (await createServiceClient()) as any;
   const usage = await getCurrentUsage(orgId);
 
   const { error } = await supabase
@@ -231,7 +231,7 @@ export async function incrementTrainingUsage(orgId: string): Promise<void> {
  * Increment AI message usage
  */
 export async function incrementMessageUsage(orgId: string): Promise<void> {
-  const supabase = await createServiceClient();
+  const supabase = (await createServiceClient()) as any;
   const usage = await getCurrentUsage(orgId);
 
   const { error } = await supabase
@@ -250,7 +250,7 @@ export async function incrementMessageUsage(orgId: string): Promise<void> {
  * Deduct credits from organization
  */
 export async function deductCredits(orgId: string, amount: number): Promise<void> {
-  const supabase = await createServiceClient();
+  const supabase = (await createServiceClient()) as any;
 
   const { data: org, error: fetchError } = await supabase
     .from('organizations')
@@ -278,7 +278,7 @@ export async function deductCredits(orgId: string, amount: number): Promise<void
  * Add credits to organization
  */
 export async function addCredits(orgId: string, amount: number): Promise<void> {
-  const supabase = await createServiceClient();
+  const supabase = (await createServiceClient()) as any;
 
   const { data: org, error: fetchError } = await supabase
     .from('organizations')

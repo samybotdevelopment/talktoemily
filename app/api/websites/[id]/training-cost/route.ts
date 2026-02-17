@@ -7,7 +7,7 @@ export async function GET(
 ) {
   try {
     const { id: websiteId } = await context.params;
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -73,6 +73,7 @@ export async function GET(
     );
   }
 }
+
 
 
 

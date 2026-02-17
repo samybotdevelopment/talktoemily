@@ -6,7 +6,7 @@ export async function GET(
   context: { params: Promise<{ id: string }> }
 ) {
   const { id: websiteId } = await context.params;
-  const supabase = await createClient();
+  const supabase = (await createClient()) as any;
 
   const {
     data: { user },
@@ -17,11 +17,11 @@ export async function GET(
   }
 
   // Use service client to create conversation (bypass RLS)
-  const serviceSupabase = await createServiceClient();
+  const serviceSupabase = (await createServiceClient()) as any;
   
   // Create new conversation
-  const { data: conversation, error } = await serviceSupabase
-    .from('conversations')
+  const { data: conversation, error } = await (serviceSupabase
+    .from('conversations') as any)
     .insert({
       website_id: websiteId,
       agent_type: 'owner',

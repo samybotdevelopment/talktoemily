@@ -13,7 +13,7 @@ export async function GET(
 ) {
   try {
     const { id: websiteId } = await context.params;
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -47,7 +47,7 @@ export async function POST(
 ) {
   try {
     const { id: websiteId } = await context.params;
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -79,7 +79,7 @@ export async function POST(
     return NextResponse.json({ data: trainingItem }, { status: 201 });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid input', details: error.issues }, { status: 400 });
     }
 
     console.error('Error creating training item:', error);

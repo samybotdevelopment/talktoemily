@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server';
+﻿import { createClient } from '@/lib/supabase/server';
 import { createServiceClient } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
 import { OnboardingState } from '@/types/models';
@@ -9,7 +9,7 @@ import { OnboardingState } from '@/types/models';
  */
 export async function GET(request: Request) {
   try {
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -18,7 +18,7 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const serviceSupabase = await createServiceClient();
+    const serviceSupabase = (await createServiceClient()) as any;
 
     // Get user's organization
     const { data: memberships } = (await serviceSupabase
@@ -52,7 +52,7 @@ export async function GET(request: Request) {
  */
 export async function POST(request: Request) {
   try {
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const serviceSupabase = await createServiceClient();
+    const serviceSupabase = (await createServiceClient()) as any;
 
     // Get user's organization
     const { data: memberships } = (await serviceSupabase

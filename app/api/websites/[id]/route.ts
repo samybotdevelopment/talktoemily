@@ -13,7 +13,7 @@ export async function DELETE(
 ) {
   try {
     const { id: websiteId } = await context.params;
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -23,7 +23,7 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const serviceSupabase = await createServiceClient();
+    const serviceSupabase = (await createServiceClient()) as any;
 
     // Verify user owns this website
     const { data: website } = await serviceSupabase

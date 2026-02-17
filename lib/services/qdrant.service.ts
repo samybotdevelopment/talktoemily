@@ -82,7 +82,7 @@ export async function upsertVectors(
     points: points.map(point => ({
       id: point.id,
       vector: point.vector,
-      payload: point.payload,
+      payload: point.payload as unknown as Record<string, unknown>,
     })),
   });
 }
@@ -106,7 +106,7 @@ export async function searchSimilar(
 
     return results.map(result => ({
       score: result.score,
-      payload: result.payload as QdrantPayload,
+      payload: result.payload as unknown as QdrantPayload,
     }));
   } catch (error) {
     console.error(`Search failed for collection ${collectionName}:`, error);

@@ -1,4 +1,4 @@
-import { createServiceClient } from '@/lib/supabase/server';
+﻿import { createServiceClient } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
@@ -10,7 +10,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    const supabase = await createServiceClient();
+    const supabase = (await createServiceClient()) as any;
 
     const { data: website, error } = await supabase
       .from('websites')
@@ -43,7 +43,7 @@ export async function GET(request: Request) {
       primaryColor: website.primary_color,
       widgetStyle: website.widget_style || 'modern',
       widgetSubtitle: website.widget_subtitle || 'We reply instantly',
-      widgetWelcomeTitle: website.widget_welcome_title || 'Hi there! 👋',
+      widgetWelcomeTitle: website.widget_welcome_title || 'Hi there! ðŸ‘‹',
       widgetWelcomeMessage: website.widget_welcome_message || 'How can we help you today?',
     }, {
       headers: {
@@ -67,3 +67,4 @@ export async function OPTIONS() {
     },
   });
 }
+

@@ -1,4 +1,4 @@
-import { createServiceClient } from '@/lib/supabase/server';
+﻿import { createServiceClient } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { checkWGCustomer } from '@/lib/integrations/wg-api';
@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const validatedData = signupSchema.parse(body);
 
-    const supabase = await createServiceClient();
+    const supabase = (await createServiceClient()) as any;
 
     // Check if user already exists
     const { data: existingUser } = (await supabase
@@ -119,3 +119,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
+

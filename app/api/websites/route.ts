@@ -11,7 +11,7 @@ const createWebsiteSchema = z.object({
 
 export async function POST(request: Request) {
   try {
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -71,7 +71,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ data: website }, { status: 201 });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid input', details: error.issues }, { status: 400 });
     }
 
     console.error('Error creating website:', error);
@@ -81,7 +81,7 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -101,7 +101,7 @@ export async function GET() {
       return NextResponse.json({ data: [] });
     }
 
-    const orgIds = memberships.map((m) => m.org_id);
+    const orgIds = memberships.map((m: any) => m.org_id);
 
     // Get websites
     const { data: websites, error } = await supabase

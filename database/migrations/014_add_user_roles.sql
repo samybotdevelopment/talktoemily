@@ -18,3 +18,4 @@ COMMENT ON COLUMN public.users.role IS 'User role: user (default) or admin (supe
 
 
 
+

@@ -18,7 +18,7 @@ export async function POST(
 ) {
   try {
     const { id: websiteId } = await context.params;
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -31,7 +31,7 @@ export async function POST(
     const body = await request.json();
     const validatedData = activationSchema.parse(body);
 
-    const serviceSupabase = await createServiceClient();
+    const serviceSupabase = (await createServiceClient()) as any;
 
     // Get website with org info
     const { data: website } = await serviceSupabase
@@ -84,7 +84,7 @@ export async function POST(
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid data', details: error.errors }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid data', details: error.issues }, { status: 400 });
     }
 
     console.error('Widget activation error:', error);

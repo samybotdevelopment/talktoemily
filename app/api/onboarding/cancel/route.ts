@@ -1,10 +1,10 @@
-import { NextResponse } from 'next/server';
+﻿import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createServiceClient } from '@/lib/supabase/server';
 
 export async function POST() {
   try {
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -13,7 +13,7 @@ export async function POST() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const serviceSupabase = await createServiceClient();
+    const serviceSupabase = (await createServiceClient()) as any;
 
     // Get user's organization
     const { data: membership } = (await serviceSupabase
@@ -31,7 +31,7 @@ export async function POST() {
     // Clear onboarding state
     await (serviceSupabase
       .from('organizations') as any)
-      .update({ onboarding_state: null } as any)
+      .update({ onboarding_state: null })
       .eq('id', org.id);
 
     // Find and delete any incomplete websites (no onboarding_completed_at)
@@ -58,4 +58,5 @@ export async function POST() {
     );
   }
 }
+
 

@@ -63,7 +63,7 @@ export default function LoginPage() {
         <div className="neo-card bg-white p-8 w-full max-w-md">
           <h2 className="text-3xl font-bold mb-4">{t('checkEmail')}</h2>
           <p className="text-gray-600 mb-4">
-            {t('magicLinkSent', { email: <strong>{email}</strong> })}
+            {t('magicLinkSent', { email })}
           </p>
           <p className="text-sm text-gray-500 mb-6">
             {t('clickLinkToSignIn')}

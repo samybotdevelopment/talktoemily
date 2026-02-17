@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
   try {
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },
@@ -25,7 +25,7 @@ export async function GET(request: Request) {
     }
 
     // Use service client to bypass RLS and see ALL data
-    const serviceSupabase = await createServiceClient();
+    const serviceSupabase = (await createServiceClient()) as any;
 
     // Get query params
     const { searchParams } = new URL(request.url);
@@ -59,9 +59,18 @@ export async function GET(request: Request) {
 
     if (error) throw error;
 
+    type OrganizationRow = {
+      id: string;
+      plan: string | null;
+      wg_plan: string | null;
+      [key: string]: unknown;
+    };
+
+    const organizationRows = (organizations ?? []) as OrganizationRow[];
+
     // Get additional stats for each org (website count, Stripe info)
     const orgsWithStats = await Promise.all(
-      (organizations || []).map(async (org) => {
+      organizationRows.map(async (org) => {
         // Get website count
         const { count: websiteCount } = await serviceSupabase
           .from('websites')

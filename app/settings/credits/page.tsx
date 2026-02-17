@@ -14,7 +14,7 @@ export default async function CreditsPage({
   const t = await getTranslations('credits');
   const tCommon = await getTranslations('common');
   const params = await searchParams;
-  const supabase = await createClient();
+  const supabase = (await createClient()) as any;
 
   const {
     data: { user },
@@ -25,7 +25,7 @@ export default async function CreditsPage({
   }
 
   // Get user's organization
-  const serviceSupabase = await createServiceClient();
+  const serviceSupabase = (await createServiceClient()) as any;
   const { data: memberships } = await serviceSupabase
     .from('memberships')
     .select('org_id, role, organizations(*)')

@@ -94,8 +94,11 @@ export async function* streamChatCompletion(
     });
 
     for await (const chunk of response) {
-      if (chunk.text) {
-        yield chunk.text;
+      const event = chunk as any;
+      if (typeof event.delta === 'string') {
+        yield event.delta;
+      } else if (typeof event.text === 'string') {
+        yield event.text;
       }
     }
   } catch (error) {

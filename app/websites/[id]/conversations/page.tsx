@@ -8,7 +8,7 @@ export default async function ConversationsPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const supabase = await createClient();
+  const supabase = (await createClient()) as any;
 
   const {
     data: { user },
@@ -27,7 +27,7 @@ export default async function ConversationsPage({
 
   // Get last message for each conversation
   const conversationsWithMessages = await Promise.all(
-    (conversations || []).map(async (conv) => {
+    (conversations || []).map(async (conv: any) => {
       const { data: lastMessage } = await supabase
         .from('messages')
         .select('content, sender')

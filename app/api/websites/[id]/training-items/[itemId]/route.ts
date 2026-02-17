@@ -7,7 +7,7 @@ export async function DELETE(
 ) {
   try {
     const { id: websiteId, itemId } = await context.params;
-    const supabase = await createClient();
+    const supabase = (await createClient()) as any;
 
     const {
       data: { user },

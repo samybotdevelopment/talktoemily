@@ -296,7 +296,7 @@ export default function OrganizationDetailPage() {
         <div className="neo-card bg-white p-6">
           <h2 className="text-2xl font-bold mb-4">Users ({data.users.length})</h2>
           <div className="space-y-2">
-            {data.users.map((user) => (
+            {data.users.map((user: any) => (
               <div key={user.id} className="p-3 bg-gray-50 rounded-lg">
                 <div className="font-bold">{user.email}</div>
                 <div className="text-sm text-gray-600">
@@ -314,7 +314,7 @@ export default function OrganizationDetailPage() {
             {data.websites.length === 0 ? (
               <p className="text-gray-600">No bots created yet</p>
             ) : (
-              data.websites.map((website) => (
+              data.websites.map((website: any) => (
                 <div key={website.id} className="p-3 bg-gray-50 rounded-lg">
                   <div className="flex items-center justify-between mb-1">
                     <span className="font-bold">{website.display_name}</span>
@@ -454,6 +454,7 @@ export default function OrganizationDetailPage() {
     </main>
   );
 }
+
 
 
 

@@ -1,11 +1,11 @@
-import { createClient } from '@/lib/supabase/server';
+﻿import { createClient } from '@/lib/supabase/server';
 import { createServiceClient } from '@/lib/supabase/server';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = await createClient();
-    const serviceClient = await createServiceClient();
+    const supabase = (await createClient()) as any;
+    const serviceClient = (await createServiceClient()) as any;
 
     // Get the current user
     const {
@@ -89,3 +89,4 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
