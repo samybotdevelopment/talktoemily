@@ -1,15 +1,18 @@
 import { createClient } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
 
-export async function PUT(
+async function updateAiMode(
   request: Request,
   context: { params: Promise<{ convId: string }> }
 ) {
   try {
     const { convId } = await context.params;
-    const { aiMode } = await request.json();
+    const { ai_mode, aiMode } = await request.json();
+    
+    // Support both ai_mode and aiMode
+    const mode = ai_mode || aiMode;
 
-    if (!['auto', 'paused'].includes(aiMode)) {
+    if (!['auto', 'paused'].includes(mode)) {
       return NextResponse.json({ error: 'Invalid AI mode' }, { status: 400 });
     }
 
@@ -25,7 +28,7 @@ export async function PUT(
 
     const { data, error } = await (supabase
       .from('conversations') as any)
-      .update({ ai_mode: aiMode })
+      .update({ ai_mode: mode })
       .eq('id', convId)
       .select()
       .single();
@@ -37,7 +40,21 @@ export async function PUT(
 
     return NextResponse.json({ data });
   } catch (error) {
-    console.error('Error in PUT /api/conversations/[convId]/ai-mode:', error);
+    console.error('Error in AI mode update:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
+}
+
+export async function PUT(
+  request: Request,
+  context: { params: Promise<{ convId: string }> }
+) {
+  return updateAiMode(request, context);
+}
+
+export async function PATCH(
+  request: Request,
+  context: { params: Promise<{ convId: string }> }
+) {
+  return updateAiMode(request, context);
 }
