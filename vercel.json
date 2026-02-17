@@ -4,12 +4,6 @@
   "installCommand": "npm install",
   "framework": "nextjs",
   "outputDirectory": ".next",
-  "rewrites": [
-    {
-      "source": "/widget/:path*",
-      "destination": "/public/widget/:path*"
-    }
-  ],
   "headers": [
     {
       "source": "/api/widget/:path*",
@@ -17,6 +11,13 @@
         { "key": "Access-Control-Allow-Origin", "value": "*" },
         { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
         { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
+      ]
+    },
+    {
+      "source": "/widget/:path*",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
       ]
     }
   ]
