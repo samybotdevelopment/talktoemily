@@ -28,20 +28,8 @@ export async function* processChatMessage(
     throw new Error(quotaCheck.reason || 'Message quota exceeded');
   }
 
-  // Store user message
-  const { data: savedUserMessage, error: userMsgError } = await supabase
-    .from('messages')
-    .insert({
-      conversation_id: conversationId,
-      sender: 'user',
-      content: userMessage,
-    })
-    .select()
-    .single();
-
-  if (userMsgError) {
-    throw new Error('Failed to save user message');
-  }
+  // NOTE: User message is already saved by the caller (widget/messages or conversations/messages API)
+  // Do NOT save it again here to avoid duplicates
 
   try {
     // Track token usage
