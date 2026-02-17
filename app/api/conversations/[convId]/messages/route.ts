@@ -20,7 +20,7 @@ export async function GET(
 
     const messages = await getConversationHistory(convId);
 
-    return NextResponse.json({ data: messages });
+    return NextResponse.json({ messages });
   } catch (error) {
     console.error('Error fetching messages:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
