@@ -200,5 +200,5 @@ export function generateWidgetScript(websiteId: string, appUrl: string): string 
   return `<script>
   window.EmilyChat = { websiteId: '${websiteId}' };
 </script>
-<script src="${appUrl}/widget/emily-chat.js"></script>`;
+<script src="${appUrl}/widget/emily-loader.js"></script>`;
 }
