@@ -802,31 +802,42 @@
 
   // Handle real-time message
   function handleRealtimeMessage(message) {
-    // Only show messages from assistant (backoffice responses)
-    // User messages are already shown optimistically when sent
-    // Streamed AI responses are already shown with temp IDs
+    // Only show messages from assistant (backoffice responses) or when message is saved
     if (message.sender === 'assistant') {
       const messagesContainer = document.getElementById('emily-messages');
       
-      // Check if message already exists (to avoid duplicates)
-      const existingMessages = messagesContainer.querySelectorAll('.emily-message');
-      let isDuplicate = false;
+      // Check if this exact message ID already exists
+      const existingMessages = messagesContainer.querySelectorAll('.emily-message.assistant');
+      let messageAlreadyExists = false;
+      let tempMessageToRemove = null;
+      
       existingMessages.forEach(el => {
         const existingId = el.dataset.messageId;
-        // Skip temp messages (they'll stay)
-        if (existingId && (existingId === message.id || existingId.startsWith('temp-'))) {
-          isDuplicate = true;
+        if (existingId === message.id) {
+          // Exact match - already displayed
+          messageAlreadyExists = true;
+        } else if (existingId && existingId.startsWith('temp-')) {
+          // This is a temp message - we'll replace it with the real one
+          tempMessageToRemove = el;
         }
       });
 
-      if (!isDuplicate) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `emily-message ${message.sender}`;
-        messageDiv.dataset.messageId = message.id;
-        messageDiv.innerHTML = `<div class="emily-message-content">${message.content}</div>`;
-        messagesContainer.appendChild(messageDiv);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      if (messageAlreadyExists) {
+        return; // Already displayed
       }
+      
+      // Remove temp message if exists
+      if (tempMessageToRemove) {
+        tempMessageToRemove.remove();
+      }
+      
+      // Add the real message
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `emily-message ${message.sender}`;
+      messageDiv.dataset.messageId = message.id;
+      messageDiv.innerHTML = `<div class="emily-message-content">${message.content}</div>`;
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
   }
 
@@ -864,13 +875,16 @@
   }
 
   // Add message to UI
-  function addMessage(content, sender) {
+  function addMessage(content, sender, messageId) {
     const messagesContainer = document.getElementById('emily-messages');
     const welcome = messagesContainer.querySelector('.emily-welcome');
     if (welcome) welcome.remove();
 
     const messageDiv = document.createElement('div');
     messageDiv.className = `emily-message ${sender}`;
+    if (messageId) {
+      messageDiv.dataset.messageId = messageId;
+    }
     messageDiv.innerHTML = `
       <div class="emily-message-content">${content}</div>
     `;
@@ -969,7 +983,7 @@
       
       // Display AI response if present (AI was active)
       if (data.response) {
-        addMessage(data.response, 'assistant');
+        addMessage(data.response, 'assistant', 'temp-assistant-' + Date.now());
       }
       
       console.log('Emily Chat: Message sent successfully');
