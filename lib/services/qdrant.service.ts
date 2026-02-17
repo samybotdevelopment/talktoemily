@@ -1,6 +1,11 @@
 import { QdrantClient } from '@qdrant/js-client-rest';
 import { QdrantPayload } from '@/types/models';
 
+/**
+ * Qdrant Vector Database Client
+ * Manages vector storage and similarity search for chatbot training data
+ * Note: QDRANT_URL must use HTTPS in production environments
+ */
 const client = new QdrantClient({
   url: process.env.QDRANT_URL!,
   apiKey: process.env.QDRANT_API_KEY,
