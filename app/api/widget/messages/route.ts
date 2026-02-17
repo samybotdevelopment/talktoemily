@@ -96,41 +96,36 @@ export async function POST(request: Request) {
       });
     }
 
-    // Stream the AI response
-    const encoder = new TextEncoder();
-    const stream = new ReadableStream({
-      async start(controller) {
-        try {
-          // Send conversation ID as first chunk
-          controller.enqueue(encoder.encode(`__CONVERSATION_ID__:${currentConversationId}\n`));
-          
-          for await (const chunk of processChatMessage(
-            currentConversationId,
-            content,
-            websiteId,
-            website.org_id
-          )) {
-            controller.enqueue(encoder.encode(chunk));
-          }
-          controller.close();
-        } catch (error: any) {
-          console.error('Stream error:', error);
-          const errorMessage = `\n\n[Error: ${error.message}]`;
-          controller.enqueue(encoder.encode(errorMessage));
-          controller.close();
-        }
-      },
-    });
+    // Get AI response (NO STREAMING)
+    try {
+      const response = await processChatMessage(
+        currentConversationId,
+        content,
+        websiteId,
+        website.org_id
+      );
 
-    return new Response(stream, {
-      headers: {
-        'Content-Type': 'text/plain; charset=utf-8',
-        'Transfer-Encoding': 'chunked',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-    });
+      return NextResponse.json({ 
+        conversationId: currentConversationId,
+        response 
+      }, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        }
+      });
+    } catch (error: any) {
+      console.error('Chat processing error:', error);
+      return NextResponse.json(
+        { error: error.message || 'Failed to process message' },
+        { status: 500,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+          }
+        }
+      );
+    }
   } catch (error: any) {
     console.error('Widget message error:', error);
     return NextResponse.json(

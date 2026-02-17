@@ -1,5 +1,5 @@
 import { createServiceClient } from '@/lib/supabase/server';
-import { createEmbedding, streamChatCompletion, buildPromptWithContext, rewriteQueryForSearch } from '@/lib/services/openai.service';
+import { createEmbedding, getChatCompletion, buildPromptWithContext, rewriteQueryForSearch } from '@/lib/services/openai.service';
 import { searchSimilar } from '@/lib/services/qdrant.service';
 import { incrementMessageUsage, checkMessageQuota } from '@/lib/services/usage.service';
 import { encode } from 'gpt-tokenizer';
@@ -11,15 +11,15 @@ import { encode } from 'gpt-tokenizer';
  * 2. Search Qdrant (top 3-5)
  * 3. Extract context
  * 4. Build prompt
- * 5. Stream LLM response
+ * 5. Get LLM response (NO STREAMING)
  * 6. Store assistant message
  */
-export async function* processChatMessage(
+export async function processChatMessage(
   conversationId: string,
   userMessage: string,
   websiteId: string,
   orgId: string
-): AsyncGenerator<string, void, unknown> {
+): Promise<string> {
   const supabase = (await createServiceClient()) as any;
 
   // Check message quota
@@ -158,13 +158,8 @@ export async function* processChatMessage(
     const currentMessageTokens = encode(userMessage).length;
     const inputTokens = systemTokens + historyTokens + currentMessageTokens;
 
-    // Stream LLM response
-    let assistantResponse = '';
-
-    for await (const chunk of streamChatCompletion(messages)) {
-      assistantResponse += chunk;
-      yield chunk;
-    }
+    // Get LLM response (NO STREAMING)
+    const assistantResponse = await getChatCompletion(messages);
 
     // Count output tokens
     const outputTokens = encode(assistantResponse).length;
@@ -192,6 +187,8 @@ export async function* processChatMessage(
 
     // Increment usage
     await incrementMessageUsage(orgId);
+    
+    return assistantResponse;
 
   } catch (error) {
     console.error('Chat processing error:', error);

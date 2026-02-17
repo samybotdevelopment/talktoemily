@@ -952,82 +952,27 @@
         throw new Error(errorData.error || 'Failed to send message');
       }
 
-      // Check if response is JSON (AI paused) or stream (AI active)
-      const contentType = response.headers.get('content-type');
+      // All responses are now JSON (no streaming)
+      hideTyping();
+      const data = await response.json();
       
-      if (contentType && contentType.includes('application/json')) {
-        // AI is paused - just hide typing and set conversation ID
-        hideTyping();
-        const data = await response.json();
-        if (data.conversationId) {
-          const isNewConversation = !conversationId;
-          conversationId = data.conversationId;
-          console.log('Emily Chat: Conversation ID set to', conversationId);
-          
-          // Subscribe to real-time updates for new conversation
-          if (isNewConversation) {
-            subscribeToMessages(conversationId);
-          }
-        }
-        console.log('Emily Chat: AI is paused, message saved');
-      } else {
-        // Stream AI response
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let assistantMessage = '';
-        let isFirstChunk = true;
+      if (data.conversationId) {
+        const isNewConversation = !conversationId;
+        conversationId = data.conversationId;
+        console.log('Emily Chat: Conversation ID set to', conversationId);
         
-        const messagesContainer = document.getElementById('emily-messages');
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'emily-message assistant';
-        messageDiv.dataset.messageId = 'temp-assistant-' + Date.now(); // Mark as temp to ignore in realtime
-        messageDiv.innerHTML = '<div class="emily-message-content"></div>';
-        
-        let hasContent = false;
-
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-
-          const chunk = decoder.decode(value);
-          
-          // Check for conversation ID in first chunk ONLY if we don't have one yet
-          if (isFirstChunk && !conversationId && chunk.startsWith('__CONVERSATION_ID__:')) {
-            const lines = chunk.split('\n');
-            const idLine = lines[0];
-            const newConversationId = idLine.replace('__CONVERSATION_ID__:', '');
-            
-            conversationId = newConversationId;
-            console.log('Emily Chat: Conversation ID set to', conversationId);
-            subscribeToMessages(conversationId);
-            
-            // Process remaining content after ID line
-            if (lines.length > 1) {
-              assistantMessage = lines.slice(1).join('\n');
-            }
-            isFirstChunk = false;
-          } else {
-            // Regular content chunk
-            assistantMessage += chunk;
-            isFirstChunk = false;
-          }
-          
-          // Hide typing and add message div when first content arrives
-          if (assistantMessage && !hasContent) {
-            hideTyping();
-            messagesContainer.appendChild(messageDiv);
-            hasContent = true;
-          }
-          
-          if (hasContent) {
-            const contentDiv = messageDiv.querySelector('.emily-message-content');
-            contentDiv.textContent = assistantMessage;
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-          }
+        // Subscribe to real-time updates for new conversation
+        if (isNewConversation) {
+          subscribeToMessages(conversationId);
         }
-
-        console.log('Emily Chat: Message sent successfully');
       }
+      
+      // Display AI response if present (AI was active)
+      if (data.response) {
+        addMessage(data.response, 'assistant');
+      }
+      
+      console.log('Emily Chat: Message sent successfully');
 
     } catch (error) {
       console.error('Emily Chat: Send error', error);

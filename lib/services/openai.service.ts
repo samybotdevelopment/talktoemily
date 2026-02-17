@@ -62,12 +62,12 @@ export async function transcribeAudio(
 }
 
 /**
- * Streaming chat completion using GPT-5-nano
+ * Get chat completion using GPT-5-nano (NO STREAMING)
  */
-export async function* streamChatCompletion(
+export async function getChatCompletion(
   messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }>,
   model: string = 'gpt-5-nano'
-): AsyncGenerator<string, void, unknown> {
+): Promise<string> {
   try {
     // Build the input from messages
     let input = '';
@@ -90,21 +90,12 @@ export async function* streamChatCompletion(
       text: {
         verbosity: 'low'
       },
-      stream: true,
+      stream: false, // NO STREAMING
     });
 
-    for await (const chunk of response) {
-      const event = chunk as any;
-      // Only yield delta (streaming chunks), not text (which might be cumulative)
-      if (typeof event.delta === 'string' && event.delta) {
-        yield event.delta;
-      } else if (typeof event.text === 'string' && event.text && !event.delta) {
-        // Fallback to text only if delta doesn't exist
-        yield event.text;
-      }
-    }
+    return response.output_text || '';
   } catch (error) {
-    console.error('Failed to stream chat completion:', error);
+    console.error('Failed to get chat completion:', error);
     throw new Error('Failed to generate response');
   }
 }

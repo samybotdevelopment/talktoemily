@@ -102,35 +102,23 @@ export async function POST(
       return NextResponse.json({ error: 'Website not found' }, { status: 404 });
     }
 
-    // Stream the AI response
-    const encoder = new TextEncoder();
-    const stream = new ReadableStream({
-      async start(controller) {
-        try {
-          for await (const chunk of processChatMessage(
-            convId,
-            content,
-            conversation.website_id,
-            website.org_id
-          )) {
-            controller.enqueue(encoder.encode(chunk));
-          }
-          controller.close();
-        } catch (error: any) {
-          console.error('Stream error:', error);
-          const errorMessage = `\n\n[Error: ${error.message}]`;
-          controller.enqueue(encoder.encode(errorMessage));
-          controller.close();
-        }
-      },
-    });
+    // AI is active - get AI response (NO STREAMING)
+    try {
+      const response = await processChatMessage(
+        convId,
+        content,
+        conversation.website_id,
+        website.org_id
+      );
 
-    return new Response(stream, {
-      headers: {
-        'Content-Type': 'text/plain; charset=utf-8',
-        'Transfer-Encoding': 'chunked',
-      },
-    });
+      return NextResponse.json({ success: true, response });
+    } catch (error: any) {
+      console.error('Chat processing error:', error);
+      return NextResponse.json(
+        { error: error.message || 'Failed to process message' },
+        { status: 500 }
+      );
+    }
   } catch (error: any) {
     console.error('Error processing message:', error);
     return NextResponse.json(
