@@ -108,9 +108,15 @@ export async function searchSimilar(
       score: result.score,
       payload: result.payload as unknown as QdrantPayload,
     }));
-  } catch (error) {
+  } catch (error: any) {
     console.error(`Search failed for collection ${collectionName}:`, error);
-    throw new Error('Failed to search vectors');
+    
+    // Check if it's a "collection not found" error
+    if (error?.status === 404 || error?.message?.includes('Not found') || error?.message?.includes('not found')) {
+      throw new Error('Bot not trained yet. Please train the bot first from the dashboard.');
+    }
+    
+    throw new Error('Failed to search vectors. Please check if the bot is trained.');
   }
 }
 
