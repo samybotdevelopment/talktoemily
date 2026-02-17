@@ -6,14 +6,19 @@ export async function updateSession(request: NextRequest) {
     request,
   })
 
-  // Skip auth check for public routes
-  const isPublicRoute = 
+  // Routes that don't need any auth checking at all
+  const isCompletelyPublicRoute = 
     request.nextUrl.pathname === '/' ||
     request.nextUrl.pathname.startsWith('/api/widget') ||
     request.nextUrl.pathname.startsWith('/widget/') ||
-    request.nextUrl.pathname === '/test-widget.html'
+    request.nextUrl.pathname.startsWith('/api/stripe/webhook') ||
+    request.nextUrl.pathname === '/test-widget.html' ||
+    request.nextUrl.pathname === '/test-realtime.html' ||
+    request.nextUrl.pathname === '/legal' ||
+    request.nextUrl.pathname === '/terms' ||
+    request.nextUrl.pathname === '/privacy'
 
-  if (isPublicRoute) {
+  if (isCompletelyPublicRoute) {
     return supabaseResponse
   }
 
@@ -48,7 +53,11 @@ export async function updateSession(request: NextRequest) {
   try {
     const { data, error } = await supabase.auth.getUser()
     if (error) {
-      console.error('Middleware auth error:', error.message)
+      // Only log error if it's not an auth page or auth API (expected to have no session)
+      if (!request.nextUrl.pathname.startsWith('/auth') && 
+          !request.nextUrl.pathname.startsWith('/api/auth')) {
+        console.error('Middleware auth error:', error.message)
+      }
     }
     user = data.user
   } catch (error) {
