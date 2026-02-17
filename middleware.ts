@@ -11,8 +11,11 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
+     * - widget/ (public widget files)
+     * - *.svg, *.png, etc. (image files)
+     * - *.js files in public/ (widget scripts)
      */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|widget/|.*\\.(?:svg|png|jpg|jpeg|gif|webp|js)$).*)',
   ],
 }
 

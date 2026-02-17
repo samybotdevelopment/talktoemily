@@ -11,9 +11,25 @@
     widgetLoaded = true;
     
     const emilyScript = document.createElement('script');
-    emilyScript.src = window.location.hostname === 'localhost' || window.location.protocol === 'file:'
-      ? 'http://localhost:3000/widget/emily-chat.js'
-      : 'https://talktoemily.com/widget/emily-chat.js';
+    
+    // Determine the base URL dynamically
+    let baseUrl = 'https://talktoemily.com';
+    if (window.location.hostname === 'localhost' || window.location.protocol === 'file:') {
+      baseUrl = 'http://localhost:3000';
+    } else {
+      // Try to extract from the loader script that's currently running
+      const scripts = document.getElementsByTagName('script');
+      for (let i = 0; i < scripts.length; i++) {
+        const src = scripts[i].src;
+        if (src && src.includes('/widget/emily-loader.js')) {
+          const url = new URL(src);
+          baseUrl = `${url.protocol}//${url.host}`;
+          break;
+        }
+      }
+    }
+    
+    emilyScript.src = `${baseUrl}/widget/emily-chat.js`;
     emilyScript.async = true;
     document.head.appendChild(emilyScript);
   }

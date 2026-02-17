@@ -17,9 +17,23 @@
     return;
   }
 
-  const API_BASE = window.location.hostname === 'localhost' || window.location.protocol === 'file:'
-    ? 'http://localhost:3000'
-    : 'https://talktoemily.com';
+  // Determine API base URL dynamically based on script source
+  let API_BASE = 'https://talktoemily.com'; // default
+  
+  if (window.location.hostname === 'localhost' || window.location.protocol === 'file:') {
+    API_BASE = 'http://localhost:3000';
+  } else {
+    // Try to extract from the script tag that loaded this file
+    const scripts = document.getElementsByTagName('script');
+    for (let i = 0; i < scripts.length; i++) {
+      const src = scripts[i].src;
+      if (src && src.includes('/widget/emily-chat.js')) {
+        const url = new URL(src);
+        API_BASE = `${url.protocol}//${url.host}`;
+        break;
+      }
+    }
+  }
 
   const SUPABASE_URL = config.supabaseUrl || 'https://gfppotrwghrawzpezsoc.supabase.co';
   const SUPABASE_ANON_KEY = config.supabaseAnonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdmcHBvdHJ3Z2hyYXd6cGV6c29jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk0NDI3NDgsImV4cCI6MjA4NTAxODc0OH0.HFKh_-IpV9w5ErDP7m_WscR0hVTvs8Kby_pT6YiUhvQ';
