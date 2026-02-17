@@ -192,7 +192,7 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
     
     const tempMessage: Message = {
       id: `temp-${Date.now()}`,
-      sender: 'user',
+      sender: 'assistant', // Manual response from backoffice
       content: userMessage,
       created_at: new Date().toISOString()
     };
@@ -200,12 +200,12 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
     processedMessageIds.current.add(tempMessage.id);
 
     try {
-      const response = await fetch('/api/messages', {
+      const response = await fetch(`/api/conversations/${selectedConvId}/messages`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          conversation_id: selectedConvId,
           content: userMessage,
+          sender: 'assistant', // Manual message from backoffice
         }),
       });
 
@@ -214,15 +214,10 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
         throw new Error(data.error || t('failedToSend'));
       }
 
-      const data = await response.json();
-      
+      // Message was saved, realtime will add it to the UI
+      // Just remove the temp message
       setMessages(prev => prev.filter(m => m.id !== tempMessage.id));
       processedMessageIds.current.delete(tempMessage.id);
-      
-      if (!processedMessageIds.current.has(data.message.id)) {
-        setMessages(prev => [...prev, data.message]);
-        processedMessageIds.current.add(data.message.id);
-      }
     } catch (err: any) {
       setError(err.message);
       setMessages(prev => prev.filter(m => m.id !== tempMessage.id));
