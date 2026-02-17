@@ -991,18 +991,15 @@
 
           const chunk = decoder.decode(value);
           
-          // Check for conversation ID in first chunk
-          if (isFirstChunk && chunk.startsWith('__CONVERSATION_ID__:')) {
+          // Check for conversation ID in first chunk ONLY if we don't have one yet
+          if (isFirstChunk && !conversationId && chunk.startsWith('__CONVERSATION_ID__:')) {
             const lines = chunk.split('\n');
             const idLine = lines[0];
             const newConversationId = idLine.replace('__CONVERSATION_ID__:', '');
             
-            // Subscribe to real-time updates for new conversation
-            if (!conversationId) {
-              conversationId = newConversationId;
-              console.log('Emily Chat: Conversation ID set to', conversationId);
-              subscribeToMessages(conversationId);
-            }
+            conversationId = newConversationId;
+            console.log('Emily Chat: Conversation ID set to', conversationId);
+            subscribeToMessages(conversationId);
             
             // Process remaining content after ID line
             if (lines.length > 1) {
@@ -1010,7 +1007,9 @@
             }
             isFirstChunk = false;
           } else {
+            // Regular content chunk
             assistantMessage += chunk;
+            isFirstChunk = false;
           }
           
           // Hide typing and add message div when first content arrives

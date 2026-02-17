@@ -95,9 +95,11 @@ export async function* streamChatCompletion(
 
     for await (const chunk of response) {
       const event = chunk as any;
-      if (typeof event.delta === 'string') {
+      // Only yield delta (streaming chunks), not text (which might be cumulative)
+      if (typeof event.delta === 'string' && event.delta) {
         yield event.delta;
-      } else if (typeof event.text === 'string') {
+      } else if (typeof event.text === 'string' && event.text && !event.delta) {
+        // Fallback to text only if delta doesn't exist
         yield event.text;
       }
     }
