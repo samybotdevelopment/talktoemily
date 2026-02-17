@@ -42,6 +42,7 @@
   let visitorId = null;
   let supabaseClient = null;
   let realtimeChannel = null;
+  let displayedMessageIds = new Set(); // Track displayed messages to prevent duplicates
   let widgetSettings = {
     websiteName: 'Emily',
     primaryColor: '#E91E63',
@@ -803,6 +804,7 @@
   function handleRealtimeMessage(message) {
     // Only show messages from assistant (backoffice responses)
     // User messages are already shown optimistically when sent
+    // Streamed AI responses are already shown with temp IDs
     if (message.sender === 'assistant') {
       const messagesContainer = document.getElementById('emily-messages');
       
@@ -810,7 +812,9 @@
       const existingMessages = messagesContainer.querySelectorAll('.emily-message');
       let isDuplicate = false;
       existingMessages.forEach(el => {
-        if (el.dataset.messageId === message.id) {
+        const existingId = el.dataset.messageId;
+        // Skip temp messages (they'll stay)
+        if (existingId && (existingId === message.id || existingId.startsWith('temp-'))) {
           isDuplicate = true;
         }
       });
@@ -976,6 +980,7 @@
         const messagesContainer = document.getElementById('emily-messages');
         const messageDiv = document.createElement('div');
         messageDiv.className = 'emily-message assistant';
+        messageDiv.dataset.messageId = 'temp-assistant-' + Date.now(); // Mark as temp to ignore in realtime
         messageDiv.innerHTML = '<div class="emily-message-content"></div>';
         
         let hasContent = false;
