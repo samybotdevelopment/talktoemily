@@ -103,25 +103,39 @@ export async function searchSimilar(
   const collectionName = getCollectionName(websiteId);
   
   try {
+    console.log(`[Qdrant] Searching collection: ${collectionName}, URL: ${process.env.QDRANT_URL}`);
+    
     const results = await client.search(collectionName, {
       vector: queryVector,
       limit,
       with_payload: true,
     });
 
+    console.log(`[Qdrant] Search successful, found ${results.length} results`);
+
     return results.map(result => ({
       score: result.score,
       payload: result.payload as unknown as QdrantPayload,
     }));
   } catch (error: any) {
-    console.error(`Search failed for collection ${collectionName}:`, error);
+    console.error(`[Qdrant] Search failed for collection ${collectionName}:`, {
+      error: error.message,
+      code: error.code,
+      status: error.status,
+      cause: error.cause?.message || error.cause,
+    });
     
     // Check if it's a "collection not found" error
     if (error?.status === 404 || error?.message?.includes('Not found') || error?.message?.includes('not found')) {
       throw new Error('Bot not trained yet. Please train the bot first from the dashboard.');
     }
     
-    throw new Error('Failed to search vectors. Please check if the bot is trained.');
+    // Check if it's a connection error
+    if (error?.code === 'ECONNREFUSED' || error?.code === 'ETIMEDOUT' || error?.code === 'UND_ERR_CONNECT_TIMEOUT') {
+      throw new Error('Cannot connect to vector database. Please contact support.');
+    }
+    
+    throw new Error(`Failed to search vectors: ${error.message || 'Unknown error'}`);
   }
 }
 
