@@ -8,6 +8,7 @@ import { QdrantPayload } from '@/types/models';
  */
 const client = new QdrantClient({
   url: process.env.QDRANT_URL!,
+  port: 443, // Explicitly use HTTPS port 443 for reverse proxy
   apiKey: process.env.QDRANT_API_KEY,
   checkCompatibility: false,
   timeout: 30000, // 30 seconds
