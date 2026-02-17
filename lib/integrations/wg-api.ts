@@ -192,6 +192,11 @@ export async function activateWGWidget(
  * Generate Emily widget script code for a website
  */
 export function generateWidgetScript(websiteId: string, appUrl: string): string {
+  // Ensure HTTPS for production URLs to prevent Mixed Content errors
+  if (!appUrl.startsWith('http://localhost') && !appUrl.startsWith('https://')) {
+    console.warn(`⚠️ Widget URL should use HTTPS: ${appUrl}`);
+  }
+  
   return `<script>
   window.EmilyChat = { websiteId: '${websiteId}' };
 </script>
