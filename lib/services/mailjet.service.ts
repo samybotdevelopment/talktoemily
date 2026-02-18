@@ -208,4 +208,51 @@ export async function getPaymentFailureEmail(
   return { subject, body };
 }
 
+/**
+ * Send email verification link to user
+ */
+export async function sendVerificationEmail(
+  email: string,
+  verificationUrl: string,
+  orgName: string
+): Promise<void> {
+  try {
+    const t = await getTranslations('email.verification');
+    const tEmail = await getTranslations('email');
+    
+    const subject = t('subject');
+    const textBody = [
+      t('greeting'),
+      '',
+      t('welcome'),
+      '',
+      t('action'),
+      '',
+      verificationUrl,
+      '',
+      t('expiry'),
+      '',
+      t('postVerification', { orgName }),
+      '',
+      t('ignoreIfNotYou'),
+      '',
+      t('closing'),
+      t('signature'),
+      '',
+      '---',
+      tEmail('footer'),
+    ].join('\n');
+
+    await sendEmail({
+      to: email,
+      subject,
+      textBody,
+    });
+
+    console.log(`✅ Verification email sent to ${email}`);
+  } catch (error) {
+    console.error('Failed to send verification email:', error);
+    throw error;
+  }
+}
 

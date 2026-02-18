@@ -17,7 +17,7 @@
     "getStarted": "Aan de slag",
     "getStartedFree": "Gratis aan de slag",
     "signIn": "Inloggen",
-    "learnMore": "Meer informatie",
+    "learnMore": "Meer info",
     "viewAll": "Alles bekijken",
     "upgrade": "Upgraden",
     "comingSoon": "Binnenkort beschikbaar",
@@ -26,7 +26,7 @@
   "landing": {
     "title": "Praat met {name}",
     "titleName": "Emily",
-    "subtitle": "AI-gestuurde chatassistent voor je website. Train hem met jouw content, zet hem in binnen enkele minuten.",
+    "subtitle": "AI-chatassistent voor je website. Train met je content en zet ’m in enkele minuten live.",
     "features": {
       "easyTraining": {
         "title": "Eenvoudig trainen",
@@ -34,11 +34,11 @@
       },
       "instantAnswers": {
         "title": "Directe antwoorden",
-        "description": "AI-gestuurde antwoorden op basis van jouw kennisbank. Snel en nauwkeurig."
+        "description": "AI-antwoorden op basis van jouw kennisbank. Snel en nauwkeurig."
       },
       "customizable": {
         "title": "Aanpasbaar",
-        "description": "Laat hem aansluiten bij je merk met aangepaste kleuren en stijlopties."
+        "description": "Laat het bij je merk passen met aangepaste kleuren en stylingopties."
       }
     }
   },
@@ -52,20 +52,20 @@
       "password": "Wachtwoord",
       "passwordPlaceholder": "Je wachtwoord",
       "submit": "Inloggen",
-      "sendMagicLink": "Magische link sturen",
+      "sendMagicLink": "Magic link versturen",
       "noAccount": "Nog geen account?",
       "signUp": "Registreren",
       "forgotPassword": "Wachtwoord vergeten?",
-      "magicLinkSent": "We hebben een magische link gestuurd naar",
+      "magicLinkSent": "We hebben een magic link gestuurd naar",
       "checkEmail": "Controleer je e-mail",
       "clickLinkToSignIn": "Klik op de link in de e-mail om in te loggen. Je kunt deze pagina sluiten.",
       "backToLogin": "Terug naar inloggen",
-      "useMagicLink": "Inloggen met magische link",
+      "useMagicLink": "Inloggen met magic link",
       "usePassword": "Inloggen met wachtwoord",
       "error": "Inloggen mislukt. Controleer je gegevens."
     },
     "signup": {
-      "title": "Word lid van Emily",
+      "title": "Doe mee met Emily",
       "subtitle": "Maak je account aan en begin met bouwen",
       "email": "E-mail",
       "emailPlaceholder": "jij@voorbeeld.com",
@@ -73,13 +73,13 @@
       "passwordPlaceholder": "Kies een sterk wachtwoord",
       "passwordHint": "Minimaal 6 tekens",
       "orgName": "Organisatienaam",
-      "orgNamePlaceholder": "Mijn bedrijf",
+      "orgNamePlaceholder": "Mijn Bedrijf",
       "submit": "Account aanmaken",
-      "creating": "Account aanmaken...",
+      "creating": "Account wordt aangemaakt...",
       "hasAccount": "Heb je al een account?",
       "login": "Inloggen",
       "error": "Registreren mislukt. Probeer het opnieuw.",
-      "createdButSignInFailed": "Account aangemaakt, maar inloggen is mislukt. Probeer opnieuw in te loggen.",
+      "createdButSignInFailed": "Account aangemaakt, maar inloggen is mislukt. Probeer in te loggen.",
       "freeTrialTitle": "Gratis proefperiode bevat:",
       "freeTrialFeature1": "1 trainingsrun (levenslang)",
       "freeTrialFeature2": "50 AI-berichten (levenslang)",
@@ -97,7 +97,7 @@
     "overview": "Overzicht",
     "conversations": "Gesprekken",
     "training": "Training",
-    "embed": "Insluiten",
+    "embed": "Embed",
     "botSettings": "Botinstellingen"
   },
   "header": {
@@ -111,7 +111,7 @@
     "welcome": "Welkom bij Talk to Emily",
     "yourChatbots": "Jouw chatbots",
     "noChatbots": "Nog geen chatbots",
-    "noChatbotsDescription": "Maak je eerste AI-chatbot om in te sluiten op je website",
+    "noChatbotsDescription": "Maak je eerste AI-chatbot om op je website te embedden",
     "createFirstBot": "Maak je eerste chatbot",
     "createNewBot": "Nieuwe chatbot maken",
     "currentPlan": "Huidig plan",
@@ -129,31 +129,31 @@
     "reactivateSubscription": "Abonnement opnieuw activeren",
     "continueWithFreePlan": "Doorgaan met Gratis plan",
     "subscriptionCanceled": "Abonnement geannuleerd",
-    "freePlanActive": "Je zit momenteel op het Gratis plan.",
-    "upgradeToAccess": "Upgrade om toegang te krijgen tot meer functies en chatbots.",
-    "incompleteBot": "Je hebt een onvolledige bot-installatie",
-    "resumeSetup": "Installatie hervatten",
+    "freePlanActive": "Je gebruikt momenteel het Gratis plan.",
+    "upgradeToAccess": "Upgrade voor meer functies en chatbots.",
+    "incompleteBot": "Je hebt een onvolledige botconfiguratie",
+    "resumeSetup": "Setup hervatten",
     "deleteIncompleteBot": "Verwijderen",
     "wgCustomerTitle": "Wonder George-klant",
-    "wgCustomerMessage": "Je bent Wonder George-klant! Je Emily-abonnement is gratis en bevat onbeperkte training en berichten.",
+    "wgCustomerMessage": "Je bent klant van Wonder George! Je Emily-abonnement is gratis en bevat onbeperkte training en berichten.",
     "wgLinked": "WG GEKOPPELD",
     "frozen": "bevroren",
-    "starterCredits": "+100 credits/maand bij abonnement",
-    "proCredits": "+250 credits/maand bij abonnement",
+    "starterCredits": "+100 credits/maand met abonnement",
+    "proCredits": "+250 credits/maand met abonnement",
     "unlimitedWG": "Onbeperkt met Wonder George",
     "freeCredits": "1 credit = 1 berichtuitwisseling",
-    "upgradeToUnlock": "Upgrade om bevroren credits vrij te maken",
-    "completeBotCreation": "Maak {name} af",
+    "upgradeToUnlock": "Upgrade om bevroren credits vrij te geven",
+    "completeBotCreation": "Aanmaken van {name} afronden",
     "limitReachedTitle": "Chatbotlimiet bereikt",
-    "limitReachedMessage": "Je hebt de limiet van je plan van {max} chatbots bereikt.",
+    "limitReachedMessage": "Je hebt de limiet van je plan bereikt: {max} chatbots.",
     "upgradeToProMessage": "Upgrade naar het Pro-plan om tot 5 chatbots te maken.",
     "upgradePlan": "Plan upgraden",
     "created": "Aangemaakt",
     "inactive": "INACTIEF",
     "clickToReactivate": "Klik om opnieuw te activeren",
     "botDeactivatedTitle": "Bot gedeactiveerd",
-    "botDeactivatedMessage": "{name} is gedeactiveerd toen je abonnement afliep. Het Gratis plan bevat slechts 1 actieve bot.",
-    "upgradeToReactivate": "Upgrade naar een betaald plan om deze bot opnieuw te activeren en tot 5 bots te maken."
+    "botDeactivatedMessage": "{name} is gedeactiveerd toen je abonnement eindigde. Het Gratis plan bevat slechts 1 actieve bot.",
+    "upgradeToReactivate": "Upgrade naar een betaald plan om deze bot te heractiveren en tot 5 bots te maken."
   },
   "onboarding": {
     "welcomeTitle": "Welkom bij Emily",
@@ -162,34 +162,34 @@
       "title": "Welkom bij Talk to Emily!",
       "wgSubscription": "Je hebt een Wonder George-abonnement, dus je Emily-abonnement is gratis.",
       "wgCongrats": "Gefeliciteerd! Laten we je eerste chatbot maken.",
-      "regularIntro": "Laten we je AI-gestuurde chatbot in een paar stappen maken.",
-      "regularDescription": "Je chatbot staat klaar om vragen te beantwoorden en met je bezoekers te communiceren.",
+      "regularIntro": "Laten we je AI-chatbot in een paar stappen maken.",
+      "regularDescription": "Je chatbot is straks klaar om vragen te beantwoorden en met je bezoekers te praten.",
       "getStarted": "Aan de slag"
     },
     "step2": {
       "chooseWebsite": "Kies je website",
       "chooseWebsiteDescription": "Selecteer de website waaraan je je chatbot wilt toevoegen",
-      "loadingWebsites": "Je websites laden...",
+      "loadingWebsites": "Je websites worden geladen...",
       "noWebsites": "Geen websites gevonden",
       "chatbotAlreadyCreated": "Chatbot is al aangemaakt",
-      "businessInfo": "Vertel ons over je bedrijf",
-      "businessInfoDescription": "We gebruiken deze informatie om je chatbot in te stellen",
+      "businessInfo": "Vertel ons iets over je bedrijf",
+      "businessInfoDescription": "We gebruiken deze info om je chatbot in te stellen",
       "businessName": "Bedrijfs-/websitenaam",
-      "businessNamePlaceholder": "bijv. Mijn koffiezaak",
+      "businessNamePlaceholder": "bijv. Mijn Koffiezaak",
       "websiteUrl": "Website-URL (optioneel)",
       "websiteUrlPlaceholder": "bijv. https://mijnkoffiezaak.nl"
     },
     "step3": {
-      "title": "Pas je bot aan",
+      "title": "Personaliseer je bot",
       "description": "Geef je bot een naam en kies een kleur",
       "botName": "Botnaam",
-      "botNamePlaceholder": "Mijn websiteassistent",
+      "botNamePlaceholder": "Mijn website-assistent",
       "widgetColor": "Widgetkleur"
     },
     "step4": {
       "title": "Laten we {botName} trainen",
-      "description": "We halen data van je website op om je chatbot te trainen",
-      "loading": "Data van je website ophalen...",
+      "description": "We halen data op van je website om je chatbot te trainen",
+      "loading": "Data van je website wordt opgehaald...",
       "button": "Websitecontent ophalen"
     },
     "step5": {
@@ -198,37 +198,37 @@
       "title": "Titel",
       "titlePlaceholder": "Voer een titel in voor deze content...",
       "content": "Content",
-      "totalItems": "Totaal aantal toegevoegde trainingsitems",
+      "totalItems": "Totaal toegevoegde trainingsitems",
       "savedSuccess": "Succesvol opgeslagen",
       "nextSection": "Volgende sectie"
     },
     "step6": {
-      "title": "Upload een document (optioneel)",
+      "title": "Document uploaden (optioneel)",
       "description": "Upload een .txt-bestand met extra informatie om je bot te trainen. De AI haalt automatisch titel- en contentblokken eruit.",
-      "uploadPrompt": "Klik om een .txt-bestand te uploaden",
+      "uploadPrompt": "Klik om .txt-bestand te uploaden",
       "uploadHint": "De LLM haalt automatisch titel- en contentblokken eruit",
-      "processing": "Document verwerken...",
+      "processing": "Document wordt verwerkt...",
       "processedSuccess": "Document succesvol verwerkt!",
-      "continueToReview": "Doorgaan naar controleren"
+      "continueToReview": "Doorgaan naar review"
     },
     "productsTitle": "Vragen over producten en diensten",
     "productsQuestion": "Vertel ons over je producten of diensten",
     "productsPlaceholder": "Beschrijf wat je aanbiedt, belangrijkste kenmerken, prijzen, enz.",
-    "customerQuestionsTitle": "Vragen die klanten meestal stellen",
+    "customerQuestionsTitle": "Vragen die klanten vaak stellen",
     "customerQuestionsQuestion": "Welke vragen stellen klanten je meestal?",
     "customerQuestionsPlaceholder": "Veelgestelde vragen van je klanten...",
     "uniqueTitle": "Wat maakt je bedrijf uniek",
     "uniqueQuestion": "Wat maakt je bedrijf uniek?",
     "uniquePlaceholder": "Wat onderscheidt je van concurrenten...",
     "additionalTitle": "Aanvullende informatie",
-    "additionalQuestion": "Is er nog iets dat je chatbot moet weten over je bedrijf?",
+    "additionalQuestion": "Is er nog iets dat je de chatbot wilt laten weten over je bedrijf?",
     "additionalPlaceholder": "Andere belangrijke informatie...",
     "step7": {
-      "title": "Controleren & trainen",
+      "title": "Review & trainen",
       "description": "Je hebt {count} trainingsitems. Controleer en start de training.",
       "content": "Content",
       "saveChanges": "Wijzigingen opslaan",
-      "training": "Je bot trainen... Dit kan 1-2 minuten duren",
+      "training": "Je bot wordt getraind... Dit kan 1–2 minuten duren",
       "launch": "AI-training starten"
     },
     "cancelBotCreation": "Bot aanmaken annuleren",
@@ -240,7 +240,7 @@
     },
     "allWebsitesModal": {
       "title": "Alle websites hebben bots",
-      "description": "Alle websites op Wonder George hebben al een chatbot. Maak een nieuwe website op Wonder George om een nieuwe bot te maken.",
+      "description": "Al je websites op Wonder George hebben al een chatbot. Maak een nieuwe website aan op Wonder George om een nieuwe bot te maken.",
       "ok": "OK"
     }
   },
@@ -256,7 +256,7 @@
       "never": "Nooit",
       "trainBot": "Bot trainen",
       "testBot": "Bot testen",
-      "embedCode": "Insluitcode ophalen",
+      "embedCode": "Embedcode ophalen",
       "quickStats": "Snelle statistieken",
       "recentConversations": "Recente gesprekken",
       "noConversations": "Nog geen gesprekken",
@@ -300,17 +300,17 @@
       "noItemsDescription": "Voeg content toe om je chatbot te trainen",
       "itemAdded": "Trainingsitem succesvol toegevoegd",
       "itemDeleted": "Trainingsitem verwijderd",
-      "trainingComplete": "Training succesvol voltooid!",
+      "trainingComplete": "Training succesvol afgerond!",
       "trainingFailed": "Training mislukt. Probeer het opnieuw.",
       "confirmDelete": "Weet je zeker dat je dit trainingsitem wilt verwijderen?"
     },
     "embed": {
-      "title": "Je chatbot insluiten",
-      "description": "Kopieer en plak deze code in de HTML van je website, vlak voor de afsluitende </body>-tag.",
+      "title": "Embed je chatbot",
+      "description": "Kopieer en plak deze code in de HTML van je website, vlak vóór de afsluitende </body>-tag.",
       "copyCode": "Code kopiëren",
       "copied": "Gekopieerd!",
       "testWidget": "Widget testen",
-      "widgetAppearance": "Widget-uiterlijk",
+      "widgetAppearance": "Widget-weergave",
       "widgetPosition": "Positie",
       "positionBottomRight": "Rechtsonder",
       "positionBottomLeft": "Linksonder",
@@ -338,7 +338,7 @@
       "deactivate": "Deactiveren",
       "activate": "Activeren",
       "deleteBot": "Bot verwijderen",
-      "deleteDescription": "Verwijder deze bot en alle data definitief",
+      "deleteDescription": "Verwijder deze bot en alle data permanent",
       "delete": "Bot verwijderen",
       "confirmDelete": "Weet je zeker dat je deze bot wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
       "confirmDeactivate": "Weet je zeker dat je deze bot wilt deactiveren?"
@@ -353,13 +353,13 @@
     "manageSubscriptionError": "Toegang tot het facturatieportaal mislukt. Probeer het opnieuw.",
     "billingTitle": "Facturatie & facturen",
     "billingDescription": "Bekijk je betaalgeschiedenis, download facturen en beheer je betaalmethoden.",
-    "viewBillingHistory": "Facturatiegeschiedenis & facturen bekijken →",
-    "billingPortalError": "Het openen van het facturatieportaal is mislukt. Probeer het opnieuw.",
+    "viewBillingHistory": "Betaalgeschiedenis & facturen bekijken →",
+    "billingPortalError": "Facturatieportaal openen mislukt. Probeer het opnieuw.",
     "dangerZone": "Gevarenzone",
-    "deleteAccountWarning": "Verwijder je account en alle bijbehorende data definitief. Deze actie kan niet ongedaan worden gemaakt.",
+    "deleteAccountWarning": "Verwijder je account en alle bijbehorende data permanent. Deze actie kan niet ongedaan worden gemaakt.",
     "deleteAccount": "Account verwijderen",
-    "deletingAccount": "Account verwijderen...",
-    "deleteAccountConfirmation": "Deze actie verwijdert je account en alle bijbehorende data definitief.",
+    "deletingAccount": "Account wordt verwijderd...",
+    "deleteAccountConfirmation": "Deze actie verwijdert je account en alle bijbehorende data permanent.",
     "deleteAccountError": "Er is een fout opgetreden"
   },
   "subscription": {
@@ -377,7 +377,7 @@
     "recommended": "AANBEVOLEN",
     "manage": "Beheren",
     "managedByWonderGeorge": "Beheerd door Wonder George",
-    "checkoutError": "Starten van checkout mislukt. Probeer het opnieuw.",
+    "checkoutError": "Checkout starten mislukt. Probeer het opnieuw.",
     "portalError": "Toegang tot het facturatieportaal mislukt. Probeer het opnieuw.",
     "plans": {
       "free": {
@@ -404,7 +404,7 @@
     },
     "wonderGeorge": {
       "title": "Gratis voor Wonder George-klanten",
-      "description": "Bouw je website met Wonder George en krijg Emily AI-chatbot volledig gratis! Wonder George is de beste oplossing om je volledige digitale marketing op autopilot te draaien. Wonder George bouwt je website in 35 seconden, optimaliseert die voor Google-ranking (SEO), publiceert blogartikelen op autopilot, maakt socialmediaposts op autopilot, vertaalt je volledige website naar elke taal met één klik. Het heeft ook een e-commerce feature om je producten te verkopen, een e-learning feature om je online cursussen te verkopen en een chauffeur-plugin om ritboekingen via je website aan te nemen. En daarbovenop is je Emily-abonnement inbegrepen bij je Wonder George-abonnement.",
+      "description": "Bouw je website met Wonder George en krijg de Emily AI-chatbot helemaal gratis! Wonder George is de beste oplossing om je volledige digitale marketing op autopilot te laten draaien. Wonder George bouwt je website in 35 seconden, optimaliseert deze voor Google-ranking (SEO), publiceert blogartikelen op autopilot, maakt socialmediaposts op autopilot, en vertaalt je volledige website naar elke taal met één klik. Het heeft ook een e-commerce feature om je producten te verkopen, een e-learning feature om je online cursussen te verkopen en een chauffeur-plugin om ritboekingen via je website te ontvangen. En als kers op de taart: je Emily-abonnement is inbegrepen bij je Wonder George-abonnement.",
       "discover": "Ontdek Wonder George",
       "linkAccount": "Wonder George-account koppelen (Binnenkort beschikbaar)"
     }
@@ -422,34 +422,34 @@
     "creditsExplanation": "AI-credits worden gebruikt om je chatbot te trainen met nieuwe content. Elk trainingsitem (pagina, document of Q&A) kost 1 credit. Je eerste training is altijd gratis!",
     "whenYouNeed": "Wanneer je meer credits nodig hebt",
     "needMoreExplanation": "Je hebt credits nodig wanneer je nieuwe content toevoegt om je bot te trainen. Koop hieronder credits in bulk om te besparen!",
-    "purchasePacks": "Creditpacks kopen",
+    "purchasePacks": "Creditpakketten kopen",
     "purchaseDescription": "Geef je AI-chatbot extra power met extra credits. Alle prijzen in EUR. Credits verlopen nooit en worden elke maand meegenomen.",
     "requiresSubscription": "Actief abonnement vereist",
-    "requiresSubscriptionMessage": "Je hebt een actief Pro-abonnement of Wonder George-plan nodig om creditpacks te kopen.",
+    "requiresSubscriptionMessage": "Je hebt een actief Pro-abonnement of Wonder George-plan nodig om creditpakketten te kopen.",
     "viewPlans": "Abonnementsplannen bekijken",
     "upgradeFirst": "Upgrade eerst naar een betaald plan",
     "creditEquation": "1 credit = 1 AI-berichtuitwisseling • Credits worden maand na maand meegenomen",
     "howCreditsWork": "Hoe credits werken",
-    "creditInfo1": "Elk bezoekersbericht en AI-antwoord telt als 1 credit",
+    "creditInfo1": "Elk bezoekersbericht en elke AI-respons telt als 1 credit",
     "creditInfo2": "Credits worden maand na maand meegenomen en verlopen nooit",
     "creditInfo3": "Pro-abonnees krijgen elke maand 100 gratis credits",
-    "creditInfo4": "Koop grotere packs voor een betere prijs per bericht",
+    "creditInfo4": "Koop grotere pakketten voor een betere prijs per bericht",
     "packs": {
       "small": {
-        "name": "Starter Pack",
+        "name": "Starterpakket",
         "credits": "100 credits",
         "price": "$4.99",
         "description": "Perfect voor kleine updates"
       },
       "medium": {
-        "name": "Populair Pack",
+        "name": "Populair pakket",
         "credits": "500 credits",
         "price": "$19.99",
         "description": "Beste waarde voor groeiende bedrijven",
         "badge": "Beste waarde"
       },
       "large": {
-        "name": "Pro Pack",
+        "name": "Pro-pakket",
         "credits": "1000 credits",
         "price": "$34.99",
         "description": "Voor power users"
@@ -465,29 +465,29 @@
     "neverExpires": "Verloopt nooit",
     "perMessage": "{price} per bericht",
     "loading": "Laden...",
-    "purchaseError": "Starten van checkout mislukt. Probeer het opnieuw.",
+    "purchaseError": "Checkout starten mislukt. Probeer het opnieuw.",
     "starter": {
-      "name": "Starter Pack"
+      "name": "Starterpakket"
     },
     "growth": {
-      "name": "Growth Pack"
+      "name": "Groeipakket"
     },
     "business": {
-      "name": "Business Pack"
+      "name": "Businesspakket"
     }
   },
   "trainingCostModal": {
     "title": "Trainingskosten bevestigen",
     "firstTrainingFree": "🎉 Eerste training is gratis!",
-    "firstTrainingDescription": "Dit is de eerste keer dat je deze bot traint, dus deze is van ons! Er worden {count} contentitems verwerkt.",
-    "costDescription": "Het trainen van je chatbot verwerkt {count} contentitems.",
+    "firstTrainingDescription": "Dit is de eerste keer dat je deze bot traint, dus die is van ons! Er worden {count} content-items verwerkt.",
+    "costDescription": "Het trainen van je chatbot verwerkt {count} content-items.",
     "cost": "Kosten:",
     "credits": "{count} credits",
     "currentBalance": "Je huidige saldo: {count} credits",
-    "insufficientCredits": "Je hebt nog {count} credits nodig om je bot te trainen.",
+    "insufficientCredits": "Je hebt {count} extra credits nodig om je bot te trainen.",
     "purchaseCredits": "Credits kopen",
     "cancel": "Annuleren",
-    "processing": "Verwerken...",
+    "processing": "Bezig met verwerken...",
     "startTraining": "Training starten",
     "confirmTrain": "Bevestigen & trainen"
   },
@@ -509,7 +509,7 @@
   },
   "superadmin": {
     "title": "Superadmin-dashboard",
-    "subtitle": "Systeemoverzicht en beheer",
+    "subtitle": "Systeemooverzicht en beheer",
     "stats": {
       "totalOrganizations": "Totaal aantal organisaties",
       "totalUsers": "Totaal aantal gebruikers",
@@ -517,7 +517,7 @@
       "activeMRR": "Actieve MRR",
       "totalConversations": "Totaal aantal gesprekken",
       "totalMessages": "Totaal aantal berichten",
-      "currentMonthRevenue": "Omzet van deze maand"
+      "currentMonthRevenue": "Omzet deze maand"
     },
     "organizations": {
       "title": "Organisaties beheren",
@@ -535,7 +535,7 @@
       "title": "Organisatiedetails",
       "grantPlan": "Plan toekennen",
       "grantCredits": "Credits toekennen",
-      "selectPlan": "Plan selecteren",
+      "selectPlan": "Selecteer plan",
       "starter": "Starter",
       "pro": "Pro",
       "grant": "Toekennen",
@@ -566,18 +566,18 @@
     "paymentFailed": {
       "subject": {
         "first": "Oeps! We konden je betaling niet verwerken",
-        "reminder": "Kleine herinnering: betaling staat nog open ({days} dagen over)",
+        "reminder": "Korte reminder: betaling staat nog open ({days} dagen over)",
         "urgent": "⚠️ Dringend: werk je betaalgegevens bij"
       },
       "greeting": "Hoi,",
       "greetingReminder": "Hallo,",
       "firstAttempt": "Even een seintje – we hebben geprobeerd je betaling te verwerken, maar dat is niet gelukt. Geen zorgen, dat kan gebeuren!",
-      "retryInfo": "Zou je even je betaalgegevens willen bijwerken? We proberen het de komende {days} dagen automatisch opnieuw (dit was poging {attempt} van meerdere).",
-      "reminderMessage": "Dit is een vriendelijke herinnering dat we nog steeds moeite hebben om je betaling te verwerken. Je abonnement wordt binnenkort verlengd, dus werk je betaalmethode bij om onderbrekingen te voorkomen.",
-      "urgentMessage": "Dit is een dringende herinnering dat je betaling voor je abonnement is mislukt en dit is de laatste herhaalpoging. Werk je betaalmethode onmiddellijk bij om een onderbreking van de service te voorkomen.",
+      "retryInfo": "Wil je heel even je betaalgegevens bijwerken? We proberen automatisch opnieuw in de komende {days} dagen (dit was poging {attempt} van meerdere).",
+      "reminderMessage": "Dit is een vriendelijke reminder dat we nog steeds problemen hebben met het verwerken van je betaling. Je abonnement wordt binnenkort verlengd, dus werk je betaalmethode bij om onderbrekingen te voorkomen.",
+      "urgentMessage": "Dit is een dringende herinnering dat je betaling voor je abonnement is mislukt en dit is de laatste herhaalpoging. Werk je betaalmethode meteen bij om onderbreking van de service te voorkomen.",
       "updatePayment": "👉 Werk je betaalmethode hier bij: {link}",
       "helpMessage": "Denk je dat dit een vergissing is of heb je hulp nodig? Antwoord gewoon op deze e-mail – ik ben er voor je!",
-      "helpMessageReminder": "Als je problemen hebt, laat het me gewoon weten!",
+      "helpMessageReminder": "Als je problemen hebt, laat het me even weten!",
       "helpMessageUrgent": "Als je hulp nodig hebt, neem dan contact op met support.",
       "signature": "Bedankt,\nEmily 💙",
       "signatureReminder": "Groetjes,\nEmily 💙",
@@ -585,7 +585,7 @@
     }
   },
   "errors": {
-    "generic": "Er is iets misgegaan. Probeer het opnieuw.",
+    "generic": "Er ging iets mis. Probeer het opnieuw.",
     "unauthorized": "Je bent niet gemachtigd om deze actie uit te voeren.",
     "notFound": "De gevraagde resource is niet gevonden.",
     "networkError": "Netwerkfout. Controleer je verbinding.",
@@ -599,7 +599,7 @@
     "email": "Voer een geldig e-mailadres in",
     "url": "Voer een geldige URL in",
     "minLength": "Moet minimaal {min} tekens zijn",
-    "maxLength": "Mag niet meer dan {max} tekens zijn",
+    "maxLength": "Mag maximaal {max} tekens zijn",
     "passwordMismatch": "Wachtwoorden komen niet overeen"
   },
   "botOverview": {
@@ -611,15 +611,15 @@
     "inactive": "Inactief",
     "widgetVisibleWG": "Je chatbot is zichtbaar op je Wonder George-website",
     "widgetHiddenWG": "Je chatbot is verborgen op je Wonder George-website",
-    "processing": "Verwerken...",
+    "processing": "Bezig met verwerken...",
     "deactivate": "Deactiveren",
     "activate": "Activeren",
     "trainedAndReady": "Je chatbot is getraind en klaar!",
     "notTrainedYet": "Nog niet getraind",
     "trainToEnable": "Train je chatbot om AI-antwoorden in te schakelen.",
     "addTrainingContent": "Trainingscontent toevoegen",
-    "embedCode": "Insluitcode",
-    "embedInstructions": "Voeg deze code toe aan de HTML van je website, vlak voor de afsluitende </body>-tag:",
+    "embedCode": "Embedcode",
+    "embedInstructions": "Voeg deze code toe aan de HTML van je website, vlak vóór de afsluitende </body>-tag:",
     "widgetWillAppear": "De widget verschijnt op je site, maar train je chatbot om AI-antwoorden in te schakelen.",
     "trainingStatusTitle": "TRAININGSSTATUS",
     "trainingItems": "{count} trainingsitems",
@@ -629,13 +629,13 @@
     "widgetStatusTitle": "WIDGETSTATUS",
     "ready": "Klaar",
     "notReady": "Niet klaar",
-    "widgetIsLive": "Widget is live",
+    "widgetIsLive": "Widget staat live",
     "trainBotFirst": "Train eerst je bot",
     "toggleWidgetError": "Widget schakelen mislukt. Probeer het opnieuw.",
     "status": {
       "completed": "Voltooid",
       "pending": "In afwachting",
-      "processing": "Verwerken",
+      "processing": "Bezig met verwerken",
       "failed": "Mislukt"
     }
   },
@@ -646,14 +646,14 @@
     "settings": "Instellingen",
     "delete": "Verwijderen",
     "deleteModalTitle": "⚠️ Bot verwijderen?",
-    "deleteModalDescription": "Hiermee verwijder je {name} definitief en alle bijbehorende data, waaronder:",
+    "deleteModalDescription": "Hiermee wordt {name} en alle bijbehorende data permanent verwijderd, inclusief:",
     "deleteItem1": "Alle trainingsdata",
     "deleteItem2": "Alle gesprekken en berichten",
     "deleteItem3": "Vector embeddings",
     "deleteItem4": "Widgetconfiguratie",
     "deleteWarning": "Deze actie kan niet ongedaan worden gemaakt!",
-    "deleting": "Verwijderen...",
-    "deleteForever": "Voor altijd verwijderen",
+    "deleting": "Bezig met verwijderen...",
+    "deleteForever": "Permanent verwijderen",
     "deleteError": "Bot verwijderen mislukt. Probeer het opnieuw."
   },
   "training": {
@@ -663,7 +663,7 @@
     "content": "Content",
     "contentPlaceholder": "Voer hier je trainingscontent in...",
     "addItem": "Item toevoegen",
-    "stop": "Stoppen",
+    "stop": "Stop",
     "transcribing": "Transcriberen...",
     "record": "Opnemen",
     "howToTrain": "Hoe je je bot traint",
@@ -681,9 +681,9 @@
     "itemDeleted": "Item verwijderd",
     "microphoneError": "Toegang tot microfoon mislukt. Sta microfoontoegang toe.",
     "audioTranscribed": "Audio getranscribeerd! Bewerk en voeg een titel toe.",
-    "insufficientCredits": "Onvoldoende credits. Je hebt {required} credits nodig, maar je hebt er slechts {available}.",
-    "trainingSuccessFree": "🎉 Training succesvol voltooid! (Eerste training was gratis)",
-    "trainingSuccess": "Training succesvol voltooid! {credits} credits gebruikt."
+    "insufficientCredits": "Onvoldoende credits. Je hebt {required} credits nodig maar je hebt er {available}.",
+    "trainingSuccessFree": "🎉 Training succesvol afgerond! (Eerste training was gratis)",
+    "trainingSuccess": "Training succesvol afgerond! {credits} credits gebruikt."
   },
   "conversations": {
     "noConversations": "Nog geen gesprekken",
@@ -692,18 +692,18 @@
     "owner": "Eigenaar",
     "visitor": "Bezoeker",
     "noMessages": "Nog geen berichten",
-    "ownerAssistant": "Assistent van de eigenaar",
+    "ownerAssistant": "Assistent van eigenaar",
     "visitorChat": "Bezoekerschat",
     "pauseAI": "AI pauzeren",
     "resumeAI": "AI hervatten",
     "loadingMessages": "Berichten laden...",
     "startConversation": "Start het gesprek",
     "startConversationDescription": "Stuur een bericht om te beginnen",
-    "pauseAiToSend": "💡 Pauzeer de AI om handmatige berichten te sturen",
-    "aiPaused": "AI is gepauzeerd. Je berichten gaan direct naar de bezoeker.",
-    "pauseAiPlaceholder": "Pauzeer AI om berichten te sturen",
+    "pauseAiToSend": "💡 Pauzeer de AI om handmatige berichten te versturen",
+    "aiPaused": "AI staat gepauzeerd. Jouw berichten gaan direct naar de bezoeker.",
+    "pauseAiPlaceholder": "Pauzeer AI om berichten te versturen",
     "typePlaceholder": "Typ je bericht...",
-    "sending": "Verzenden...",
+    "sending": "Versturen...",
     "send": "Versturen",
     "selectConversation": "Selecteer een gesprek om te bekijken",
     "aiActiveTitle": "AI is actief",
@@ -724,16 +724,16 @@
     "inactive": "Inactief",
     "widgetVisibleOnSite": "Je chatbot is zichtbaar op je website",
     "widgetHiddenFromSite": "Je chatbot is verborgen op je website",
-    "processing": "Verwerken...",
+    "processing": "Bezig met verwerken...",
     "deactivate": "Deactiveren",
     "activate": "Activeren",
     "toggleWidgetError": "Widget schakelen mislukt. Probeer het opnieuw.",
     "widgetStyleTitle": "Widgetstijl",
     "widgetStyleDescription": "Kies hoe je chatwidget eruitziet voor bezoekers op je website",
-    "modernLabel": "Stoer & Neo-brutalist",
+    "modernLabel": "Stoer & neo-brutalist",
     "modern": "Modern",
     "modernDescription": "Dikke randen, sterke schaduwen, opvallend design",
-    "neutralLabel": "Strak & minimaal",
+    "neutralLabel": "Strak & minimalistisch",
     "neutral": "Neutraal",
     "neutralDescription": "Strak, subtiel design zoals Intercom",
     "widgetMessagesTitle": "Widgetberichten",
@@ -751,7 +751,7 @@
     "displayName": "Weergavenaam",
     "displayNamePlaceholder": "Mijn bot",
     "domain": "Domein",
-    "domainPlaceholder": "https://mijnwebsite.com",
+    "domainPlaceholder": "https://mijnwebsite.nl",
     "primaryColor": "Primaire kleur",
     "dangerZone": "Gevarenzone",
     "dangerZoneDescription": "Als je deze chatbot verwijdert, worden alle trainingsdata, gesprekken en instellingen verwijderd. Deze actie kan niet ongedaan worden gemaakt.",
@@ -763,41 +763,52 @@
     "hoursAgo": "{count}u geleden",
     "daysAgo": "{count}d geleden",
     "weeksAgo": "{count}w geleden",
-    "monthsAgo": "{count}mnd geleden",
+    "monthsAgo": "{count} mnd geleden",
     "yearsAgo": "{count}j geleden"
   },
   "email": {
     "fromName": "Emily",
     "footer": "Talk to Emily - Jouw AI-chatbotplatform",
+    "verification": {
+      "subject": "Verifieer je e-mail voor TalkToEmily",
+      "greeting": "Hoi!",
+      "welcome": "Welkom bij TalkToEmily! Leuk dat je er bent.",
+      "action": "Verifieer je e-mailadres door op de link hieronder te klikken:",
+      "expiry": "Deze link verloopt over 24 uur.",
+      "postVerification": "Na verificatie krijg je toegang tot je dashboard en kun je je AI-chatbot gaan bouwen voor \"{orgName}\".",
+      "ignoreIfNotYou": "Als jij geen account hebt aangemaakt, kun je deze e-mail gerust negeren.",
+      "closing": "Met vriendelijke groet,",
+      "signature": "Het TalkToEmily-team"
+    },
     "paymentFailure": {
       "attempt1": {
         "subject": "Oeps! We konden je betaling niet verwerken",
         "greeting": "Hoi {customerName},",
         "intro": "Even een seintje – we hebben geprobeerd je betaling te verwerken, maar dat is niet gelukt. Geen zorgen, dat kan gebeuren!",
-        "action": "Zou je even je betaalgegevens willen bijwerken? We proberen het de komende {daysRemaining} dagen automatisch opnieuw (dit was poging 1 van meerdere).",
+        "action": "Wil je heel even je betaalgegevens bijwerken? We proberen automatisch opnieuw in de komende {daysRemaining} dagen (dit was poging 1 van meerdere).",
         "cta": "👉 Werk je betaalmethode hier bij: {portalUrl}",
         "help": "Denk je dat dit een vergissing is of heb je hulp nodig? Antwoord gewoon op deze e-mail – ik ben er voor je!",
         "closing": "Bedankt,",
         "signature": "Emily 💙"
       },
       "attempt2to3": {
-        "subject": "Kleine herinnering: betaling staat nog open",
+        "subject": "Korte reminder: betaling staat nog open",
         "greeting": "Hoi {customerName},",
-        "intro": "Ik check even opnieuw – we hebben nog steeds moeite om je betaling te verwerken (poging {attemptCount}).",
-        "action": "We blijven het nog {daysRemaining} dagen proberen, maar ik wilde zeker weten dat je het weet. Hoe sneller je je betaalinfo bijwerkt, hoe sneller alles weer soepel loopt!",
+        "intro": "Even opnieuw inchecken – we hebben nog steeds moeite om je betaling te verwerken (poging {attemptCount}).",
+        "action": "We blijven het nog {daysRemaining} dagen proberen, maar ik wilde zeker weten dat je het weet. Hoe sneller je je betaalinfo bijwerkt, hoe sneller we alles weer op orde hebben!",
         "cta": "👉 Werk je betaalmethode hier bij: {portalUrl}",
-        "closing": "Bedankt dat je zo geweldig bent!",
+        "closing": "Thanks, je bent geweldig!",
         "signature": "Emily 💙"
       },
       "attempt4plus": {
         "subject": "⚠️ Dringend: werk je betaalgegevens bij",
         "greeting": "Hoi {customerName},",
-        "intro": "Ik heb je hulp echt nodig – we hebben al {attemptCount} keer geprobeerd je betaling te verwerken en het lukt nog steeds niet.",
+        "intro": "Ik heb je echt even nodig – we hebben al {attemptCount} keer geprobeerd je betaling te verwerken en het lukt nog steeds niet.",
         "urgentWithDays": "We hebben nog ongeveer {daysRemaining} dag{plural} voordat je abonnement wordt geannuleerd en je bots worden gedeactiveerd.",
         "urgentFinal": "Dit is onze laatste poging voordat je abonnement wordt geannuleerd.",
-        "action": "Werk je betaalmethode meteen bij om je chatbots actief te houden:",
+        "action": "Werk je betaalmethode meteen bij om je chatbots draaiende te houden:",
         "cta": "👉 Werk je betaalmethode hier bij: {portalUrl}",
-        "help": "Als je ergens tegenaan loopt of even wilt sparren over je abonnement, antwoord gerust op deze e-mail. Ik help je graag!",
+        "help": "Als je ergens tegenaan loopt of even wilt sparren over je abonnement, antwoord gewoon op deze e-mail. Ik help je graag!",
         "signature": "Emily 💙"
       }
     }

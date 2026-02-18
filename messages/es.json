@@ -19,26 +19,26 @@
     "signIn": "Iniciar sesión",
     "learnMore": "Más información",
     "viewAll": "Ver todo",
-    "upgrade": "Actualizar",
+    "upgrade": "Mejorar plan",
     "comingSoon": "Próximamente",
     "purchase": "Comprar"
   },
   "landing": {
     "title": "Habla con {name}",
     "titleName": "Emily",
-    "subtitle": "Asistente de chat con IA para tu sitio web. Entrénalo con tu contenido y publícalo en minutos.",
+    "subtitle": "Asistente de chat con IA para tu sitio web. Entrénalo con tu contenido y ponlo en marcha en minutos.",
     "features": {
       "easyTraining": {
         "title": "Entrenamiento fácil",
         "description": "Entrena tu chatbot con texto o voz. No se requieren conocimientos técnicos."
       },
       "instantAnswers": {
-        "title": "Respuestas instantáneas",
-        "description": "Respuestas con IA usando tu base de conocimientos. Rápidas y precisas."
+        "title": "Respuestas al instante",
+        "description": "Respuestas con IA usando tu base de conocimiento. Rápidas y precisas."
       },
       "customizable": {
         "title": "Personalizable",
-        "description": "Adapta a tu marca con colores personalizados y opciones de estilo."
+        "description": "Alinea tu marca con colores y opciones de estilo personalizadas."
       }
     }
   },
@@ -48,32 +48,32 @@
       "welcomeTitle": "Bienvenido/a a Emily",
       "subtitle": "Inicia sesión en tu cuenta",
       "email": "Correo electrónico",
-      "emailPlaceholder": "you@example.com",
+      "emailPlaceholder": "tu@ejemplo.com",
       "password": "Contraseña",
       "passwordPlaceholder": "Tu contraseña",
       "submit": "Iniciar sesión",
       "sendMagicLink": "Enviar enlace mágico",
       "noAccount": "¿No tienes una cuenta?",
-      "signUp": "Registrarse",
+      "signUp": "Registrarte",
       "forgotPassword": "¿Olvidaste tu contraseña?",
       "magicLinkSent": "Hemos enviado un enlace mágico a",
       "checkEmail": "Revisa tu correo",
       "clickLinkToSignIn": "Haz clic en el enlace del correo para iniciar sesión. Puedes cerrar esta página.",
       "backToLogin": "Volver al inicio de sesión",
-      "useMagicLink": "Inicia sesión con enlace mágico en su lugar",
-      "usePassword": "Inicia sesión con contraseña en su lugar",
+      "useMagicLink": "Inicia sesión con enlace mágico",
+      "usePassword": "Inicia sesión con contraseña",
       "error": "No se pudo iniciar sesión. Por favor, revisa tus credenciales."
     },
     "signup": {
       "title": "Únete a Emily",
       "subtitle": "Crea tu cuenta y empieza a construir",
       "email": "Correo electrónico",
-      "emailPlaceholder": "you@example.com",
+      "emailPlaceholder": "tu@ejemplo.com",
       "password": "Contraseña",
       "passwordPlaceholder": "Elige una contraseña segura",
       "passwordHint": "Al menos 6 caracteres",
       "orgName": "Nombre de la organización",
-      "orgNamePlaceholder": "Mi empresa",
+      "orgNamePlaceholder": "Mi Empresa",
       "submit": "Crear cuenta",
       "creating": "Creando cuenta...",
       "hasAccount": "¿Ya tienes una cuenta?",
@@ -81,7 +81,7 @@
       "error": "No se pudo completar el registro. Por favor, inténtalo de nuevo.",
       "createdButSignInFailed": "La cuenta se creó, pero no se pudo iniciar sesión. Por favor, intenta iniciar sesión.",
       "freeTrialTitle": "La prueba gratis incluye:",
-      "freeTrialFeature1": "1 ejecución de entrenamiento (de por vida)",
+      "freeTrialFeature1": "1 entrenamiento (de por vida)",
       "freeTrialFeature2": "50 mensajes de IA (de por vida)",
       "freeTrialFeature3": "1 sitio web"
     },
@@ -90,28 +90,28 @@
   },
   "navigation": {
     "dashboard": "Panel",
-    "settings": "Ajustes",
+    "settings": "Configuración",
     "billing": "Facturación",
     "credits": "Créditos",
     "subscription": "Suscripción",
     "overview": "Resumen",
     "conversations": "Conversaciones",
     "training": "Entrenamiento",
-    "embed": "Insertar",
-    "botSettings": "Ajustes del bot"
+    "embed": "Incrustar",
+    "botSettings": "Configuración del bot"
   },
   "header": {
     "welcome": "Bienvenido/a",
-    "settings": "Ajustes",
+    "settings": "Configuración",
     "signOut": "Cerrar sesión",
-    "signedInAs": "Sesión iniciada como"
+    "signedInAs": "Has iniciado sesión como"
   },
   "dashboard": {
     "title": "Panel",
     "welcome": "Bienvenido/a a Habla con Emily",
     "yourChatbots": "Tus chatbots",
     "noChatbots": "Aún no hay chatbots",
-    "noChatbotsDescription": "Crea tu primer chatbot con IA para insertarlo en tu sitio web",
+    "noChatbotsDescription": "Crea tu primer chatbot con IA para incrustarlo en tu sitio web",
     "createFirstBot": "Crea tu primer chatbot",
     "createNewBot": "Crear nuevo chatbot",
     "currentPlan": "Plan actual",
@@ -124,36 +124,36 @@
     "viewPlans": "Ver planes",
     "cancelingAt": "Se cancelará al final del período",
     "canceledAt": "Suscripción cancelada el {date}",
-    "yourPlanWillDowngrade": "Tu plan bajará a Gratis el {date}.",
-    "botsWillBeDeactivated": "Los bots que superen el límite del plan Gratis se desactivarán.",
+    "yourPlanWillDowngrade": "Tu plan pasará a Gratis el {date}.",
+    "botsWillBeDeactivated": "Los bots que excedan el límite del plan Gratis se desactivarán.",
     "reactivateSubscription": "Reactivar suscripción",
     "continueWithFreePlan": "Continuar con el plan Gratis",
     "subscriptionCanceled": "Suscripción cancelada",
     "freePlanActive": "Actualmente estás en el plan Gratis.",
-    "upgradeToAccess": "Actualiza para acceder a más funciones y chatbots.",
+    "upgradeToAccess": "Mejora tu plan para acceder a más funciones y chatbots.",
     "incompleteBot": "Tienes una configuración de bot incompleta",
     "resumeSetup": "Reanudar configuración",
     "deleteIncompleteBot": "Eliminar",
     "wgCustomerTitle": "Cliente de Wonder George",
-    "wgCustomerMessage": "¡Eres cliente de Wonder George! Tu suscripción a Emily es gratuita e incluye entrenamiento y mensajes ilimitados.",
+    "wgCustomerMessage": "¡Eres cliente de Wonder George! Tu suscripción a Emily es gratuita e incluye entrenamientos y mensajes ilimitados.",
     "wgLinked": "WG VINCULADO",
     "frozen": "congelados",
     "starterCredits": "+100 créditos/mes con suscripción",
     "proCredits": "+250 créditos/mes con suscripción",
     "unlimitedWG": "Ilimitado con Wonder George",
     "freeCredits": "1 crédito = 1 intercambio de mensajes",
-    "upgradeToUnlock": "Actualiza para desbloquear créditos congelados",
+    "upgradeToUnlock": "Mejora tu plan para desbloquear créditos congelados",
     "completeBotCreation": "Completar la creación de {name}",
     "limitReachedTitle": "Límite de chatbots alcanzado",
     "limitReachedMessage": "Has alcanzado el límite de tu plan de {max} chatbots.",
-    "upgradeToProMessage": "Actualiza al plan Pro para crear hasta 5 chatbots.",
-    "upgradePlan": "Actualizar plan",
+    "upgradeToProMessage": "Mejora al plan Pro para crear hasta 5 chatbots.",
+    "upgradePlan": "Mejorar plan",
     "created": "Creado",
     "inactive": "INACTIVO",
     "clickToReactivate": "Haz clic para reactivar",
     "botDeactivatedTitle": "Bot desactivado",
-    "botDeactivatedMessage": "{name} se desactivó cuando terminó tu suscripción. El plan Gratis solo incluye 1 bot activo.",
-    "upgradeToReactivate": "Actualiza a un plan de pago para reactivar este bot y crear hasta 5 bots."
+    "botDeactivatedMessage": "{name} se desactivó cuando finalizó tu suscripción. El plan Gratis solo incluye 1 bot activo.",
+    "upgradeToReactivate": "Mejora a un plan de pago para reactivar este bot y crear hasta 5 bots."
   },
   "onboarding": {
     "welcomeTitle": "Bienvenido/a a Emily",
@@ -161,7 +161,7 @@
     "step1": {
       "title": "¡Bienvenido/a a Habla con Emily!",
       "wgSubscription": "Tienes una suscripción de Wonder George, así que tu suscripción a Emily es gratuita.",
-      "wgCongrats": "¡Felicidades! Vamos a crear tu primer chatbot.",
+      "wgCongrats": "¡Enhorabuena! Vamos a crear tu primer chatbot.",
       "regularIntro": "Vamos a crear tu chatbot con IA en solo unos pasos.",
       "regularDescription": "Tu chatbot estará listo para responder preguntas e interactuar con tus visitantes.",
       "getStarted": "Empezar"
@@ -177,13 +177,13 @@
       "businessName": "Nombre del negocio/sitio web",
       "businessNamePlaceholder": "p. ej., Mi cafetería",
       "websiteUrl": "URL del sitio web (opcional)",
-      "websiteUrlPlaceholder": "p. ej., https://mycoffeeshop.com"
+      "websiteUrlPlaceholder": "p. ej., https://micafeteria.com"
     },
     "step3": {
       "title": "Personaliza tu bot",
       "description": "Ponle nombre a tu bot y elige un color",
       "botName": "Nombre del bot",
-      "botNamePlaceholder": "Mi asistente del sitio web",
+      "botNamePlaceholder": "Asistente de mi sitio web",
       "widgetColor": "Color del widget"
     },
     "step4": {
@@ -206,15 +206,15 @@
       "title": "Sube un documento (opcional)",
       "description": "Sube un archivo .txt con más información para entrenar tu bot. La IA extraerá automáticamente el título y fragmentos de contenido.",
       "uploadPrompt": "Haz clic para subir un archivo .txt",
-      "uploadHint": "El LLM extraerá automáticamente el título y fragmentos de contenido",
+      "uploadHint": "El LLM extraerá automáticamente el título y los fragmentos de contenido",
       "processing": "Procesando documento...",
       "processedSuccess": "¡Documento procesado correctamente!",
       "continueToReview": "Continuar a revisión"
     },
     "productsTitle": "Preguntas sobre productos y servicios",
     "productsQuestion": "Cuéntanos sobre tus productos o servicios",
-    "productsPlaceholder": "Describe lo que ofreces, características principales, precios, etc.",
-    "customerQuestionsTitle": "Preguntas que suelen hacer los clientes",
+    "productsPlaceholder": "Describe lo que ofreces, características clave, precios, etc.",
+    "customerQuestionsTitle": "Preguntas típicas de los clientes",
     "customerQuestionsQuestion": "¿Qué preguntas suelen hacerte los clientes?",
     "customerQuestionsPlaceholder": "Preguntas comunes que tienen tus clientes...",
     "uniqueTitle": "Qué hace único a tu negocio",
@@ -225,7 +225,7 @@
     "additionalPlaceholder": "Cualquier otra información importante...",
     "step7": {
       "title": "Revisar y entrenar",
-      "description": "Tienes {count} elementos de entrenamiento. Revisa y empieza el entrenamiento.",
+      "description": "Tienes {count} elementos de entrenamiento. Revísalos e inicia el entrenamiento.",
       "content": "Contenido",
       "saveChanges": "Guardar cambios",
       "training": "Entrenando tu bot... Esto puede tardar 1-2 minutos",
@@ -239,7 +239,7 @@
       "continue": "Seguir creando"
     },
     "allWebsitesModal": {
-      "title": "Todos los sitios web tienen bots",
+      "title": "Todos los sitios web ya tienen bots",
       "description": "Todos tus sitios web en Wonder George ya tienen un chatbot. Crea un nuevo sitio web en Wonder George para crear un nuevo bot.",
       "ok": "OK"
     }
@@ -290,7 +290,7 @@
       "urlPlaceholder": "https://example.com/page",
       "fileLabel": "Subir archivo",
       "voiceLabel": "Grabar voz",
-      "startRecording": "Empezar a grabar",
+      "startRecording": "Iniciar grabación",
       "stopRecording": "Detener grabación",
       "addItem": "Añadir elemento de entrenamiento",
       "trainBot": "Entrenar chatbot",
@@ -305,7 +305,7 @@
       "confirmDelete": "¿Seguro que quieres eliminar este elemento de entrenamiento?"
     },
     "embed": {
-      "title": "Inserta tu chatbot",
+      "title": "Incrusta tu chatbot",
       "description": "Copia y pega este código en el HTML de tu sitio web, justo antes de la etiqueta de cierre </body>.",
       "copyCode": "Copiar código",
       "copied": "¡Copiado!",
@@ -318,8 +318,8 @@
       "positionTopLeft": "Arriba a la izquierda"
     },
     "settings": {
-      "title": "Ajustes del bot",
-      "general": "Ajustes generales",
+      "title": "Configuración del bot",
+      "general": "Configuración general",
       "botName": "Nombre del bot",
       "botNamePlaceholder": "Emily",
       "websiteDomain": "Dominio del sitio web",
@@ -328,13 +328,13 @@
       "appearance": "Apariencia",
       "welcomeMessage": "Mensaje de bienvenida",
       "welcomeMessagePlaceholder": "¡Hola! ¿En qué puedo ayudarte hoy?",
-      "placeholder": "Marcador de entrada del chat",
+      "placeholder": "Texto del campo de chat",
       "placeholderText": "Escribe tu mensaje...",
       "save": "Guardar cambios",
-      "saved": "Ajustes guardados correctamente",
+      "saved": "Configuración guardada correctamente",
       "danger": "Zona de peligro",
       "deactivateBot": "Desactivar bot",
-      "deactivateDescription": "Deshabilita temporalmente este bot en tu sitio web",
+      "deactivateDescription": "Desactiva temporalmente este bot en tu sitio web",
       "deactivate": "Desactivar",
       "activate": "Activar",
       "deleteBot": "Eliminar bot",
@@ -345,10 +345,10 @@
     }
   },
   "settings": {
-    "title": "Ajustes de la cuenta",
+    "title": "Configuración de la cuenta",
     "subscriptionTitle": "Suscripción",
     "currentPlan": "Plan actual",
-    "viewAllPlans": "Ver todos los planes y opciones de actualización",
+    "viewAllPlans": "Ver todos los planes y opciones de mejora",
     "manageSubscription": "Gestionar suscripción",
     "manageSubscriptionError": "No se pudo acceder al portal de facturación. Por favor, inténtalo de nuevo.",
     "billingTitle": "Facturación y facturas",
@@ -365,7 +365,7 @@
   "subscription": {
     "title": "Planes de suscripción",
     "subscriptionActivated": "¡Suscripción activada!",
-    "welcomeToPlan": "¡Bienvenido/a al plan {plan}! Tus créditos se han añadido.",
+    "welcomeToPlan": "¡Bienvenido/a al plan {plan}! Tus créditos han sido añadidos.",
     "subscriptionCanceled": "Suscripción cancelada",
     "subscriptionCanceledDescription": "Tu suscripción fue cancelada. No se realizaron cargos.",
     "currentPlan": "PLAN ACTUAL",
@@ -373,7 +373,7 @@
     "currentPlanButton": "Plan actual",
     "wonderGeorgeLinked": "Wonder George vinculado",
     "manageBilling": "Gestionar facturación",
-    "perMonth": "por mes",
+    "perMonth": "al mes",
     "recommended": "RECOMENDADO",
     "manage": "Gestionar",
     "managedByWonderGeorge": "Gestionado por Wonder George",
@@ -389,14 +389,14 @@
       },
       "starter": {
         "name": "Starter",
-        "feature1": "100 créditos por mes",
+        "feature1": "100 créditos al mes",
         "feature2": "1 bot",
         "feature3": "Reentrenamiento ilimitado",
         "feature4": "Comprar créditos adicionales"
       },
       "pro": {
         "name": "Pro",
-        "feature1": "250 créditos por mes",
+        "feature1": "250 créditos al mes",
         "feature2": "5 bots",
         "feature3": "Reentrenamiento ilimitado",
         "feature4": "Comprar créditos adicionales"
@@ -404,7 +404,7 @@
     },
     "wonderGeorge": {
       "title": "Gratis para clientes de Wonder George",
-      "description": "Crea tu sitio web con Wonder George y obtén el chatbot de IA de Emily completamente gratis. Wonder George es la mejor solución para gestionar todo tu marketing digital en piloto automático. Wonder George crea tu sitio web en 35 segundos, lo optimiza para el posicionamiento en Google (SEO), publica artículos de blog en piloto automático, prepara publicaciones para redes sociales en piloto automático y traduce todo tu sitio web a cualquier idioma con un solo clic. También incluye una función de e-commerce para vender tus productos, una función de e-learning para vender tus cursos online y un plugin de chófer para gestionar reservas de viajes en tu sitio web. Y además de todo eso, tu suscripción a Emily está incluida en tu suscripción a Wonder George.",
+      "description": "Crea tu sitio web con Wonder George y consigue el chatbot de IA Emily completamente gratis. Wonder George es la mejor solución para gestionar todo tu marketing digital en piloto automático. Wonder George crea tu sitio web en 35 segundos, lo optimiza para el posicionamiento en Google (SEO), publica artículos de blog en piloto automático, prepara publicaciones para redes sociales en piloto automático, traduce tu sitio web completo a cualquier idioma con un solo clic. También tiene una función de e-commerce para vender tus productos, una función de e-learning para vender tus cursos online y un plugin de chófer para gestionar reservas de viajes en tu sitio web. Y además, tu suscripción a Emily está incluida en tu suscripción de Wonder George.",
       "discover": "Descubre Wonder George",
       "linkAccount": "Vincular cuenta de Wonder George (próximamente)"
     }
@@ -417,40 +417,40 @@
     "purchaseCanceledDescription": "Tu compra fue cancelada. No se realizaron cargos.",
     "currentBalance": "Saldo actual",
     "creditsLabel": "créditos",
-    "balanceAmount": "{count} créditos",
+    "balanceAmount": "{count} Créditos",
     "whatAreCredits": "¿Qué son los créditos de IA?",
-    "creditsExplanation": "Los créditos de IA se usan para entrenar tu chatbot con nuevo contenido. Cada elemento de entrenamiento (página, documento o preguntas y respuestas) cuesta 1 crédito. ¡Tu primer entrenamiento siempre es gratis!",
+    "creditsExplanation": "Los créditos de IA se usan para entrenar tu chatbot con contenido nuevo. Cada elemento de entrenamiento (página, documento o preguntas y respuestas) cuesta 1 crédito. ¡Tu primer entrenamiento siempre es gratis!",
     "whenYouNeed": "Cuándo necesitas más créditos",
-    "needMoreExplanation": "Necesitarás créditos al añadir contenido nuevo para entrenar tu bot. ¡Compra créditos en paquetes para ahorrar!",
-    "purchasePacks": "Comprar paquetes de créditos",
-    "purchaseDescription": "Potencia tu chatbot con IA con créditos adicionales. Todos los precios en EUR. Los créditos nunca caducan y se acumulan cada mes.",
+    "needMoreExplanation": "Necesitarás créditos al añadir contenido nuevo para entrenar tu bot. ¡Compra créditos en packs a continuación para ahorrar!",
+    "purchasePacks": "Comprar packs de créditos",
+    "purchaseDescription": "Impulsa tu chatbot con IA con créditos adicionales. Todos los precios en EUR. Los créditos nunca caducan y se acumulan cada mes.",
     "requiresSubscription": "Se requiere suscripción activa",
-    "requiresSubscriptionMessage": "Necesitas una suscripción Pro activa o un plan de Wonder George para comprar paquetes de créditos.",
+    "requiresSubscriptionMessage": "Necesitas una suscripción Pro activa o un plan de Wonder George para comprar packs de créditos.",
     "viewPlans": "Ver planes de suscripción",
-    "upgradeFirst": "Por favor, primero actualiza a un plan de pago",
-    "creditEquation": "1 crédito = 1 intercambio de mensajes con IA • Los créditos se acumulan mes a mes",
+    "upgradeFirst": "Por favor, primero mejora a un plan de pago",
+    "creditEquation": "1 crédito = 1 intercambio de mensajes con IA • Los créditos se acumulan mes tras mes",
     "howCreditsWork": "Cómo funcionan los créditos",
     "creditInfo1": "Cada mensaje del visitante y la respuesta de la IA cuentan como 1 crédito",
-    "creditInfo2": "Los créditos se acumulan mes a mes y nunca caducan",
+    "creditInfo2": "Los créditos se acumulan mes tras mes y nunca caducan",
     "creditInfo3": "Los suscriptores Pro reciben 100 créditos gratis cada mes",
-    "creditInfo4": "Compra paquetes más grandes para obtener mejor valor por mensaje",
+    "creditInfo4": "Compra packs más grandes para obtener mejor valor por mensaje",
     "packs": {
       "small": {
-        "name": "Paquete Starter",
-        "credits": "100 créditos",
+        "name": "Pack Starter",
+        "credits": "100 Créditos",
         "price": "$4.99",
         "description": "Perfecto para pequeñas actualizaciones"
       },
       "medium": {
-        "name": "Paquete popular",
-        "credits": "500 créditos",
+        "name": "Pack Popular",
+        "credits": "500 Créditos",
         "price": "$19.99",
         "description": "La mejor relación calidad-precio para negocios en crecimiento",
         "badge": "Mejor valor"
       },
       "large": {
-        "name": "Paquete Pro",
-        "credits": "1000 créditos",
+        "name": "Pack Pro",
+        "credits": "1000 Créditos",
         "price": "$34.99",
         "description": "Para usuarios avanzados"
       }
@@ -467,19 +467,19 @@
     "loading": "Cargando...",
     "purchaseError": "No se pudo iniciar el pago. Por favor, inténtalo de nuevo.",
     "starter": {
-      "name": "Paquete Starter"
+      "name": "Pack Starter"
     },
     "growth": {
-      "name": "Paquete Growth"
+      "name": "Pack Growth"
     },
     "business": {
-      "name": "Paquete Business"
+      "name": "Pack Business"
     }
   },
   "trainingCostModal": {
     "title": "Confirmar coste del entrenamiento",
     "firstTrainingFree": "🎉 ¡El primer entrenamiento es gratis!",
-    "firstTrainingDescription": "Es la primera vez que entrenas este bot, así que va por nuestra cuenta. Procesará {count} elementos de contenido.",
+    "firstTrainingDescription": "Es la primera vez que entrenas este bot, así que corre por nuestra cuenta. Procesará {count} elementos de contenido.",
     "costDescription": "Entrenar tu chatbot procesará {count} elementos de contenido.",
     "cost": "Coste:",
     "credits": "{count} créditos",
@@ -505,7 +505,7 @@
     "hoursAgo": "hace {count} h",
     "daysAgo": "hace {count} d",
     "errorMessage": "Lo siento, encontré un error. Por favor, inténtalo de nuevo.",
-    "botInactive": "Este chatbot está inactivo actualmente"
+    "botInactive": "Este chatbot está inactivo en este momento"
   },
   "superadmin": {
     "title": "Panel de superadmin",
@@ -545,7 +545,7 @@
       "organizationInfo": "Información de la organización",
       "name": "Nombre",
       "plan": "Plan",
-      "maxBots": "Máx. de bots",
+      "maxBots": "Máx. bots",
       "creditsBalance": "Saldo de créditos",
       "frozenCredits": "Créditos congelados",
       "users": "Usuarios",
@@ -565,7 +565,7 @@
   "emails": {
     "paymentFailed": {
       "subject": {
-        "first": "¡Ups! No pudimos procesar tu pago",
+        "first": "Ups, no pudimos procesar tu pago",
         "reminder": "Recordatorio rápido: el pago sigue pendiente (quedan {days} días)",
         "urgent": "⚠️ Urgente: Por favor, actualiza tus datos de pago"
       },
@@ -573,11 +573,11 @@
       "greetingReminder": "Hola,",
       "firstAttempt": "Solo quería avisarte: intentamos procesar tu pago, pero no se pudo completar. No te preocupes, estas cosas pasan.",
       "retryInfo": "¿Podrías tomarte un momento para actualizar tus datos de pago? Reintentaremos automáticamente durante los próximos {days} días (este fue el intento {attempt} de varios).",
-      "reminderMessage": "Este es un recordatorio amistoso: seguimos teniendo problemas para procesar tu pago. Tu suscripción se renovará pronto, así que actualiza tu método de pago para evitar interrupciones.",
-      "urgentMessage": "Este es un recordatorio urgente: el pago de tu suscripción ha fallado y este es el último intento de reintento. Para evitar interrupciones del servicio, actualiza tu método de pago de inmediato.",
+      "reminderMessage": "Este es un recordatorio amistoso de que seguimos teniendo problemas para procesar tu pago. Tu suscripción se renovará pronto, así que por favor actualiza tu método de pago para evitar interrupciones.",
+      "urgentMessage": "Este es un recordatorio urgente de que el pago de tu suscripción ha fallado y este es el último intento de reintento. Para evitar interrupciones del servicio, por favor actualiza tu método de pago de inmediato.",
       "updatePayment": "👉 Actualiza tu método de pago aquí: {link}",
-      "helpMessage": "Si crees que es un error o necesitas ayuda, responde a este correo: aquí estoy.",
-      "helpMessageReminder": "Si tienes algún problema, dímelo y listo.",
+      "helpMessage": "Si crees que esto es un error o necesitas ayuda, responde a este correo: estoy aquí.",
+      "helpMessageReminder": "Si tienes problemas, dímelo y lo revisamos.",
       "helpMessageUrgent": "Si necesitas ayuda, por favor contacta con soporte.",
       "signature": "Gracias,\nEmily 💙",
       "signatureReminder": "Saludos,\nEmily 💙",
@@ -589,14 +589,14 @@
     "unauthorized": "No estás autorizado/a para realizar esta acción.",
     "notFound": "No se encontró el recurso solicitado.",
     "networkError": "Error de red. Por favor, revisa tu conexión.",
-    "validationError": "Por favor, revisa lo que has introducido e inténtalo de nuevo.",
+    "validationError": "Por favor, revisa tus datos e inténtalo de nuevo.",
     "insufficientCredits": "Créditos insuficientes. Por favor, compra más créditos para continuar.",
-    "botLimitReached": "Has alcanzado tu límite de bots. Actualiza para crear más bots.",
-    "trainingFailed": "El entrenamiento falló. Por favor, inténtalo de nuevo más tarde."
+    "botLimitReached": "Has alcanzado tu límite de bots. Mejora tu plan para crear más bots.",
+    "trainingFailed": "El entrenamiento falló. Por favor, inténtalo más tarde."
   },
   "validation": {
     "required": "Este campo es obligatorio",
-    "email": "Por favor, introduce un correo electrónico válido",
+    "email": "Por favor, introduce una dirección de correo válida",
     "url": "Por favor, introduce una URL válida",
     "minLength": "Debe tener al menos {min} caracteres",
     "maxLength": "No debe tener más de {max} caracteres",
@@ -615,23 +615,23 @@
     "deactivate": "Desactivar",
     "activate": "Activar",
     "trainedAndReady": "¡Tu chatbot está entrenado y listo!",
-    "notTrainedYet": "Aún no está entrenado",
-    "trainToEnable": "Entrena tu chatbot para habilitar las respuestas de IA.",
+    "notTrainedYet": "Aún no entrenado",
+    "trainToEnable": "Entrena tu chatbot para habilitar respuestas con IA.",
     "addTrainingContent": "Añadir contenido de entrenamiento",
     "embedCode": "Código de inserción",
     "embedInstructions": "Añade este código al HTML de tu sitio web, justo antes de la etiqueta de cierre </body>:",
-    "widgetWillAppear": "El widget aparecerá en tu sitio, pero entrena tu chatbot para habilitar las respuestas de IA.",
-    "trainingStatusTitle": "ESTADO DE ENTRENAMIENTO",
+    "widgetWillAppear": "El widget aparecerá en tu sitio, pero entrena tu chatbot para habilitar respuestas con IA.",
+    "trainingStatusTitle": "ESTADO DEL ENTRENAMIENTO",
     "trainingItems": "{count} elementos de entrenamiento",
-    "notTrained": "Sin entrenar",
+    "notTrained": "No entrenado",
     "conversationsTitle": "CONVERSACIONES",
     "totalConversations": "Total de conversaciones",
     "widgetStatusTitle": "ESTADO DEL WIDGET",
     "ready": "Listo",
     "notReady": "No listo",
     "widgetIsLive": "El widget está activo",
-    "trainBotFirst": "Primero entrena tu bot",
-    "toggleWidgetError": "No se pudo activar/desactivar el widget. Por favor, inténtalo de nuevo.",
+    "trainBotFirst": "Entrena tu bot primero",
+    "toggleWidgetError": "No se pudo cambiar el estado del widget. Por favor, inténtalo de nuevo.",
     "status": {
       "completed": "Completado",
       "pending": "Pendiente",
@@ -643,10 +643,10 @@
     "overview": "Resumen",
     "training": "Entrenamiento",
     "conversations": "Conversaciones",
-    "settings": "Ajustes",
+    "settings": "Configuración",
     "delete": "Eliminar",
     "deleteModalTitle": "⚠️ ¿Eliminar bot?",
-    "deleteModalDescription": "Esto eliminará permanentemente {name} y todos los datos asociados, incluidos:",
+    "deleteModalDescription": "Esto eliminará permanentemente {name} y todos los datos asociados, incluyendo:",
     "deleteItem1": "Todos los datos de entrenamiento",
     "deleteItem2": "Todas las conversaciones y mensajes",
     "deleteItem3": "Embeddings vectoriales",
@@ -668,8 +668,8 @@
     "record": "Grabar",
     "howToTrain": "Cómo entrenar tu bot",
     "step1": "Añade elementos de entrenamiento con texto o voz",
-    "step2": "Cada elemento debe cubrir un tema de forma clara",
-    "step3": "Haz clic en \"Entrenar chatbot\" cuando esté listo",
+    "step2": "Cada elemento debe cubrir un tema con claridad",
+    "step3": "Haz clic en \"Entrenar chatbot\" cuando estés listo/a",
     "step4": "El entrenamiento reconstruye el conocimiento de tu bot",
     "trainingItems": "Elementos de entrenamiento ({count})",
     "training": "Entrenando...",
@@ -711,12 +711,12 @@
     "gotIt": "Entendido"
   },
   "botSettings": {
-    "title": "Ajustes del chatbot",
+    "title": "Configuración del chatbot",
     "preview": "Vista previa",
     "saving": "Guardando...",
     "saved": "¡Guardado!",
     "saveChanges": "Guardar cambios",
-    "settingsSaved": "¡Ajustes guardados correctamente!",
+    "settingsSaved": "¡Configuración guardada correctamente!",
     "widgetStatusTitle": "Estado del widget",
     "widgetStatusDescription": "Controla si el widget de tu chatbot está activo en tu sitio web de Wonder George",
     "widgetIs": "El widget está {status}",
@@ -727,15 +727,15 @@
     "processing": "Procesando...",
     "deactivate": "Desactivar",
     "activate": "Activar",
-    "toggleWidgetError": "No se pudo activar/desactivar el widget. Por favor, inténtalo de nuevo.",
+    "toggleWidgetError": "No se pudo cambiar el estado del widget. Por favor, inténtalo de nuevo.",
     "widgetStyleTitle": "Estilo del widget",
     "widgetStyleDescription": "Elige cómo se ve tu widget de chat para los visitantes en tu sitio web",
-    "modernLabel": "Audaz y neo-brutalista",
+    "modernLabel": "Atrevido y neo-brutalista",
     "modern": "Moderno",
-    "modernDescription": "Bordes marcados, sombras fuertes, diseño llamativo",
+    "modernDescription": "Bordes marcados, sombras fuertes, diseño destacado",
     "neutralLabel": "Limpio y minimalista",
     "neutral": "Neutro",
-    "neutralDescription": "Diseño limpio y sutil, estilo Intercom",
+    "neutralDescription": "Diseño limpio y sutil como Intercom",
     "widgetMessagesTitle": "Mensajes del widget",
     "widgetMessagesDescription": "Personaliza los mensajes que ven los visitantes cuando abren el widget de chat",
     "headerSubtitle": "Subtítulo del encabezado",
@@ -743,7 +743,7 @@
     "headerSubtitleHint": "Se muestra debajo del nombre de tu bot en el encabezado",
     "welcomeTitle": "Título de bienvenida",
     "welcomeTitlePlaceholder": "¡Hola! 👋",
-    "welcomeTitleHint": "Primer mensaje cuando se abre el chat",
+    "welcomeTitleHint": "Primer mensaje al abrir el chat",
     "welcomeMessage": "Mensaje de bienvenida",
     "welcomeMessagePlaceholder": "¿Cómo podemos ayudarte hoy?",
     "welcomeMessageHint": "Subtítulo que se muestra debajo del título de bienvenida",
@@ -751,7 +751,7 @@
     "displayName": "Nombre visible",
     "displayNamePlaceholder": "Mi bot",
     "domain": "Dominio",
-    "domainPlaceholder": "https://mywebsite.com",
+    "domainPlaceholder": "https://misitioweb.com",
     "primaryColor": "Color principal",
     "dangerZone": "Zona de peligro",
     "dangerZoneDescription": "Eliminar este chatbot borrará todos los datos de entrenamiento, conversaciones y ajustes. Esta acción no se puede deshacer.",
@@ -763,28 +763,39 @@
     "hoursAgo": "hace {count} h",
     "daysAgo": "hace {count} d",
     "weeksAgo": "hace {count} sem",
-    "monthsAgo": "hace {count} мес",
+    "monthsAgo": "hace {count} mes",
     "yearsAgo": "hace {count} a"
   },
   "email": {
     "fromName": "Emily",
     "footer": "Talk to Emily - Tu plataforma de chatbots con IA",
+    "verification": {
+      "subject": "Verifica tu correo para TalkToEmily",
+      "greeting": "¡Hola!",
+      "welcome": "¡Bienvenido/a a TalkToEmily! Nos alegra tenerte con nosotros.",
+      "action": "Por favor, verifica tu dirección de correo haciendo clic en el enlace de abajo:",
+      "expiry": "Este enlace caducará en 24 horas.",
+      "postVerification": "Una vez verificado, podrás acceder a tu panel y empezar a crear tu chatbot con IA para \"{orgName}\".",
+      "ignoreIfNotYou": "Si no creaste una cuenta, puedes ignorar este correo con total tranquilidad.",
+      "closing": "Saludos cordiales,",
+      "signature": "El equipo de TalkToEmily"
+    },
     "paymentFailure": {
       "attempt1": {
-        "subject": "¡Ups! No pudimos procesar tu pago",
+        "subject": "Ups, no pudimos procesar tu pago",
         "greeting": "Hola {customerName},",
         "intro": "Solo quería avisarte: intentamos procesar tu pago, pero no se pudo completar. No te preocupes, estas cosas pasan.",
         "action": "¿Podrías tomarte un momento para actualizar tus datos de pago? Reintentaremos automáticamente durante los próximos {daysRemaining} días (este fue el intento 1 de varios).",
         "cta": "👉 Actualiza tu método de pago aquí: {portalUrl}",
-        "help": "Si crees que es un error o necesitas ayuda, responde a este correo: aquí estoy.",
+        "help": "Si crees que esto es un error o necesitas ayuda, responde a este correo: estoy aquí.",
         "closing": "Gracias,",
         "signature": "Emily 💙"
       },
       "attempt2to3": {
         "subject": "Recordatorio rápido: el pago sigue pendiente",
         "greeting": "Hola {customerName},",
-        "intro": "Solo paso a comprobar de nuevo: seguimos teniendo problemas para procesar tu pago (intento {attemptCount}).",
-        "action": "Seguiremos intentando durante {daysRemaining} días más, pero quería asegurarme de que lo supieras. Cuanto antes actualices tu información de pago, antes podremos volver a encarrilarlo todo.",
+        "intro": "Solo para volver a revisar: seguimos teniendo problemas para procesar tu pago (intento {attemptCount}).",
+        "action": "Seguiremos intentándolo durante {daysRemaining} días más, pero quería asegurarme de que lo supieras. Cuanto antes actualices tu información de pago, antes podremos dejar todo funcionando de nuevo.",
         "cta": "👉 Actualiza tu método de pago aquí: {portalUrl}",
         "closing": "¡Gracias por ser genial!",
         "signature": "Emily 💙"
@@ -792,18 +803,18 @@
       "attempt4plus": {
         "subject": "⚠️ Urgente: Por favor, actualiza tus datos de pago",
         "greeting": "Hola {customerName},",
-        "intro": "De verdad necesito tu ayuda: hemos intentado {attemptCount} veces procesar tu pago y todavía no se ha podido completar.",
-        "urgentWithDays": "Nos queda aproximadamente {daysRemaining} día{plural} antes de que tu suscripción se cancele y tus bots se desactiven.",
+        "intro": "De verdad necesito tu ayuda: hemos intentado {attemptCount} veces procesar tu pago y sigue sin completarse.",
+        "urgentWithDays": "Nos quedan aproximadamente {daysRemaining} día{plural} antes de que tu suscripción se cancele y tus bots se desactiven.",
         "urgentFinal": "Este es nuestro último intento antes de que tu suscripción se cancele.",
         "action": "Por favor, actualiza tu método de pago ahora mismo para mantener tus chatbots en funcionamiento:",
         "cta": "👉 Actualiza tu método de pago aquí: {portalUrl}",
-        "help": "Si tienes algún problema o quieres hablar sobre tu suscripción, responde a este correo. Estoy aquí para ayudarte.",
+        "help": "Si tienes algún problema o quieres hablar sobre tu suscripción, responde a este correo. ¡Estoy aquí para ayudarte!",
         "signature": "Emily 💙"
       }
     }
   },
   "footer": {
-    "copyright": "© {year} TalkToEmily de",
+    "copyright": "© {year} TalkToEmily por",
     "company": "Alsatech SAS",
     "wonderGeorge": "Wonder George",
     "legal": "Legal",

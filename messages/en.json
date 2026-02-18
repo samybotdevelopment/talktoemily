@@ -967,6 +967,17 @@
   "email": {
     "fromName": "Emily",
     "footer": "Talk to Emily - Your AI Chatbot Platform",
+    "verification": {
+      "subject": "Verify your email for TalkToEmily",
+      "greeting": "Hi there!",
+      "welcome": "Welcome to TalkToEmily! We're excited to have you on board.",
+      "action": "Please verify your email address by clicking the link below:",
+      "expiry": "This link will expire in 24 hours.",
+      "postVerification": "Once verified, you'll be able to access your dashboard and start building your AI chatbot for \"{orgName}\".",
+      "ignoreIfNotYou": "If you didn't create an account, you can safely ignore this email.",
+      "closing": "Best regards,",
+      "signature": "The TalkToEmily Team"
+    },
     "paymentFailure": {
       "attempt1": {
         "subject": "Oops! We couldn't process your payment",

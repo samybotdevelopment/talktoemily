@@ -13,32 +13,32 @@
     "next": "İleri",
     "previous": "Önceki",
     "continue": "Devam et",
-    "backToDashboard": "← Kontrol Paneline Dön",
+    "backToDashboard": "← Panele Dön",
     "getStarted": "Başlayın",
     "getStartedFree": "Ücretsiz Başlayın",
     "signIn": "Giriş Yap",
     "learnMore": "Daha Fazla Bilgi",
     "viewAll": "Tümünü Gör",
     "upgrade": "Yükselt",
-    "comingSoon": "Yakında",
+    "comingSoon": "Çok Yakında",
     "purchase": "Satın Al"
   },
   "landing": {
     "title": "{name} ile konuş",
     "titleName": "Emily",
-    "subtitle": "Web siteniz için yapay zekâ destekli sohbet asistanı. İçeriğinizle eğitin, dakikalar içinde yayına alın.",
+    "subtitle": "Web siteniz için yapay zeka destekli sohbet asistanı. İçeriğinizle eğitin, dakikalar içinde yayına alın.",
     "features": {
       "easyTraining": {
         "title": "Kolay Eğitim",
-        "description": "Chatbot’unuzu metin veya sesle eğitin. Teknik bilgi gerekmez."
+        "description": "Chatbot’unuzu metinle veya sesle eğitin. Teknik bilgi gerekmez."
       },
       "instantAnswers": {
         "title": "Anında Yanıtlar",
-        "description": "Bilgi tabanınızı kullanarak yapay zekâ destekli yanıtlar. Hızlı ve doğru."
+        "description": "Bilgi tabanınızı kullanarak yapay zeka destekli yanıtlar. Hızlı ve doğru."
       },
       "customizable": {
         "title": "Özelleştirilebilir",
-        "description": "Özel renkler ve stil seçenekleriyle markanıza uyarlayın."
+        "description": "Özel renkler ve stil seçenekleriyle markanıza uyum sağlayın."
       }
     }
   },
@@ -54,9 +54,9 @@
       "submit": "Giriş yap",
       "sendMagicLink": "Sihirli bağlantı gönder",
       "noAccount": "Hesabınız yok mu?",
-      "signUp": "Kaydol",
+      "signUp": "Kayıt ol",
       "forgotPassword": "Şifrenizi mi unuttunuz?",
-      "magicLinkSent": "Sihirli bağlantıyı şu adrese gönderdik:",
+      "magicLinkSent": "Sihirli bağlantıyı şuraya gönderdik:",
       "checkEmail": "E-postanızı kontrol edin",
       "clickLinkToSignIn": "Giriş yapmak için e-postadaki bağlantıya tıklayın. Bu sayfayı kapatabilirsiniz.",
       "backToLogin": "Girişe dön",
@@ -72,7 +72,7 @@
       "password": "Şifre",
       "passwordPlaceholder": "Güçlü bir şifre seçin",
       "passwordHint": "En az 6 karakter",
-      "orgName": "Kuruluş Adı",
+      "orgName": "Kurum Adı",
       "orgNamePlaceholder": "Şirketim",
       "submit": "Hesap oluştur",
       "creating": "Hesap oluşturuluyor...",
@@ -82,14 +82,14 @@
       "createdButSignInFailed": "Hesap oluşturuldu ancak giriş yapılamadı. Lütfen giriş yapmayı tekrar deneyin.",
       "freeTrialTitle": "Ücretsiz Deneme Şunları İçerir:",
       "freeTrialFeature1": "1 eğitim çalıştırması (ömür boyu)",
-      "freeTrialFeature2": "50 yapay zekâ mesajı (ömür boyu)",
+      "freeTrialFeature2": "50 AI mesajı (ömür boyu)",
       "freeTrialFeature3": "1 web sitesi"
     },
     "signOut": "Çıkış Yap",
     "signOutConfirm": "Çıkış yapmak istediğinizden emin misiniz?"
   },
   "navigation": {
-    "dashboard": "Kontrol Paneli",
+    "dashboard": "Panel",
     "settings": "Ayarlar",
     "billing": "Faturalandırma",
     "credits": "Krediler",
@@ -97,21 +97,21 @@
     "overview": "Genel Bakış",
     "conversations": "Konuşmalar",
     "training": "Eğitim",
-    "embed": "Gömme",
+    "embed": "Göm",
     "botSettings": "Bot Ayarları"
   },
   "header": {
     "welcome": "Hoş geldiniz",
     "settings": "Ayarlar",
     "signOut": "Çıkış Yap",
-    "signedInAs": "Giriş yapan"
+    "signedInAs": "Şu hesapla giriş yapıldı:"
   },
   "dashboard": {
-    "title": "Kontrol Paneli",
+    "title": "Panel",
     "welcome": "Talk to Emily’ye Hoş Geldiniz",
     "yourChatbots": "Chatbot’larınız",
     "noChatbots": "Henüz chatbot yok",
-    "noChatbotsDescription": "Web sitenize gömmek için ilk yapay zekâ chatbot’unuzu oluşturun",
+    "noChatbotsDescription": "Web sitenize gömmek için ilk yapay zeka chatbot’unuzu oluşturun",
     "createFirstBot": "İlk Chatbot’unuzu Oluşturun",
     "createNewBot": "Yeni Chatbot Oluştur",
     "currentPlan": "Mevcut Plan",
@@ -119,8 +119,8 @@
     "planStarter": "Starter",
     "planPro": "Pro",
     "planLabel": "PLAN",
-    "creditsLabel": "KREDİLER",
-    "botsActive": "{count} / {max} bot aktif",
+    "creditsLabel": "KREDİ",
+    "botsActive": "{count}/{max} bot aktif",
     "viewPlans": "Planları Gör",
     "cancelingAt": "Dönem sonunda iptal edilecek",
     "canceledAt": "Abonelik {date} tarihinde iptal edildi",
@@ -135,25 +135,25 @@
     "resumeSetup": "Kuruluma Devam Et",
     "deleteIncompleteBot": "Sil",
     "wgCustomerTitle": "Wonder George Müşterisi",
-    "wgCustomerMessage": "Wonder George müşterisisiniz! Emily aboneliğiniz ücretsiz ve sınırsız eğitim ile mesajlaşma içerir.",
-    "wgLinked": "WG BAĞLI",
+    "wgCustomerMessage": "Wonder George müşterisisiniz! Emily aboneliğiniz ücretsizdir ve sınırsız eğitim ile mesaj içerir.",
+    "wgLinked": "WG BAĞLANDI",
     "frozen": "dondurulmuş",
     "starterCredits": "Abonelikle +100 kredi/ay",
     "proCredits": "Abonelikle +250 kredi/ay",
     "unlimitedWG": "Wonder George ile sınırsız",
-    "freeCredits": "1 kredi = 1 mesaj alışverişi",
-    "upgradeToUnlock": "Dondurulmuş kredileri açmak için yükseltin",
-    "completeBotCreation": "{name} oluşturmayı tamamla",
-    "limitReachedTitle": "Chatbot Limiti Doldu",
-    "limitReachedMessage": "Plan limitiniz olan {max} chatbot sayısına ulaştınız.",
-    "upgradeToProMessage": "En fazla 5 chatbot oluşturmak için Pro plana yükseltin.",
+    "freeCredits": "1 kredi = 1 mesajlaşma değişimi",
+    "upgradeToUnlock": "Dondurulmuş kredilerin kilidini açmak için yükseltin",
+    "completeBotCreation": "{name} oluşturmayı tamamlayın",
+    "limitReachedTitle": "Chatbot Limitine Ulaşıldı",
+    "limitReachedMessage": "Plan limitiniz olan {max} chatbot’a ulaştınız.",
+    "upgradeToProMessage": "5 adede kadar chatbot oluşturmak için Pro plana yükseltin.",
     "upgradePlan": "Planı Yükselt",
     "created": "Oluşturuldu",
-    "inactive": "PASİF",
+    "inactive": "ETKİN DEĞİL",
     "clickToReactivate": "Yeniden etkinleştirmek için tıklayın",
-    "botDeactivatedTitle": "Bot Devre Dışı",
+    "botDeactivatedTitle": "Bot Devre Dışı Bırakıldı",
     "botDeactivatedMessage": "Aboneliğiniz sona erdiğinde {name} devre dışı bırakıldı. Ücretsiz plan yalnızca 1 aktif bot içerir.",
-    "upgradeToReactivate": "Bu botu yeniden etkinleştirmek ve en fazla 5 bot oluşturmak için ücretli plana yükseltin."
+    "upgradeToReactivate": "Bu botu yeniden etkinleştirmek ve 5 adede kadar bot oluşturmak için ücretli bir plana yükseltin."
   },
   "onboarding": {
     "welcomeTitle": "Emily’ye Hoş Geldiniz",
@@ -162,8 +162,8 @@
       "title": "Talk to Emily’ye Hoş Geldiniz!",
       "wgSubscription": "Wonder George aboneliğiniz var, bu yüzden Emily aboneliğiniz ücretsizdir.",
       "wgCongrats": "Tebrikler! İlk chatbot’unuzu oluşturalım.",
-      "regularIntro": "Yapay zekâ destekli chatbot’unuzu sadece birkaç adımda oluşturalım.",
-      "regularDescription": "Chatbot’unuz soruları yanıtlamaya ve ziyaretçilerinizle etkileşime girmeye hazır olacak.",
+      "regularIntro": "Yapay zeka destekli chatbot’unuzu sadece birkaç adımda oluşturalım.",
+      "regularDescription": "Chatbot’unuz soruları yanıtlamaya ve ziyaretçilerinizle etkileşime geçmeye hazır olacak.",
       "getStarted": "Başlayın"
     },
     "step2": {
@@ -172,28 +172,28 @@
       "loadingWebsites": "Web siteleriniz yükleniyor...",
       "noWebsites": "Web sitesi bulunamadı",
       "chatbotAlreadyCreated": "Chatbot zaten oluşturuldu",
-      "businessInfo": "İşiniz Hakkında Bize Bilgi Verin",
+      "businessInfo": "İşletmeniz Hakkında Bilgi Verin",
       "businessInfoDescription": "Bu bilgileri chatbot’unuzu kurmak için kullanacağız",
       "businessName": "İşletme/Web Sitesi Adı",
       "businessNamePlaceholder": "örn. Kahve Dükkanım",
-      "websiteUrl": "Web Sitesi URL’si (Opsiyonel)",
+      "websiteUrl": "Web Sitesi URL’si (İsteğe bağlı)",
       "websiteUrlPlaceholder": "örn. https://mycoffeeshop.com"
     },
     "step3": {
       "title": "Botunuzu Özelleştirin",
-      "description": "Botunuza isim verin ve bir renk seçin",
+      "description": "Botunuza bir isim verin ve bir renk seçin",
       "botName": "Bot Adı",
-      "botNamePlaceholder": "Web Sitesi Asistanım",
+      "botNamePlaceholder": "Web Sitem Asistanı",
       "widgetColor": "Widget Rengi"
     },
     "step4": {
-      "title": "{botName} eğitimine başlayalım",
+      "title": "{botName} için eğitime başlayalım",
       "description": "Chatbot’unuzu eğitmek için web sitenizden verileri çekeceğiz",
-      "loading": "Web sitenizden veri çekiliyor...",
+      "loading": "Web sitenizden veriler çekiliyor...",
       "button": "Web Sitesi İçeriğini Çek"
     },
     "step5": {
-      "sectionProgress": "{total} bölümden {current}. bölüm",
+      "sectionProgress": "Bölüm {current} / {total}",
       "description": "Bu bölüm için eğitim içeriği ekleyin. Birden fazla giriş ekleyebilirsiniz.",
       "title": "Başlık",
       "titlePlaceholder": "Bu içerik için bir başlık girin...",
@@ -203,33 +203,33 @@
       "nextSection": "Sonraki Bölüm"
     },
     "step6": {
-      "title": "Bir Belge Yükleyin (Opsiyonel)",
-      "description": "Botunuzu eğitmek için daha fazla bilgi içeren bir .txt dosyası yükleyin. Yapay zekâ başlık ve içerik parçalarını otomatik olarak çıkaracaktır.",
+      "title": "Belge Yükleyin (İsteğe bağlı)",
+      "description": "Botunuzu eğitmek için daha fazla bilgi içeren bir .txt dosyası yükleyin. AI başlık ve içerik parçalarını otomatik olarak çıkaracaktır.",
       "uploadPrompt": ".txt dosyası yüklemek için tıklayın",
-      "uploadHint": "LLM başlığı ve içerik parçalarını otomatik olarak çıkarır",
+      "uploadHint": "LLM başlık ve içerik parçalarını otomatik olarak çıkarır",
       "processing": "Belge işleniyor...",
       "processedSuccess": "Belge başarıyla işlendi!",
-      "continueToReview": "Gözden Geçirmeye Devam Et"
+      "continueToReview": "İncelemeye Devam Et"
     },
     "productsTitle": "Ürün ve Hizmet Soruları",
     "productsQuestion": "Ürünleriniz veya hizmetleriniz hakkında bize bilgi verin",
     "productsPlaceholder": "Neler sunduğunuzu, öne çıkan özellikleri, fiyatlandırmayı vb. açıklayın.",
     "customerQuestionsTitle": "Müşterilerin Genellikle Sorduğu Sorular",
-    "customerQuestionsQuestion": "Müşteriler size genellikle hangi soruları soruyor?",
+    "customerQuestionsQuestion": "Müşteriler size genellikle hangi soruları sorar?",
     "customerQuestionsPlaceholder": "Müşterilerinizin sık sorduğu sorular...",
-    "uniqueTitle": "İşinizi Benzersiz Kılan Nedir?",
-    "uniqueQuestion": "İşinizi benzersiz kılan nedir?",
-    "uniquePlaceholder": "Rakiplerden sizi ayıran şeyler...",
-    "additionalTitle": "Ek Bilgi",
-    "additionalQuestion": "Chatbot’un işiniz hakkında bilmesini istediğiniz başka bir şey var mı?",
+    "uniqueTitle": "İşletmenizi Benzersiz Yapan Nedir",
+    "uniqueQuestion": "İşletmenizi benzersiz yapan nedir?",
+    "uniquePlaceholder": "Sizi rakiplerinizden ayıran şey...",
+    "additionalTitle": "Ek Bilgiler",
+    "additionalQuestion": "Chatbot’un işletmeniz hakkında bilmesini istediğiniz başka bir şey var mı?",
     "additionalPlaceholder": "Diğer önemli bilgiler...",
     "step7": {
-      "title": "Gözden Geçir & Eğit",
-      "description": "{count} eğitim öğeniz var. Gözden geçirin ve eğitimi başlatın.",
+      "title": "İncele ve Eğit",
+      "description": "{count} eğitim öğeniz var. İnceleyin ve eğitimi başlatın.",
       "content": "İçerik",
       "saveChanges": "Değişiklikleri Kaydet",
       "training": "Botunuz eğitiliyor... Bu işlem 1-2 dakika sürebilir",
-      "launch": "Yapay Zekâ Eğitimini Başlat"
+      "launch": "AI Eğitimini Başlat"
     },
     "cancelBotCreation": "Bot Oluşturmayı İptal Et",
     "cancelModal": {
@@ -240,7 +240,7 @@
     },
     "allWebsitesModal": {
       "title": "Tüm Web Sitelerinde Bot Var",
-      "description": "Wonder George üzerindeki tüm web sitelerinizde zaten bir chatbot var. Yeni bir bot oluşturmak için Wonder George’ta yeni bir web sitesi oluşturun.",
+      "description": "Wonder George üzerindeki tüm web sitelerinizde zaten bir chatbot var. Yeni bir bot oluşturmak için Wonder George’da yeni bir web sitesi oluşturun.",
       "ok": "Tamam"
     }
   },
@@ -249,10 +249,10 @@
       "title": "Bot Genel Bakış",
       "status": "Durum",
       "active": "Aktif",
-      "inactive": "Pasif",
+      "inactive": "Etkin değil",
       "conversations": "Konuşmalar",
       "messages": "Mesajlar",
-      "lastTrained": "Son Eğitim",
+      "lastTrained": "Son Eğitilme",
       "never": "Hiç",
       "trainBot": "Botu Eğit",
       "testBot": "Botu Test Et",
@@ -268,7 +268,7 @@
       "visitor": "Ziyaretçi",
       "messages": "{count} mesaj",
       "noConversations": "Henüz konuşma yok",
-      "noConversationsDescription": "Ziyaretçiler botunuzla sohbet ettiğinde, konuşmalar burada görünecek.",
+      "noConversationsDescription": "Ziyaretçiler botunuzla sohbet ettiğinde konuşmalar burada görünecek.",
       "loadMore": "Daha Fazla Yükle",
       "filterAll": "Tümü",
       "filterActive": "Aktif",
@@ -283,7 +283,7 @@
       "typeFile": "Dosya",
       "typeVoice": "Ses",
       "titleLabel": "Başlık",
-      "titlePlaceholder": "örn., Hizmetlerimiz Hakkında",
+      "titlePlaceholder": "örn. Hizmetlerimiz Hakkında",
       "contentLabel": "İçerik",
       "contentPlaceholder": "Botun öğrenmesini istediğiniz bilgileri girin...",
       "urlLabel": "URL",
@@ -324,15 +324,15 @@
       "botNamePlaceholder": "Emily",
       "websiteDomain": "Web Sitesi Alan Adı",
       "websiteDomainPlaceholder": "example.com",
-      "primaryColor": "Ana Renk",
+      "primaryColor": "Birincil Renk",
       "appearance": "Görünüm",
       "welcomeMessage": "Karşılama Mesajı",
       "welcomeMessagePlaceholder": "Merhaba! Bugün size nasıl yardımcı olabilirim?",
-      "placeholder": "Sohbet Girdi Yer Tutucusu",
+      "placeholder": "Sohbet Giriş Yer Tutucusu",
       "placeholderText": "Mesajınızı yazın...",
       "save": "Değişiklikleri Kaydet",
       "saved": "Ayarlar başarıyla kaydedildi",
-      "danger": "Tehlike Bölgesi",
+      "danger": "Tehlikeli Bölge",
       "deactivateBot": "Botu Devre Dışı Bırak",
       "deactivateDescription": "Bu botu web sitenizde geçici olarak devre dışı bırakın",
       "deactivate": "Devre Dışı Bırak",
@@ -351,11 +351,11 @@
     "viewAllPlans": "Tüm planları ve yükseltme seçeneklerini görüntüleyin",
     "manageSubscription": "Aboneliği Yönet",
     "manageSubscriptionError": "Faturalandırma portalına erişilemedi. Lütfen tekrar deneyin.",
-    "billingTitle": "Faturalandırma & Faturalar",
+    "billingTitle": "Faturalandırma ve Faturalar",
     "billingDescription": "Ödeme geçmişinizi görüntüleyin, faturaları indirin ve ödeme yöntemlerinizi yönetin.",
-    "viewBillingHistory": "Faturalandırma Geçmişi & Faturaları Gör →",
+    "viewBillingHistory": "Faturalandırma Geçmişini ve Faturaları Görüntüle →",
     "billingPortalError": "Faturalandırma portalı açılamadı. Lütfen tekrar deneyin.",
-    "dangerZone": "Tehlike Bölgesi",
+    "dangerZone": "Tehlikeli Bölge",
     "deleteAccountWarning": "Hesabınızı ve ilişkili tüm verileri kalıcı olarak silin. Bu işlem geri alınamaz.",
     "deleteAccount": "Hesabı Sil",
     "deletingAccount": "Hesap Siliniyor...",
@@ -365,13 +365,13 @@
   "subscription": {
     "title": "Abonelik Planları",
     "subscriptionActivated": "Abonelik Etkinleştirildi!",
-    "welcomeToPlan": "{plan} planına hoş geldiniz! Kredileriniz eklendi.",
+    "welcomeToPlan": "{plan} planına hoş geldiniz! Kredileriniz hesabınıza eklendi.",
     "subscriptionCanceled": "Abonelik İptal Edildi",
-    "subscriptionCanceledDescription": "Aboneliğiniz iptal edildi. Herhangi bir ücret alınmadı.",
+    "subscriptionCanceledDescription": "Aboneliğiniz iptal edildi. Herhangi bir ücret tahsil edilmedi.",
     "currentPlan": "MEVCUT PLAN",
     "currentPlanBadge": "MEVCUT PLAN",
     "currentPlanButton": "Mevcut Plan",
-    "wonderGeorgeLinked": "Wonder George Bağlı",
+    "wonderGeorgeLinked": "Wonder George Bağlandı",
     "manageBilling": "Faturalandırmayı Yönet",
     "perMonth": "aylık",
     "recommended": "ÖNERİLEN",
@@ -383,7 +383,7 @@
       "free": {
         "name": "Ücretsiz",
         "subtitle": "Denemek için",
-        "feature1": "50 kredi (yalnızca bir kez)",
+        "feature1": "50 kredi (tek seferlik)",
         "feature2": "1 bot",
         "feature3": "1 ücretsiz eğitim çalıştırması"
       },
@@ -392,54 +392,54 @@
         "feature1": "Aylık 100 kredi",
         "feature2": "1 bot",
         "feature3": "Sınırsız yeniden eğitim",
-        "feature4": "Ek kredi satın al"
+        "feature4": "Ek kredi satın alın"
       },
       "pro": {
         "name": "Pro",
         "feature1": "Aylık 250 kredi",
         "feature2": "5 bot",
         "feature3": "Sınırsız yeniden eğitim",
-        "feature4": "Ek kredi satın al"
+        "feature4": "Ek kredi satın alın"
       }
     },
     "wonderGeorge": {
-      "title": "Wonder George Müşterileri İçin Ücretsiz",
-      "description": "Wonder George ile web sitenizi oluşturun ve Emily AI chatbot’u tamamen ücretsiz edinin! Wonder George, tüm dijital pazarlamanızı otomatik pilotta yürütmek için en iyi çözümdür. Wonder George web sitenizi 35 saniyede oluşturur, Google sıralaması (SEO) için optimize eder, otomatik pilotta blog yazısı yayınlar, otomatik pilotta sosyal medya gönderileri hazırlar, tek tıkla tüm web sitenizi herhangi bir dile çevirir. Ayrıca ürünlerinizi satmak için bir e-ticaret özelliği, online kurslarınızı satmak için bir e-öğrenme özelliği ve web sitenizde yolculuk rezervasyonu almak için bir şoför eklentisi de içerir. Üstelik Emily aboneliğiniz Wonder George aboneliğinize dahildir.",
+      "title": "Wonder George Müşterileri için Ücretsiz",
+      "description": "Web sitenizi Wonder George ile oluşturun ve Emily AI chatbot’unu tamamen ücretsiz edinin! Wonder George, tüm dijital pazarlamanızı otomatik pilotta yürütmek için en iyi çözümdür. Wonder George web sitenizi 35 saniyede oluşturur, Google sıralaması (SEO) için optimize eder, otomatik pilotta blog yazısı yayınlar, otomatik pilotta sosyal medya gönderileri hazırlar, tek tıkla tüm web sitenizi herhangi bir dile çevirir. Ayrıca ürünlerinizi satmanız için bir e-ticaret özelliği, online kurslarınızı satmanız için bir e-öğrenme özelliği ve web sitenizden araç rezervasyonu almak için bir chauffeur eklentisi vardır. Üstelik Emily aboneliğiniz de Wonder George aboneliğinize dahildir.",
       "discover": "Wonder George’u Keşfet",
-      "linkAccount": "Wonder George Hesabını Bağla (Yakında)"
+      "linkAccount": "Wonder George Hesabını Bağla (Çok Yakında)"
     }
   },
   "credits": {
-    "title": "Yapay Zekâ Kredileri",
+    "title": "AI Kredileri",
     "purchaseSuccess": "Satın Alma Başarılı!",
     "purchaseSuccessDescription": "{count} kredi hesabınıza eklendi.",
     "purchaseCanceled": "Satın Alma İptal Edildi",
-    "purchaseCanceledDescription": "Satın alma işleminiz iptal edildi. Herhangi bir ücret alınmadı.",
+    "purchaseCanceledDescription": "Satın almanız iptal edildi. Herhangi bir ücret tahsil edilmedi.",
     "currentBalance": "Mevcut Bakiye",
     "creditsLabel": "kredi",
     "balanceAmount": "{count} Kredi",
-    "whatAreCredits": "Yapay Zekâ Kredileri Nedir?",
-    "creditsExplanation": "Yapay Zekâ Kredileri, chatbot’unuzu yeni içeriklerle eğitmek için kullanılır. Her eğitim öğesi (sayfa, belge veya Soru-Cevap) 1 kredi tutar. İlk eğitiminiz her zaman ücretsiz!",
+    "whatAreCredits": "AI Kredileri Nedir?",
+    "creditsExplanation": "AI kredileri, chatbot’unuzu yeni içerikle eğitmek için kullanılır. Her eğitim öğesi (sayfa, belge veya Soru-Cevap) 1 kredi tutar. İlk eğitiminiz her zaman ücretsizdir!",
     "whenYouNeed": "Ne Zaman Daha Fazla Krediye İhtiyacınız Olur",
-    "needMoreExplanation": "Botunuzu eğitmek için yeni içerik eklediğinizde krediye ihtiyacınız olur. Tasarruf etmek için aşağıdan toplu kredi satın alın!",
+    "needMoreExplanation": "Botunuzu eğitmek için yeni içerik eklerken krediye ihtiyacınız olur. Tasarruf etmek için aşağıdan toplu kredi satın alın!",
     "purchasePacks": "Kredi Paketleri Satın Al",
-    "purchaseDescription": "Yapay zekâ chatbot’unuzu ek kredilerle güçlendirin. Tüm fiyatlar EUR cinsindendir. Krediler asla sona ermez ve her ay devreder.",
-    "requiresSubscription": "Aktif Abonelik Gerekli",
-    "requiresSubscriptionMessage": "Kredi paketlerini satın almak için aktif bir Pro aboneliğine veya Wonder George planına ihtiyacınız var.",
+    "purchaseDescription": "Yapay zeka chatbot’unuzu ek kredilerle güçlendirin. Tüm fiyatlar EUR cinsindendir. Kredilerin süresi dolmaz ve her ay devreder.",
+    "requiresSubscription": "Aktif Abonelik Gerekir",
+    "requiresSubscriptionMessage": "Kredi paketleri satın almak için aktif bir Pro aboneliğine veya Wonder George planına ihtiyacınız var.",
     "viewPlans": "Abonelik Planlarını Gör",
     "upgradeFirst": "Lütfen önce ücretli bir plana yükseltin",
-    "creditEquation": "1 kredi = 1 AI mesaj alışverişi • Krediler aylar boyunca devreder",
+    "creditEquation": "1 kredi = 1 AI mesajlaşma değişimi • Krediler aydan aya devreder",
     "howCreditsWork": "Krediler Nasıl Çalışır",
     "creditInfo1": "Her ziyaretçi mesajı ve AI yanıtı 1 kredi sayılır",
-    "creditInfo2": "Krediler aylar boyunca devreder ve asla sona ermez",
+    "creditInfo2": "Krediler aydan aya devreder ve asla sona ermez",
     "creditInfo3": "Pro aboneleri her ay 100 ücretsiz kredi alır",
     "creditInfo4": "Mesaj başına daha iyi değer için daha büyük paketler satın alın",
     "packs": {
       "small": {
-        "name": "Başlangıç Paketi",
+        "name": "Starter Paket",
         "credits": "100 Kredi",
         "price": "$4.99",
-        "description": "Küçük güncellemeler için mükemmel"
+        "description": "Küçük güncellemeler için ideal"
       },
       "medium": {
         "name": "Popüler Paket",
@@ -449,10 +449,10 @@
         "badge": "En İyi Değer"
       },
       "large": {
-        "name": "Pro Paketi",
+        "name": "Pro Paket",
         "credits": "1000 Kredi",
         "price": "$34.99",
-        "description": "Güçlü kullanıcılar için"
+        "description": "Yoğun kullanıcılar için"
       }
     },
     "purchase": "Satın Al"
@@ -461,26 +461,26 @@
     "popular": "POPÜLER",
     "credits": "kredi",
     "save": "%{percent} tasarruf",
-    "messageExchanges": "{count} AI mesaj alışverişi",
-    "neverExpires": "Asla sona ermez",
+    "messageExchanges": "{count} AI mesajlaşma değişimi",
+    "neverExpires": "Süresi dolmaz",
     "perMessage": "Mesaj başına {price}",
     "loading": "Yükleniyor...",
     "purchaseError": "Ödeme başlatılamadı. Lütfen tekrar deneyin.",
     "starter": {
-      "name": "Starter Pack"
+      "name": "Starter Paket"
     },
     "growth": {
-      "name": "Growth Pack"
+      "name": "Growth Paket"
     },
     "business": {
-      "name": "Business Pack"
+      "name": "Business Paket"
     }
   },
   "trainingCostModal": {
     "title": "Eğitim Maliyetini Onaylayın",
     "firstTrainingFree": "🎉 İlk Eğitim Ücretsiz!",
-    "firstTrainingDescription": "Bu botu ilk kez eğitiyorsunuz, bizden olsun! {count} içerik öğesini işleyecek.",
-    "costDescription": "Chatbot’unuzu eğitmek {count} içerik öğesini işleyecek.",
+    "firstTrainingDescription": "Bu botu ilk kez eğitiyorsunuz, bu yüzden bizden! {count} içerik öğesi işlenecek.",
+    "costDescription": "Chatbot’unuzun eğitimi {count} içerik öğesini işleyecek.",
     "cost": "Maliyet:",
     "credits": "{count} kredi",
     "currentBalance": "Mevcut bakiyeniz: {count} kredi",
@@ -489,7 +489,7 @@
     "cancel": "İptal",
     "processing": "İşleniyor...",
     "startTraining": "Eğitimi Başlat",
-    "confirmTrain": "Onayla & Eğit"
+    "confirmTrain": "Onayla ve Eğit"
   },
   "widget": {
     "loading": "Konuşmalar yükleniyor...",
@@ -501,29 +501,29 @@
     "newConversation": "Yeni Konuşma",
     "typeMessage": "Mesajınızı yazın...",
     "justNow": "Az önce",
-    "minutesAgo": "{count}d önce",
-    "hoursAgo": "{count}s önce",
-    "daysAgo": "{count}g önce",
+    "minutesAgo": "{count} dk önce",
+    "hoursAgo": "{count} sa önce",
+    "daysAgo": "{count} gün önce",
     "errorMessage": "Üzgünüm, bir hatayla karşılaştım. Lütfen tekrar deneyin.",
-    "botInactive": "Bu chatbot şu anda pasif"
+    "botInactive": "Bu chatbot şu anda etkin değil"
   },
   "superadmin": {
-    "title": "Süper Yönetici Kontrol Paneli",
-    "subtitle": "Sistem genel bakışı ve yönetim",
+    "title": "Süperadmin Paneli",
+    "subtitle": "Sistem genel görünümü ve yönetimi",
     "stats": {
-      "totalOrganizations": "Toplam Kuruluş",
+      "totalOrganizations": "Toplam Kurum",
       "totalUsers": "Toplam Kullanıcı",
-      "payingCustomers": "Ödeyen Müşteriler",
+      "payingCustomers": "Ücretli Müşteriler",
       "activeMRR": "Aktif MRR",
       "totalConversations": "Toplam Konuşma",
       "totalMessages": "Toplam Mesaj",
       "currentMonthRevenue": "Bu Ayın Geliri"
     },
     "organizations": {
-      "title": "Kuruluşları Yönet",
-      "description": "Tüm kuruluşları görüntüleyin, arayın ve yönetin",
-      "search": "Kuruluşlarda ara...",
-      "noOrganizations": "Kuruluş bulunamadı",
+      "title": "Kurumları Yönet",
+      "description": "Tüm kurumları görüntüleyin, arayın ve yönetin",
+      "search": "Kurumlarda ara...",
+      "noOrganizations": "Kurum bulunamadı",
       "viewDetails": "Detayları Gör",
       "plan": "Plan",
       "credits": "Krediler",
@@ -532,7 +532,7 @@
       "created": "Oluşturuldu"
     },
     "organizationDetail": {
-      "title": "Kuruluş Detayları",
+      "title": "Kurum Detayları",
       "grantPlan": "Plan Tanımla",
       "grantCredits": "Kredi Tanımla",
       "selectPlan": "Plan Seç",
@@ -542,10 +542,10 @@
       "creditsAmount": "Kredi Miktarı",
       "creditsPlaceholder": "Miktarı girin",
       "grantCreditsButton": "Kredi Tanımla",
-      "organizationInfo": "Kuruluş Bilgileri",
+      "organizationInfo": "Kurum Bilgileri",
       "name": "Ad",
       "plan": "Plan",
-      "maxBots": "Maks. Bot",
+      "maxBots": "Maks Bot",
       "creditsBalance": "Kredi Bakiyesi",
       "frozenCredits": "Dondurulmuş Krediler",
       "users": "Kullanıcılar",
@@ -557,36 +557,36 @@
       "creditsGranted": "Krediler başarıyla tanımlandı"
     },
     "systemLogs": {
-      "title": "Sistem Kayıtları",
-      "comingSoon": "Yakında..."
+      "title": "Sistem Günlükleri",
+      "comingSoon": "Çok yakında..."
     },
-    "backToDashboard": "← Kontrol Paneline Dön"
+    "backToDashboard": "← Panele Dön"
   },
   "emails": {
     "paymentFailed": {
       "subject": {
-        "first": "Hay aksi! Ödemenizi işleyemedik",
+        "first": "Hoppala! Ödemenizi işleyemedik",
         "reminder": "Kısa hatırlatma: Ödeme hâlâ beklemede ({days} gün kaldı)",
         "urgent": "⚠️ Acil: Lütfen ödeme bilgilerinizi güncelleyin"
       },
       "greeting": "Merhaba,",
-      "greetingReminder": "Merhaba,",
-      "firstAttempt": "Sizi bilgilendirmek istedim – ödemenizi işlemeye çalıştık ama gerçekleşmedi. Hiç sorun değil, böyle şeyler olabiliyor!",
-      "retryInfo": "Ödeme bilgilerinizi güncellemek için kısa bir an ayırabilir misiniz? Önümüzdeki {days} gün boyunca otomatik olarak yeniden deneyeceğiz (bu, birkaç denemeden {attempt}. denemeydi).",
-      "reminderMessage": "Bu, ödemenizi işleme konusunda hâlâ sorun yaşadığımıza dair nazik bir hatırlatmadır. Aboneliğiniz yakında yenilenecek, bu yüzden herhangi bir kesinti yaşamamak için lütfen ödeme yönteminizi güncelleyin.",
-      "urgentMessage": "Bu, aboneliğiniz için ödemenin başarısız olduğuna dair acil bir hatırlatmadır ve bu son yeniden deneme girişimidir. Hizmet kesintisini önlemek için lütfen ödeme yönteminizi hemen güncelleyin.",
+      "greetingReminder": "Selam,",
+      "firstAttempt": "Kısaca haber vermek istedim — ödemenizi işlemeye çalıştık ama gerçekleşmedi. Endişe etmeyin, böyle şeyler olabiliyor!",
+      "retryInfo": "Ödeme bilgilerinizi güncellemek için kısa bir zaman ayırabilir misiniz? Önümüzdeki {days} gün boyunca otomatik olarak tekrar deneyeceğiz (bu, birkaç denemeden {attempt}. denemeydi).",
+      "reminderMessage": "Bu, ödemenizi işlemekte hâlâ sorun yaşadığımıza dair dostça bir hatırlatmadır. Aboneliğiniz yakında yenilenecek; kesinti yaşamamak için lütfen ödeme yönteminizi güncelleyin.",
+      "urgentMessage": "Bu, abonelik ödemenizin başarısız olduğuna dair acil bir hatırlatmadır ve bu son yeniden deneme girişimidir. Hizmet kesintisini önlemek için lütfen ödeme yönteminizi hemen güncelleyin.",
       "updatePayment": "👉 Ödeme yönteminizi buradan güncelleyin: {link}",
-      "helpMessage": "Bunun bir hata olduğunu düşünüyorsanız ya da yardıma ihtiyacınız varsa bu e-postayı yanıtlamanız yeterli – buradayım!",
-      "helpMessageReminder": "Sorun yaşıyorsanız, bana haber vermeniz yeterli!",
-      "helpMessageUrgent": "Herhangi bir yardıma ihtiyacınız olursa lütfen destek ekibiyle iletişime geçin.",
+      "helpMessage": "Bunun bir hata olduğunu düşünüyorsanız veya yardıma ihtiyacınız varsa, bu e-postayı yanıtlayın — buradayım!",
+      "helpMessageReminder": "Sorun yaşıyorsanız bana haber verin!",
+      "helpMessageUrgent": "Yardıma ihtiyacınız olursa lütfen destek ile iletişime geçin.",
       "signature": "Teşekkürler,\nEmily 💙",
       "signatureReminder": "Sevgiler,\nEmily 💙",
-      "footer": "---\nTalk to Emily - Yapay Zekâ Chatbot Platformunuz"
+      "footer": "---\nTalk to Emily - AI Chatbot Platformunuz"
     }
   },
   "errors": {
     "generic": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
-    "unauthorized": "Bu işlemi gerçekleştirmeye yetkiniz yok.",
+    "unauthorized": "Bu işlemi yapma yetkiniz yok.",
     "notFound": "İstenen kaynak bulunamadı.",
     "networkError": "Ağ hatası. Lütfen bağlantınızı kontrol edin.",
     "validationError": "Lütfen girdilerinizi kontrol edip tekrar deneyin.",
@@ -608,7 +608,7 @@
     "wonderGeorgeAutoManaged": "Chatbot widget’ınız Wonder George web sitenizde otomatik olarak yönetilir",
     "widgetStatus": "Widget {status}",
     "active": "Aktif",
-    "inactive": "Pasif",
+    "inactive": "Etkin değil",
     "widgetVisibleWG": "Chatbot’unuz Wonder George web sitenizde görünür",
     "widgetHiddenWG": "Chatbot’unuz Wonder George web sitenizde gizli",
     "processing": "İşleniyor...",
@@ -616,11 +616,11 @@
     "activate": "Etkinleştir",
     "trainedAndReady": "Chatbot’unuz eğitildi ve hazır!",
     "notTrainedYet": "Henüz eğitilmedi",
-    "trainToEnable": "Yapay zekâ yanıtlarını etkinleştirmek için chatbot’unuzu eğitin.",
+    "trainToEnable": "AI yanıtlarını etkinleştirmek için chatbot’unuzu eğitin.",
     "addTrainingContent": "Eğitim içeriği ekle",
     "embedCode": "Gömme Kodu",
     "embedInstructions": "Bu kodu web sitenizin HTML’ine, kapanış </body> etiketinden hemen önce ekleyin:",
-    "widgetWillAppear": "Widget sitenizde görünecek, ancak yapay zekâ yanıtlarını etkinleştirmek için chatbot’unuzu eğitin.",
+    "widgetWillAppear": "Widget sitenizde görünecek, ancak AI yanıtlarını etkinleştirmek için chatbot’unuzu eğitin.",
     "trainingStatusTitle": "EĞİTİM DURUMU",
     "trainingItems": "{count} eğitim öğesi",
     "notTrained": "Eğitilmedi",
@@ -631,7 +631,7 @@
     "notReady": "Hazır Değil",
     "widgetIsLive": "Widget yayında",
     "trainBotFirst": "Önce botunuzu eğitin",
-    "toggleWidgetError": "Widget değiştirilemedi. Lütfen tekrar deneyin.",
+    "toggleWidgetError": "Widget durumu değiştirilemedi. Lütfen tekrar deneyin.",
     "status": {
       "completed": "Tamamlandı",
       "pending": "Beklemede",
@@ -646,10 +646,10 @@
     "settings": "Ayarlar",
     "delete": "Sil",
     "deleteModalTitle": "⚠️ Bot Silinsin mi?",
-    "deleteModalDescription": "Bu işlem {name} botunu ve aşağıdakiler dahil tüm ilişkili verileri kalıcı olarak silecek:",
+    "deleteModalDescription": "Bu işlem {name} botunu ve aşağıdakiler dahil tüm ilişkili verileri kalıcı olarak silecektir:",
     "deleteItem1": "Tüm eğitim verileri",
     "deleteItem2": "Tüm konuşmalar ve mesajlar",
-    "deleteItem3": "Vektör gömmeleri",
+    "deleteItem3": "Vektör embedding’leri",
     "deleteItem4": "Widget yapılandırması",
     "deleteWarning": "Bu işlem geri alınamaz!",
     "deleting": "Siliniyor...",
@@ -664,7 +664,7 @@
     "contentPlaceholder": "Eğitim içeriğinizi buraya girin...",
     "addItem": "Öğe Ekle",
     "stop": "Durdur",
-    "transcribing": "Deşifre ediliyor...",
+    "transcribing": "Metne dönüştürülüyor...",
     "record": "Kaydet",
     "howToTrain": "Botunuzu nasıl eğitirsiniz",
     "step1": "Metin veya ses ile eğitim öğeleri ekleyin",
@@ -680,8 +680,8 @@
     "deleteConfirm": "Bu eğitim öğesi silinsin mi?",
     "itemDeleted": "Öğe silindi",
     "microphoneError": "Mikrofona erişilemedi. Lütfen mikrofon erişimine izin verin.",
-    "audioTranscribed": "Ses deşifre edildi! Düzenleyin ve bir başlık ekleyin.",
-    "insufficientCredits": "Yetersiz kredi. {required} kredi gerekiyor ama yalnızca {available} krediniz var.",
+    "audioTranscribed": "Ses metne dönüştürüldü! Düzenleyin ve bir başlık ekleyin.",
+    "insufficientCredits": "Yetersiz kredi. {required} kredi gerekiyor ancak yalnızca {available} krediniz var.",
     "trainingSuccessFree": "🎉 Eğitim başarıyla tamamlandı! (İlk eğitim ücretsizdi)",
     "trainingSuccess": "Eğitim başarıyla tamamlandı! {credits} kredi kullanıldı."
   },
@@ -694,20 +694,20 @@
     "noMessages": "Henüz mesaj yok",
     "ownerAssistant": "Sahip Asistanı",
     "visitorChat": "Ziyaretçi Sohbeti",
-    "pauseAI": "AI’yi Duraklat",
-    "resumeAI": "AI’yi Devam Ettir",
+    "pauseAI": "AI’ı Duraklat",
+    "resumeAI": "AI’ı Devam Ettir",
     "loadingMessages": "Mesajlar yükleniyor...",
     "startConversation": "Konuşmayı başlatın",
     "startConversationDescription": "Başlamak için bir mesaj gönderin",
-    "pauseAiToSend": "💡 Manuel mesaj göndermek için AI’yi duraklatın",
+    "pauseAiToSend": "💡 Manuel mesaj göndermek için AI’ı duraklatın",
     "aiPaused": "AI duraklatıldı. Mesajlarınız doğrudan ziyaretçiye gidecek.",
-    "pauseAiPlaceholder": "Mesaj göndermek için AI’yi duraklatın",
+    "pauseAiPlaceholder": "Mesaj göndermek için AI’ı duraklatın",
     "typePlaceholder": "Mesajınızı yazın...",
     "sending": "Gönderiliyor...",
     "send": "Gönder",
     "selectConversation": "Görüntülemek için bir konuşma seçin",
     "aiActiveTitle": "AI Aktif",
-    "aiActiveDescription": "Manuel mesaj gönderebilmek için önce AI’yi duraklatmanız gerekiyor. Konuşmayı devralmak için üst kısımdaki duraklatma düğmesine (⏸) tıklayın.",
+    "aiActiveDescription": "Manuel mesaj göndermeden önce AI’ı duraklatmanız gerekir. Konuşmayı devralmak için üst kısımdaki duraklat düğmesine (⏸) tıklayın.",
     "gotIt": "Anladım"
   },
   "botSettings": {
@@ -721,29 +721,29 @@
     "widgetStatusDescription": "Chatbot widget’ınızın Wonder George web sitenizde aktif olup olmadığını kontrol edin",
     "widgetIs": "Widget {status}",
     "activeCheck": "Aktif ✓",
-    "inactive": "Pasif",
+    "inactive": "Etkin değil",
     "widgetVisibleOnSite": "Chatbot’unuz web sitenizde görünür",
     "widgetHiddenFromSite": "Chatbot’unuz web sitenizde gizli",
     "processing": "İşleniyor...",
     "deactivate": "Devre Dışı Bırak",
     "activate": "Etkinleştir",
-    "toggleWidgetError": "Widget değiştirilemedi. Lütfen tekrar deneyin.",
+    "toggleWidgetError": "Widget durumu değiştirilemedi. Lütfen tekrar deneyin.",
     "widgetStyleTitle": "Widget Stili",
     "widgetStyleDescription": "Sohbet widget’ınızın ziyaretçilere nasıl görüneceğini seçin",
-    "modernLabel": "Cesur & Neo-Brutalist",
+    "modernLabel": "Cesur ve Neo-Brutalist",
     "modern": "Modern",
-    "modernDescription": "Kalın kenarlıklar, güçlü gölgeler, dikkat çekici tasarım",
-    "neutralLabel": "Temiz & Minimal",
+    "modernDescription": "Kalın kenarlıklar, güçlü gölgeler, dikkat çeken tasarım",
+    "neutralLabel": "Temiz ve Minimal",
     "neutral": "Nötr",
     "neutralDescription": "Intercom gibi temiz, sade tasarım",
     "widgetMessagesTitle": "Widget Mesajları",
-    "widgetMessagesDescription": "Ziyaretçilerin sohbet widget’ını açtığında gördüğü mesajları özelleştirin",
-    "headerSubtitle": "Başlık Alt Yazısı",
-    "headerSubtitlePlaceholder": "Anında yanıtlıyoruz",
+    "widgetMessagesDescription": "Ziyaretçiler sohbet widget’ını açtığında göreceği mesajları özelleştirin",
+    "headerSubtitle": "Başlık Alt Metni",
+    "headerSubtitlePlaceholder": "Anında yanıt veriyoruz",
     "headerSubtitleHint": "Başlıkta bot adınızın altında gösterilir",
     "welcomeTitle": "Karşılama Başlığı",
     "welcomeTitlePlaceholder": "Merhaba! 👋",
-    "welcomeTitleHint": "Sohbet açıldığında görünen ilk mesaj",
+    "welcomeTitleHint": "Sohbet açıldığında ilk mesaj",
     "welcomeMessage": "Karşılama Mesajı",
     "welcomeMessagePlaceholder": "Bugün size nasıl yardımcı olabiliriz?",
     "welcomeMessageHint": "Karşılama başlığının altında gösterilen alt metin",
@@ -752,39 +752,50 @@
     "displayNamePlaceholder": "Botum",
     "domain": "Alan Adı",
     "domainPlaceholder": "https://mywebsite.com",
-    "primaryColor": "Ana Renk",
-    "dangerZone": "Tehlike Bölgesi",
+    "primaryColor": "Birincil Renk",
+    "dangerZone": "Tehlikeli Bölge",
     "dangerZoneDescription": "Bu chatbot’u silmek tüm eğitim verilerini, konuşmaları ve ayarları kaldırır. Bu işlem geri alınamaz.",
     "deleteChatbot": "Chatbot’u Sil"
   },
   "time": {
     "now": "az önce",
-    "minutesAgo": "{count}d önce",
-    "hoursAgo": "{count}s önce",
-    "daysAgo": "{count}g önce",
-    "weeksAgo": "{count}h önce",
-    "monthsAgo": "{count}ay önce",
-    "yearsAgo": "{count}y önce"
+    "minutesAgo": "{count} dk önce",
+    "hoursAgo": "{count} sa önce",
+    "daysAgo": "{count} gün önce",
+    "weeksAgo": "{count} hf önce",
+    "monthsAgo": "{count} ay önce",
+    "yearsAgo": "{count} yıl önce"
   },
   "email": {
     "fromName": "Emily",
-    "footer": "Talk to Emily - Yapay Zekâ Chatbot Platformunuz",
+    "footer": "Talk to Emily - AI Chatbot Platformunuz",
+    "verification": {
+      "subject": "TalkToEmily için e-postanızı doğrulayın",
+      "greeting": "Merhaba!",
+      "welcome": "TalkToEmily’ye hoş geldiniz! Aramıza katıldığınız için çok mutluyuz.",
+      "action": "Lütfen aşağıdaki bağlantıya tıklayarak e-posta adresinizi doğrulayın:",
+      "expiry": "Bu bağlantının süresi 24 saat içinde dolacak.",
+      "postVerification": "Doğruladıktan sonra panelinize erişebilir ve \"{orgName}\" için yapay zeka chatbot’unuzu oluşturmaya başlayabilirsiniz.",
+      "ignoreIfNotYou": "Bu hesabı siz oluşturmadıysanız, bu e-postayı güvenle yok sayabilirsiniz.",
+      "closing": "Saygılarımızla,",
+      "signature": "TalkToEmily Ekibi"
+    },
     "paymentFailure": {
       "attempt1": {
-        "subject": "Hay aksi! Ödemenizi işleyemedik",
+        "subject": "Hoppala! Ödemenizi işleyemedik",
         "greeting": "Merhaba {customerName},",
-        "intro": "Sizi bilgilendirmek istedim – ödemenizi işlemeye çalıştık ama gerçekleşmedi. Hiç sorun değil, böyle şeyler olabiliyor!",
-        "action": "Ödeme bilgilerinizi güncellemek için kısa bir an ayırabilir misiniz? Önümüzdeki {daysRemaining} gün boyunca otomatik olarak yeniden deneyeceğiz (bu, birkaç denemeden 1. denemeydi).",
+        "intro": "Kısaca haber vermek istedim — ödemenizi işlemeye çalıştık ama gerçekleşmedi. Endişe etmeyin, böyle şeyler olabiliyor!",
+        "action": "Ödeme bilgilerinizi güncellemek için kısa bir zaman ayırabilir misiniz? Önümüzdeki {daysRemaining} gün boyunca otomatik olarak tekrar deneyeceğiz (bu, birkaç denemenin 1.’siydi).",
         "cta": "👉 Ödeme yönteminizi buradan güncelleyin: {portalUrl}",
-        "help": "Bunun bir hata olduğunu düşünüyorsanız ya da yardıma ihtiyacınız varsa bu e-postayı yanıtlamanız yeterli – buradayım!",
+        "help": "Bunun bir hata olduğunu düşünüyorsanız veya yardıma ihtiyacınız varsa, bu e-postayı yanıtlayın — buradayım!",
         "closing": "Teşekkürler,",
         "signature": "Emily 💙"
       },
       "attempt2to3": {
         "subject": "Kısa hatırlatma: Ödeme hâlâ beklemede",
         "greeting": "Merhaba {customerName},",
-        "intro": "Tekrar kontrol ediyorum – ödemenizi işleme konusunda hâlâ sorun yaşıyoruz ({attemptCount}. deneme).",
-        "action": "{daysRemaining} gün daha denemeye devam edeceğiz, ama haberdar olmanızı istedim. Ödeme bilgilerinizi ne kadar erken güncellerseniz, her şeyi o kadar hızlı yoluna koyabiliriz!",
+        "intro": "Tekrar kontrol etmek istedim — ödemenizi işlemekte hâlâ sorun yaşıyoruz (deneme {attemptCount}).",
+        "action": "{daysRemaining} gün daha denemeye devam edeceğiz, ancak farkında olmanızı istedim. Ödeme bilgilerinizi ne kadar erken güncellerseniz, her şeyi o kadar çabuk tekrar yoluna koyabiliriz!",
         "cta": "👉 Ödeme yönteminizi buradan güncelleyin: {portalUrl}",
         "closing": "Harika olduğunuz için teşekkürler!",
         "signature": "Emily 💙"
@@ -792,22 +803,22 @@
       "attempt4plus": {
         "subject": "⚠️ Acil: Lütfen ödeme bilgilerinizi güncelleyin",
         "greeting": "Merhaba {customerName},",
-        "intro": "Burada gerçekten yardımınıza ihtiyacım var – ödemenizi işlemek için {attemptCount} kez denedik ama hâlâ gerçekleşmiyor.",
-        "urgentWithDays": "Aboneliğiniz iptal edilmeden ve botlarınız devre dışı bırakılmadan önce yaklaşık {daysRemaining} gün{plural} kaldı.",
-        "urgentFinal": "Aboneliğiniz iptal edilmeden önceki son denememiz bu.",
+        "intro": "Burada gerçekten yardımınıza ihtiyacım var — ödemenizi işlemek için {attemptCount} kez denedik ve hâlâ gerçekleşmiyor.",
+        "urgentWithDays": "Aboneliğiniz iptal edilip botlarınız devre dışı bırakılmadan önce yaklaşık {daysRemaining} gün{plural} kaldı.",
+        "urgentFinal": "Bu, aboneliğiniz iptal edilmeden önceki son denememiz.",
         "action": "Chatbot’larınızın çalışmaya devam etmesi için lütfen ödeme yönteminizi hemen güncelleyin:",
         "cta": "👉 Ödeme yönteminizi buradan güncelleyin: {portalUrl}",
-        "help": "Herhangi bir sorun yaşıyorsanız ya da aboneliğiniz hakkında konuşmak isterseniz bu e-postayı yanıtlamanız yeterli. Yardım etmek için buradayım!",
+        "help": "Herhangi bir sorun yaşıyorsanız veya aboneliğiniz hakkında konuşmak isterseniz, bu e-postayı yanıtlayın. Yardım etmek için buradayım!",
         "signature": "Emily 💙"
       }
     }
   },
   "footer": {
-    "copyright": "© {year} TalkToEmily tarafından",
+    "copyright": "© {year} TalkToEmily by",
     "company": "Alsatech SAS",
     "wonderGeorge": "Wonder George",
     "legal": "Yasal",
     "privacy": "Gizlilik Politikası",
-    "terms": "Şartlar & Koşullar"
+    "terms": "Şartlar ve Koşullar"
   }
 }

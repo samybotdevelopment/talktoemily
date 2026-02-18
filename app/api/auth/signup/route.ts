@@ -2,6 +2,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { checkWGCustomer } from '@/lib/integrations/wg-api';
+import { sendVerificationEmail } from '@/lib/services/mailjet.service';
 
 const signupSchema = z.object({
   email: z.string().email(),
@@ -61,9 +62,9 @@ export async function POST(request: Request) {
       );
     }
 
-    // Send verification email manually since we're using admin.createUser
+    // Generate verification link and send email via Mailjet
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://app.talktoemily.com';
-    const { data: emailData, error: emailError } = await supabase.auth.admin.generateLink({
+    const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
       type: 'signup',
       email: validatedData.email,
       options: {
@@ -71,12 +72,21 @@ export async function POST(request: Request) {
       },
     });
 
-    if (emailError) {
-      console.error('Failed to send verification email:', emailError);
-      // Don't fail the signup - user is created, they can request a new verification email
-      // Or admin can manually verify them in Supabase dashboard
+    if (linkError || !linkData.properties?.action_link) {
+      console.error('Failed to generate verification link:', linkError);
+      // Continue with signup - user can request new verification email
     } else {
-      console.log('Verification email sent successfully to:', validatedData.email);
+      // Send verification email via Mailjet
+      try {
+        await sendVerificationEmail(
+          validatedData.email,
+          linkData.properties.action_link,
+          validatedData.orgName
+        );
+      } catch (emailError) {
+        console.error('Failed to send verification email via Mailjet:', emailError);
+        // Don't fail signup - user can request new verification email
+      }
     }
 
     // Create organization (bypasses RLS with service role)
