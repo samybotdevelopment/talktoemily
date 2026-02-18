@@ -14,6 +14,7 @@ export default function SignupPage() {
   const [orgName, setOrgName] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
   const router = useRouter();
   const supabase = createClient();
 
@@ -40,7 +41,14 @@ export default function SignupPage() {
         throw new Error(data.error || t('error'));
       }
 
-      // Account created! Now sign in to establish session
+      // Check if email verification is required
+      if (data.requiresEmailVerification) {
+        setSuccess(true);
+        setLoading(false);
+        return;
+      }
+
+      // Legacy flow: if no verification required, sign in
       const { error: signInError } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -62,12 +70,7 @@ export default function SignupPage() {
         // Continue anyway - this is non-critical
       }
 
-      // Check if user needs onboarding (WG customer)
-      if (data.needs_onboarding) {
-        router.push('/onboarding');
-      } else {
-        router.push('/dashboard');
-      }
+      router.push('/dashboard');
       router.refresh();
     } catch (err: any) {
       setError(err.message);
@@ -87,7 +90,20 @@ export default function SignupPage() {
           </div>
         )}
 
-        <form onSubmit={handleSignup}>
+        {success && (
+          <div className="bg-green-50 border-4 border-green-500 rounded-lg p-4 mb-6">
+            <h3 className="text-green-800 font-bold mb-2">✓ Account Created!</h3>
+            <p className="text-green-700 mb-3">
+              We've sent a confirmation email to <strong>{email}</strong>.
+            </p>
+            <p className="text-green-700 text-sm">
+              Please check your inbox and click the verification link to activate your account.
+            </p>
+          </div>
+        )}
+
+        {!success && (
+          <form onSubmit={handleSignup}>
           <div className="mb-6">
             <label htmlFor="orgName" className="block text-sm font-bold mb-2">
               {t('orgName')}
@@ -145,6 +161,7 @@ export default function SignupPage() {
             {loading ? t('creating') : t('submit')}
           </button>
         </form>
+        )}
 
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-600">
@@ -155,14 +172,16 @@ export default function SignupPage() {
           </p>
         </div>
 
-        <div className="mt-6 p-4 bg-page rounded-lg border-4 border-black">
-          <h3 className="font-bold mb-2">{t('freeTrialTitle')}</h3>
-          <ul className="text-sm space-y-1">
-            <li>✓ {t('freeTrialFeature1')}</li>
-            <li>✓ {t('freeTrialFeature2')}</li>
-            <li>✓ {t('freeTrialFeature3')}</li>
-          </ul>
-        </div>
+        {!success && (
+          <div className="mt-6 p-4 bg-page rounded-lg border-4 border-black">
+            <h3 className="font-bold mb-2">{t('freeTrialTitle')}</h3>
+            <ul className="text-sm space-y-1">
+              <li>✓ {t('freeTrialFeature1')}</li>
+              <li>✓ {t('freeTrialFeature2')}</li>
+              <li>✓ {t('freeTrialFeature3')}</li>
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

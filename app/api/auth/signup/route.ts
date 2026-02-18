@@ -47,7 +47,10 @@ export async function POST(request: Request) {
     const { data: authData, error: signUpError } = await supabase.auth.admin.createUser({
       email: validatedData.email,
       password: validatedData.password,
-      email_confirm: true, // Auto-confirm for development
+      email_confirm: false, // Require email verification
+      user_metadata: {
+        org_name: validatedData.orgName,
+      },
     });
 
     if (signUpError || !authData.user) {
@@ -106,9 +109,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: 'Account created successfully. Please sign in.',
+      message: 'Account created successfully. Please check your email to verify your account.',
+      requiresEmailVerification: true,
       is_wg_customer: isWGCustomer,
-      needs_onboarding: isWGCustomer, // WG customers need onboarding
     });
   } catch (error) {
     if (error instanceof z.ZodError) {

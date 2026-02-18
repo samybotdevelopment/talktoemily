@@ -29,7 +29,12 @@ export default function LoginPage() {
     });
 
     if (error) {
-      setError(error.message);
+      // Check for unverified email
+      if (error.message.includes('Email not confirmed') || error.message.includes('email_not_confirmed')) {
+        setError('Please verify your email address before signing in. Check your inbox for the confirmation link.');
+      } else {
+        setError(error.message);
+      }
       setLoading(false);
     } else {
       router.push('/dashboard');
