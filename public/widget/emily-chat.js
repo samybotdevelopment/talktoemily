@@ -52,6 +52,39 @@
     widgetWelcomeMessage: 'How can we help you today?'
   };
 
+  // Utility function to scroll messages to bottom
+  function scrollMessagesToBottom() {
+    const messagesContainer = document.getElementById('emily-messages');
+    if (messagesContainer) {
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+  }
+
+  // Handle viewport changes (keyboard open/close on mobile)
+  function setupKeyboardHandling() {
+    const input = document.getElementById('emily-input');
+    if (!input) return;
+
+    // Modern approach: visualViewport API
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => {
+        setTimeout(scrollMessagesToBottom, 100);
+      });
+    }
+
+    // Fallback: input focus events
+    input.addEventListener('focus', () => {
+      setTimeout(scrollMessagesToBottom, 300);
+    });
+
+    // Additional fallback for older devices
+    window.addEventListener('resize', () => {
+      if (document.activeElement === input) {
+        setTimeout(scrollMessagesToBottom, 100);
+      }
+    });
+  }
+
   // Get or create visitor ID
   function getVisitorId() {
     const storageKey = `emily_visitor_${websiteId}`;
@@ -100,7 +133,7 @@
       <style>
         #emily-chat-widget {
           position: fixed;
-          bottom: 20px;
+          bottom: 70px;
           right: 20px;
           z-index: 9999;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -145,7 +178,7 @@
       <style>
         #emily-chat-widget {
           position: fixed;
-          bottom: 20px;
+          bottom: 70px;
           right: 20px;
           z-index: 9999;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -178,16 +211,18 @@
         .emily-chat-container {
           display: none;
           position: fixed;
-          bottom: 20px;
+          bottom: 70px;
           right: 20px;
           width: 380px;
           height: 600px;
+          max-height: 100vh;
           background: white;
           border-radius: ${isModern ? '16px' : '24px'};
           border: ${isModern ? '4px solid #000' : '1px solid #e5e7eb'};
           box-shadow: ${isModern ? '8px 8px 0 #000' : '0 10px 40px rgba(0,0,0,0.1)'};
           flex-direction: column;
           overflow: hidden;
+          box-sizing: border-box;
         }
 
         .emily-chat-container.open {
@@ -492,8 +527,13 @@
             right: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 100dvh;
+            max-height: 100dvh;
             border-radius: 0;
+          }
+          
+          #emily-chat-widget {
+            bottom: 20px;
           }
         }
       </style>
@@ -631,6 +671,7 @@
       </div>
     `;
     showChatView();
+    setupKeyboardHandling();
     document.getElementById('emily-input').focus();
   }
 
@@ -723,7 +764,8 @@
         });
       }
       
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      scrollMessagesToBottom();
+      setupKeyboardHandling();
       document.getElementById('emily-input').focus();
 
       // Subscribe to real-time updates for this conversation
@@ -837,7 +879,7 @@
       messageDiv.dataset.messageId = message.id;
       messageDiv.innerHTML = `<div class="emily-message-content">${message.content}</div>`;
       messagesContainer.appendChild(messageDiv);
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      scrollMessagesToBottom();
     }
   }
 
@@ -889,7 +931,7 @@
       <div class="emily-message-content">${content}</div>
     `;
     messagesContainer.appendChild(messageDiv);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    scrollMessagesToBottom();
   }
 
   // Show typing indicator
@@ -906,7 +948,7 @@
       </div>
     `;
     messagesContainer.appendChild(typing);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    scrollMessagesToBottom();
   }
 
   // Remove typing indicator
