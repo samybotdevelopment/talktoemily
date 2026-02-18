@@ -60,6 +60,22 @@
     }
   }
 
+  // Adjust container height based on visual viewport (for mobile keyboard)
+  function adjustContainerHeight() {
+    const container = document.querySelector('.emily-chat-container');
+    if (!container) return;
+
+    // Only apply on mobile
+    if (window.innerWidth <= 480) {
+      if (window.visualViewport) {
+        // Use visual viewport height when keyboard is open
+        const height = window.visualViewport.height;
+        container.style.height = `${height}px`;
+        container.style.maxHeight = `${height}px`;
+      }
+    }
+  }
+
   // Handle viewport changes (keyboard open/close on mobile)
   function setupKeyboardHandling() {
     const input = document.getElementById('emily-input');
@@ -68,21 +84,47 @@
     // Modern approach: visualViewport API
     if (window.visualViewport) {
       window.visualViewport.addEventListener('resize', () => {
+        adjustContainerHeight();
         setTimeout(scrollMessagesToBottom, 100);
+      });
+
+      // Also listen to scroll events (iOS sometimes scrolls instead of resizing)
+      window.visualViewport.addEventListener('scroll', () => {
+        adjustContainerHeight();
       });
     }
 
     // Fallback: input focus events
     input.addEventListener('focus', () => {
-      setTimeout(scrollMessagesToBottom, 300);
+      setTimeout(() => {
+        adjustContainerHeight();
+        scrollMessagesToBottom();
+      }, 300);
+    });
+
+    // Blur event to restore height when keyboard closes
+    input.addEventListener('blur', () => {
+      setTimeout(() => {
+        if (window.innerWidth <= 480) {
+          const container = document.querySelector('.emily-chat-container');
+          if (container && window.visualViewport) {
+            container.style.height = `${window.visualViewport.height}px`;
+            container.style.maxHeight = `${window.visualViewport.height}px`;
+          }
+        }
+      }, 100);
     });
 
     // Additional fallback for older devices
     window.addEventListener('resize', () => {
       if (document.activeElement === input) {
+        adjustContainerHeight();
         setTimeout(scrollMessagesToBottom, 100);
       }
     });
+
+    // Initial adjustment
+    adjustContainerHeight();
   }
 
   // Get or create visitor ID
@@ -530,10 +572,6 @@
             height: 100dvh;
             max-height: 100dvh;
             border-radius: 0;
-          }
-          
-          #emily-chat-widget {
-            bottom: 20px;
           }
         }
       </style>
