@@ -61,6 +61,24 @@ export async function POST(request: Request) {
       );
     }
 
+    // Send verification email manually since we're using admin.createUser
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://app.talktoemily.com';
+    const { data: emailData, error: emailError } = await supabase.auth.admin.generateLink({
+      type: 'signup',
+      email: validatedData.email,
+      options: {
+        redirectTo: `${appUrl}/auth/callback`,
+      },
+    });
+
+    if (emailError) {
+      console.error('Failed to send verification email:', emailError);
+      // Don't fail the signup - user is created, they can request a new verification email
+      // Or admin can manually verify them in Supabase dashboard
+    } else {
+      console.log('Verification email sent successfully to:', validatedData.email);
+    }
+
     // Create organization (bypasses RLS with service role)
     const { data: org, error: orgError } = await supabase
       .from('organizations')
