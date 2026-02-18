@@ -35,8 +35,18 @@ const TARGET_LANGUAGES = [
 const MESSAGES_DIR = path.join(__dirname, '..', 'messages');
 const EN_FILE = path.join(MESSAGES_DIR, 'en.json');
 
-async function translateToLanguage(englishMessages, targetLang) {
+async function translateToLanguage(englishMessages, targetLang, existingMessages = {}) {
   console.log(`\n🌍 Translating to ${targetLang.name} (${targetLang.code})...`);
+
+  // Find missing keys by comparing structures
+  const missingKeys = findMissingKeys(englishMessages, existingMessages);
+  
+  if (Object.keys(missingKeys).length === 0) {
+    console.log(`✅ ${targetLang.name} is already up to date, skipping`);
+    return existingMessages;
+  }
+
+  console.log(`📝 Found ${countKeys(missingKeys)} missing translations`);
 
   const prompt = `You are a professional translator specializing in software localization. 
 Translate the following JSON file from English to ${targetLang.name}.
@@ -51,14 +61,14 @@ IMPORTANT RULES:
 7. Ensure pluralization rules are appropriate for ${targetLang.name}
 8. Keep URLs, email addresses, and code snippets unchanged
 
-Source JSON (English):
-${JSON.stringify(englishMessages, null, 2)}
+Source JSON (English) - ONLY translate these missing keys:
+${JSON.stringify(missingKeys, null, 2)}
 
 Respond ONLY with the translated JSON. No explanations, no markdown code blocks, just the raw JSON.`;
 
   try {
     const completion = await openai.chat.completions.create({
-      model: 'gpt-5.2',
+      model: 'gpt-5-nano',
       messages: [
         {
           role: 'system',
@@ -80,10 +90,13 @@ Respond ONLY with the translated JSON. No explanations, no markdown code blocks,
     }
 
     // Parse to validate JSON
-    const translatedMessages = JSON.parse(cleanedText);
+    const translatedMissingKeys = JSON.parse(cleanedText);
+    
+    // Merge with existing translations
+    const mergedMessages = deepMerge(existingMessages, translatedMissingKeys);
     
     console.log(`✅ Translation to ${targetLang.name} completed successfully`);
-    return translatedMessages;
+    return mergedMessages;
   } catch (error) {
     console.error(`❌ Error translating to ${targetLang.name}:`, error.message);
     if (error.response) {
@@ -93,9 +106,57 @@ Respond ONLY with the translated JSON. No explanations, no markdown code blocks,
   }
 }
 
+// Deep merge helper
+function deepMerge(target, source) {
+  const output = { ...target };
+  for (const key in source) {
+    if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+      output[key] = deepMerge(target[key] || {}, source[key]);
+    } else {
+      output[key] = source[key];
+    }
+  }
+  return output;
+}
+
+// Find missing keys recursively
+function findMissingKeys(source, target, path = '') {
+  const missing = {};
+  
+  for (const key in source) {
+    const currentPath = path ? `${path}.${key}` : key;
+    
+    if (!(key in target)) {
+      // Key is completely missing
+      missing[key] = source[key];
+    } else if (typeof source[key] === 'object' && !Array.isArray(source[key])) {
+      // Recursively check nested objects
+      const nestedMissing = findMissingKeys(source[key], target[key], currentPath);
+      if (Object.keys(nestedMissing).length > 0) {
+        missing[key] = nestedMissing;
+      }
+    }
+  }
+  
+  return missing;
+}
+
+// Count total keys
+function countKeys(obj) {
+  let count = 0;
+  for (const key in obj) {
+    if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+      count += countKeys(obj[key]);
+    } else {
+      count++;
+    }
+  }
+  return count;
+}
+
 async function main() {
   console.log('🚀 Starting automated translation process...');
-  console.log('📖 Using GPT-4 Turbo for high-quality translations');
+  console.log('📖 Using GPT-5-Nano for fast and efficient translations');
 
   // Check for API key
   if (!process.env.OPENAI_API_KEY) {
@@ -116,29 +177,35 @@ async function main() {
     process.exit(1);
   }
 
-  // Translate to each target language
-  let successCount = 0;
-  let failCount = 0;
-
-  for (const targetLang of TARGET_LANGUAGES) {
+  // Translate to all target languages IN PARALLEL
+  console.log('\n🚀 Starting parallel translations...');
+  const translationPromises = TARGET_LANGUAGES.map(async (targetLang) => {
     try {
-      const translatedMessages = await translateToLanguage(englishMessages, targetLang);
+      // Read existing translation if it exists
+      const targetFile = path.join(MESSAGES_DIR, `${targetLang.code}.json`);
+      let existingMessages = {};
+      if (fs.existsSync(targetFile)) {
+        const existingContent = fs.readFileSync(targetFile, 'utf-8');
+        existingMessages = JSON.parse(existingContent);
+      }
+
+      const translatedMessages = await translateToLanguage(englishMessages, targetLang, existingMessages);
       
       // Write to file
-      const outputFile = path.join(MESSAGES_DIR, `${targetLang.code}.json`);
-      fs.writeFileSync(outputFile, JSON.stringify(translatedMessages, null, 2), 'utf-8');
-      console.log(`💾 Saved translation to: ${outputFile}`);
+      fs.writeFileSync(targetFile, JSON.stringify(translatedMessages, null, 2), 'utf-8');
+      console.log(`💾 Saved translation to: ${targetFile}`);
       
-      successCount++;
-      
-      // Add a small delay to avoid rate limiting
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      return { success: true, lang: targetLang.name };
     } catch (error) {
       console.error(`❌ Failed to translate to ${targetLang.name}`);
-      failCount++;
-      // Continue with other languages even if one fails
+      return { success: false, lang: targetLang.name, error };
     }
-  }
+  });
+
+  // Wait for all translations to complete
+  const results = await Promise.all(translationPromises);
+  const successCount = results.filter(r => r.success).length;
+  const failCount = results.filter(r => !r.success).length;
 
   // Summary
   console.log('\n' + '='.repeat(60));

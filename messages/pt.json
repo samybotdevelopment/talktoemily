@@ -62,7 +62,8 @@
       "backToLogin": "Voltar ao login",
       "useMagicLink": "Em vez disso, iniciar sessão com link mágico",
       "usePassword": "Em vez disso, iniciar sessão com palavra-passe",
-      "error": "Falha ao iniciar sessão. Verifique as suas credenciais."
+      "error": "Falha ao iniciar sessão. Verifique as suas credenciais.",
+      "emailNotVerified": "Por favor, verifique seu endereço de e-mail antes de fazer login. Verifique sua caixa de entrada para o link de confirmação."
     },
     "signup": {
       "title": "Junte-se à Emily",
@@ -83,7 +84,10 @@
       "freeTrialTitle": "O teste grátis inclui:",
       "freeTrialFeature1": "1 treino (vitalício)",
       "freeTrialFeature2": "50 mensagens de IA (vitalício)",
-      "freeTrialFeature3": "1 website"
+      "freeTrialFeature3": "1 website",
+      "accountCreated": "Conta criada!",
+      "confirmationEmailSent": "Enviamos um e-mail de confirmação para",
+      "checkInboxAndVerify": "Por favor, verifique sua caixa de entrada e clique no link de verificação para ativar sua conta."
     },
     "signOut": "Terminar sessão",
     "signOutConfirm": "Tem a certeza de que quer terminar sessão?"

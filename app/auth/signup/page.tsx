@@ -92,12 +92,12 @@ export default function SignupPage() {
 
         {success && (
           <div className="bg-green-50 border-4 border-green-500 rounded-lg p-4 mb-6">
-            <h3 className="text-green-800 font-bold mb-2">✓ Account Created!</h3>
+            <h3 className="text-green-800 font-bold mb-2">✓ {t('accountCreated')}</h3>
             <p className="text-green-700 mb-3">
-              We've sent a confirmation email to <strong>{email}</strong>.
+              {t('confirmationEmailSent')} <strong>{email}</strong>.
             </p>
             <p className="text-green-700 text-sm">
-              Please check your inbox and click the verification link to activate your account.
+              {t('checkInboxAndVerify')}
             </p>
           </div>
         )}

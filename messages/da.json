@@ -62,7 +62,8 @@
       "backToLogin": "Tilbage til login",
       "useMagicLink": "Log ind med magic link i stedet",
       "usePassword": "Log ind med adgangskode i stedet",
-      "error": "Login mislykkedes. Tjek venligst dine loginoplysninger."
+      "error": "Login mislykkedes. Tjek venligst dine loginoplysninger.",
+      "emailNotVerified": "Venligst bekræft din e-mailadresse, før du logger ind. Tjek din indbakke for bekræftelseslinket."
     },
     "signup": {
       "title": "Bliv en del af Emily",
@@ -83,7 +84,10 @@
       "freeTrialTitle": "Gratis prøveperiode inkluderer:",
       "freeTrialFeature1": "1 træningskørsel (livstid)",
       "freeTrialFeature2": "50 AI-beskeder (livstid)",
-      "freeTrialFeature3": "1 hjemmeside"
+      "freeTrialFeature3": "1 hjemmeside",
+      "accountCreated": "Konto oprettet!",
+      "confirmationEmailSent": "Vi har sendt en bekræftelses-e-mail til",
+      "checkInboxAndVerify": "Tjek venligst din indbakke og klik på bekræftelseslinket for at aktivere din konto."
     },
     "signOut": "Log ud",
     "signOutConfirm": "Er du sikker på, at du vil logge ud?"

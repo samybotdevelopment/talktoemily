@@ -62,7 +62,8 @@
       "backToLogin": "Back to login",
       "useMagicLink": "Sign in with magic link instead",
       "usePassword": "Sign in with password instead",
-      "error": "Login failed. Please check your credentials."
+      "error": "Login failed. Please check your credentials.",
+      "emailNotVerified": "Please verify your email address before signing in. Check your inbox for the confirmation link."
     },
     "signup": {
       "title": "Join Emily",
@@ -83,7 +84,10 @@
       "freeTrialTitle": "Free Trial Includes:",
       "freeTrialFeature1": "1 training run (lifetime)",
       "freeTrialFeature2": "50 AI messages (lifetime)",
-      "freeTrialFeature3": "1 website"
+      "freeTrialFeature3": "1 website",
+      "accountCreated": "Account Created!",
+      "confirmationEmailSent": "We've sent a confirmation email to",
+      "checkInboxAndVerify": "Please check your inbox and click the verification link to activate your account."
     },
     "signOut": "Sign Out",
     "signOutConfirm": "Are you sure you want to sign out?"

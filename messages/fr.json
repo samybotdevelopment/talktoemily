@@ -62,7 +62,8 @@
       "backToLogin": "Retour à la connexion",
       "useMagicLink": "Se connecter avec un lien magique",
       "usePassword": "Se connecter avec un mot de passe",
-      "error": "Échec de la connexion. Veuillez vérifier vos identifiants."
+      "error": "Échec de la connexion. Veuillez vérifier vos identifiants.",
+      "emailNotVerified": "Veuillez vérifier votre adresse e-mail avant de vous connecter. Consultez votre boîte de réception pour le lien de confirmation."
     },
     "signup": {
       "title": "Rejoindre Emily",
@@ -83,7 +84,10 @@
       "freeTrialTitle": "L'essai gratuit inclut :",
       "freeTrialFeature1": "1 entraînement (à vie)",
       "freeTrialFeature2": "50 messages IA (à vie)",
-      "freeTrialFeature3": "1 site web"
+      "freeTrialFeature3": "1 site web",
+      "accountCreated": "Compte créé !",
+      "confirmationEmailSent": "Nous avons envoyé un e-mail de confirmation à",
+      "checkInboxAndVerify": "Veuillez consulter votre boîte de réception et cliquer sur le lien de vérification pour activer votre compte."
     },
     "signOut": "Se déconnecter",
     "signOutConfirm": "Êtes-vous sûr(e) de vouloir vous déconnecter ?"

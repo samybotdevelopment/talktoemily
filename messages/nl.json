@@ -62,7 +62,8 @@
       "backToLogin": "Terug naar inloggen",
       "useMagicLink": "Inloggen met magic link",
       "usePassword": "Inloggen met wachtwoord",
-      "error": "Inloggen mislukt. Controleer je gegevens."
+      "error": "Inloggen mislukt. Controleer je gegevens.",
+      "emailNotVerified": "Verifieer uw e-mailadres voordat u inlogt. Controleer uw postvak in op de bevestigingslink."
     },
     "signup": {
       "title": "Doe mee met Emily",
@@ -83,7 +84,10 @@
       "freeTrialTitle": "Gratis proefperiode bevat:",
       "freeTrialFeature1": "1 trainingsrun (levenslang)",
       "freeTrialFeature2": "50 AI-berichten (levenslang)",
-      "freeTrialFeature3": "1 website"
+      "freeTrialFeature3": "1 website",
+      "accountCreated": "Account aangemaakt!",
+      "confirmationEmailSent": "We hebben een bevestigingsmail gestuurd naar",
+      "checkInboxAndVerify": "Controleer uw postvak in en klik op de verificatie-link om uw account te activeren."
     },
     "signOut": "Uitloggen",
     "signOutConfirm": "Weet je zeker dat je wilt uitloggen?"

@@ -31,7 +31,7 @@ export default function LoginPage() {
     if (error) {
       // Check for unverified email
       if (error.message.includes('Email not confirmed') || error.message.includes('email_not_confirmed')) {
-        setError('Please verify your email address before signing in. Check your inbox for the confirmation link.');
+        setError(t('emailNotVerified'));
       } else {
         setError(error.message);
       }

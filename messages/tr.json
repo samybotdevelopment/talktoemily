@@ -62,7 +62,8 @@
       "backToLogin": "Girişe dön",
       "useMagicLink": "Bunun yerine sihirli bağlantıyla giriş yap",
       "usePassword": "Bunun yerine şifreyle giriş yap",
-      "error": "Giriş başarısız. Lütfen bilgilerinizi kontrol edin."
+      "error": "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.",
+      "emailNotVerified": "Giriş yapmadan önce lütfen e-posta adresinizi doğrulayın. Onay bağlantısını içeren e-postayı gelen kutunuzda kontrol edin."
     },
     "signup": {
       "title": "Emily’ye Katılın",
@@ -83,7 +84,10 @@
       "freeTrialTitle": "Ücretsiz Deneme Şunları İçerir:",
       "freeTrialFeature1": "1 eğitim çalıştırması (ömür boyu)",
       "freeTrialFeature2": "50 AI mesajı (ömür boyu)",
-      "freeTrialFeature3": "1 web sitesi"
+      "freeTrialFeature3": "1 web sitesi",
+      "accountCreated": "Hesap Oluşturuldu!",
+      "confirmationEmailSent": "Onay e-postasını gönderdik",
+      "checkInboxAndVerify": "Lütfen gelen kutunuzu kontrol edin ve hesabınızı etkinleştirmek için doğrulama bağlantısına tıklayın."
     },
     "signOut": "Çıkış Yap",
     "signOutConfirm": "Çıkış yapmak istediğinizden emin misiniz?"

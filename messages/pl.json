@@ -62,7 +62,8 @@
       "backToLogin": "Wróć do logowania",
       "useMagicLink": "Zaloguj się zamiast tego magicznym linkiem",
       "usePassword": "Zaloguj się zamiast tego hasłem",
-      "error": "Logowanie nie powiodło się. Sprawdź swoje dane."
+      "error": "Logowanie nie powiodło się. Sprawdź swoje dane.",
+      "emailNotVerified": "Proszę zweryfikuj swój adres e-mail przed zalogowaniem się. Sprawdź swoją skrzynkę odbiorczą w poszukiwaniu linku potwierdzającego."
     },
     "signup": {
       "title": "Dołącz do Emily",
@@ -83,7 +84,10 @@
       "freeTrialTitle": "Bezpłatny okres próbny obejmuje:",
       "freeTrialFeature1": "1 trening (na zawsze)",
       "freeTrialFeature2": "50 wiadomości AI (na zawsze)",
-      "freeTrialFeature3": "1 stronę internetową"
+      "freeTrialFeature3": "1 stronę internetową",
+      "accountCreated": "Konto utworzone!",
+      "confirmationEmailSent": "Wysłaliśmy wiadomość e-mail z potwierdzeniem na",
+      "checkInboxAndVerify": "Proszę sprawdź swoją skrzynkę odbiorczą i kliknij link potwierdzający, aby aktywować swoje konto."
     },
     "signOut": "Wyloguj się",
     "signOutConfirm": "Na pewno chcesz się wylogować?"
