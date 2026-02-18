@@ -364,7 +364,8 @@
     "deleteAccount": "Elimina Account",
     "deletingAccount": "Eliminazione Account...",
     "deleteAccountConfirmation": "Questa azione eliminerà permanentemente il tuo account e tutti i dati associati.",
-    "deleteAccountError": "Si è verificato un errore"
+    "deleteAccountError": "Si è verificato un errore",
+    "deleteAccountHasBots": "Per favore, elimina tutti i bot prima di eliminare il tuo account"
   },
   "subscription": {
     "title": "Piani di Abbonamento",

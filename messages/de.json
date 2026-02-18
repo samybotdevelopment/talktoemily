@@ -364,7 +364,8 @@
     "deleteAccount": "Konto löschen",
     "deletingAccount": "Konto wird gelöscht...",
     "deleteAccountConfirmation": "Diese Aktion löscht dauerhaft Ihr Konto und alle zugehörigen Daten.",
-    "deleteAccountError": "Es ist ein Fehler aufgetreten"
+    "deleteAccountError": "Es ist ein Fehler aufgetreten",
+    "deleteAccountHasBots": "Bitte löschen Sie alle Bots, bevor Sie Ihr Konto löschen."
   },
   "subscription": {
     "title": "Abonnementpläne",

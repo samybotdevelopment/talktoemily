@@ -364,7 +364,8 @@
     "deleteAccount": "Ta bort konto",
     "deletingAccount": "Tar bort konto...",
     "deleteAccountConfirmation": "Den här åtgärden kommer att ta bort ditt konto och all tillhörande data permanent.",
-    "deleteAccountError": "Ett fel uppstod"
+    "deleteAccountError": "Ett fel uppstod",
+    "deleteAccountHasBots": "Vänligen ta bort alla botar innan du raderar ditt konto"
   },
   "subscription": {
     "title": "Prenumerationsplaner",

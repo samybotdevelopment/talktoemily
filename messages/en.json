@@ -713,7 +713,8 @@
     "deleteAccount": "Delete Account",
     "deletingAccount": "Deleting Account...",
     "deleteAccountConfirmation": "This action will permanently delete your account and all associated data.",
-    "deleteAccountError": "An error occurred"
+    "deleteAccountError": "An error occurred",
+    "deleteAccountHasBots": "Please delete all bots before deleting your account"
   },
   "botOverview": {
     "wonderGeorgeWebsite": "Wonder George Website",

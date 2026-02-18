@@ -364,7 +364,8 @@
     "deleteAccount": "Usuń konto",
     "deletingAccount": "Usuwanie konta...",
     "deleteAccountConfirmation": "Ta akcja trwale usunie Twoje konto i wszystkie powiązane dane.",
-    "deleteAccountError": "Wystąpił błąd"
+    "deleteAccountError": "Wystąpił błąd",
+    "deleteAccountHasBots": "Proszę usunąć wszystkie boty przed usunięciem konta."
   },
   "subscription": {
     "title": "Plany subskrypcji",

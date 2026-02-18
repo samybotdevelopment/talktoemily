@@ -364,7 +364,8 @@
     "deleteAccount": "Hesabı Sil",
     "deletingAccount": "Hesap Siliniyor...",
     "deleteAccountConfirmation": "Bu işlem hesabınızı ve ilişkili tüm verileri kalıcı olarak silecektir.",
-    "deleteAccountError": "Bir hata oluştu"
+    "deleteAccountError": "Bir hata oluştu",
+    "deleteAccountHasBots": "Lütfen hesabınızı silmeden önce tüm botları silin"
   },
   "subscription": {
     "title": "Abonelik Planları",

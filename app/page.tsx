@@ -19,10 +19,10 @@ export default async function Home() {
               className="h-16 sm:h-24 w-auto"
             />
           </div>
-          <h1 className="text-4xl sm:text-6xl font-bold mb-6">
+          {/* <h1 className="text-4xl sm:text-6xl font-bold mb-6">
             {t('title', { name: t('titleName') }).split(t('titleName'))[0]}
             <span className="text-fuchsia-primary">{t('titleName')}</span>
-          </h1>
+          </h1> */}
           <p className="text-lg sm:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto">
             {t('subtitle')}
           </p>

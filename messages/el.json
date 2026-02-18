@@ -364,7 +364,8 @@
     "deleteAccount": "Διαγραφή λογαριασμού",
     "deletingAccount": "Διαγραφή λογαριασμού...",
     "deleteAccountConfirmation": "Αυτή η ενέργεια θα διαγράψει οριστικά τον λογαριασμό σας και όλα τα σχετικά δεδομένα.",
-    "deleteAccountError": "Παρουσιάστηκε σφάλμα"
+    "deleteAccountError": "Παρουσιάστηκε σφάλμα",
+    "deleteAccountHasBots": "Παρακαλώ διαγράψτε όλα τα ρομπότ πριν διαγράψετε τον λογαριασμό σας"
   },
   "subscription": {
     "title": "Πλάνα συνδρομής",

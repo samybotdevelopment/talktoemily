@@ -364,7 +364,8 @@
     "deleteAccount": "Account verwijderen",
     "deletingAccount": "Account wordt verwijderd...",
     "deleteAccountConfirmation": "Deze actie verwijdert je account en alle bijbehorende data permanent.",
-    "deleteAccountError": "Er is een fout opgetreden"
+    "deleteAccountError": "Er is een fout opgetreden",
+    "deleteAccountHasBots": "Verwijder alsjeblieft eerst alle bots voordat je je account verwijdert"
   },
   "subscription": {
     "title": "Abonnementsplannen",

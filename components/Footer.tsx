@@ -1,7 +1,6 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 
 export function Footer() {
   const t = useTranslations('footer');
@@ -28,15 +27,30 @@ export function Footer() {
             >
               {t('wonderGeorge')}
             </a>
-            <Link href="/legal" className="text-gray-600 hover:text-fuchsia-primary transition-colors font-medium">
+            <a
+              href="https://talktoemily.com/?page=legal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-fuchsia-primary transition-colors font-medium"
+            >
               {t('legal')}
-            </Link>
-            <Link href="/privacy" className="text-gray-600 hover:text-fuchsia-primary transition-colors font-medium">
+            </a>
+            <a
+              href="https://talktoemily.com/?page=privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-fuchsia-primary transition-colors font-medium"
+            >
               {t('privacy')}
-            </Link>
-            <Link href="/terms" className="text-gray-600 hover:text-fuchsia-primary transition-colors font-medium">
+            </a>
+            <a
+              href="https://talktoemily.com/?page=legal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-fuchsia-primary transition-colors font-medium"
+            >
               {t('terms')}
-            </Link>
+            </a>
           </div>
         </div>
       </div>

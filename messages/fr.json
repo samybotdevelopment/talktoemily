@@ -713,7 +713,8 @@
     "deleteAccount": "Supprimer le compte",
     "deletingAccount": "Suppression du compte...",
     "deleteAccountConfirmation": "Cette action supprimera définitivement votre compte et toutes les données associées.",
-    "deleteAccountError": "Une erreur s'est produite"
+    "deleteAccountError": "Une erreur s'est produite",
+    "deleteAccountHasBots": "Veuillez supprimer tous les bots avant de supprimer votre compte"
   },
   "botOverview": {
     "wonderGeorgeWebsite": "Site Wonder George",

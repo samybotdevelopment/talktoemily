@@ -364,7 +364,8 @@
     "deleteAccount": "Slet konto",
     "deletingAccount": "Sletter konto...",
     "deleteAccountConfirmation": "Denne handling sletter permanent din konto og alle tilknyttede data.",
-    "deleteAccountError": "Der opstod en fejl"
+    "deleteAccountError": "Der opstod en fejl",
+    "deleteAccountHasBots": "Slet venligst alle bots, før du sletter din konto"
   },
   "subscription": {
     "title": "Abonnementsplaner",

@@ -22,7 +22,11 @@ export function DeleteAccountButton() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to delete account');
+        // Check if it's the "has bots" error
+        if (data.hasBots) {
+          throw new Error(t('deleteAccountHasBots'));
+        }
+        throw new Error(data.error || t('deleteAccountError'));
       }
 
       router.push('/auth/login');
