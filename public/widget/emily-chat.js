@@ -944,35 +944,31 @@
     
     const messagesContainer = document.getElementById('emily-messages');
     
-    // Look for temp messages of the SAME sender type only
-    // We want to find the MOST RECENT temp message for this sender
-    const tempMessages = messagesContainer.querySelectorAll(`.emily-message.${message.sender}`);
-    let mostRecentTempMessage = null;
-    let mostRecentTempTimestamp = 0;
+    // Look for temp message with MATCHING CONTENT and sender
+    // This is critical - we must match by content, not just find any temp message
+    const allMessages = messagesContainer.querySelectorAll(`.emily-message.${message.sender}`);
+    let tempMessageToRemove = null;
     
-    tempMessages.forEach(el => {
+    allMessages.forEach(el => {
       const existingId = el.dataset.messageId;
-      // Only consider temp messages of the same sender
       if (existingId && existingId.startsWith(`temp-${message.sender}-`)) {
-        // Extract timestamp from temp-{sender}-{timestamp}
-        const parts = existingId.split('-');
-        const timestamp = parseInt(parts[parts.length - 1]);
-        if (timestamp > mostRecentTempTimestamp) {
-          mostRecentTempTimestamp = timestamp;
-          mostRecentTempMessage = el;
+        // Check if content matches
+        const contentEl = el.querySelector('.emily-message-content');
+        if (contentEl && contentEl.textContent === message.content) {
+          tempMessageToRemove = el;
+          console.log('Emily Chat: Found matching temp message by content:', existingId);
         }
       }
     });
     
-    // Remove most recent temp message if exists
-    if (mostRecentTempMessage) {
-      console.log('Emily Chat: Removing temp message:', mostRecentTempMessage.dataset.messageId);
-      // Remove from Set before removing from DOM
-      const tempId = mostRecentTempMessage.dataset.messageId;
+    // Remove matching temp message if exists
+    if (tempMessageToRemove) {
+      console.log('Emily Chat: Removing temp message:', tempMessageToRemove.dataset.messageId);
+      const tempId = tempMessageToRemove.dataset.messageId;
       if (tempId) {
         displayedMessageIds.delete(tempId);
       }
-      mostRecentTempMessage.remove();
+      tempMessageToRemove.remove();
     }
     
     // Add the real message ID to our tracking Set
