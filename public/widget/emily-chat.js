@@ -1074,19 +1074,28 @@
       hideTyping();
       const data = await response.json();
       
+      let isNewConversation = false;
       if (data.conversationId) {
-        const isNewConversation = !conversationId;
+        isNewConversation = !conversationId;
         conversationId = data.conversationId;
         console.log('Emily Chat: Conversation ID set to', conversationId);
         
         // Subscribe to real-time updates for new conversation
         if (isNewConversation) {
           subscribeToMessages(conversationId);
+          
+          // CRITICAL: Fetch messages from DB after subscribing
+          // This ensures we get any messages that were saved before subscription was active
+          // (like the first AI response which is saved before we subscribe)
+          console.log('Emily Chat: Fetching messages after new subscription to sync DB state');
+          await loadMessagesFromConversation(conversationId);
         }
       }
       
-      // Display AI response if present (AI was active)
-      if (data.response) {
+      // DO NOT display AI response as temp for new conversations
+      // It will be loaded from DB in loadMessagesFromConversation above
+      // Only show temp for existing conversations where subscription is already active
+      if (data.response && !isNewConversation) {
         addMessage(data.response, 'assistant', 'temp-assistant-' + Date.now());
       }
       
