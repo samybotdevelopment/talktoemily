@@ -175,7 +175,7 @@
       <style>
         #emily-chat-widget {
           position: fixed;
-          bottom: 70px;
+          bottom: 100px;
           right: 20px;
           z-index: 9999;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -220,7 +220,7 @@
       <style>
         #emily-chat-widget {
           position: fixed;
-          bottom: 70px;
+          bottom: 100px;
           right: 20px;
           z-index: 9999;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -253,7 +253,7 @@
         .emily-chat-container {
           display: none;
           position: fixed;
-          bottom: 70px;
+          bottom: 100px;
           right: 20px;
           width: 380px;
           height: 600px;
@@ -785,6 +785,9 @@
 
       messagesContainer.innerHTML = '';
       
+      // Clear the displayedMessageIds Set for this conversation
+      displayedMessageIds.clear();
+      
       if (messages.length === 0) {
         messagesContainer.innerHTML = `
           <div class="emily-welcome">
@@ -800,6 +803,9 @@
           messageDiv.dataset.messageId = msg.id;
           messageDiv.innerHTML = `<div class="emily-message-content">${msg.content}</div>`;
           messagesContainer.appendChild(messageDiv);
+          
+          // Add to displayedMessageIds Set
+          displayedMessageIds.add(msg.id);
         });
       }
       
@@ -883,39 +889,56 @@
 
   // Handle real-time message
   function handleRealtimeMessage(message) {
+    // Check if we've already processed this message ID
+    if (displayedMessageIds.has(message.id)) {
+      console.log('Emily Chat: Message already displayed, skipping:', message.id);
+      return;
+    }
+    
     const messagesContainer = document.getElementById('emily-messages');
     
-    // Check if this exact message ID already exists
-    const existingMessages = messagesContainer.querySelectorAll(`.emily-message.${message.sender}`);
-    let messageAlreadyExists = false;
-    let tempMessageToRemove = null;
+    // Look for temp messages of the SAME sender type only
+    // We want to find the MOST RECENT temp message for this sender
+    const tempMessages = messagesContainer.querySelectorAll(`.emily-message.${message.sender}`);
+    let mostRecentTempMessage = null;
+    let mostRecentTempTimestamp = 0;
     
-    existingMessages.forEach(el => {
+    tempMessages.forEach(el => {
       const existingId = el.dataset.messageId;
-      if (existingId === message.id) {
-        // Exact match - already displayed
-        messageAlreadyExists = true;
-      } else if (existingId && existingId.startsWith('temp-')) {
-        // This is a temp message - we'll replace it with the real one
-        tempMessageToRemove = el;
+      // Only consider temp messages of the same sender
+      if (existingId && existingId.startsWith(`temp-${message.sender}-`)) {
+        // Extract timestamp from temp-{sender}-{timestamp}
+        const parts = existingId.split('-');
+        const timestamp = parseInt(parts[parts.length - 1]);
+        if (timestamp > mostRecentTempTimestamp) {
+          mostRecentTempTimestamp = timestamp;
+          mostRecentTempMessage = el;
+        }
       }
     });
-
-    if (messageAlreadyExists) {
-      return; // Already displayed
+    
+    // Remove most recent temp message if exists
+    if (mostRecentTempMessage) {
+      console.log('Emily Chat: Removing temp message:', mostRecentTempMessage.dataset.messageId);
+      // Remove from Set before removing from DOM
+      const tempId = mostRecentTempMessage.dataset.messageId;
+      if (tempId) {
+        displayedMessageIds.delete(tempId);
+      }
+      mostRecentTempMessage.remove();
     }
     
-    // Remove temp message if exists
-    if (tempMessageToRemove) {
-      tempMessageToRemove.remove();
-    }
+    // Add the real message ID to our tracking Set
+    displayedMessageIds.add(message.id);
     
-    // Add the real message
+    // Add the real message to the DOM
     const messageDiv = document.createElement('div');
     messageDiv.className = `emily-message ${message.sender}`;
     messageDiv.dataset.messageId = message.id;
     messageDiv.innerHTML = `<div class="emily-message-content">${message.content}</div>`;
     messagesContainer.appendChild(messageDiv);
+    
+    console.log('Emily Chat: Added message via realtime:', message.id);
     scrollMessagesToBottom();
   }
 
@@ -962,6 +985,8 @@
     messageDiv.className = `emily-message ${sender}`;
     if (messageId) {
       messageDiv.dataset.messageId = messageId;
+      // Add to displayedMessageIds Set
+      displayedMessageIds.add(messageId);
     }
     messageDiv.innerHTML = `
       <div class="emily-message-content">${content}</div>
