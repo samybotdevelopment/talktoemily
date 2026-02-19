@@ -942,39 +942,14 @@
       return;
     }
     
-    const messagesContainer = document.getElementById('emily-messages');
+    // Hide typing indicator when message arrives
+    hideTyping();
     
-    // Look for temp message with MATCHING CONTENT and sender
-    // This is critical - we must match by content, not just find any temp message
-    const allMessages = messagesContainer.querySelectorAll(`.emily-message.${message.sender}`);
-    let tempMessageToRemove = null;
-    
-    allMessages.forEach(el => {
-      const existingId = el.dataset.messageId;
-      if (existingId && existingId.startsWith(`temp-${message.sender}-`)) {
-        // Check if content matches
-        const contentEl = el.querySelector('.emily-message-content');
-        if (contentEl && contentEl.textContent === message.content) {
-          tempMessageToRemove = el;
-          console.log('Emily Chat: Found matching temp message by content:', existingId);
-        }
-      }
-    });
-    
-    // Remove matching temp message if exists
-    if (tempMessageToRemove) {
-      console.log('Emily Chat: Removing temp message:', tempMessageToRemove.dataset.messageId);
-      const tempId = tempMessageToRemove.dataset.messageId;
-      if (tempId) {
-        displayedMessageIds.delete(tempId);
-      }
-      tempMessageToRemove.remove();
-    }
-    
-    // Add the real message ID to our tracking Set
+    // Add the message ID to tracking Set
     displayedMessageIds.add(message.id);
     
-    // Add the real message to the DOM
+    // Add the message to the DOM
+    const messagesContainer = document.getElementById('emily-messages');
     const messageDiv = document.createElement('div');
     messageDiv.className = `emily-message ${message.sender}`;
     messageDiv.dataset.messageId = message.id;
@@ -1128,9 +1103,9 @@
           subscribeToMessages(conversationId);
           console.log('Emily Chat: Subscribed to new conversation');
           
-          // Wait a moment for subscription to establish, then poll for any missed messages
+          // Poll after 500ms to get messages that were saved before subscription
           setTimeout(async () => {
-            console.log('Emily Chat: Polling for messages that may have been saved before subscription');
+            console.log('Emily Chat: Polling for messages saved before subscription');
             try {
               const response = await fetch(`${API_BASE}/api/widget/conversation/messages?conversationId=${conversationId}`);
               if (response.ok) {
@@ -1149,23 +1124,18 @@
                     displayedMessageIds.add(msg.id);
                   }
                 });
+                hideTyping();
                 scrollMessagesToBottom();
               }
             } catch (err) {
               console.error('Emily Chat: Failed to poll messages', err);
+              hideTyping();
             }
-          }, 500); // 500ms delay to let subscription establish
+          }, 500);
         }
       }
       
-      // For existing conversations, show temp AI response (will be replaced by realtime)
-      // For NEW conversations, don't show temp - polling will get it
-      if (data.response && !isNewConversation) {
-        console.log('Emily Chat: Adding temp AI response for existing conversation');
-        addMessage(data.response, 'assistant', 'temp-assistant-' + Date.now());
-      } else if (data.response && isNewConversation) {
-        console.log('Emily Chat: NOT adding temp AI response for new conversation - polling will get it');
-      }
+      // NO temp AI messages - just wait for realtime or polling
       
       console.log('Emily Chat: Message sent successfully');
 
