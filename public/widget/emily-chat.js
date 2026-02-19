@@ -797,6 +797,7 @@
         messages.forEach(msg => {
           const messageDiv = document.createElement('div');
           messageDiv.className = `emily-message ${msg.sender}`;
+          messageDiv.dataset.messageId = msg.id;
           messageDiv.innerHTML = `<div class="emily-message-content">${msg.content}</div>`;
           messagesContainer.appendChild(messageDiv);
         });
@@ -882,43 +883,40 @@
 
   // Handle real-time message
   function handleRealtimeMessage(message) {
-    // Only show messages from assistant (backoffice responses) or when message is saved
-    if (message.sender === 'assistant') {
-      const messagesContainer = document.getElementById('emily-messages');
-      
-      // Check if this exact message ID already exists
-      const existingMessages = messagesContainer.querySelectorAll('.emily-message.assistant');
-      let messageAlreadyExists = false;
-      let tempMessageToRemove = null;
-      
-      existingMessages.forEach(el => {
-        const existingId = el.dataset.messageId;
-        if (existingId === message.id) {
-          // Exact match - already displayed
-          messageAlreadyExists = true;
-        } else if (existingId && existingId.startsWith('temp-')) {
-          // This is a temp message - we'll replace it with the real one
-          tempMessageToRemove = el;
-        }
-      });
+    const messagesContainer = document.getElementById('emily-messages');
+    
+    // Check if this exact message ID already exists
+    const existingMessages = messagesContainer.querySelectorAll(`.emily-message.${message.sender}`);
+    let messageAlreadyExists = false;
+    let tempMessageToRemove = null;
+    
+    existingMessages.forEach(el => {
+      const existingId = el.dataset.messageId;
+      if (existingId === message.id) {
+        // Exact match - already displayed
+        messageAlreadyExists = true;
+      } else if (existingId && existingId.startsWith('temp-')) {
+        // This is a temp message - we'll replace it with the real one
+        tempMessageToRemove = el;
+      }
+    });
 
-      if (messageAlreadyExists) {
-        return; // Already displayed
-      }
-      
-      // Remove temp message if exists
-      if (tempMessageToRemove) {
-        tempMessageToRemove.remove();
-      }
-      
-      // Add the real message
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `emily-message ${message.sender}`;
-      messageDiv.dataset.messageId = message.id;
-      messageDiv.innerHTML = `<div class="emily-message-content">${message.content}</div>`;
-      messagesContainer.appendChild(messageDiv);
-      scrollMessagesToBottom();
+    if (messageAlreadyExists) {
+      return; // Already displayed
     }
+    
+    // Remove temp message if exists
+    if (tempMessageToRemove) {
+      tempMessageToRemove.remove();
+    }
+    
+    // Add the real message
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `emily-message ${message.sender}`;
+    messageDiv.dataset.messageId = message.id;
+    messageDiv.innerHTML = `<div class="emily-message-content">${message.content}</div>`;
+    messagesContainer.appendChild(messageDiv);
+    scrollMessagesToBottom();
   }
 
   // Format time ago
@@ -1017,8 +1015,9 @@
     input.disabled = true;
     sendButton.disabled = true;
 
-    // Add user message
-    addMessage(message, 'user');
+    // Add user message with temp ID for deduplication
+    const tempUserId = 'temp-user-' + Date.now();
+    addMessage(message, 'user', tempUserId);
     input.value = '';
 
     // Show typing
