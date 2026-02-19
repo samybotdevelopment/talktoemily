@@ -1058,12 +1058,10 @@
     input.disabled = true;
     sendButton.disabled = true;
 
-    // Add user message with temp ID for deduplication
-    const tempUserId = 'temp-user-' + Date.now();
-    addMessage(message, 'user', tempUserId);
+    // Clear input immediately for better UX
     input.value = '';
 
-    // Show typing
+    // Show typing indicator
     showTyping();
 
     try {
