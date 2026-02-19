@@ -763,6 +763,53 @@
     }
   }
 
+  // Refresh messages for current conversation (for syncing after subscription)
+  async function refreshCurrentConversationMessages() {
+    if (!conversationId) return;
+    
+    console.log('Emily Chat: Refreshing messages for conversation:', conversationId);
+    
+    try {
+      const response = await fetch(`${API_BASE}/api/widget/conversation/messages?conversationId=${conversationId}`);
+      
+      if (!response.ok) {
+        console.error('Emily Chat: Failed to refresh messages');
+        return;
+      }
+
+      const data = await response.json();
+      const messages = data.messages || [];
+      
+      const messagesContainer = document.getElementById('emily-messages');
+      messagesContainer.innerHTML = '';
+      displayedMessageIds.clear();
+      
+      if (messages.length === 0) {
+        messagesContainer.innerHTML = `
+          <div class="emily-welcome">
+            <div class="emily-welcome-avatar">${widgetSettings.websiteName[0]}</div>
+            <h4>${widgetSettings.widgetWelcomeTitle}</h4>
+            <p>${widgetSettings.widgetWelcomeMessage}</p>
+          </div>
+        `;
+      } else {
+        messages.forEach(msg => {
+          const messageDiv = document.createElement('div');
+          messageDiv.className = `emily-message ${msg.sender}`;
+          messageDiv.dataset.messageId = msg.id;
+          messageDiv.innerHTML = `<div class="emily-message-content">${msg.content}</div>`;
+          messagesContainer.appendChild(messageDiv);
+          displayedMessageIds.add(msg.id);
+        });
+      }
+      
+      scrollMessagesToBottom();
+      console.log('Emily Chat: Messages refreshed, total:', messages.length);
+    } catch (error) {
+      console.error('Emily Chat: Error refreshing messages', error);
+    }
+  }
+
   // Open existing conversation
   async function openConversation(convId) {
     conversationId = convId;
@@ -1088,12 +1135,12 @@
           // This ensures we get any messages that were saved before subscription was active
           // (like the first AI response which is saved before we subscribe)
           console.log('Emily Chat: Fetching messages after new subscription to sync DB state');
-          await loadMessagesFromConversation(conversationId);
+          await refreshCurrentConversationMessages();
         }
       }
       
       // DO NOT display AI response as temp for new conversations
-      // It will be loaded from DB in loadMessagesFromConversation above
+      // It will be loaded from DB in refreshCurrentConversationMessages above
       // Only show temp for existing conversations where subscription is already active
       if (data.response && !isNewConversation) {
         addMessage(data.response, 'assistant', 'temp-assistant-' + Date.now());
