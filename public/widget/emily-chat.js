@@ -1125,25 +1125,50 @@
       if (data.conversationId) {
         isNewConversation = !conversationId;
         conversationId = data.conversationId;
-        console.log('Emily Chat: Conversation ID set to', conversationId);
+        console.log('Emily Chat: Conversation ID set to', conversationId, 'isNew:', isNewConversation);
         
         // Subscribe to real-time updates for new conversation
         if (isNewConversation) {
           subscribeToMessages(conversationId);
+          console.log('Emily Chat: Subscribed to new conversation');
           
-          // CRITICAL: Fetch messages from DB after subscribing
-          // This ensures we get any messages that were saved before subscription was active
-          // (like the first AI response which is saved before we subscribe)
-          console.log('Emily Chat: Fetching messages after new subscription to sync DB state');
-          await refreshCurrentConversationMessages();
+          // Wait a moment for subscription to establish, then poll for any missed messages
+          setTimeout(async () => {
+            console.log('Emily Chat: Polling for messages that may have been saved before subscription');
+            try {
+              const response = await fetch(`${API_BASE}/api/widget/conversation/messages?conversationId=${conversationId}`);
+              if (response.ok) {
+                const data = await response.json();
+                const messages = data.messages || [];
+                
+                messages.forEach(msg => {
+                  // Only add if not already displayed
+                  if (!displayedMessageIds.has(msg.id)) {
+                    console.log('Emily Chat: Adding missed message from poll:', msg.id);
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `emily-message ${msg.sender}`;
+                    messageDiv.dataset.messageId = msg.id;
+                    messageDiv.innerHTML = `<div class="emily-message-content">${msg.content}</div>`;
+                    document.getElementById('emily-messages').appendChild(messageDiv);
+                    displayedMessageIds.add(msg.id);
+                  }
+                });
+                scrollMessagesToBottom();
+              }
+            } catch (err) {
+              console.error('Emily Chat: Failed to poll messages', err);
+            }
+          }, 500); // 500ms delay to let subscription establish
         }
       }
       
-      // DO NOT display AI response as temp for new conversations
-      // It will be loaded from DB in refreshCurrentConversationMessages above
-      // Only show temp for existing conversations where subscription is already active
+      // For existing conversations, show temp AI response (will be replaced by realtime)
+      // For NEW conversations, don't show temp - polling will get it
       if (data.response && !isNewConversation) {
+        console.log('Emily Chat: Adding temp AI response for existing conversation');
         addMessage(data.response, 'assistant', 'temp-assistant-' + Date.now());
+      } else if (data.response && isNewConversation) {
+        console.log('Emily Chat: NOT adding temp AI response for new conversation - polling will get it');
       }
       
       console.log('Emily Chat: Message sent successfully');
