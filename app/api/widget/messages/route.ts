@@ -1,11 +1,11 @@
-﻿import { createServiceClient } from '@/lib/supabase/server';
+import { createServiceClient } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
 import { processChatMessage } from '@/lib/chat/pipeline';
 
 export async function POST(request: Request) {
   const { websiteId, content, conversationId, visitorId } = await request.json();
   
-  console.log(`ðŸ”µ WIDGET API CALLED: "${content}" | convId: ${conversationId || 'NEW'} | visitorId: ${visitorId}`);
+  console.log(`WIDGET API CALLED: "${content}" | convId: ${conversationId || 'NEW'} | visitorId: ${visitorId}`);
 
   if (!websiteId || !content) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -66,21 +66,31 @@ export async function POST(request: Request) {
     }
 
     // Save the user message
-    console.log(`ðŸ’¾ INSERTING MESSAGE: "${content}" into conversation ${currentConversationId}`);
-    const { error: msgError } = await supabase
+    console.log(`INSERTING MESSAGE: "${content}" into conversation ${currentConversationId}`);
+    console.log(`Using service client with role key:`, process.env.SUPABASE_SERVICE_ROLE_KEY ? 'SET' : 'NOT SET');
+    
+    const { data: insertedMessage, error: msgError } = await supabase
       .from('messages')
       .insert({
         conversation_id: currentConversationId,
         sender: 'user',
         content: content,
-      } as any);
+      } as any)
+      .select()
+      .single();
 
     if (msgError) {
-      console.error('Error saving message:', msgError);
+      console.error('ERROR saving message:', msgError);
+      console.error('ERROR details:', JSON.stringify(msgError, null, 2));
       return NextResponse.json({ error: 'Failed to save message' }, { status: 500 });
     }
     
-    console.log(`âœ… MESSAGE INSERTED SUCCESSFULLY`);
+    if (!insertedMessage) {
+      console.error('No message returned after insert, but no error!');
+      return NextResponse.json({ error: 'Message insert returned no data' }, { status: 500 });
+    }
+    
+    console.log(`MESSAGE INSERTED SUCCESSFULLY - ID: ${insertedMessage.id}`);
 
     // If AI is paused, just return conversation ID without AI response
     if (aiMode === 'paused') {
@@ -144,4 +154,3 @@ export async function OPTIONS() {
     },
   });
 }
-
