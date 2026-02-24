@@ -197,8 +197,11 @@ export function generateWidgetScript(websiteId: string, appUrl: string): string 
     console.warn(`⚠️ Widget URL should use HTTPS: ${appUrl}`);
   }
   
+  // Add version parameter to bypass caching
+  const version = Date.now();
+  
   return `<script>
   window.EmilyChat = { websiteId: '${websiteId}' };
 </script>
-<script src="${appUrl}/widget/emily-loader.js"></script>`;
+<script src="${appUrl}/widget/emily-loader.js?v=${version}"></script>`;
 }
