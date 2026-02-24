@@ -145,7 +145,7 @@ export function WebsiteOverviewClient({
             <pre>{`<script>
   window.EmilyChat = { websiteId: "${websiteId}" };
 </script>
-<script src="${process.env.NEXT_PUBLIC_APP_URL || 'https://talktoemily.com'}/widget/emily-loader.js"></script>`}</pre>
+<script src="${process.env.NEXT_PUBLIC_APP_URL || 'https://talktoemily.com'}/widget/emily-loader.js?v=${Date.now()}"></script>`}</pre>
           </div>
           
           {latestRunStatus === 'completed' ? (
