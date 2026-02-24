@@ -27,28 +27,46 @@
     }
     
     emilyScript.src = `${baseUrl}/widget/emily-chat.js`;
-    emilyScript.async = false; // Load synchronously after Supabase
+    emilyScript.async = false;
     document.head.appendChild(emilyScript);
   }
 
-  // Load Supabase client library from CDN
-  console.log('Emily Chat: Loading Supabase library from CDN...');
-  const supabaseScript = document.createElement('script');
-  supabaseScript.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
-  supabaseScript.async = false; // Load synchronously to ensure it's ready
-
-  supabaseScript.onload = function() {
-    console.log('Emily Chat: Supabase library loaded successfully');
-    console.log('Emily Chat: window.supabase available?', typeof window.supabase !== 'undefined');
-    loadWidget();
-  };
-
-  supabaseScript.onerror = function(error) {
-    console.error('Emily Chat: Failed to load Supabase library', error);
-    console.error('Emily Chat: CDN URL:', supabaseScript.src);
-    // Load widget anyway without real-time support
-    loadWidget();
-  };
-
-  document.head.appendChild(supabaseScript);
+  // Try multiple CDN sources for Supabase
+  console.log('Emily Chat: Loading Supabase library...');
+  
+  const cdnOptions = [
+    'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js',
+    'https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js'
+  ];
+  
+  let cdnIndex = 0;
+  
+  function tryLoadSupabase() {
+    if (cdnIndex >= cdnOptions.length) {
+      console.error('Emily Chat: Failed to load Supabase from all CDN sources');
+      console.error('Emily Chat: Real-time updates will not work');
+      loadWidget();
+      return;
+    }
+    
+    const supabaseScript = document.createElement('script');
+    supabaseScript.src = cdnOptions[cdnIndex];
+    supabaseScript.async = false;
+    
+    supabaseScript.onload = function() {
+      console.log('Emily Chat: Supabase library loaded successfully from:', cdnOptions[cdnIndex]);
+      console.log('Emily Chat: window.supabase available?', typeof window.supabase !== 'undefined');
+      loadWidget();
+    };
+    
+    supabaseScript.onerror = function() {
+      console.warn('Emily Chat: Failed to load from:', cdnOptions[cdnIndex]);
+      cdnIndex++;
+      tryLoadSupabase();
+    };
+    
+    document.head.appendChild(supabaseScript);
+  }
+  
+  tryLoadSupabase();
 })();
