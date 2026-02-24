@@ -17,21 +17,17 @@
     return;
   }
 
-  // Determine API base URL dynamically based on script source
-  let API_BASE = 'https://talktoemily.com'; // default
+  // Determine API base URL by extracting from the script's src attribute
+  let API_BASE = 'https://app.talktoemily.com'; // default fallback
   
-  if (window.location.hostname === 'localhost' || window.location.protocol === 'file:') {
-    API_BASE = 'http://localhost:3000';
-  } else {
-    // Try to extract from the script tag that loaded this file
-    const scripts = document.getElementsByTagName('script');
-    for (let i = 0; i < scripts.length; i++) {
-      const src = scripts[i].src;
-      if (src && src.includes('/widget/emily-chat.js')) {
-        const url = new URL(src);
-        API_BASE = `${url.protocol}//${url.host}`;
-        break;
-      }
+  // Extract from the script tag that loaded this file
+  const scripts = document.getElementsByTagName('script');
+  for (let i = 0; i < scripts.length; i++) {
+    const src = scripts[i].src;
+    if (src && src.includes('/widget/emily-chat.js')) {
+      const url = new URL(src);
+      API_BASE = `${url.protocol}//${url.host}`;
+      break;
     }
   }
 
