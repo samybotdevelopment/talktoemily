@@ -1,7 +1,7 @@
 import { createServiceClient } from '@/lib/supabase/server';
 import { createEmbedding, getChatCompletion, buildPromptWithContext, rewriteQueryForSearch } from '@/lib/services/openai.service';
 import { searchSimilar } from '@/lib/services/qdrant.service';
-import { incrementMessageUsage, checkMessageQuota } from '@/lib/services/usage.service';
+import { incrementMessageUsage, checkMessageQuota, deductCredits } from '@/lib/services/usage.service';
 import { encode } from 'gpt-tokenizer';
 
 /**
@@ -185,8 +185,9 @@ export async function processChatMessage(
         content: assistantResponse,
       });
 
-    // Increment usage
+    // Increment usage counter AND deduct 1 credit
     await incrementMessageUsage(orgId);
+    await deductCredits(orgId, 1);
     
     return assistantResponse;
 
