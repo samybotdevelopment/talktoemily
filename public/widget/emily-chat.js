@@ -47,6 +47,80 @@
     widgetWelcomeTitle: 'Hi there! 👋',
     widgetWelcomeMessage: 'How can we help you today?'
   };
+  
+  // Translations
+  let translations = {
+    loading: 'Loading conversations...',
+    loadingMessages: 'Loading messages...',
+    failedToLoad: 'Failed to load conversations',
+    failedToLoadMessages: 'Failed to load messages',
+    noConversations: 'No conversations yet.',
+    clickToStart: 'Click below to start chatting!',
+    newConversation: 'New Conversation',
+    typeMessage: 'Type your message...',
+    justNow: 'Just now',
+    errorMessage: 'Sorry, I encountered an error. Please try again.',
+    botInactive: 'This chatbot is currently inactive'
+  };
+
+  // Detect browser language
+  function detectLanguage() {
+    // Allow manual override via config
+    if (config.locale) return config.locale;
+    
+    // Detect from browser
+    const browserLang = navigator.language || navigator.userLanguage || 'en';
+    // Extract the language code (e.g., 'en-US' -> 'en', 'fr-FR' -> 'fr')
+    const langCode = browserLang.split('-')[0].toLowerCase();
+    
+    // Supported languages
+    const supportedLangs = ['en', 'fr', 'de', 'es', 'it', 'pt', 'nl', 'da', 'no', 'sv', 'pl', 'el', 'tr'];
+    
+    return supportedLangs.includes(langCode) ? langCode : 'en';
+  }
+
+  const locale = detectLanguage();
+  
+  // Fetch translations
+  async function fetchTranslations() {
+    try {
+      console.log('Emily Chat: Fetching translations for locale:', locale);
+      const response = await fetch(`${API_BASE}/api/widget/i18n?locale=${locale}`);
+      if (response.ok) {
+        const data = await response.json();
+        translations = { ...translations, ...data.translations };
+        console.log('Emily Chat: Translations loaded', translations);
+        return true;
+      } else {
+        console.warn('Emily Chat: Failed to fetch translations, using defaults');
+        return false;
+      }
+    } catch (error) {
+      console.error('Emily Chat: Failed to fetch translations', error);
+      return false;
+    }
+  }
+  
+  // Format time ago with translations
+  function formatTimeAgo(date) {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    
+    if (seconds < 60) return translations.justNow || 'Just now';
+    if (seconds < 3600) {
+      const count = Math.floor(seconds / 60);
+      return (translations.minutesAgo || '{count}m ago').replace('{count}', count);
+    }
+    if (seconds < 86400) {
+      const count = Math.floor(seconds / 3600);
+      return (translations.hoursAgo || '{count}h ago').replace('{count}', count);
+    }
+    if (seconds < 604800) {
+      const count = Math.floor(seconds / 86400);
+      return (translations.daysAgo || '{count}d ago').replace('{count}', count);
+    }
+    
+    return date.toLocaleDateString();
+  }
 
   // Utility function to scroll messages to bottom
   function scrollMessagesToBottom() {
@@ -197,7 +271,7 @@
           fill: #fff;
         }
       </style>
-      <div class="emily-inactive-bubble" title="${message}">
+      <div class="emily-inactive-bubble" title="${message || translations.botInactive}">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
         </svg>
@@ -559,6 +633,36 @@
           height: 20px;
         }
 
+        .emily-footer {
+          padding: 8px 16px;
+          background: #f9fafb;
+          border-top: ${isModern ? '2px solid #e5e7eb' : '1px solid #e5e7eb'};
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+        }
+
+        .emily-footer a {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          text-decoration: none;
+          color: #6b7280;
+          font-size: 11px;
+          transition: color 0.2s;
+        }
+
+        .emily-footer a:hover {
+          color: #374151;
+        }
+
+        .emily-footer img {
+          width: 16px;
+          height: 16px;
+          object-fit: contain;
+        }
+
         @media (max-width: 480px) {
           .emily-chat-container {
             bottom: 0;
@@ -597,14 +701,21 @@
           </div>
           
           <div class="emily-conversations-list" id="emily-conversations-list">
-            <div class="emily-loading">Loading conversations...</div>
+            <div class="emily-loading">${translations.loading}</div>
           </div>
           
           <div class="emily-new-conversation-btn" onclick="window.EmilyChat.startNewConversation()">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:20px;height:20px;">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
-            <span>New Conversation</span>
+            <span>${translations.newConversation}</span>
+          </div>
+          
+          <div class="emily-footer">
+            <a href="https://talktoemily.com" target="_blank" rel="noopener noreferrer">
+              <img src="${API_BASE}/emily_logo.png" alt="Emily logo" />
+              <span>Powered by Emily</span>
+            </a>
           </div>
         </div>
 
@@ -644,7 +755,7 @@
                 type="text" 
                 class="emily-input" 
                 id="emily-input"
-                placeholder="Type your message..."
+                placeholder="${translations.typeMessage}"
                 autocomplete="off"
               />
               <button type="submit" class="emily-send" id="emily-send">
@@ -653,6 +764,13 @@
                 </svg>
               </button>
             </form>
+          </div>
+          
+          <div class="emily-footer">
+            <a href="https://talktoemily.com" target="_blank" rel="noopener noreferrer">
+              <img src="${API_BASE}/emily_logo.png" alt="Emily logo" />
+              <span>Powered by Emily</span>
+            </a>
           </div>
         </div>
       </div>
@@ -712,7 +830,7 @@
   // Load conversations from API
   async function loadConversations() {
     const listContainer = document.getElementById('emily-conversations-list');
-    listContainer.innerHTML = '<div class="emily-loading">Loading conversations...</div>';
+    listContainer.innerHTML = `<div class="emily-loading">${translations.loading}</div>`;
 
     try {
       const response = await fetch(`${API_BASE}/api/widget/conversations?websiteId=${websiteId}&visitorId=${visitorId}`);
@@ -727,8 +845,8 @@
       if (conversations.length === 0) {
         listContainer.innerHTML = `
           <div class="emily-no-conversations">
-            <p>No conversations yet.</p>
-            <p style="font-size:12px;margin-top:8px;">Click below to start chatting!</p>
+            <p>${translations.noConversations}</p>
+            <p style="font-size:12px;margin-top:8px;">${translations.clickToStart}</p>
           </div>
         `;
         return;
@@ -744,7 +862,7 @@
         const timeAgo = formatTimeAgo(date);
         
         // Truncate message if too long
-        const preview = conv.firstMessage || 'New conversation';
+        const preview = conv.firstMessage || translations.newConversation;
         const truncated = preview.length > 60 ? preview.substring(0, 60) + '...' : preview;
         
         item.innerHTML = `
@@ -755,7 +873,7 @@
       });
     } catch (error) {
       console.error('Emily Chat: Failed to load conversations', error);
-      listContainer.innerHTML = '<div class="emily-loading">Failed to load conversations</div>';
+      listContainer.innerHTML = `<div class="emily-loading">${translations.failedToLoad}</div>`;
     }
   }
 
@@ -810,7 +928,7 @@
   async function openConversation(convId) {
     conversationId = convId;
     const messagesContainer = document.getElementById('emily-messages');
-    messagesContainer.innerHTML = '<div class="emily-loading">Loading messages...</div>';
+    messagesContainer.innerHTML = `<div class="emily-loading">${translations.loadingMessages}</div>`;
     showChatView();
 
     // Unsubscribe from previous conversation
@@ -860,7 +978,7 @@
       subscribeToMessages(convId);
     } catch (error) {
       console.error('Emily Chat: Failed to load messages', error);
-      messagesContainer.innerHTML = '<div class="emily-loading">Failed to load messages</div>';
+      messagesContainer.innerHTML = `<div class="emily-loading">${translations.failedToLoadMessages}</div>`;
     }
   }
 
@@ -1136,7 +1254,7 @@
     } catch (error) {
       console.error('Emily Chat: Send error', error);
       hideTyping();
-      addMessage('Sorry, I encountered an error. Please try again.', 'assistant');
+      addMessage(translations.errorMessage, 'assistant');
     }
 
     // Re-enable input
@@ -1156,11 +1274,15 @@
 
   // Initialize
   console.log('Emily Chat: Initializing widget for', websiteId);
-  fetchWidgetSettings().then((success) => {
-    if (success) {
-      console.log('Emily Chat: Creating widget with style', widgetSettings.widgetStyle);
-      createWidget();
-    }
+  
+  // Fetch translations first, then settings, then create widget
+  fetchTranslations().then(() => {
+    fetchWidgetSettings().then((success) => {
+      if (success) {
+        console.log('Emily Chat: Creating widget with style', widgetSettings.widgetStyle);
+        createWidget();
+      }
+    });
   });
 
 })();

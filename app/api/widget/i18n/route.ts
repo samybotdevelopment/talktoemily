@@ -1,22 +1,32 @@
 import { NextResponse } from 'next/server';
 import enMessages from '@/messages/en.json';
 import frMessages from '@/messages/fr.json';
+import deMessages from '@/messages/de.json';
+import esMessages from '@/messages/es.json';
+import itMessages from '@/messages/it.json';
+import ptMessages from '@/messages/pt.json';
+import nlMessages from '@/messages/nl.json';
+import daMessages from '@/messages/da.json';
+import noMessages from '@/messages/no.json';
+import svMessages from '@/messages/sv.json';
+import plMessages from '@/messages/pl.json';
+import elMessages from '@/messages/el.json';
+import trMessages from '@/messages/tr.json';
 
 const messages: Record<string, any> = {
   en: enMessages,
   fr: frMessages,
-  // Other languages will use English as fallback for now
-  de: enMessages,
-  es: enMessages,
-  it: enMessages,
-  pt: enMessages,
-  nl: enMessages,
-  da: enMessages,
-  no: enMessages,
-  sv: enMessages,
-  pl: enMessages,
-  el: enMessages,
-  tr: enMessages,
+  de: deMessages,
+  es: esMessages,
+  it: itMessages,
+  pt: ptMessages,
+  nl: nlMessages,
+  da: daMessages,
+  no: noMessages,
+  sv: svMessages,
+  pl: plMessages,
+  el: elMessages,
+  tr: trMessages,
 };
 
 export async function GET(request: Request) {
