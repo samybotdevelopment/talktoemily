@@ -17,7 +17,7 @@ export async function PATCH(
   }
 
   const body = await request.json();
-  const updates: Record<string, string> = {};
+  const updates: Record<string, any> = {};
 
   // Add basic information fields
   if (body.display_name !== undefined) {
