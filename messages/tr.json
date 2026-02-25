@@ -21,7 +21,8 @@
     "viewAll": "Tümünü Gör",
     "upgrade": "Yükselt",
     "comingSoon": "Çok Yakında",
-    "purchase": "Satın Al"
+    "purchase": "Satın Al",
+    "or": "veya"
   },
   "landing": {
     "title": "{name} ile konuş",
@@ -688,7 +689,10 @@
     "audioTranscribed": "Ses metne dönüştürüldü! Düzenleyin ve bir başlık ekleyin.",
     "insufficientCredits": "Yetersiz kredi. {required} kredi gerekiyor ancak yalnızca {available} krediniz var.",
     "trainingSuccessFree": "🎉 Eğitim başarıyla tamamlandı! (İlk eğitim ücretsizdi)",
-    "trainingSuccess": "Eğitim başarıyla tamamlandı! {credits} kredi kullanıldı."
+    "trainingSuccess": "Eğitim başarıyla tamamlandı! {credits} kredi kullanıldı.",
+    "uploadDocument": "Eğitim Belgesini Yükle",
+    "uploadDocumentHint": "Eğitim öğelerini otomatik olarak çıkarmak için bir .txt dosyası yükleyin",
+    "processing": "Belge işleniyor..."
   },
   "conversations": {
     "noConversations": "Henüz konuşma yok",
@@ -760,7 +764,19 @@
     "primaryColor": "Birincil Renk",
     "dangerZone": "Tehlikeli Bölge",
     "dangerZoneDescription": "Bu chatbot’u silmek tüm eğitim verilerini, konuşmaları ve ayarları kaldırır. Bu işlem geri alınamaz.",
-    "deleteChatbot": "Chatbot’u Sil"
+    "deleteChatbot": "Chatbot’u Sil",
+    "botBehaviorTitle": "Bot Davranışı",
+    "botBehaviorDescription": "Sohbetler sırasında botunuzun yanıt verme ve davranış biçimini özelleştirin.",
+    "strictContextLabel": "Botun yanıtını yalnızca eğitim içeriğinden vermesini zorlayın",
+    "strictContextDescription": "Etkinleştirildiğinde, bot yalnızca kullanıcı sorusunun cevabını eğitim içeriğinizde bulursa yanıt verir ve bilmediğini belirtir.",
+    "speakingStyleLabel": "Konuşma Tarzı",
+    "speakingStyleOptional": "(isteğe bağlı, en fazla 150 karakter)",
+    "speakingStylePlaceholder": "örn. Dostane ve profesyonel, ara sıra emojiler kullanın",
+    "speakingStyleHint": "Botun nasıl iletişim kurması gerektiğini tanımlayın (ton, stil, kişilik)",
+    "customRulesLabel": "Özel Kurallar",
+    "customRulesOptional": "(isteğe bağlı, en fazla 500 karakter)",
+    "customRulesPlaceholder": "örn. Fiyatları paylaşmadan önce her zaman e-posta isteyin. Rakiplerden asla bahsetmeyin. Yanıtları bir eylem çağrısıyla bitirin.",
+    "customRulesHint": "Görüşmelerde botun uyması gereken belirli yönergeler veya kurallar"
   },
   "time": {
     "now": "az önce",

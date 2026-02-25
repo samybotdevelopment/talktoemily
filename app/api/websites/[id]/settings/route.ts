@@ -52,6 +52,17 @@ export async function PATCH(
     updates.widget_welcome_message = body.widget_welcome_message.trim().substring(0, 200);
   }
 
+  // Add bot behavior fields
+  if (body.strict_context_only !== undefined) {
+    updates.strict_context_only = Boolean(body.strict_context_only);
+  }
+  if (body.speaking_style !== undefined) {
+    updates.speaking_style = body.speaking_style ? body.speaking_style.trim().substring(0, 150) : null;
+  }
+  if (body.custom_rules !== undefined) {
+    updates.custom_rules = body.custom_rules ? body.custom_rules.trim().substring(0, 500) : null;
+  }
+
   if (Object.keys(updates).length === 0) {
     return NextResponse.json({ error: 'No valid updates provided' }, { status: 400 });
   }

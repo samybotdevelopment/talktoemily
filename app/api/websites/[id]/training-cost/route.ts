@@ -39,7 +39,7 @@ export async function GET(
     // Get organization credits
     const { data: org } = (await supabase
       .from('organizations')
-      .select('credits_balance, plan')
+      .select('credits_balance, plan, is_wg_linked')
       .eq('id', website.org_id)
       .single()) as any;
 
@@ -50,8 +50,9 @@ export async function GET(
     const isFreeTraining = website.training_count === 0;
     const creditCost = isFreeTraining ? 0 : itemCount;
     
-    // Determine usable credits (respect frozen credits for Free plan)
-    const usableCredits = org.plan === 'free' 
+    // Determine usable credits
+    // Free plan users have frozen credits (max 50 usable) UNLESS they're WG linked
+    const usableCredits = (org.plan === 'free' && !org.is_wg_linked)
       ? Math.min(org.credits_balance, 50) 
       : org.credits_balance;
 
@@ -60,10 +61,12 @@ export async function GET(
     return NextResponse.json({
       itemCount,
       creditCost,
-      creditsBalance: usableCredits,
+      creditsBalance: org.credits_balance, // Show actual balance
+      usableCredits, // Send usable credits for validation
       isFreeTraining,
       hasEnoughCredits,
       trainingCount: website.training_count,
+      isWgLinked: org.is_wg_linked,
     });
   } catch (error: any) {
     console.error('Error getting training cost:', error);

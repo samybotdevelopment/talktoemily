@@ -195,8 +195,13 @@ Search query:`;
 /**
  * Get the Emily Assistant system prompt
  */
-export function getSystemPrompt(websiteName?: string): string {
-  return `You're a helpful assistant${websiteName ? ` for ${websiteName}` : ''}.
+export function getSystemPrompt(
+  websiteName?: string,
+  strictContextOnly?: boolean,
+  speakingStyle?: string | null,
+  customRules?: string | null
+): string {
+  let prompt = `You're a helpful assistant${websiteName ? ` for ${websiteName}` : ''}.
 
 Your job is to answer questions based on the context provided. Be friendly and conversational - like you're texting with a friend.
 
@@ -214,13 +219,34 @@ Example of BAD response: "Super, je peux aider votre startup sur plusieurs front
 
 IMPORTANT - YOU CANNOT TAKE ACTIONS:
 - You are a conversational assistant that provides information and guidance ONLY
-- You CANNOT perform actions on the website, submit forms, place orders, book appointments, or make changes
-- Use the provided context intelligently - you can make reasonable inferences
-- If the context shows you offer other things but NOT what they asked for, briefly mention alternatives
-- Only say "I don't have that information" if the context is completely unrelated
-- Never make up facts, prices, addresses, or specific details that aren't in the context
+- You CANNOT perform actions on the website, submit forms, place orders, book appointments, or make changes`;
 
-Think: helpful friend texting back, not a corporate FAQ bot.`;
+  // Add context handling based on strict_context_only setting
+  if (strictContextOnly) {
+    prompt += `\n- RESPOND STRICTLY AND ONLY FROM THE CONTEXT provided
+- If the answer is not in the context, clearly state "I don't have that information"
+- Do NOT use any general knowledge outside the provided context`;
+  } else {
+    prompt += `\n- Use the provided context intelligently - you can make reasonable inferences
+- If the context shows you offer other things but NOT what they asked for, briefly mention alternatives
+- Only say "I don't have that information" if the context is completely unrelated`;
+  }
+
+  prompt += `\n- Never make up facts, prices, addresses, or specific details that aren't in the context`;
+
+  // Add speaking style if provided
+  if (speakingStyle && speakingStyle.trim()) {
+    prompt += `\n\nHere's your speaking style: ${speakingStyle.trim()}`;
+  }
+
+  // Add custom rules if provided
+  if (customRules && customRules.trim()) {
+    prompt += `\n\nAbide by these rules:\n${customRules.trim()}`;
+  }
+
+  prompt += `\n\nThink: helpful friend texting back, not a corporate FAQ bot.`;
+
+  return prompt;
 }
 
 /**
@@ -230,9 +256,12 @@ export function buildPromptWithContext(
   userMessage: string,
   context: Array<{ title: string; content: string }>,
   conversationHistory: Array<{ sender: string; content: string }>,
-  websiteName?: string
+  websiteName?: string,
+  strictContextOnly?: boolean,
+  speakingStyle?: string | null,
+  customRules?: string | null
 ): Array<{ role: 'system' | 'user' | 'assistant'; content: string }> {
-  const systemPrompt = getSystemPrompt(websiteName);
+  const systemPrompt = getSystemPrompt(websiteName, strictContextOnly, speakingStyle, customRules);
   
   let contextSection = '';
   if (context.length > 0) {

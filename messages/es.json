@@ -21,7 +21,8 @@
     "viewAll": "Ver todo",
     "upgrade": "Actualizar",
     "comingSoon": "Próximamente",
-    "purchase": "Comprar"
+    "purchase": "Comprar",
+    "or": "o"
   },
   "landing": {
     "title": "Habla con {name}",
@@ -688,7 +689,10 @@
     "audioTranscribed": "¡Audio transcrito! Edita y añade un título.",
     "insufficientCredits": "Créditos insuficientes. Necesitas {required} créditos pero solo tienes {available}.",
     "trainingSuccessFree": "🎉 ¡Entrenamiento completado con éxito! (El primer entrenamiento fue gratis)",
-    "trainingSuccess": "¡Entrenamiento completado con éxito! Se utilizaron {credits} créditos."
+    "trainingSuccess": "¡Entrenamiento completado con éxito! Se utilizaron {credits} créditos.",
+    "uploadDocument": "Subir Documento de Entrenamiento",
+    "uploadDocumentHint": "Sube un archivo .txt para extraer automáticamente elementos de entrenamiento",
+    "processing": "Procesando documento..."
   },
   "conversations": {
     "noConversations": "Aún no hay conversaciones",
@@ -760,7 +764,19 @@
     "primaryColor": "Color Primario",
     "dangerZone": "Zona de peligro",
     "dangerZoneDescription": "Eliminar este chatbot eliminará todos los datos de entrenamiento, conversaciones y configuraciones. Esta acción no se puede deshacer.",
-    "deleteChatbot": "Eliminar Chatbot"
+    "deleteChatbot": "Eliminar Chatbot",
+    "botBehaviorTitle": "Comportamiento del bot",
+    "botBehaviorDescription": "Personaliza cómo responde y se comporta tu bot durante las conversaciones.",
+    "strictContextLabel": "Forzar al bot a responder SOLO a partir del contenido de su entrenamiento",
+    "strictContextDescription": "Cuando esté activado, el bot responderá solo si tu contenido de entrenamiento tiene la respuesta a la pregunta del usuario y dirá que no sabe cuando no la tenga.",
+    "speakingStyleLabel": "Estilo de conversación",
+    "speakingStyleOptional": "(opcional, máximo 150 caracteres)",
+    "speakingStylePlaceholder": "p. ej., Amigable y profesional, usa emojis ocasionalmente",
+    "speakingStyleHint": "Define cómo debe comunicarse el bot (tono, estilo, personalidad)",
+    "customRulesLabel": "Reglas personalizadas",
+    "customRulesOptional": "(opcional, máximo 500 caracteres)",
+    "customRulesPlaceholder": "p. ej., Siempre solicita el correo electrónico antes de compartir precios. Nunca menciones a los competidores. Finaliza las respuestas con un llamado a la acción.",
+    "customRulesHint": "Directrices específicas o reglas que el bot debe seguir en las conversaciones"
   },
   "time": {
     "now": "ahora mismo",

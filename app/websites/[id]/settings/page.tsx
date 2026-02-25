@@ -41,6 +41,9 @@ export default async function WebsiteSettingsPage({
       widgetWelcomeMessage={website.widget_welcome_message || 'How can we help you today?'}
       wgWebsiteId={website.wg_website_id || null}
       widgetActivated={website.widget_activated || false}
+      strictContextOnly={website.strict_context_only || false}
+      speakingStyle={website.speaking_style || null}
+      customRules={website.custom_rules || null}
     />
   );
 }

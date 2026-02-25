@@ -21,7 +21,8 @@
     "viewAll": "Visa alla",
     "upgrade": "Uppgradera",
     "comingSoon": "Kommer snart",
-    "purchase": "Köp"
+    "purchase": "Köp",
+    "or": "eller"
   },
   "landing": {
     "title": "Prata med {name}",
@@ -688,7 +689,10 @@
     "audioTranscribed": "Ljudet transkriberat! Redigera och lägg till en titel.",
     "insufficientCredits": "Otillräckliga krediter. Du behöver {required} krediter men har bara {available}.",
     "trainingSuccessFree": "🎉 Träningen slutfördes! (Första träningen var gratis)",
-    "trainingSuccess": "Träningen slutfördes! Använde {credits} krediter."
+    "trainingSuccess": "Träningen slutfördes! Använde {credits} krediter.",
+    "uploadDocument": "Ladda upp träningsdokument",
+    "uploadDocumentHint": "Ladda upp en .txt-fil för att automatiskt extrahera träningsposter",
+    "processing": "Bearbetar dokumentet..."
   },
   "conversations": {
     "noConversations": "Inga konversationer ännu",
@@ -760,7 +764,19 @@
     "primaryColor": "Primär färg",
     "dangerZone": "Riskzon",
     "dangerZoneDescription": "Om du tar bort den här chatboten försvinner all träningsdata, konversationer och inställningar. Den här åtgärden kan inte ångras.",
-    "deleteChatbot": "Ta bort chatbot"
+    "deleteChatbot": "Ta bort chatbot",
+    "botBehaviorTitle": "Botens beteende",
+    "botBehaviorDescription": "Anpassa hur din bot svarar och beter sig under samtal.",
+    "strictContextLabel": "Tvinga boten att endast svara utifrån sitt träningsinnehåll",
+    "strictContextDescription": "När den är markerad kommer boten endast svara om ditt träningsinnehåll har svaret på användarens fråga och säga att den inte vet när den inte har svaret.",
+    "speakingStyleLabel": "Talsstil",
+    "speakingStyleOptional": "(valfritt, upp till 150 tecken)",
+    "speakingStylePlaceholder": "t.ex., Vänlig och professionell, använd emojis då och då",
+    "speakingStyleHint": "Ange hur boten bör kommunicera (ton, stil, personlighet)",
+    "customRulesLabel": "Egna regler",
+    "customRulesOptional": "(valfritt, upp till 500 tecken)",
+    "customRulesPlaceholder": "t.ex., Alltid be om e-post innan du delar prisuppgifter. Nämn aldrig konkurrenter. Avsluta svaren med en uppmaning till handling.",
+    "customRulesHint": "Specifika riktlinjer eller regler som boten ska följa i konversationer"
   },
   "time": {
     "now": "nyss",

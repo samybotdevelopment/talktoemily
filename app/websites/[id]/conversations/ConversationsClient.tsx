@@ -263,7 +263,7 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
   }
 
   return (
-    <div className="fixed inset-0 top-16 flex overflow-hidden overscroll-none">
+    <div className="fixed inset-0 top-16 flex overflow-hidden overscroll-none pt-4">
       {/* Mobile Overlay */}
       {showSidebar && (
         <div 
@@ -274,7 +274,7 @@ export function ConversationsClient({ websiteId, initialConversations }: Convers
 
       {/* Sidebar */}
       <div className={`
-        fixed lg:static inset-y-0 left-0 z-50
+        fixed lg:static inset-y-0 top-20 lg:top-0 left-0 z-50
         w-80 border-r-4 border-black bg-white flex flex-col
         transform transition-transform duration-300 ease-in-out
         ${showSidebar ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}

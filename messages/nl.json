@@ -21,7 +21,8 @@
     "viewAll": "Alles bekijken",
     "upgrade": "Upgrade",
     "comingSoon": "Binnenkort beschikbaar",
-    "purchase": "Kopen"
+    "purchase": "Kopen",
+    "or": "of"
   },
   "landing": {
     "title": "Praat met {name}",
@@ -364,7 +365,8 @@
     "deleteAccount": "Account verwijderen",
     "deletingAccount": "Account verwijderen...",
     "deleteAccountConfirmation": "Deze actie verwijdert permanent je account en alle bijbehorende gegevens.",
-    "deleteAccountError": "Er is een fout opgetreden"
+    "deleteAccountError": "Er is een fout opgetreden",
+    "deleteAccountHasBots": "Verwijder alstublieft alle bots voordat je je account verwijdert"
   },
   "subscription": {
     "title": "Abonnementsplannen",
@@ -687,7 +689,10 @@
     "audioTranscribed": "Audio getranscribeerd! Bewerk en voeg een titel toe.",
     "insufficientCredits": "Onvoldoende kredieten. Je hebt {required} kredieten nodig maar hebt er maar {available}.",
     "trainingSuccessFree": "🎉 Training met succes voltooid! (Eerste training was gratis)",
-    "trainingSuccess": "Training succesvol voltooid! Gebruikt {credits} kredieten."
+    "trainingSuccess": "Training succesvol voltooid! Gebruikt {credits} kredieten.",
+    "uploadDocument": "Trainingsdocument uploaden",
+    "uploadDocumentHint": "Upload een .txt-bestand om trainingsonderdelen automatisch te extraheren",
+    "processing": "Document wordt verwerkt..."
   },
   "conversations": {
     "noConversations": "Nog geen gesprekken",
@@ -759,7 +764,19 @@
     "primaryColor": "Primaire kleur",
     "dangerZone": "Gevaarzone",
     "dangerZoneDescription": "Het verwijderen van deze chatbot verwijdert alle trainingsgegevens, gesprekken en instellingen. Deze handeling kan niet ongedaan gemaakt worden.",
-    "deleteChatbot": "Chatbot verwijderen"
+    "deleteChatbot": "Chatbot verwijderen",
+    "botBehaviorTitle": "Botgedrag",
+    "botBehaviorDescription": "Stel in hoe je bot reageert en zich gedraagt tijdens gesprekken.",
+    "strictContextLabel": "Dwing de bot om uitsluitend vanuit zijn trainingsinhoud te antwoorden",
+    "strictContextDescription": "Wanneer dit is ingeschakeld, zal de bot alleen antwoorden als jouw trainingsinhoud het antwoord bevat op de vraag van de gebruiker en aangeven dat het het niet weet als dat niet het geval is.",
+    "speakingStyleLabel": "Spreekstijl",
+    "speakingStyleOptional": "(optioneel, max. 150 tekens)",
+    "speakingStylePlaceholder": "bijv., Vriendelijk en professioneel, gebruik af en toe emoji's",
+    "speakingStyleHint": "Bepaal hoe de bot moet communiceren (toon, stijl, persoonlijkheid)",
+    "customRulesLabel": "Aangepaste regels",
+    "customRulesOptional": "(optioneel, max. 500 tekens)",
+    "customRulesPlaceholder": "bijv., Vraag altijd om een e-mailadres voordat je prijzen deelt. Noem nooit concurrenten. Sluit antwoorden af met een oproep tot actie.",
+    "customRulesHint": "Specifieke richtlijnen of regels waaraan de bot in gesprekken moet voldoen"
   },
   "time": {
     "now": "zojuist",

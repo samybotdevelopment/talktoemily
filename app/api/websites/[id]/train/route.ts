@@ -108,11 +108,12 @@ export async function POST(
       console.log(`🎉 First training is free (${itemCount} items)`);
     }
 
-    // Increment training count
+    // Increment training count and update last_trained_at
     const { error: countError } = await supabase
       .from('websites')
       .update({
         training_count: website.training_count + 1,
+        last_trained_at: new Date().toISOString(),
       } as any)
       .eq('id', websiteId);
 

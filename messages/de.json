@@ -21,7 +21,8 @@
     "viewAll": "Alle anzeigen",
     "upgrade": "Upgrade",
     "comingSoon": "Bald verfügbar",
-    "purchase": "Kaufen"
+    "purchase": "Kaufen",
+    "or": "oder"
   },
   "landing": {
     "title": "Sprich mit {name}",
@@ -688,7 +689,10 @@
     "audioTranscribed": "Audio transkribiert! Bearbeiten Sie ihn und fügen Sie einen Titel hinzu.",
     "insufficientCredits": "Nicht genügend Guthaben. Sie benötigen {required} Guthaben, haben aber nur {available}.",
     "trainingSuccessFree": "🎉 Training erfolgreich abgeschlossen! (Erstes Training war kostenlos)",
-    "trainingSuccess": "Training erfolgreich abgeschlossen! Verwendete Guthaben: {credits}."
+    "trainingSuccess": "Training erfolgreich abgeschlossen! Verwendete Guthaben: {credits}.",
+    "uploadDocument": "Trainingsdokument hochladen",
+    "uploadDocumentHint": "Lade eine .txt-Datei hoch, um Trainingsdatenpunkte automatisch zu extrahieren",
+    "processing": "Dokument wird verarbeitet..."
   },
   "conversations": {
     "noConversations": "Noch keine Gespräche",
@@ -760,7 +764,19 @@
     "primaryColor": "Primärfarbe",
     "dangerZone": "Gefahrenzone",
     "dangerZoneDescription": "Das Löschen dieses Chatbots entfernt alle Trainingsdaten, Gespräche und Einstellungen. Diese Aktion kann nicht rückgängig gemacht werden.",
-    "deleteChatbot": "Chatbot löschen"
+    "deleteChatbot": "Chatbot löschen",
+    "botBehaviorTitle": "Bot-Verhalten",
+    "botBehaviorDescription": "Passen Sie an, wie Ihr Bot während Gesprächen reagiert und sich verhält.",
+    "strictContextLabel": "Bot soll NUR aus seinem Trainingsinhalt antworten",
+    "strictContextDescription": "Wenn aktiviert, antwortet der Bot nur, wenn Ihr Trainingsinhalt eine Antwort auf die Frage des Nutzers enthält, andernfalls sagt er, dass er es nicht weiß.",
+    "speakingStyleLabel": "Sprechstil",
+    "speakingStyleOptional": "(optional, max. 150 Zeichen)",
+    "speakingStylePlaceholder": "z. B., Freundlich und professionell, gelegentlich Emojis verwenden",
+    "speakingStyleHint": "Bestimmen Sie, wie der Bot kommunizieren soll (Tonfall, Stil, Persönlichkeit)",
+    "customRulesLabel": "Eigene Regeln",
+    "customRulesOptional": "(optional, max. 500 Zeichen)",
+    "customRulesPlaceholder": "z. B., Fragen Sie immer nach der E-Mail, bevor Preise geteilt werden. Erwähnen Sie niemals Wettbewerber. Beenden Sie Antworten mit einer Handlungsaufforderung.",
+    "customRulesHint": "Spezifische Richtlinien oder Regeln, die der Bot in Gesprächen befolgen muss"
   },
   "time": {
     "now": "gerade jetzt",

@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import TrainingCostModal from '@/components/TrainingCostModal';
 import { useTranslations } from 'next-intl';
+import confetti from 'canvas-confetti';
 
 interface TrainingItem {
   id: string;
@@ -25,11 +26,12 @@ export default function TrainingPage() {
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [isRecording, setIsRecording] = useState(false);
-  const [isTranscribing, setIsTranscribing] = useState(false);
+  const [isProcessingDocument, setIsProcessingDocument] = useState(false);
   const [isTraining, setIsTraining] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [lastTrainedAt, setLastTrainedAt] = useState<string | null>(null);
+  const [itemToDelete, setItemToDelete] = useState<string | null>(null);
   
   // Training cost modal state
   const [showCostModal, setShowCostModal] = useState(false);
@@ -41,12 +43,22 @@ export default function TrainingPage() {
     hasEnoughCredits: boolean;
   } | null>(null);
 
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const audioChunksRef = useRef<Blob[]>([]);
-
   useEffect(() => {
     fetchTrainingItems();
+    fetchWebsiteInfo();
   }, [websiteId]);
+
+  const fetchWebsiteInfo = async () => {
+    try {
+      const response = await fetch(`/api/websites/${websiteId}`);
+      const data = await response.json();
+      if (response.ok && data.website) {
+        setLastTrainedAt(data.website.last_trained_at);
+      }
+    } catch (err) {
+      console.error('Failed to fetch website info:', err);
+    }
+  };
 
   const fetchTrainingItems = async () => {
     try {
@@ -90,8 +102,6 @@ export default function TrainingPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm(t('deleteConfirm'))) return;
-
     try {
       const response = await fetch(`/api/websites/${websiteId}/training-items/${id}`, {
         method: 'DELETE',
@@ -102,54 +112,23 @@ export default function TrainingPage() {
       }
 
       setSuccess(t('itemDeleted'));
+      setItemToDelete(null);
       fetchTrainingItems();
     } catch (err: any) {
       setError(err.message);
     }
   };
 
-  const startRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream);
-      
-      mediaRecorderRef.current = mediaRecorder;
-      audioChunksRef.current = [];
-
-      mediaRecorder.ondataavailable = (event) => {
-        audioChunksRef.current.push(event.data);
-      };
-
-      mediaRecorder.onstop = async () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-        await transcribeAudio(audioBlob);
-        stream.getTracks().forEach(track => track.stop());
-      };
-
-      mediaRecorder.start();
-      setIsRecording(true);
-      setError(null);
-    } catch (err: any) {
-      setError(t('microphoneError'));
-    }
-  };
-
-  const stopRecording = () => {
-    if (mediaRecorderRef.current && isRecording) {
-      mediaRecorderRef.current.stop();
-      setIsRecording(false);
-    }
-  };
-
-  const transcribeAudio = async (audioBlob: Blob) => {
-    setIsTranscribing(true);
+  const handleDocumentUpload = async (file: File) => {
+    setIsProcessingDocument(true);
     setError(null);
 
     try {
       const formData = new FormData();
-      formData.append('audio', audioBlob);
+      formData.append('file', file);
+      formData.append('websiteId', websiteId);
 
-      const response = await fetch('/api/transcribe', {
+      const response = await fetch('/api/onboarding/process-document', {
         method: 'POST',
         body: formData,
       });
@@ -157,15 +136,44 @@ export default function TrainingPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to transcribe audio');
+        throw new Error(data.error || 'Failed to process document');
       }
 
-      setContent((prev) => (prev ? `${prev}\n\n${data.text}` : data.text));
-      setSuccess(t('audioTranscribed'));
+      // Add chunks as training items and track their IDs
+      const addedIds = new Set<string>();
+      if (data.chunks && data.chunks.length > 0) {
+        for (const chunk of data.chunks) {
+          const addResponse = await fetch(`/api/websites/${websiteId}/training-items`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              title: chunk.title, 
+              content: chunk.content 
+            }),
+          });
+          
+          if (addResponse.ok) {
+            const addedItem = await addResponse.json();
+            if (addedItem.data?.id) {
+              addedIds.add(addedItem.data.id);
+            }
+          }
+        }
+        
+        // Trigger confetti
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+        
+        setSuccess(`Document processed! ${data.chunks.length} training items added.`);
+        fetchTrainingItems();
+      }
     } catch (err: any) {
       setError(err.message);
     } finally {
-      setIsTranscribing(false);
+      setIsProcessingDocument(false);
     }
   };
 
@@ -216,6 +224,8 @@ export default function TrainingPage() {
         setSuccess(t('trainingSuccess', { credits: data.creditsUsed }));
       }
       
+      // Refresh website info to get updated last_trained_at
+      await fetchWebsiteInfo();
       router.refresh();
     } catch (err: any) {
       setError(err.message);
@@ -283,25 +293,39 @@ export default function TrainingPage() {
                   <button type="submit" className="neo-button-primary flex-1">
                     {t('addItem')}
                   </button>
-                  
-                  {isRecording ? (
-                    <button
-                      type="button"
-                      onClick={stopRecording}
-                      className="neo-button-secondary bg-red-500 text-white border-red-700"
-                    >
-                      ⏹ {t('stop')}
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={startRecording}
-                      className="neo-button-secondary"
-                      disabled={isTranscribing}
-                    >
-                      🎤 {isTranscribing ? t('transcribing') : t('record')}
-                    </button>
-                  )}
+                </div>
+
+                <div className="mt-4 text-center text-gray-500">
+                  <span className="text-sm">— {tCommon('or')} —</span>
+                </div>
+
+                <div className="mt-4">
+                  <input
+                    type="file"
+                    accept=".txt"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) handleDocumentUpload(file);
+                    }}
+                    className="hidden"
+                    id="document-upload-training"
+                    disabled={isProcessingDocument}
+                  />
+                  <label htmlFor="document-upload-training" className="cursor-pointer block">
+                    <div className="neo-button-secondary w-full text-center">
+                      {isProcessingDocument ? (
+                        <>
+                          <span className="animate-spin inline-block mr-2">⚙️</span>
+                          {t('processing')}
+                        </>
+                      ) : (
+                        t('uploadDocument')
+                      )}
+                    </div>
+                  </label>
+                  <p className="text-xs text-gray-500 mt-2 text-center">
+                    {t('uploadDocumentHint')}
+                  </p>
                 </div>
               </form>
             </div>
@@ -344,33 +368,70 @@ export default function TrainingPage() {
               </div>
             ) : (
               <div className="space-y-4">
-                {trainingItems.map((item: any) => (
-                  <div key={item.id} className="neo-card bg-white p-6">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-lg font-bold">{item.title}</h3>
-                      <button
-                        onClick={() => handleDelete(item.id)}
-                        className="text-red-600 hover:text-red-800 font-bold"
-                      >
-                        {tCommon('delete')}
-                      </button>
+                {trainingItems.map((item: any) => {
+                  const isNew = !lastTrainedAt || new Date(item.created_at) > new Date(lastTrainedAt);
+                  
+                  return (
+                    <div key={item.id} className="neo-card bg-white p-6">
+                      <div className="flex justify-between items-start mb-2">
+                        <div className="flex items-center gap-2">
+                          {isNew && (
+                            <span className="px-2 py-1 bg-green-500 text-white text-xs font-bold rounded">
+                              NEW
+                            </span>
+                          )}
+                          <h3 className="text-lg font-bold">{item.title}</h3>
+                        </div>
+                        <button
+                          onClick={() => setItemToDelete(item.id)}
+                          className="text-red-600 hover:text-red-800 font-bold"
+                        >
+                          {tCommon('delete')}
+                        </button>
+                      </div>
+                      <p className="text-gray-700 text-sm mb-2 whitespace-pre-wrap">
+                        {item.content.length > 200 
+                          ? `${item.content.substring(0, 200)}...` 
+                          : item.content}
+                      </p>
+                      <div className="flex gap-2 text-xs">
+                        <span className="px-2 py-1 bg-gray-100 rounded font-bold">
+                          {item.source}
+                        </span>
+                      </div>
                     </div>
-                    <p className="text-gray-700 text-sm mb-2 whitespace-pre-wrap">
-                      {item.content.length > 200 
-                        ? `${item.content.substring(0, 200)}...` 
-                        : item.content}
-                    </p>
-                    <div className="flex gap-2 text-xs">
-                      <span className="px-2 py-1 bg-gray-100 rounded font-bold">
-                        {item.source}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
         </div>
+
+      {/* Delete Confirmation Modal */}
+      {itemToDelete && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={() => setItemToDelete(null)}>
+          <div className="bg-white border-4 border-black rounded-lg p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-xl font-bold mb-3">{t('deleteConfirm')}</h3>
+            <p className="text-gray-700 mb-6">
+              This action cannot be undone.
+            </p>
+            <div className="flex gap-4">
+              <button
+                onClick={() => setItemToDelete(null)}
+                className="neo-button-secondary flex-1"
+              >
+                {tCommon('cancel')}
+              </button>
+              <button
+                onClick={() => handleDelete(itemToDelete)}
+                className="neo-button-primary bg-red-500 border-red-700 flex-1"
+              >
+                {tCommon('delete')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       </main>
   );
 }

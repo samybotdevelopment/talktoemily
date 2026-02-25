@@ -21,7 +21,8 @@
     "viewAll": "Vis alle",
     "upgrade": "Opgradér",
     "comingSoon": "Kommer snart",
-    "purchase": "Køb"
+    "purchase": "Køb",
+    "or": "eller"
   },
   "landing": {
     "title": "Tal med {name}",
@@ -364,7 +365,8 @@
     "deleteAccount": "Slet konto",
     "deletingAccount": "Sletter konto...",
     "deleteAccountConfirmation": "Denne handling vil permanent slette din konto og al tilknyttet data.",
-    "deleteAccountError": "Der opstod en fejl"
+    "deleteAccountError": "Der opstod en fejl",
+    "deleteAccountHasBots": "Slet venligst alle bots, før du sletter din konto"
   },
   "subscription": {
     "title": "Abonnementsplaner",
@@ -687,7 +689,10 @@
     "audioTranscribed": "Audio transkriberet! Rediger og tilføj en titel.",
     "insufficientCredits": "Utilstrækkelige kreditter. Du har brug for {required} kreditter men har kun {available}.",
     "trainingSuccessFree": "🎉 Træning gennemført! (Første træning var gratis)",
-    "trainingSuccess": "Træning gennemført med succes! Brugt {credits} kreditter."
+    "trainingSuccess": "Træning gennemført med succes! Brugt {credits} kreditter.",
+    "uploadDocument": "Upload træningsdokument",
+    "uploadDocumentHint": "Upload en .txt-fil til automatisk at udtrække træningspunkter",
+    "processing": "Behandler dokumentet..."
   },
   "conversations": {
     "noConversations": "Endnu ingen samtaler",
@@ -759,7 +764,19 @@
     "primaryColor": "Primær farve",
     "dangerZone": "Farezone",
     "dangerZoneDescription": "Sletning af denne chatbot vil fjerne alle træningsdata, samtaler og indstillinger. Denne handling kan ikke fortrydes.",
-    "deleteChatbot": "Slet chatbot"
+    "deleteChatbot": "Slet chatbot",
+    "botBehaviorTitle": "Botadfærd",
+    "botBehaviorDescription": "Tilpas hvordan din bot svarer og opfører sig under samtaler.",
+    "strictContextLabel": "Tving boten til at svare KUN ud fra sit træningsindhold",
+    "strictContextDescription": "Når denne indstilling er aktiveret, vil boten kun svare, hvis dit træningsindhold indeholder svaret på brugerens spørgsmål, og den vil sige, at den ikke ved det, hvis den ikke gør.",
+    "speakingStyleLabel": "Talestil",
+    "speakingStyleOptional": "(valgfri, maks. 150 tegn)",
+    "speakingStylePlaceholder": "f.eks. Venlig og professionel, brug emojier lejlighedsvis",
+    "speakingStyleHint": "Definér hvordan boten skal kommunikere (tone, stil, personlighed)",
+    "customRulesLabel": "Egne regler",
+    "customRulesOptional": "(valgfrit, maks. 500 tegn)",
+    "customRulesPlaceholder": "f.eks. Bed altid om e-mail, før priser deles. Nævn aldrig konkurrenter. Afslut svarene med en opfordring til handling.",
+    "customRulesHint": "Specifikke retningslinjer eller regler, som boten skal følge i samtaler."
   },
   "time": {
     "now": "lige nu",

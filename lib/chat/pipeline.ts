@@ -130,10 +130,10 @@ export async function processChatMessage(
       }));
     }
 
-    // Get website info for personalization
+    // Get website info for personalization and settings
     const { data: website } = await supabase
       .from('websites')
-      .select('display_name')
+      .select('display_name, strict_context_only, speaking_style, custom_rules')
       .eq('id', websiteId)
       .single();
 
@@ -142,7 +142,10 @@ export async function processChatMessage(
       userMessage,
       context,
       conversationHistory,
-      website?.display_name
+      website?.display_name,
+      website?.strict_context_only || false,
+      website?.speaking_style || null,
+      website?.custom_rules || null
     );
 
     // Count tokens with detailed breakdown

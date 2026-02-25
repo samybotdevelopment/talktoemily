@@ -21,7 +21,8 @@
     "viewAll": "Se alle",
     "upgrade": "Oppgrader",
     "comingSoon": "Kommer snart",
-    "purchase": "Kjøp"
+    "purchase": "Kjøp",
+    "or": "eller"
   },
   "landing": {
     "title": "Snakk med {name}",
@@ -688,7 +689,10 @@
     "audioTranscribed": "Lyd transkribert! Rediger og legg til en tittel.",
     "insufficientCredits": "Ikke nok kreditter. Du trenger {required} kreditter, men har bare {available}.",
     "trainingSuccessFree": "🎉 Trening fullført! (Første trening var gratis)",
-    "trainingSuccess": "Trening fullført! Brukte {credits} kreditter."
+    "trainingSuccess": "Trening fullført! Brukte {credits} kreditter.",
+    "uploadDocument": "Last opp treningsdokument",
+    "uploadDocumentHint": "Last opp en .txt-fil for å automatisk trekke ut treningsposter",
+    "processing": "Behandler dokumentet..."
   },
   "conversations": {
     "noConversations": "Ingen samtaler ennå",
@@ -760,7 +764,19 @@
     "primaryColor": "Primærfarge",
     "dangerZone": "Faresone",
     "dangerZoneDescription": "Å slette denne chatboten vil fjerne all treningsdata, samtaler og innstillinger. Denne handlingen kan ikke angres.",
-    "deleteChatbot": "Slett chatbot"
+    "deleteChatbot": "Slett chatbot",
+    "botBehaviorTitle": "Botoppførsel",
+    "botBehaviorDescription": "Tilpass hvordan boten svarer og oppfører seg under samtaler.",
+    "strictContextLabel": "Tving boten til å svare KUN fra treningsinnholdet",
+    "strictContextDescription": "Når dette er valgt, vil boten svare bare hvis treningsinnholdet ditt har svaret på brukerens spørsmål, og den vil si at den ikke vet når den ikke har det.",
+    "speakingStyleLabel": "Talestil",
+    "speakingStyleOptional": "(valgfritt, maks 150 tegn)",
+    "speakingStylePlaceholder": "f.eks., vennlig og profesjonell, bruk emojis av og til",
+    "speakingStyleHint": "Definer hvordan boten skal kommunisere (tone, stil, personlighet)",
+    "customRulesLabel": "Tilpassede regler",
+    "customRulesOptional": "(valgfritt, maks 500 tegn)",
+    "customRulesPlaceholder": "f.eks., Spør alltid om e-post før du deler prisinformasjon. Ikke nevn konkurrenter. Avslutt svarene med en oppfordring til handling.",
+    "customRulesHint": "Spesifikke retningslinjer eller regler som boten må følge i samtaler"
   },
   "time": {
     "now": "akkurat nå",
