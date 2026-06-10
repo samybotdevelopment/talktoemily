@@ -1,18 +1,15 @@
 import { createClient } from '@/lib/supabase/server';
 import { createServiceClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
-import Link from 'next/link';
 import { formatRelativeTime } from '@/lib/utils/helpers';
 import { Header } from '@/components/Header';
 import { CreateBotButton } from '@/components/CreateBotButton';
 import { CancellationCountdownClient } from '@/components/CancellationCountdownClient';
 import { BotCard } from '@/components/BotCard';
-import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 
 export default async function DashboardPage() {
   const t = await getTranslations('dashboard');
-  const tCommon = await getTranslations('common');
   const supabase = (await createClient()) as any;
 
   const {
@@ -192,9 +189,6 @@ export default async function DashboardPage() {
               <p className="text-gray-600 mb-6">
                 {t('noChatbotsDescription')}
               </p>
-              <Link href="/websites/new" className="neo-button-primary">
-                {t('createFirstBot')}
-              </Link>
             </div>
           )}
         </div>

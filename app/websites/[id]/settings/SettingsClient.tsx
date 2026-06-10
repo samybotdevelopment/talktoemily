@@ -295,13 +295,13 @@ export function SettingsClient({
                     onChange={(e) => handleCustomRulesChange(e.target.value)}
                     placeholder={t('customRulesPlaceholder')}
                     className="neo-input w-full min-h-[100px]"
-                    maxLength={500}
+                    maxLength={1000}
                   />
                   <div className="flex justify-between items-center mt-1">
                     <p className="text-xs text-gray-500">
                       {t('customRulesHint')}
                     </p>
-                    <span className="text-xs text-gray-400">{customRules.length}/500</span>
+                    <span className="text-xs text-gray-400">{customRules.length}/1000</span>
                   </div>
                 </div>
               </div>

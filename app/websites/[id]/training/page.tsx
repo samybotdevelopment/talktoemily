@@ -32,6 +32,10 @@ export default function TrainingPage() {
   const [success, setSuccess] = useState<string | null>(null);
   const [lastTrainedAt, setLastTrainedAt] = useState<string | null>(null);
   const [itemToDelete, setItemToDelete] = useState<string | null>(null);
+  const [editingItemId, setEditingItemId] = useState<string | null>(null);
+  const [editTitle, setEditTitle] = useState('');
+  const [editContent, setEditContent] = useState('');
+  const [isSavingEdit, setIsSavingEdit] = useState(false);
   
   // Training cost modal state
   const [showCostModal, setShowCostModal] = useState(false);
@@ -116,6 +120,60 @@ export default function TrainingPage() {
       fetchTrainingItems();
     } catch (err: any) {
       setError(err.message);
+    }
+  };
+
+  const handleEditStart = (item: TrainingItem) => {
+    setEditingItemId(item.id);
+    setEditTitle(item.title);
+    setEditContent(item.content);
+    setError(null);
+    setSuccess(null);
+  };
+
+  const handleEditCancel = () => {
+    setEditingItemId(null);
+    setEditTitle('');
+    setEditContent('');
+  };
+
+  const handleEditSave = async (id: string) => {
+    setIsSavingEdit(true);
+    setError(null);
+    setSuccess(null);
+
+    try {
+      const response = await fetch(`/api/websites/${websiteId}/training-items/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: editTitle,
+          content: editContent,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to update item');
+      }
+
+      setTrainingItems((current) =>
+        current.map((item) =>
+          item.id === id
+            ? {
+                ...item,
+                title: data.data?.title ?? editTitle,
+                content: data.data?.content ?? editContent,
+              }
+            : item
+        )
+      );
+      setSuccess(tCommon('success'));
+      handleEditCancel();
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsSavingEdit(false);
     }
   };
 
@@ -370,6 +428,7 @@ export default function TrainingPage() {
               <div className="space-y-4">
                 {trainingItems.map((item: any) => {
                   const isNew = !lastTrainedAt || new Date(item.created_at) > new Date(lastTrainedAt);
+                  const isEditing = editingItemId === item.id;
                   
                   return (
                     <div key={item.id} className="neo-card bg-white p-6">
@@ -380,20 +439,70 @@ export default function TrainingPage() {
                               NEW
                             </span>
                           )}
-                          <h3 className="text-lg font-bold">{item.title}</h3>
+                          {isEditing ? (
+                            <input
+                              type="text"
+                              value={editTitle}
+                              onChange={(e) => setEditTitle(e.target.value)}
+                              className="neo-input"
+                              disabled={isSavingEdit}
+                            />
+                          ) : (
+                            <h3 className="text-lg font-bold">{item.title}</h3>
+                          )}
                         </div>
-                        <button
-                          onClick={() => setItemToDelete(item.id)}
-                          className="text-red-600 hover:text-red-800 font-bold"
-                        >
-                          {tCommon('delete')}
-                        </button>
+                        <div className="flex items-center gap-3">
+                          {isEditing ? (
+                            <>
+                              <button
+                                onClick={() => handleEditSave(item.id)}
+                                className="text-green-700 hover:text-green-900 font-bold"
+                                disabled={isSavingEdit || !editTitle.trim() || !editContent.trim()}
+                              >
+                                {isSavingEdit ? t('processing') : tCommon('save')}
+                              </button>
+                              <button
+                                onClick={handleEditCancel}
+                                className="text-gray-600 hover:text-gray-800 font-bold"
+                                disabled={isSavingEdit}
+                              >
+                                {tCommon('cancel')}
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              <button
+                                onClick={() => handleEditStart(item)}
+                                className="text-blue-600 hover:text-blue-800 font-bold"
+                                disabled={isSavingEdit}
+                              >
+                                {tCommon('edit')}
+                              </button>
+                              <button
+                                onClick={() => setItemToDelete(item.id)}
+                                className="text-red-600 hover:text-red-800 font-bold"
+                                disabled={isSavingEdit}
+                              >
+                                {tCommon('delete')}
+                              </button>
+                            </>
+                          )}
+                        </div>
                       </div>
-                      <p className="text-gray-700 text-sm mb-2 whitespace-pre-wrap">
-                        {item.content.length > 200 
-                          ? `${item.content.substring(0, 200)}...` 
-                          : item.content}
-                      </p>
+                      {isEditing ? (
+                        <textarea
+                          value={editContent}
+                          onChange={(e) => setEditContent(e.target.value)}
+                          className="neo-input w-full min-h-[160px] mb-2"
+                          disabled={isSavingEdit}
+                        />
+                      ) : (
+                        <p className="text-gray-700 text-sm mb-2 whitespace-pre-wrap">
+                          {item.content.length > 200 
+                            ? `${item.content.substring(0, 200)}...` 
+                            : item.content}
+                        </p>
+                      )}
                       <div className="flex gap-2 text-xs">
                         <span className="px-2 py-1 bg-gray-100 rounded font-bold">
                           {item.source}
